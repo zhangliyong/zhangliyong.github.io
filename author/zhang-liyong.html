@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>Lyon's Blog - zhang liyong</title>
+        <link rel="stylesheet" href="../theme/css/main.css">
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="../">Lyon's Blog </a></h1>
+                <nav><ul>
+                                                                                    <li ><a href="../category/bash.html">bash</a></li>
+                                    <li ><a href="../category/git.html">git</a></li>
+                                    <li ><a href="../category/linux.html">linux</a></li>
+                                    <li ><a href="../category/misc.html">misc</a></li>
+                                    <li ><a href="../category/mongo.html">mongo</a></li>
+                                    <li ><a href="../category/munin.html">munin</a></li>
+                                    <li ><a href="../category/mysql.html">mysql</a></li>
+                                    <li ><a href="../category/network.html">network</a></li>
+                                    <li ><a href="../category/nginx.html">nginx</a></li>
+                                    <li ><a href="../category/python.html">python</a></li>
+                                    <li ><a href="../category/vim.html">vim</a></li>
+                                                </ul></nav>
+        </header><!-- /#banner -->
+                
+            
+
+                            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="../bash.html">Bash</a></h1> 
+                    <footer class="post-info">
+        <abbr class="published" title="2013-03-27T19:21:50">
+                Wed 27 March 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/bash.html">bash</a>. </p>
+
+</footer><!-- /.post-info --><h2>alias</h2>
+<p>对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。</p>
+<p>e.g. 在.bashrc中加入</p>
+<div class="highlight"><pre><span class="nb">alias </span><span class="nv">servername</span><span class="o">=</span><span class="s1">&#39;ssh sns@hostname&#39;</span>
+</pre></div>
+
+
+<p>执行：</p>
+<div class="highlight"><pre><span class="nv">$ </span>servername
+</pre></div>
+
+
+<p>即可登陆到hostname机器。</p>
+<h2>rsync</h2>
+<p>大家常用rsync同步数据，有些数据是不需要同步的，可以用 --exclude 选项。</p>
+<p>e.g.</p>
+<div class="highlight"><pre>rsync -avz --exclude <span class="s2">&quot;.*&quot;</span> --exclude <span class="s2">&quot;dbconfig.py&quot;</span> src user@hostname:/dest
+
+--exclude <span class="s2">&quot;.*&quot;</span> 不会同步以<span class="s2">&quot;.&quot;</span>开头的文件或文件夹，不会同步.git目录（.git目录是比较大的，不建议同步）。
+</pre></div>
+
+
+<h2>mail</h2>
+<p>所有crontab任务的运行结果都会输出到mail中，可以随时查看每个任务的运行情况。</p>
+<h2>tmux</h2>
+<p>工作中经常ssh到远程服务器，有时需要在远程服务器中开启多个终端，</p>
+<ul>
+<li>一种办法是在本地开启多个终端，分别远程到服务器。</li>
+<li>还有一种方式是利用<a href="http://tmux.sourceforge.net/">tmux</a>。</li>
+</ul>
+<p>install:</p>
+<div class="highlight"><pre><span class="nv">$sudo</span> apt-get install tmux
+</pre></div>
+
+
+<p>basic usage:</p>
+<div class="highlight"><pre><span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">p</span><span class="o">&gt;</span> <span class="n">go</span> <span class="n">to</span> <span class="n">previous</span> <span class="n">window</span>
+<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">n</span><span class="o">&gt;</span> <span class="n">go</span> <span class="n">to</span> <span class="n">next</span> <span class="n">window</span>
+<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">c</span><span class="o">&gt;</span> <span class="n">create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">window</span>
+<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="mi">1</span><span class="o">&gt;</span> <span class="n">go</span> <span class="n">to</span> <span class="n">No</span><span class="mf">.1</span> <span class="n">window</span>
+<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">d</span><span class="o">&gt;</span> <span class="n">detach</span> <span class="n">this</span> <span class="n">tmux</span> <span class="n">session</span>
+</pre></div>
+
+
+<p>tmux 的功能非常强，但命令较多，学习成本较高，可以先使用上面几个命令。</p>
+<p>推荐介绍视频: http://happycasts.net/episodes/41?autoplay=true</p>
+<h2>ssh</h2>
+<p>今天搞清楚了ssh的标准输入输出，下面是ssh命令的使用方式</p>
+<div class="highlight"><pre><span class="n">ssh</span> <span class="p">[</span><span class="o">-</span><span class="mi">1246</span><span class="n">AaCfgKkMNnqsTtVvXxYy</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">bind_address</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">cipher_spec</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">D</span> <span class="p">[</span><span class="n">bind_address</span><span class="o">:</span><span class="p">]</span><span class="n">port</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="n">escape_char</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">F</span> <span class="n">configfile</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">I</span> <span class="n">pkcs11</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="n">identity_file</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">L</span> <span class="p">[</span><span class="n">bind_address</span><span class="o">:</span><span class="p">]</span><span class="n">port</span><span class="o">:</span><span class="n">host</span><span class="o">:</span><span class="n">hostport</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">login_name</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span> <span class="n">mac_spec</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">O</span> <span class="n">ctl_cmd</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">option</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">port</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">R</span> <span class="p">[</span><span class="n">bind_address</span><span class="o">:</span><span class="p">]</span><span class="n">port</span><span class="o">:</span><span class="n">host</span><span class="o">:</span><span class="n">hostport</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">S</span> <span class="n">ctl_path</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">W</span> <span class="n">host</span><span class="o">:</span><span class="n">port</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">w</span> <span class="n">local_tun</span><span class="p">[</span><span class="o">:</span><span class="n">remote_tun</span><span class="p">]]</span> <span class="p">[</span><span class="n">user</span><span class="err">@</span><span class="p">]</span><span class="n">hostname</span> <span class="p">[</span><span class="n">command</span><span class="p">]</span>
+</pre></div>
+
+
+<p>最后的<code>command</code>是在<code>hostname</code>机器上执行<code>command</code>命令，那么<code>command</code>命令的标准输入输出是远程机器<code>hostname</code>上，还是在本地机器上？ 很多初学者可能会认为是远程机器的标准输入输出（本人以前也是这么认为的），其实是在本地机器上。</p>
+<p>下面我们做个试验，可以在本地执行远程机器的程序并获得输出结果。</p>
+<div class="highlight"><pre><span class="nv">$echo</span> <span class="s2">&quot;local host&quot;</span> | ssh user@hostname <span class="s2">&quot;(echo server; cat; echo server)&quot;</span>
+server
+<span class="nb">local </span>host
+server
+</pre></div>
+
+
+<p>我们用将"local host"输出到标准输出，在hostname机器上<code>cat</code>从标准输入获取"local host"并再次输出到标准输出(本地机器的标准输出)。</p>
+<p>虽然<code>command</code>中的标准输入输出是在本地机器，但<code>command</code>中的命令和目录等都是相对于hostname的，与本地机器无法。</p>
+<p>fuser</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../config-gevent-on-uwsgi.html" rel="bookmark"
+                           title="Permalink to config gevent on uwsgi">config gevent on uwsgi</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-03-27T19:21:50">
+                Wed 27 March 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <p><strong>caution</strong>: need gevent(&gt;= 1.0), and uwsgi(&gt;= 1.4)</p>
+<p>https://github.com/SiteSupport/gevent/downloads</p>
+<p>uwsgi install
+https://uwsgi-docs.readthedocs.org/en/latest/Install.html</p>
+<p>https://uwsgi-docs.readthedocs.org/en/latest/Gevent.html</p>
+                <a class="readmore" href="../config-gevent-on-uwsgi.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../git.html" rel="bookmark"
+                           title="Permalink to Git">Git</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-03-27T19:21:50">
+                Wed 27 March 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/git.html">git</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>Basic</h2>
+<p>使用Git前，要先理解三个概念（与其它的VCS不同）：working directory, index, repository.</p>
+<h3>working directory</h3>
+<p>即是你当前的工作目录，你所编辑的文件都在此目录下。</p>
+<h3>index</h3>
+<h2>git add</h2>
+<h2>Git Flow</h2>
+<p>http://danielkummer.github.com/git-flow-cheatsheet/</p>
+<h2>Git submodules</h2>
+                <a class="readmore" href="../git.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../linux.html" rel="bookmark"
+                           title="Permalink to Linux">Linux</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-03-27T19:21:50">
+                Wed 27 March 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/linux.html">linux</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>Linux TCP Performance Tuning</h2>
+<p>There are two ways to change tcp parameters.</p>
+<ol>
+<li>
+<p>change the value of parameter files in /proc/sys/net/
+   e.g. increase the value of somaxconn
+        <code>echo 1024 &gt; /proc/sys/net/core/somaxconn</code>
+   when the server restart, the parameter will restore.</p>
+</li>
+<li>
+<p>change the vlaue in /etc/sysctl ...</p></li></ol>
+                <a class="readmore" href="../linux.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../misc.html" rel="bookmark"
+                           title="Permalink to misc">misc</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-03-31T20:31:38">
+                Sun 31 March 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <h1>Mac sshfs</h1>
+<p>Mac 挂载远程目录</p>
+<p>http://osxfuse.github.com/</p>
+<p>install OXSFUSE and SSHFS</p>
+<h2>TF-IDF</h2>
+<p>http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
+http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
+http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html</p>
+                <a class="readmore" href="../misc.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../mongo.html" rel="bookmark"
+                           title="Permalink to Mongo">Mongo</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-03-31T20:30:41">
+                Sun 31 March 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/mongo.html">mongo</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>Concurrency</h2>
+<p>MongoDB global lock to ga</p>
+<h2>Tips</h2>
+<h3>If Write Heavy</h3>
+<p>Global Lock is Global
+As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.</p>
+<p>Updating documents that have been pushed to ...</p>
+                <a class="readmore" href="../mongo.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../munin.html" rel="bookmark"
+                           title="Permalink to munin">munin</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-04T16:36:47">
+                Sat 04 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/munin.html">munin</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>Writing plugins</h2>
+<p>global attribute: http://munin-monitoring.org/wiki/protocol-config</p>
+<p>redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch</p>
+<p>mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph</p>
+                <a class="readmore" href="../munin.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../mysql-xing-neng-diao-you.html" rel="bookmark"
+                           title="Permalink to Mysql 性能调优">Mysql 性能调优</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-04T16:35:42">
+                Sat 04 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/mysql.html">mysql</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>thread cache size</h2>
+<p>http://www.dbasquare.com/kb/mysql-and-thread-cache-size/</p>
+<p>query_cache_type可以设置为0(OFF)，1(ON)或者2(DEMOND)，分别表示完全不使用query cache，除显式要求不使用query cache（使用sql_no_cache）之外的所有的select都使用query cache，只有显示要求才使用query cache（使用sql_cache)</p>
+<p>show global status like '';
+show global variables like '';</p>
+<p>innodb_file_per_table</p>
+<p>mysql io 延时计算</p>
+<h2>mysql backup</h2>
+<p>相较前几种方法，备份数据文件最为直接、快速、方便，缺点是基本上不能实现增量备份。为了保证数据的一致性，需要在靠背文件前，执行以下 SQL 语句：</p>
+<p>FLUSH ...</p>
+                <a class="readmore" href="../mysql-xing-neng-diao-you.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../nginx-tips.html" rel="bookmark"
+                           title="Permalink to nginx tips">nginx tips</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-03-27T19:21:50">
+                Wed 27 March 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/nginx.html">nginx</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>nginx backlog</h2>
+                <a class="readmore" href="../nginx-tips.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../python.html" rel="bookmark"
+                           title="Permalink to Python">Python</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-04T16:36:02">
+                Sat 04 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>decorator</h2>
+<h2>class method</h2>
+<h1>Django</h1>
+<h2>Django test</h2>
+<p>ref: http://mikegrouchy.com/blog/great-django-test-talks.html</p>
+                <a class="readmore" href="../python.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
+        Page 1 / 2
+            <a href="../author/zhang-liyong2.html">&raquo;</a>
+    </p>
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+                                                    <li><a href="http://python.org">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
+                                                    <li><a href="#">You can modify those links in your config file</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://zhangliyong.github.com/None" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                    <li><a href="#">You can add links in your config file</a></li>
+                                                    <li><a href="#">Another social link</a></li>
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
