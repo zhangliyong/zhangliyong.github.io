@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>Lyon's Blog - linux</title>
+        <link rel="stylesheet" href="../theme/css/main.css">
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="../">Lyon's Blog </a></h1>
+                <nav><ul>
+                                                                                    <li ><a href="../category/bash.html">bash</a></li>
+                                    <li ><a href="../category/git.html">git</a></li>
+                                    <li class="active"><a href="../category/linux.html">linux</a></li>
+                                    <li ><a href="../category/misc.html">misc</a></li>
+                                    <li ><a href="../category/mongo.html">mongo</a></li>
+                                    <li ><a href="../category/munin.html">munin</a></li>
+                                    <li ><a href="../category/mysql.html">mysql</a></li>
+                                    <li ><a href="../category/network.html">network</a></li>
+                                    <li ><a href="../category/nginx.html">nginx</a></li>
+                                    <li ><a href="../category/python.html">python</a></li>
+                                    <li ><a href="../category/vim.html">vim</a></li>
+                                                </ul></nav>
+        </header><!-- /#banner -->
+                
+            
+
+                            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="../linux.html">Linux</a></h1> 
+                    <footer class="post-info">
+        <abbr class="published" title="2013-03-27T19:21:50">
+                Wed 27 March 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/linux.html">linux</a>. </p>
+
+</footer><!-- /.post-info --><h2>Linux TCP Performance Tuning</h2>
+<p>There are two ways to change tcp parameters.</p>
+<ol>
+<li>
+<p>change the value of parameter files in /proc/sys/net/
+   e.g. increase the value of somaxconn
+        <code>echo 1024 &gt; /proc/sys/net/core/somaxconn</code>
+   when the server restart, the parameter will restore.</p>
+</li>
+<li>
+<p>change the vlaue in /etc/sysctl.con, and run <code>sudo sysctl -p</code> to apply the changes immediately,
+   this can change the value permanently.</p>
+</li>
+</ol>
+<h3>Parameters</h3>
+<ul>
+<li>/proc/sys/fs/file-max: The maximum number of concurrently open files.</li>
+<li>/proc/sys/net/ipv4/tcp_max_syn_backlog: Maximum number of remembered connection requests, which are still did not receive an acknowledgment from connecting client. The default value is 1024 for systems with more than 128Mb of memory, and 128 for low memory machines. If server suffers of overload, try to increase this number.</li>
+<li>/proc/sys/net/core/somaxconn: Limit of socket listen() backlog, known in userspace as SOMAXCONN. Defaults to 128. The value should be raised substantially to support bursts of request. For example, to support a burst of 1024 requests, set somaxconn to 1024.</li>
+</ul>                </article>
+                                    <p class="paginator">
+        Page 1 / 1
+    </p>
+                            </aside><!-- /#featured -->
+                                                </ol><!-- /#posts-list -->
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+                                                    <li><a href="http://python.org">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
+                                                    <li><a href="#">You can modify those links in your config file</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://zhangliyong.github.com/None" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                    <li><a href="#">You can add links in your config file</a></li>
+                                                    <li><a href="#">Another social link</a></li>
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

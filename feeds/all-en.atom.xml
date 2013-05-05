@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-05T17:40:27+02:00</updated><entry><title>python build Dynamic Link Library</title><link href="/python-build-dynamic-link-library.html" rel="alternate"></link><updated>2013-05-05T17:40:27+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-05:python-build-dynamic-link-library.html</id><summary type="html">&lt;p&gt;当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
+.../lib/libpython2.7.a: could not read symbols: Bad value
+collect2: ld returned 1 exit status&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这种情况需要安装动态库版本。&lt;/p&gt;
+&lt;p&gt;下面介绍自己编译安装动态库的python版本。&lt;/p&gt;
+&lt;h2&gt;安装&lt;/h2&gt;
+&lt;p&gt;通过ubuntu软件库安装的python版本带有动态链接库，位置为&lt;code&gt;/usr/lib/libpython&amp;lt;version&amp;gt;.so&lt;/code&gt;,&lt;/p&gt;
+&lt;p&gt;如果系统中默认的python版本太低，软件库中又没有高版本时，需要手动编译安装。&lt;/p&gt;
+&lt;p&gt;下面以python2.7.4为例，其它版本类似&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;./configure
+make
+sudo make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;默认情况下，&lt;code&gt;make&lt;/code&gt;会在当前目录下编译生成一个libpython2.7.a的静态链接库。&lt;/p&gt;
+&lt;p&gt;如果要生成动态链接库，我们需要在&lt;code&gt;configure&lt;/code&gt;命令后加选项&lt;code&gt;--enable-shared&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Building a shared libpython&lt;/p&gt;
+&lt;p&gt;Starting with Python 2.3, the majority of the interpreter can be built
+into a shared library, which can then be used by the interpreter
+executable, and by applications embedding Python. To enable this feature,
+configure with --enable-shared.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;./configure --enable-shared
+make
+sudo make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;通过这种方式会生成动态链接库，并安装到系统库目录下,地址：&lt;code&gt;/usr/local/lib/libpython2.7.so&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;问题&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在make的过程可能会失败，提示如下错误：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
+.../lib/libpython2.7.a: could not read symbols: Bad value
+collect2: ld returned 1 exit status&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因是系统链接库目前下存在一个表态链接库&lt;code&gt;libpython2.7.a&lt;/code&gt;，可能是之前安装的，&lt;/p&gt;
+&lt;p&gt;对于这种情况，我们要把系统原有的Python库的路径从编译参数中除去，让链接器先搜索当前目前，当前路径为”.”，通过设置LDFLAGS，如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;./configure --enable-shared &lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;-L.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;同时建议：如果你之前运行过&lt;code&gt;make&lt;/code&gt;，那么在下一次运行&lt;code&gt;make&lt;/code&gt;之前，运行&lt;code&gt;make clean&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装完成之后运行&lt;code&gt;python&lt;/code&gt;，可能会提示如下错误：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ImportError: libpython2.7.so.1.0: cannot open shared object file: No such file or directory&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是因为新安装的动态链接库&lt;code&gt;libpython2.7.so&lt;/code&gt;并不在系统的cache中。&lt;/p&gt;
+&lt;p&gt;Linux上需要链接动态库时，系统会从cache文件（/etc/ld.so.cache）中找到此链接库。&lt;/p&gt;
+&lt;p&gt;此时需要运行 &lt;code&gt;sudo ldconfig&lt;/code&gt;更新cache。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;参考&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html"&gt;http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://blog.csdn.net/huzhenwei/article/details/7339548"&gt;http://blog.csdn.net/huzhenwei/article/details/7339548&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://linux.101hacks.com/unix/ldconfig/"&gt;http://linux.101hacks.com/unix/ldconfig/&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>munin</title><link href="/munin.html" rel="alternate"></link><updated>2013-05-04T16:36:47+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-04:munin.html</id><summary type="html">&lt;h2&gt;Writing plugins&lt;/h2&gt;
+&lt;p&gt;global attribute: http://munin-monitoring.org/wiki/protocol-config&lt;/p&gt;
+&lt;p&gt;redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch&lt;/p&gt;
+&lt;p&gt;mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph&lt;/p&gt;</summary></entry><entry><title>Python</title><link href="/python.html" rel="alternate"></link><updated>2013-05-04T16:36:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-04:python.html</id><summary type="html">&lt;h2&gt;decorator&lt;/h2&gt;
+&lt;h2&gt;class method&lt;/h2&gt;
+&lt;h1&gt;Django&lt;/h1&gt;
+&lt;h2&gt;Django test&lt;/h2&gt;
+&lt;p&gt;ref: http://mikegrouchy.com/blog/great-django-test-talks.html&lt;/p&gt;</summary></entry><entry><title>Pythonbrew</title><link href="/pythonbrew.html" rel="alternate"></link><updated>2013-05-04T16:35:56+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-04:pythonbrew.html</id><summary type="html">&lt;p&gt;home page: https://github.com/utahta/pythonbrew&lt;/p&gt;
+&lt;h2&gt;install packages over pythonbrew&lt;/h2&gt;
+&lt;p&gt;pythonbrew can install multiple python versions on the same machine,
+if you want to install packages over a specified python version, a
+recommand way is to install pip first.&lt;/p&gt;
+&lt;h3&gt;install pip&lt;/h3&gt;
+&lt;p&gt;home page: http://www.pip-installer.org/en/latest/&lt;/p&gt;
+&lt;p&gt;pip is just a python pacakge&lt;/p&gt;
+&lt;p&gt;first use pythonbrew switch to the desired python version, then&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;O&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//raw.github.com/pypa/pip/master/contrib/get-pip.py&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;after that you can use pip to install whatever pacakges over the python version.&lt;/p&gt;
+&lt;p&gt;If you want to install package on a different python version, re-do "install pip" section.&lt;/p&gt;</summary></entry><entry><title>Mysql 性能调优</title><link href="/mysql-xing-neng-diao-you.html" rel="alternate"></link><updated>2013-05-04T16:35:42+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-04:mysql-xing-neng-diao-you.html</id><summary type="html">&lt;h2&gt;thread cache size&lt;/h2&gt;
+&lt;p&gt;http://www.dbasquare.com/kb/mysql-and-thread-cache-size/&lt;/p&gt;
+&lt;p&gt;query_cache_type可以设置为0(OFF)，1(ON)或者2(DEMOND)，分别表示完全不使用query cache，除显式要求不使用query cache（使用sql_no_cache）之外的所有的select都使用query cache，只有显示要求才使用query cache（使用sql_cache)&lt;/p&gt;
+&lt;p&gt;show global status like '';
+show global variables like '';&lt;/p&gt;
+&lt;p&gt;innodb_file_per_table&lt;/p&gt;
+&lt;p&gt;mysql io 延时计算&lt;/p&gt;
+&lt;h2&gt;mysql backup&lt;/h2&gt;
+&lt;p&gt;相较前几种方法，备份数据文件最为直接、快速、方便，缺点是基本上不能实现增量备份。为了保证数据的一致性，需要在靠背文件前，执行以下 SQL 语句：&lt;/p&gt;
+&lt;p&gt;FLUSH TABLES WITH READ LOCK;
+也就是把内存中的数据都刷新到磁盘中，同时锁定数据表，以保证拷贝过程中不会有新的数据写入。这种方法备份出来的数据恢复也很简单，直接拷贝回原来的数据库目录下即可。&lt;/p&gt;
+&lt;p&gt;注意，对于 Innodb 类型表来说，还需要备份其日志文件，即 ib_logfile* 文件。因为当 Innodb 表损坏时，就可以依靠这些日志文件来恢复。&lt;/p&gt;
+&lt;p&gt;Innodb 表则可以通过执行以下语句来整理碎片，提高索引速度：&lt;/p&gt;
+&lt;p&gt;ALTER TABLE tbl_name ENGINE = Innodb;
+这其实是一个 NULL 操作，表面上看什么也不做，实际上重新整理碎片了。&lt;/p&gt;
+&lt;p&gt;为了不影响线上业务，实现在线备份，并且能增量备份，最好的办法就是采用主从复制机制(replication)，在 slave 机器上做备份。&lt;/p&gt;
+&lt;h2&gt;mysql replication&lt;/h2&gt;
+&lt;h3&gt;switch master and slave&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;one slave and one master&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Master: set read lock
+          FLUSH TABLES WITH READ LOCK;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Slave: show processlist;  when you see 'Has read all relay log', it means the slave is updated with master.
+         stop slave; reset master;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;chane the code to operate on slave;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Master: UNLOCK TABLES;
+          make the old master to be a slave;
+          change master to MASTER_HOST = '10.18.10.21', MASTER_USER = 'sns', MASTER_PASSWORD = '123';&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[mysqld]
+log-bin=mysql-bin
+server-id=1
+After making the changes, restart the server.&lt;/p&gt;
+&lt;p&gt;Note
+If you omit server-id (or set it explicitly to its default value of 0), a master refuses connections from all slaves.&lt;/p&gt;
+&lt;p&gt;Note
+For the greatest possible durability and consistency in a replication setup using InnoDB with transactions, you should use innodb_flush_log_at_trx_commit=1 and sync_binlog=1 in the master my.cnf file.&lt;/p&gt;
+&lt;p&gt;Note
+Ensure that the skip-networking option is not enabled on your replication master. If networking has been disabled, your slave will not able to communicate with the master and replication will fail.&lt;/p&gt;
+&lt;p&gt;2.&lt;/p&gt;
+&lt;p&gt;After connecting to the server as root, you can add new accounts. The following statements use GRANT to set up four new accounts:&lt;/p&gt;
+&lt;p&gt;mysql&amp;gt; CREATE USER 'monty'@'localhost' IDENTIFIED BY 'some_pass';
+mysql&amp;gt; GRANT ALL PRIVILEGES ON &lt;em&gt;.&lt;/em&gt; TO 'monty'@'localhost'
+    -&amp;gt;     WITH GRANT OPTION;
+mysql&amp;gt; CREATE USER 'monty'@'%' IDENTIFIED BY 'some_pass';
+mysql&amp;gt; GRANT ALL PRIVILEGES ON &lt;em&gt;.&lt;/em&gt; TO 'monty'@'%'
+    -&amp;gt;     WITH GRANT OPTION;
+mysql&amp;gt; CREATE USER 'admin'@'localhost';
+mysql&amp;gt; GRANT RELOAD,PROCESS ON &lt;em&gt;.&lt;/em&gt; TO 'admin'@'localhost';
+mysql&amp;gt; CREATE USER 'dummy'@'localhost';
+The accounts created by these statements have the following properties:&lt;/p&gt;
+&lt;p&gt;Two of the accounts have a user name of monty and a password of some_pass. Both accounts are superuser accounts with full privileges to do anything. The 'monty'@'localhost' account can be used only when connecting from the local host. The 'monty'@'%' account uses the '%' wildcard for the host part, so it can be used to connect from any host.&lt;/p&gt;
+&lt;p&gt;It is necessary to have both accounts for monty to be able to connect from anywhere as monty. Without the localhost account, the anonymous-user account for localhost that is created by mysql_install_db would take precedence when monty connects from the local host. As a result, monty would be treated as an anonymous user. The reason for this is that the anonymous-user account has a more specific Host column value than the 'monty'@'%' account and thus comes earlier in the user table sort order. (user table sorting is discussed in Section 6.2.4, “Access Control, Stage 1: Connection Verification”.)&lt;/p&gt;
+&lt;p&gt;The 'admin'@'localhost' account has no password. This account can be used only by admin to connect from the local host. It is granted the RELOAD and PROCESS administrative privileges. These privileges enable the admin user to execute the mysqladmin reload, mysqladmin refresh, and mysqladmin flush-xxx commands, as well as mysqladmin processlist . No privileges are granted for accessing any databases. You could add such privileges later by issuing other GRANT statements.&lt;/p&gt;
+&lt;p&gt;The 'dummy'@'localhost' account has no password. This account can be used only to connect from the local host. No privileges are granted. It is assumed that you will grant specific privileges to the account later.&lt;/p&gt;
+&lt;p&gt;The statements that create accounts with no password will fail if the NO_AUTO_CREATE_USER SQL mode is enabled. To deal with this, use an IDENTIFIED BY clause that specifies a nonempty password.&lt;/p&gt;
+&lt;p&gt;To check the privileges for an account, use SHOW GRANTS:&lt;/p&gt;
+&lt;p&gt;mysql&amp;gt; SHOW GRANTS FOR 'admin'@'localhost';
++-----------------------------------------------------+
+| Grants for admin@localhost                          |
++-----------------------------------------------------+
+| GRANT RELOAD, PROCESS ON &lt;em&gt;.&lt;/em&gt; TO 'admin'@'localhost' |
++-----------------------------------------------------+&lt;/p&gt;
+&lt;p&gt;16.1.1.5. Creating a Data Snapshot Using mysqldump  :  http://dev.mysql.com/doc/refman/5.1/en/replication-howto-mysqldump.html&lt;/p&gt;
+&lt;p&gt;Obtaining the Replication Master Binary Log Coordinates : http://dev.mysql.com/doc/refman/5.1/en/replication-howto-masterstatus.html&lt;/p&gt;
+&lt;p&gt;If a slave uses the default host-based relay log file names, changing a slave's host name after replication has been set up can cause replication to fail with the errors Failed to open the relay log and Could not find target log during relay log initialization. This is a known issue (see Bug #2122). If you anticipate that a slave's host name might change in the future (for example, if networking is set up on the slave such that its host name can be modified using DHCP), you can avoid this issue entirely by using the --relay-log and --relay-log-index options to specify relay log file names explicitly when you initially set up the slave. This will make the names independent of server host name changes.&lt;/p&gt;</summary></entry><entry><title>TIME_WAIT in netstat</title><link href="/time_wait-in-netstat.html" rel="alternate"></link><updated>2013-04-11T23:44:01+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-04-11:time_wait-in-netstat.html</id><summary type="html">&lt;p&gt;netstat -tanp | grep -o '(10.18.10.20\|211.151.139.230\|127.0.0.1):[0-9]*' | sort -nr | uniq -c | sort -nr -k 1 | wc -l&lt;/p&gt;</summary></entry><entry><title>misc</title><link href="/misc.html" rel="alternate"></link><updated>2013-03-31T20:31:38+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-31:misc.html</id><summary type="html">&lt;h1&gt;Mac sshfs&lt;/h1&gt;
+&lt;p&gt;Mac 挂载远程目录&lt;/p&gt;
+&lt;p&gt;http://osxfuse.github.com/&lt;/p&gt;
+&lt;p&gt;install OXSFUSE and SSHFS&lt;/p&gt;
+&lt;h2&gt;TF-IDF&lt;/h2&gt;
+&lt;p&gt;http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
+http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
+http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</summary></entry><entry><title>Mongo</title><link href="/mongo.html" rel="alternate"></link><updated>2013-03-31T20:30:41+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-31:mongo.html</id><summary type="html">&lt;h2&gt;Concurrency&lt;/h2&gt;
+&lt;p&gt;MongoDB global lock to ga&lt;/p&gt;
+&lt;h2&gt;Tips&lt;/h2&gt;
+&lt;h3&gt;If Write Heavy&lt;/h3&gt;
+&lt;p&gt;Global Lock is Global
+As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.&lt;/p&gt;
+&lt;p&gt;Updating documents that have been pushed to disk, first have to be read from disk, stored in memory, updated, then written back to disk. This operation is slow and happens while inside the lock.&lt;/p&gt;
+&lt;p&gt;Updating a lot of random documents that rarely get updated and have been pushed out of RAM can lead to slow writes and a high lock percentage.&lt;/p&gt;
+&lt;p&gt;More Reads Make For Faster Writes
+The trick to lowering your lock percentage and thus having faster updates is to query the document you are going to update, before you perform the update. Querying before doing an upsert might seem counter intuitive at first glance, but it makes sense when you think about it.&lt;/p&gt;
+&lt;p&gt;The read ensures that whatever document you are going to update is in RAM. This means the update, which will happen immediately after the read, always updates the document in RAM, which is super fast. I think of it as warming the database for the document you are about to update.&lt;/p&gt;
+&lt;p&gt;http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/&lt;/p&gt;</summary></entry><entry><title>Bash</title><link href="/bash.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:bash.html</id><summary type="html">&lt;h2&gt;alias&lt;/h2&gt;
+&lt;p&gt;对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。&lt;/p&gt;
+&lt;p&gt;e.g. 在.bashrc中加入&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;servername&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ssh sns@hostname&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;执行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;servername
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;即可登陆到hostname机器。&lt;/p&gt;
+&lt;h2&gt;rsync&lt;/h2&gt;
+&lt;p&gt;大家常用rsync同步数据，有些数据是不需要同步的，可以用 --exclude 选项。&lt;/p&gt;
+&lt;p&gt;e.g.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;rsync -avz --exclude &lt;span class="s2"&gt;&amp;quot;.*&amp;quot;&lt;/span&gt; --exclude &lt;span class="s2"&gt;&amp;quot;dbconfig.py&amp;quot;&lt;/span&gt; src user@hostname:/dest
+
+--exclude &lt;span class="s2"&gt;&amp;quot;.*&amp;quot;&lt;/span&gt; 不会同步以&lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;开头的文件或文件夹，不会同步.git目录（.git目录是比较大的，不建议同步）。
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;mail&lt;/h2&gt;
+&lt;p&gt;所有crontab任务的运行结果都会输出到mail中，可以随时查看每个任务的运行情况。&lt;/p&gt;
+&lt;h2&gt;tmux&lt;/h2&gt;
+&lt;p&gt;工作中经常ssh到远程服务器，有时需要在远程服务器中开启多个终端，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一种办法是在本地开启多个终端，分别远程到服务器。&lt;/li&gt;
+&lt;li&gt;还有一种方式是利用&lt;a href="http://tmux.sourceforge.net/"&gt;tmux&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;install:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$sudo&lt;/span&gt; apt-get install tmux
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;basic usage:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;go&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;previous&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;go&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;go&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;No&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;detach&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;tmux&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;tmux 的功能非常强，但命令较多，学习成本较高，可以先使用上面几个命令。&lt;/p&gt;
+&lt;p&gt;推荐介绍视频: http://happycasts.net/episodes/41?autoplay=true&lt;/p&gt;
+&lt;h2&gt;ssh&lt;/h2&gt;
+&lt;p&gt;今天搞清楚了ssh的标准输入输出，下面是ssh命令的使用方式&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1246&lt;/span&gt;&lt;span class="n"&gt;AaCfgKkMNnqsTtVvXxYy&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;cipher_spec&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="n"&gt;escape_char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;F&lt;/span&gt; &lt;span class="n"&gt;configfile&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="n"&gt;pkcs11&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;identity_file&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;hostport&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="n"&gt;login_name&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;mac_spec&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;O&lt;/span&gt; &lt;span class="n"&gt;ctl_cmd&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;hostport&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;S&lt;/span&gt; &lt;span class="n"&gt;ctl_path&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;W&lt;/span&gt; &lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="n"&gt;local_tun&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;remote_tun&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;hostname&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;最后的&lt;code&gt;command&lt;/code&gt;是在&lt;code&gt;hostname&lt;/code&gt;机器上执行&lt;code&gt;command&lt;/code&gt;命令，那么&lt;code&gt;command&lt;/code&gt;命令的标准输入输出是远程机器&lt;code&gt;hostname&lt;/code&gt;上，还是在本地机器上？ 很多初学者可能会认为是远程机器的标准输入输出（本人以前也是这么认为的），其实是在本地机器上。&lt;/p&gt;
+&lt;p&gt;下面我们做个试验，可以在本地执行远程机器的程序并获得输出结果。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;local host&amp;quot;&lt;/span&gt; | ssh user@hostname &lt;span class="s2"&gt;&amp;quot;(echo server; cat; echo server)&amp;quot;&lt;/span&gt;
+server
+&lt;span class="nb"&gt;local &lt;/span&gt;host
+server
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们用将"local host"输出到标准输出，在hostname机器上&lt;code&gt;cat&lt;/code&gt;从标准输入获取"local host"并再次输出到标准输出(本地机器的标准输出)。&lt;/p&gt;
+&lt;p&gt;虽然&lt;code&gt;command&lt;/code&gt;中的标准输入输出是在本地机器，但&lt;code&gt;command&lt;/code&gt;中的命令和目录等都是相对于hostname的，与本地机器无法。&lt;/p&gt;
+&lt;p&gt;fuser&lt;/p&gt;</summary></entry><entry><title>config gevent on uwsgi</title><link href="/config-gevent-on-uwsgi.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:config-gevent-on-uwsgi.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;caution&lt;/strong&gt;: need gevent(&amp;gt;= 1.0), and uwsgi(&amp;gt;= 1.4)&lt;/p&gt;
+&lt;p&gt;https://github.com/SiteSupport/gevent/downloads&lt;/p&gt;
+&lt;p&gt;uwsgi install
+https://uwsgi-docs.readthedocs.org/en/latest/Install.html&lt;/p&gt;
+&lt;p&gt;https://uwsgi-docs.readthedocs.org/en/latest/Gevent.html&lt;/p&gt;</summary></entry><entry><title>Git</title><link href="/git.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:git.html</id><summary type="html">&lt;h2&gt;Basic&lt;/h2&gt;
+&lt;p&gt;使用Git前，要先理解三个概念（与其它的VCS不同）：working directory, index, repository.&lt;/p&gt;
+&lt;h3&gt;working directory&lt;/h3&gt;
+&lt;p&gt;即是你当前的工作目录，你所编辑的文件都在此目录下。&lt;/p&gt;
+&lt;h3&gt;index&lt;/h3&gt;
+&lt;h2&gt;git add&lt;/h2&gt;
+&lt;h2&gt;Git Flow&lt;/h2&gt;
+&lt;p&gt;http://danielkummer.github.com/git-flow-cheatsheet/&lt;/p&gt;
+&lt;h2&gt;Git submodules&lt;/h2&gt;</summary></entry><entry><title>Linux</title><link href="/linux.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:linux.html</id><summary type="html">&lt;h2&gt;Linux TCP Performance Tuning&lt;/h2&gt;
+&lt;p&gt;There are two ways to change tcp parameters.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;change the value of parameter files in /proc/sys/net/
+   e.g. increase the value of somaxconn
+        &lt;code&gt;echo 1024 &amp;gt; /proc/sys/net/core/somaxconn&lt;/code&gt;
+   when the server restart, the parameter will restore.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;change the vlaue in /etc/sysctl.con, and run &lt;code&gt;sudo sysctl -p&lt;/code&gt; to apply the changes immediately,
+   this can change the value permanently.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Parameters&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;/proc/sys/fs/file-max: The maximum number of concurrently open files.&lt;/li&gt;
+&lt;li&gt;/proc/sys/net/ipv4/tcp_max_syn_backlog: Maximum number of remembered connection requests, which are still did not receive an acknowledgment from connecting client. The default value is 1024 for systems with more than 128Mb of memory, and 128 for low memory machines. If server suffers of overload, try to increase this number.&lt;/li&gt;
+&lt;li&gt;/proc/sys/net/core/somaxconn: Limit of socket listen() backlog, known in userspace as SOMAXCONN. Defaults to 128. The value should be raised substantially to support bursts of request. For example, to support a burst of 1024 requests, set somaxconn to 1024.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>nginx tips</title><link href="/nginx-tips.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:nginx-tips.html</id><summary type="html">&lt;h2&gt;nginx backlog&lt;/h2&gt;</summary></entry><entry><title>vim</title><link href="/vim.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:vim.html</id><summary type="html">&lt;p&gt;TODO: wrap my plugins&lt;/p&gt;</summary></entry></feed>

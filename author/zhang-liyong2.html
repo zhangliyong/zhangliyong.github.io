@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>Lyon's Blog - zhang liyong</title>
+        <link rel="stylesheet" href="../theme/css/main.css">
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="../">Lyon's Blog </a></h1>
+                <nav><ul>
+                                                                                    <li ><a href="../category/bash.html">bash</a></li>
+                                    <li ><a href="../category/git.html">git</a></li>
+                                    <li ><a href="../category/linux.html">linux</a></li>
+                                    <li ><a href="../category/misc.html">misc</a></li>
+                                    <li ><a href="../category/mongo.html">mongo</a></li>
+                                    <li ><a href="../category/munin.html">munin</a></li>
+                                    <li ><a href="../category/mysql.html">mysql</a></li>
+                                    <li ><a href="../category/network.html">network</a></li>
+                                    <li ><a href="../category/nginx.html">nginx</a></li>
+                                    <li ><a href="../category/python.html">python</a></li>
+                                    <li ><a href="../category/vim.html">vim</a></li>
+                                                </ul></nav>
+        </header><!-- /#banner -->
+                
+            
+
+                 
+                            <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="9">
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../python-build-dynamic-link-library.html" rel="bookmark"
+                           title="Permalink to python build Dynamic Link Library">python build Dynamic Link Library</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-05T17:40:27">
+                Sun 05 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <p>当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：</p>
+<blockquote>
+<p>/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
+.../lib/libpython2.7.a: could not read symbols: Bad value
+collect2: ld returned 1 exit status</p>
+</blockquote>
+<p>这种情况需要安装动态库版本。</p>
+<p>下面介绍自己编译安装动态库的python版本。</p>
+<h2>安装 ...</h2>
+                <a class="readmore" href="../python-build-dynamic-link-library.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../pythonbrew.html" rel="bookmark"
+                           title="Permalink to Pythonbrew">Pythonbrew</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-04T16:35:56">
+                Sat 04 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <p>home page: https://github.com/utahta/pythonbrew</p>
+<h2>install packages over pythonbrew</h2>
+<p>pythonbrew can install multiple python versions on the same machine,
+if you want to install packages over a specified python version, a
+recommand way is to install pip first.</p>
+<h3>install pip</h3>
+<p>home page: http://www.pip-installer.org/en/latest ...</p>
+                <a class="readmore" href="../pythonbrew.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../time_wait-in-netstat.html" rel="bookmark"
+                           title="Permalink to TIME_WAIT in netstat">TIME_WAIT in netstat</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-04-11T23:44:01">
+                Thu 11 April 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/network.html">network</a>. </p>
+
+</footer><!-- /.post-info -->                <p>netstat -tanp | grep -o '(10.18.10.20\|211.151.139.230\|127.0.0.1):[0-9]*' | sort -nr | uniq -c | sort -nr -k 1 | wc -l</p>
+                <a class="readmore" href="../time_wait-in-netstat.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../vim.html" rel="bookmark"
+                           title="Permalink to vim">vim</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-03-27T19:21:50">
+                Wed 27 March 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/vim.html">vim</a>. </p>
+
+</footer><!-- /.post-info -->                <p>TODO: wrap my plugins</p>
+                <a class="readmore" href="../vim.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
+                        <a href="../author/zhang-liyong.html">&laquo;</a>
+                Page 2 / 2
+    </p>
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+                                                    <li><a href="http://python.org">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
+                                                    <li><a href="#">You can modify those links in your config file</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://zhangliyong.github.com/None" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                    <li><a href="#">You can add links in your config file</a></li>
+                                                    <li><a href="#">Another social link</a></li>
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

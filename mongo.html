@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>Mongo</title>
+        <link rel="stylesheet" href="./theme/css/main.css">
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="./">Lyon's Blog </a></h1>
+                <nav><ul>
+                                                                                    <li ><a href="./category/bash.html">bash</a></li>
+                                    <li ><a href="./category/git.html">git</a></li>
+                                    <li ><a href="./category/linux.html">linux</a></li>
+                                    <li ><a href="./category/misc.html">misc</a></li>
+                                    <li class="active"><a href="./category/mongo.html">mongo</a></li>
+                                    <li ><a href="./category/munin.html">munin</a></li>
+                                    <li ><a href="./category/mysql.html">mysql</a></li>
+                                    <li ><a href="./category/network.html">network</a></li>
+                                    <li ><a href="./category/nginx.html">nginx</a></li>
+                                    <li ><a href="./category/python.html">python</a></li>
+                                    <li ><a href="./category/vim.html">vim</a></li>
+                                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./mongo.html" rel="bookmark"
+           title="Permalink to Mongo">Mongo</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2013-03-31T20:30:41">
+                Sun 31 March 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/mongo.html">mongo</a>. </p>
+
+</footer><!-- /.post-info -->      <h2>Concurrency</h2>
+<p>MongoDB global lock to ga</p>
+<h2>Tips</h2>
+<h3>If Write Heavy</h3>
+<p>Global Lock is Global
+As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.</p>
+<p>Updating documents that have been pushed to disk, first have to be read from disk, stored in memory, updated, then written back to disk. This operation is slow and happens while inside the lock.</p>
+<p>Updating a lot of random documents that rarely get updated and have been pushed out of RAM can lead to slow writes and a high lock percentage.</p>
+<p>More Reads Make For Faster Writes
+The trick to lowering your lock percentage and thus having faster updates is to query the document you are going to update, before you perform the update. Querying before doing an upsert might seem counter intuitive at first glance, but it makes sense when you think about it.</p>
+<p>The read ensures that whatever document you are going to update is in RAM. This means the update, which will happen immediately after the read, always updates the document in RAM, which is super fast. I think of it as warming the database for the document you are about to update.</p>
+<p>http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/</p>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+                                                    <li><a href="http://python.org">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
+                                                    <li><a href="#">You can modify those links in your config file</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://zhangliyong.github.com/None" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                    <li><a href="#">You can add links in your config file</a></li>
+                                                    <li><a href="#">Another social link</a></li>
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
