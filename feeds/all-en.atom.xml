@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-05T17:40:27+02:00</updated><entry><title>python build Dynamic Link Library</title><link href="/python-build-dynamic-link-library.html" rel="alternate"></link><updated>2013-05-05T17:40:27+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-05:python-build-dynamic-link-library.html</id><summary type="html">&lt;p&gt;当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-05T18:41:28+02:00</updated><entry><title>python build Dynamic Link Library</title><link href="/python-build-dynamic-link-library.html" rel="alternate"></link><updated>2013-05-05T18:41:28+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-05:python-build-dynamic-link-library.html</id><summary type="html">&lt;p&gt;当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
 .../lib/libpython2.7.a: could not read symbols: Bad value
@@ -11,9 +11,9 @@ collect2: ld returned 1 exit status&lt;/p&gt;
 &lt;p&gt;通过ubuntu软件库安装的python版本带有动态链接库，位置为&lt;code&gt;/usr/lib/libpython&amp;lt;version&amp;gt;.so&lt;/code&gt;,&lt;/p&gt;
 &lt;p&gt;如果系统中默认的python版本太低，软件库中又没有高版本时，需要手动编译安装。&lt;/p&gt;
 &lt;p&gt;下面以python2.7.4为例，其它版本类似&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;./configure
-make
-sudo make install
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;./configure
+&lt;span class="nv"&gt;$ &lt;/span&gt;make
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo make install
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -26,9 +26,9 @@ into a shared library, which can then be used by the interpreter
 executable, and by applications embedding Python. To enable this feature,
 configure with --enable-shared.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;./configure --enable-shared
-make
-sudo make install
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;./configure --enable-shared
+&lt;span class="nv"&gt;$ &lt;/span&gt;make
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo make install
 &lt;/pre&gt;&lt;/div&gt;
 
 

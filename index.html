@@ -34,7 +34,7 @@
                 <article>
                     <h1 class="entry-title"><a href="./python-build-dynamic-link-library.html">python build Dynamic Link Library</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-05-05T17:40:27">
+        <abbr class="published" title="2013-05-05T18:41:28">
                 Sun 05 May 2013
         </abbr>
 
@@ -55,9 +55,9 @@ collect2: ld returned 1 exit status</p>
 <p>通过ubuntu软件库安装的python版本带有动态链接库，位置为<code>/usr/lib/libpython&lt;version&gt;.so</code>,</p>
 <p>如果系统中默认的python版本太低，软件库中又没有高版本时，需要手动编译安装。</p>
 <p>下面以python2.7.4为例，其它版本类似</p>
-<div class="highlight"><pre>./configure
-make
-sudo make install
+<div class="highlight"><pre><span class="nv">$ </span>./configure
+<span class="nv">$ </span>make
+<span class="nv">$ </span>sudo make install
 </pre></div>
 
 
@@ -70,9 +70,9 @@ into a shared library, which can then be used by the interpreter
 executable, and by applications embedding Python. To enable this feature,
 configure with --enable-shared.</p>
 </blockquote>
-<div class="highlight"><pre>./configure --enable-shared
-make
-sudo make install
+<div class="highlight"><pre><span class="nv">$ </span>./configure --enable-shared
+<span class="nv">$ </span>make
+<span class="nv">$ </span>sudo make install
 </pre></div>
 
 
