@@ -32,9 +32,105 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./python-build-dynamic-link-library.html">python build Dynamic Link Library</a></h1> 
+                    <h1 class="entry-title"><a href="./mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html">Mongodb NUMA 导致的性能问题</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-05-05T18:41:28">
+        <abbr class="published" title="2013-05-08T13:45:46">
+                Wed 08 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/mongo.html">mongo</a>. </p>
+
+</footer><!-- /.post-info --><p>最近升级了mongodb，用mongo连接mongod后出现如下warning:</p>
+<div class="highlight"><pre><span class="n">Server</span> <span class="n">has</span> <span class="n">startup</span> <span class="n">warnings</span><span class="o">:</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span> <span class="n">WARNING</span><span class="o">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">running</span> <span class="n">on</span> <span class="n">a</span> <span class="n">NUMA</span> <span class="n">machine</span><span class="p">.</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span>          <span class="n">We</span> <span class="n">suggest</span> <span class="n">launching</span> <span class="n">mongod</span> <span class="n">like</span> <span class="n">this</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">performance</span> <span class="n">problems</span><span class="o">:</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span>              <span class="n">numactl</span> <span class="o">--</span><span class="n">interleave</span><span class="o">=</span><span class="n">all</span> <span class="n">mongod</span> <span class="p">[</span><span class="n">other</span> <span class="n">options</span><span class="p">]</span>
+</pre></div>
+
+
+<p>随即查了下<em>NUMA</em>是什么，有多篇文章均提到了NUMA会导致mongodb的性能问题，而且官方文档也有说明。</p>
+<blockquote>
+<p>To disable NUMA for MongoDB, use the numactl command and start mongod in the following manner:</p>
+</blockquote>
+<div class="highlight"><pre> <span class="n">numactl</span> <span class="o">--</span><span class="n">interleave</span><span class="o">=</span><span class="n">all</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">mongod</span>
+</pre></div>
+
+
+<blockquote>
+<p>Adjust the proc settings using the following command:</p>
+</blockquote>
+<div class="highlight"><pre><span class="n">echo</span> <span class="mi">0</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">vm</span><span class="o">/</span><span class="n">zone_reclaim_mode</span>
+</pre></div>
+
+
+<blockquote>
+<p>To fully disable NUMA you must perform both operations. However, you can change zone_reclaim_mode without restarting mongod. For more information, see documentation on Proc/sys/vm.</p>
+</blockquote>
+<p>在此做一个整理：</p>
+<p>NUMA：NUMA是多核心CPU架构中的一种，其全称为Non-Uniform Memory Access，简单来说就是在多核心CPU中，机器的物理内存是分配给各个核的，架构简图如下所示：</p>
+<p><img alt="NUMA" src="http://jcole.us/blog/files/numa-architecture.png" /></p>
+<p>每个核访问分配给自己的内存会比访问分配给其它核的内存要快，有下面几种访问控制策略：</p>
+<ol>
+<li>缺省(default)：总是在本地节点分配（分配在当前进程运行的节点上）；</li>
+<li>绑定(bind)：强制分配到指定节点上；</li>
+<li>交叉(interleave)：在所有节点或者指定的节点上交织分配；</li>
+<li>优先(preferred)：在指定节点上分配，失败则在其他节点上分配。</li>
+</ol>
+<p>上面文章中最后使用numactl –interleave命令就是指定其为交叉共享模式。</p>
+<p>我们知道虚拟内存机制是通过一个中断信号来通知虚拟内存系统进行内存swap的，所以这个irqbalance进程忙，是一个危险信号，在这里是由于在进行频繁的内存交换。这种频繁交换现象称为swap insanity，在MySQL中经常提到，也就是在NUMA框架中，采用不合适的策略，导致核心只能从指定内存块节点上分配内存，即使总内存还有富余，也会由于当前节点内存不足时产生大量的swap操作。</p>
+<h3>参考：</h3>
+<p>http://docs.mongodb.org/manual/administration/production-notes/#production-numa</p>
+<p>http://huoding.com/2011/08/09/104</p>
+<p>http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/</p>
+<p>http://blog.nosqlfan.com/html/2772.html</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./read-later.html" rel="bookmark"
+                           title="Permalink to Read Later">Read Later</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-06T10:42:10">
+                Mon 06 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>Python</h2>
+<p>Python Guide: http://docs.python-guide.org/en/latest/index.html</p>
+<p>fabfile(自动化工具):http://docs.fabfile.org/en/1.6/</p>
+<p>字符串匹配的KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html</p>
+                <a class="readmore" href="./read-later.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./python-build-dynamic-link-library.html" rel="bookmark"
+                           title="Permalink to python build Dynamic Link Library">python build Dynamic Link Library</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-05T18:41:50">
                 Sun 05 May 2013
         </abbr>
 
@@ -43,7 +139,7 @@
         </address>
         <p>In <a href="./category/python.html">python</a>. </p>
 
-</footer><!-- /.post-info --><p>当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：</p>
+</footer><!-- /.post-info -->                <p>当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：</p>
 <blockquote>
 <p>/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
 .../lib/libpython2.7.a: could not read symbols: Bad value
@@ -51,69 +147,11 @@ collect2: ld returned 1 exit status</p>
 </blockquote>
 <p>这种情况需要安装动态库版本。</p>
 <p>下面介绍自己编译安装动态库的python版本。</p>
-<h2>安装</h2>
-<p>通过ubuntu软件库安装的python版本带有动态链接库，位置为<code>/usr/lib/libpython&lt;version&gt;.so</code>,</p>
-<p>如果系统中默认的python版本太低，软件库中又没有高版本时，需要手动编译安装。</p>
-<p>下面以python2.7.4为例，其它版本类似</p>
-<div class="highlight"><pre><span class="nv">$ </span>./configure
-<span class="nv">$ </span>make
-<span class="nv">$ </span>sudo make install
-</pre></div>
-
-
-<p>默认情况下，<code>make</code>会在当前目录下编译生成一个libpython2.7.a的静态链接库。</p>
-<p>如果要生成动态链接库，我们需要在<code>configure</code>命令后加选项<code>--enable-shared</code></p>
-<blockquote>
-<p>Building a shared libpython</p>
-<p>Starting with Python 2.3, the majority of the interpreter can be built
-into a shared library, which can then be used by the interpreter
-executable, and by applications embedding Python. To enable this feature,
-configure with --enable-shared.</p>
-</blockquote>
-<div class="highlight"><pre><span class="nv">$ </span>./configure --enable-shared
-<span class="nv">$ </span>make
-<span class="nv">$ </span>sudo make install
-</pre></div>
-
-
-<p>通过这种方式会生成动态链接库，并安装到系统库目录下,地址：<code>/usr/local/lib/libpython2.7.so</code></p>
-<h2>问题</h2>
-<ul>
-<li>
-<p>在make的过程可能会失败，提示如下错误：</p>
-<blockquote>
-<p>/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
-.../lib/libpython2.7.a: could not read symbols: Bad value
-collect2: ld returned 1 exit status</p>
-</blockquote>
-<p>原因是系统链接库目前下存在一个表态链接库<code>libpython2.7.a</code>，可能是之前安装的，</p>
-<p>对于这种情况，我们要把系统原有的Python库的路径从编译参数中除去，让链接器先搜索当前目前，当前路径为”.”，通过设置LDFLAGS，如下：</p>
-<div class="highlight"><pre><span class="nv">$ </span>./configure --enable-shared <span class="nv">LDFLAGS</span><span class="o">=</span>-L.
-</pre></div>
-
-
-<p>同时建议：如果你之前运行过<code>make</code>，那么在下一次运行<code>make</code>之前，运行<code>make clean</code></p>
-</li>
-<li>
-<p>安装完成之后运行<code>python</code>，可能会提示如下错误：</p>
-<blockquote>
-<p>ImportError: libpython2.7.so.1.0: cannot open shared object file: No such file or directory</p>
-</blockquote>
-<p>这是因为新安装的动态链接库<code>libpython2.7.so</code>并不在系统的cache中。</p>
-<p>Linux上需要链接动态库时，系统会从cache文件（/etc/ld.so.cache）中找到此链接库。</p>
-<p>此时需要运行 <code>sudo ldconfig</code>更新cache。</p>
-</li>
-</ul>
-<h2>参考</h2>
-<p><a href="http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html">http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html</a></p>
-<p><a href="http://blog.csdn.net/huzhenwei/article/details/7339548">http://blog.csdn.net/huzhenwei/article/details/7339548</a></p>
-<p><a href="http://linux.101hacks.com/unix/ldconfig/">http://linux.101hacks.com/unix/ldconfig/</a></p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<h2>安装 ...</h2>
+                <a class="readmore" href="./python-build-dynamic-link-library.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -314,86 +352,6 @@ http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html</p>
 As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.</p>
 <p>Updating documents that have been pushed to ...</p>
                 <a class="readmore" href="./mongo.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./bash.html" rel="bookmark"
-                           title="Permalink to Bash">Bash</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-03-27T19:21:50">
-                Wed 27 March 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/bash.html">bash</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>alias</h2>
-<p>对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。</p>
-<p>e.g. 在.bashrc中加入</p>
-<div class="highlight"><pre><span class="nb">alias </span><span class="nv">servername</span><span class="o">=</span><span class="s1">&#39;ssh sns@hostname&#39;</span>
-</pre></div>
-
-
-<p>执行：</p>
-<div class="highlight"><pre><span class="nv">$ </span>servername
-</pre></div>
-
-
-<p>即可登陆到hostname机器。</p>
-<h2>rsync</h2>
-<p>大家常用rsync同步数据，有些数据是不需要同步的，可以用 --exclude 选项。</p>
-<p>e.g.</p>
-<div class="highlight"><pre>rsync -avz --exclude <span class="s2">&quot;.*&quot;</span> --exclude <span class="s2">&quot;dbconfig.py&quot;</span> src user@hostname:/dest
-
---exclude <span class="s2">&quot;.*&quot;</span> 不会同步以<span class="s2">&quot;.&quot;</span>开头的文件或文件夹，不会同步.git目录（.git目录是比较大的，不建议同步）。
-</pre></div>
-
-
-<h2>mail</h2>
-<p>所有crontab任务的运行结果都会输出到mail中，可以随时查看每个任务的运行情况。</p>
-<h2>tmux</h2>
-<p>工作中经常ssh到远程服务器，有时需要在远程服务器中开启多个终端，</p>
-<ul>
-<li>一种办法是在本地开启多个终端，分别远程到服务器。</li>
-<li>还有一种方式是利用<a href="http://tmux.sourceforge.net/">tmux ...</a></li></ul>
-                <a class="readmore" href="./bash.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./config-gevent-on-uwsgi.html" rel="bookmark"
-                           title="Permalink to config gevent on uwsgi">config gevent on uwsgi</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-03-27T19:21:50">
-                Wed 27 March 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <p><strong>caution</strong>: need gevent(&gt;= 1.0), and uwsgi(&gt;= 1.4)</p>
-<p>https://github.com/SiteSupport/gevent/downloads</p>
-<p>uwsgi install
-https://uwsgi-docs.readthedocs.org/en/latest/Install.html</p>
-<p>https://uwsgi-docs.readthedocs.org/en/latest/Gevent.html</p>
-                <a class="readmore" href="./config-gevent-on-uwsgi.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->

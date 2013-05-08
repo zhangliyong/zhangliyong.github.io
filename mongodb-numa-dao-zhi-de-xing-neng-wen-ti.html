@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
         <meta charset="utf-8">
-        <title>Lyon's Blog - mongo</title>
-        <link rel="stylesheet" href="../theme/css/main.css">
+        <title>Mongodb NUMA 导致的性能问题</title>
+        <link rel="stylesheet" href="./theme/css/main.css">
                 
         <!--[if IE]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -12,38 +12,41 @@
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="../">Lyon's Blog </a></h1>
+                <h1><a href="./">Lyon's Blog </a></h1>
                 <nav><ul>
-                                                                                    <li ><a href="../category/bash.html">bash</a></li>
-                                    <li ><a href="../category/git.html">git</a></li>
-                                    <li ><a href="../category/linux.html">linux</a></li>
-                                    <li ><a href="../category/misc.html">misc</a></li>
-                                    <li class="active"><a href="../category/mongo.html">mongo</a></li>
-                                    <li ><a href="../category/munin.html">munin</a></li>
-                                    <li ><a href="../category/mysql.html">mysql</a></li>
-                                    <li ><a href="../category/network.html">network</a></li>
-                                    <li ><a href="../category/nginx.html">nginx</a></li>
-                                    <li ><a href="../category/python.html">python</a></li>
-                                    <li ><a href="../category/vim.html">vim</a></li>
+                                                                                    <li ><a href="./category/bash.html">bash</a></li>
+                                    <li ><a href="./category/git.html">git</a></li>
+                                    <li ><a href="./category/linux.html">linux</a></li>
+                                    <li ><a href="./category/misc.html">misc</a></li>
+                                    <li class="active"><a href="./category/mongo.html">mongo</a></li>
+                                    <li ><a href="./category/munin.html">munin</a></li>
+                                    <li ><a href="./category/mysql.html">mysql</a></li>
+                                    <li ><a href="./category/network.html">network</a></li>
+                                    <li ><a href="./category/nginx.html">nginx</a></li>
+                                    <li ><a href="./category/python.html">python</a></li>
+                                    <li ><a href="./category/vim.html">vim</a></li>
                                                 </ul></nav>
         </header><!-- /#banner -->
-                
-            
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="bookmark"
+           title="Permalink to Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a></h1>
+          </header>
 
-                            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html">Mongodb NUMA 导致的性能问题</a></h1> 
-                    <footer class="post-info">
+    <div class="entry-content">
+      <footer class="post-info">
         <abbr class="published" title="2013-05-08T13:45:46">
                 Wed 08 May 2013
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
         </address>
-        <p>In <a href="../category/mongo.html">mongo</a>. </p>
+        <p>In <a href="./category/mongo.html">mongo</a>. </p>
 
-</footer><!-- /.post-info --><p>最近升级了mongodb，用mongo连接mongod后出现如下warning:</p>
+</footer><!-- /.post-info -->      <p>最近升级了mongodb，用mongo连接mongod后出现如下warning:</p>
 <div class="highlight"><pre><span class="n">Server</span> <span class="n">has</span> <span class="n">startup</span> <span class="n">warnings</span><span class="o">:</span>
 <span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span>
 <span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span> <span class="n">WARNING</span><span class="o">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">running</span> <span class="n">on</span> <span class="n">a</span> <span class="n">NUMA</span> <span class="n">machine</span><span class="p">.</span>
@@ -86,48 +89,12 @@
 <p>http://docs.mongodb.org/manual/administration/production-notes/#production-numa</p>
 <p>http://huoding.com/2011/08/09/104</p>
 <p>http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/</p>
-<p>http://blog.nosqlfan.com/html/2772.html</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../mongo.html" rel="bookmark"
-                           title="Permalink to Mongo">Mongo</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-03-31T20:30:41">
-                Sun 31 March 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/mongo.html">mongo</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>Concurrency</h2>
-<p>MongoDB global lock to ga</p>
-<h2>Tips</h2>
-<h3>If Write Heavy</h3>
-<p>Global Lock is Global
-As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.</p>
-<p>Updating documents that have been pushed to ...</p>
-                <a class="readmore" href="../mongo.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            </ol><!-- /#posts-list -->
-                            <p class="paginator">
-        Page 1 / 1
-    </p>
-                        </section><!-- /#content -->
-                    <section id="extras" class="body">
+<p>http://blog.nosqlfan.com/html/2772.html</p>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
                         <div class="blogroll">
                         <h2>blogroll</h2>
                         <ul>
