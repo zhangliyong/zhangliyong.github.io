@@ -18,9 +18,9 @@ Title: python build Dynamic Link Library
 下面以python2.7.4为例，其它版本类似
 
     :::bash
-    ./configure
-    make
-    sudo make install
+    $ ./configure
+    $ make
+    $ sudo make install
 
 默认情况下，`make`会在当前目录下编译生成一个libpython2.7.a的静态链接库。
 
@@ -35,9 +35,9 @@ Title: python build Dynamic Link Library
 
 
     :::bash
-    ./configure --enable-shared
-    make
-    sudo make install
+    $ ./configure --enable-shared
+    $ make
+    $ sudo make install
 
 通过这种方式会生成动态链接库，并安装到系统库目录下,地址：`/usr/local/lib/libpython2.7.so`
 
