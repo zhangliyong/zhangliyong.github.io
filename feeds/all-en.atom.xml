@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-18T22:35:39+02:00</updated><entry><title>log</title><link href="/log.html" rel="alternate"></link><updated>2013-05-18T22:35:39+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-18:log.html</id><summary type="html">&lt;h2&gt;Logbook&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-18T22:36:12+02:00</updated><entry><title>log</title><link href="/log.html" rel="alternate"></link><updated>2013-05-18T22:36:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-18:log.html</id><summary type="html">&lt;h2&gt;Logbook&lt;/h2&gt;
 &lt;p&gt;Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
 logbook目前还处于开发阶段。可以参考官方&lt;a href="https://logbook.readthedocs.org/en/latest/features.html#core-features"&gt;core feature&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
