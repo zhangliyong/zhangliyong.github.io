@@ -35,7 +35,7 @@
                 <article>
                     <h1 class="entry-title"><a href="../log.html">log</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-05-18T22:47:04">
+        <abbr class="published" title="2013-05-18T22:48:18">
                 Sat 18 May 2013
         </abbr>
 
@@ -60,20 +60,20 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 <h3>Examples</h3>
 <p>下面给出一些简单的使用示例，有些是官方文档上给出的。</p>
 <p>开始使用logbook可以不用做任何配置：</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">warn</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">warn</span><span class="p">(</span><span class="s">&#39;This is too cool for stdlib&#39;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="mi">2013</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">18</span> <span class="mi">14</span><span class="p">:</span><span class="mi">29</span><span class="p">]</span> <span class="n">WARNING</span><span class="p">:</span> <span class="n">Generic</span><span class="p">:</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">too</span> <span class="n">cool</span> <span class="k">for</span> <span class="n">stdlib</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">warn</span>
+<span class="n">warn</span><span class="p">(</span><span class="s">&#39;This is too cool for stdlib&#39;</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">2013</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">18</span> <span class="mi">14</span><span class="p">:</span><span class="mi">29</span><span class="p">]</span> <span class="n">WARNING</span><span class="p">:</span> <span class="n">Generic</span><span class="p">:</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">too</span> <span class="n">cool</span> <span class="k">for</span> <span class="n">stdlib</span>
 </pre></div>
 
 
 <p>上面的代码会将log记录到stderr中。是不是非常简单，都不需要设置handler，logbook有非常好的默认配置，
 在很多情况下你不需要改动即可直接使用。</p>
 <p>使用handler：</p>
-<div class="highlight"><pre><span class="n">from</span> <span class="n">logbook</span> <span class="n">import</span> <span class="n">FileHandler</span><span class="p">,</span> <span class="n">info</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">FileHandler</span><span class="p">,</span> <span class="n">info</span>
 
-<span class="n">file_handler</span> <span class="o">=</span> <span class="n">FileHandler</span><span class="p">(</span><span class="err">&#39;</span><span class="n">logbook</span><span class="p">.</span><span class="n">log</span><span class="err">&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="err">&#39;</span><span class="n">INFO</span><span class="err">&#39;</span><span class="p">)</span>
-<span class="n">with</span> <span class="n">file_handler</span><span class="o">:</span>
-    <span class="n">info</span><span class="p">(</span><span class="err">&#39;</span><span class="n">This</span> <span class="n">is</span> <span class="n">logged</span> <span class="n">in</span> <span class="n">a</span> <span class="n">file</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="n">file_handler</span> <span class="o">=</span> <span class="n">FileHandler</span><span class="p">(</span><span class="s">&#39;logbook.log&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s">&#39;INFO&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">file_handler</span><span class="p">:</span>
+    <span class="n">info</span><span class="p">(</span><span class="s">&#39;This is logged in a file&#39;</span><span class="p">)</span>
 </pre></div>
 
 
