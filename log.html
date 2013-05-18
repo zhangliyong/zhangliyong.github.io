@@ -38,7 +38,7 @@
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2013-05-18T22:36:12">
+        <abbr class="published" title="2013-05-18T22:38:15">
                 Sat 18 May 2013
         </abbr>
 
@@ -48,16 +48,19 @@
         <p>In <a href="./category/python.html">python</a>. </p>
 
 </footer><!-- /.post-info -->      <h2>Logbook</h2>
+<h3>Introduction</h3>
 <p>Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
 logbook目前还处于开发阶段。可以参考官方<a href="https://logbook.readthedocs.org/en/latest/features.html#core-features">core feature</a></p>
 <p>logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
 filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供
 了更多的组件，如：processor。</p>
+<h3>New Feature</h3>
 <p>在logbook中一个非常大的变化是大量使用<a href="://logbook.readthedocs.org/en/latest/stacks.html">stack</a>,
 一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性，
 可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。</p>
 <p>logbook也增加了很多的handler，甚至都有将log发到twitter上的handler。</p>
 <p>logbook有非常多的特性，相信以后也会增加更多有趣的特性，建议阅读其官方文档：https://logbook.readthedocs.org/en/latest/</p>
+<h3>Examples</h3>
 <p>下面给出一些简单的使用示例，有些是官方文档上给出的。</p>
 <p>开始使用logbook可以不用做任何配置：</p>
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">warn</span>
