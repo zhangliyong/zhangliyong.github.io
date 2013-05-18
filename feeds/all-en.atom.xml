@@ -1,5 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-08T19:25:47+02:00</updated><entry><title>pelican</title><link href="/pelican.html" rel="alternate"></link><updated>2013-05-08T19:25:47+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-08:pelican.html</id><summary type="html">&lt;h2&gt;介绍&lt;/h2&gt;</summary></entry><entry><title>Mongodb NUMA 导致的性能问题</title><link href="/mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="alternate"></link><updated>2013-05-08T13:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-08:mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html</id><summary type="html">&lt;p&gt;最近升级了mongodb，用mongo连接mongod后出现如下warning:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-18T22:32:41+02:00</updated><entry><title>log</title><link href="/log.html" rel="alternate"></link><updated>2013-05-18T22:32:41+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-18:log.html</id><summary type="html">&lt;h2&gt;Logbook&lt;/h2&gt;
+&lt;p&gt;Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
+logbook目前还处于开发阶段。可以参考官方&lt;a href="https://logbook.readthedocs.org/en/latest/features.html#core-features"&gt;core feature&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
+filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供
+了更多的组件，如：processor。
+在logbook中。&lt;/p&gt;
+&lt;p&gt;在logbook中一个非常大的变化是大量使用&lt;a href="://logbook.readthedocs.org/en/latest/stacks.html"&gt;stack&lt;/a&gt;,
+一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性，
+可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。&lt;/p&gt;
+&lt;p&gt;logbook也增加了很多的handler，甚至都有将log发到twitter上的handler。&lt;/p&gt;
+&lt;p&gt;logbook有非常多的特性，相信以后也会增加更多有趣的特性，建议阅读其官方文档：https://logbook.readthedocs.org/en/latest/&lt;/p&gt;
+&lt;p&gt;下面给出一些简单的使用示例，有些是官方文档上给出的。&lt;/p&gt;
+&lt;p&gt;开始使用logbook可以不用做任何配置：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;logbook&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;warn&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;warn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;This is too cool for stdlib&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2013&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mo"&gt;05&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;18&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;29&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;WARNING&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Generic&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="n"&gt;too&lt;/span&gt; &lt;span class="n"&gt;cool&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;stdlib&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面的代码会将log记录到stderr中。是不是非常简单，都不需要设置handler，logbook有非常好的默认配置，
+在很多情况下你不需要改动即可直接使用。&lt;/p&gt;
+&lt;p&gt;使用handler：&lt;/p&gt;
+&lt;h2&gt;Django log&lt;/h2&gt;
+&lt;p&gt;多进程导致rotated file log的问题&lt;/p&gt;</summary></entry><entry><title>Linux</title><link href="/linux.html" rel="alternate"></link><updated>2013-05-16T12:18:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-16:linux.html</id><summary type="html">&lt;h2&gt;Linux TCP Performance Tuning&lt;/h2&gt;
+&lt;p&gt;There are two ways to change tcp parameters.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;change the value of parameter files in /proc/sys/net/
+   e.g. increase the value of somaxconn
+        &lt;code&gt;echo 1024 &amp;gt; /proc/sys/net/core/somaxconn&lt;/code&gt;
+   when the server restart, the parameter will restore.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;change the vlaue in /etc/sysctl.con, and run &lt;code&gt;sudo sysctl -p&lt;/code&gt; to apply the changes immediately,
+   this can change the value permanently.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Parameters&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;/proc/sys/fs/file-max: The maximum number of concurrently open files.&lt;/li&gt;
+&lt;li&gt;/proc/sys/net/ipv4/tcp_max_syn_backlog: Maximum number of remembered connection requests, which are still did not receive an acknowledgment from connecting client. The default value is 1024 for systems with more than 128Mb of memory, and 128 for low memory machines. If server suffers of overload, try to increase this number.&lt;/li&gt;
+&lt;li&gt;/proc/sys/net/core/somaxconn: Limit of socket listen() backlog, known in userspace as SOMAXCONN. Defaults to 128. The value should be raised substantially to support bursts of request. For example, to support a burst of 1024 requests, set somaxconn to 1024.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;change userlevel file-max
+need logout and login to work&lt;/p&gt;</summary></entry><entry><title>gevent</title><link href="/gevent.html" rel="alternate"></link><updated>2013-05-16T11:56:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-16:gevent.html</id><summary type="html">&lt;h2&gt;Pool&lt;/h2&gt;
+&lt;p&gt;什么时候执行Pool中的任务&lt;/p&gt;</summary></entry><entry><title>nginx tips</title><link href="/nginx-tips.html" rel="alternate"></link><updated>2013-05-13T16:11:31+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-13:nginx-tips.html</id><summary type="html">&lt;h2&gt;nginx backlog&lt;/h2&gt;
+&lt;h2&gt;Root Directory&lt;/h2&gt;
+&lt;p&gt;nginx 默认根目录，&lt;/p&gt;
+&lt;p&gt;如果在配置文件中指定了root，则根目录即为root指定的目录&lt;/p&gt;
+&lt;p&gt;如果通过编译安装的nginx，则根目录为编译时指定的prefix目录&lt;/p&gt;
+&lt;p&gt;如果通过包管理器安装，则根目录与发行版相关。例如ubuntu版本的根目录为：
+/usr/share/nginx/www&lt;/p&gt;
+&lt;h2&gt;Custome error page&lt;/h2&gt;
+&lt;p&gt;nginx 有个默认的错误显示页面&lt;/p&gt;
+&lt;h2&gt;Ref&lt;/h2&gt;
+&lt;p&gt;http://wiki.nginx.org/Pitfalls&lt;/p&gt;</summary></entry><entry><title>iptables</title><link href="/iptables.html" rel="alternate"></link><updated>2013-05-13T16:11:18+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-13:iptables.html</id><summary type="html">&lt;h2&gt;Ref:&lt;/h2&gt;
+&lt;p&gt;http://www.cyberciti.biz/faq/rhel-fedorta-linux-iptables-firewall-configuration-tutorial/&lt;/p&gt;</summary></entry><entry><title>TODO</title><link href="/todo.html" rel="alternate"></link><updated>2013-05-09T10:30:16+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-09:todo.html</id><summary type="html">&lt;h2&gt;2013-05-08&lt;/h2&gt;
+&lt;h3&gt;TODO TODAY&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;蕃茄工作法做笔记（思维导图）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;总结peclian&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>pelican</title><link href="/pelican.html" rel="alternate"></link><updated>2013-05-09T10:29:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-09:pelican.html</id><summary type="html">&lt;h2&gt;介绍&lt;/h2&gt;
+&lt;p&gt;peclian 是一个python版本的表态页面生成器，类似于jekyll&lt;/p&gt;</summary></entry><entry><title>Mongodb NUMA 导致的性能问题</title><link href="/mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="alternate"></link><updated>2013-05-08T13:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-08:mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html</id><summary type="html">&lt;p&gt;最近升级了mongodb，用mongo连接mongod后出现如下warning:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Server&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;startup&lt;/span&gt; &lt;span class="n"&gt;warnings&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
 &lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;WARNING&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;You&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;running&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;NUMA&lt;/span&gt; &lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
@@ -302,23 +369,4 @@ https://uwsgi-docs.readthedocs.org/en/latest/Install.html&lt;/p&gt;
 &lt;h2&gt;git add&lt;/h2&gt;
 &lt;h2&gt;Git Flow&lt;/h2&gt;
 &lt;p&gt;http://danielkummer.github.com/git-flow-cheatsheet/&lt;/p&gt;
-&lt;h2&gt;Git submodules&lt;/h2&gt;</summary></entry><entry><title>Linux</title><link href="/linux.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:linux.html</id><summary type="html">&lt;h2&gt;Linux TCP Performance Tuning&lt;/h2&gt;
-&lt;p&gt;There are two ways to change tcp parameters.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;change the value of parameter files in /proc/sys/net/
-   e.g. increase the value of somaxconn
-        &lt;code&gt;echo 1024 &amp;gt; /proc/sys/net/core/somaxconn&lt;/code&gt;
-   when the server restart, the parameter will restore.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;change the vlaue in /etc/sysctl.con, and run &lt;code&gt;sudo sysctl -p&lt;/code&gt; to apply the changes immediately,
-   this can change the value permanently.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3&gt;Parameters&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;/proc/sys/fs/file-max: The maximum number of concurrently open files.&lt;/li&gt;
-&lt;li&gt;/proc/sys/net/ipv4/tcp_max_syn_backlog: Maximum number of remembered connection requests, which are still did not receive an acknowledgment from connecting client. The default value is 1024 for systems with more than 128Mb of memory, and 128 for low memory machines. If server suffers of overload, try to increase this number.&lt;/li&gt;
-&lt;li&gt;/proc/sys/net/core/somaxconn: Limit of socket listen() backlog, known in userspace as SOMAXCONN. Defaults to 128. The value should be raised substantially to support bursts of request. For example, to support a burst of 1024 requests, set somaxconn to 1024.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>nginx tips</title><link href="/nginx-tips.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:nginx-tips.html</id><summary type="html">&lt;h2&gt;nginx backlog&lt;/h2&gt;</summary></entry><entry><title>vim</title><link href="/vim.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:vim.html</id><summary type="html">&lt;p&gt;TODO: wrap my plugins&lt;/p&gt;</summary></entry></feed>
+&lt;h2&gt;Git submodules&lt;/h2&gt;</summary></entry><entry><title>vim</title><link href="/vim.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:vim.html</id><summary type="html">&lt;p&gt;TODO: wrap my plugins&lt;/p&gt;</summary></entry></feed>

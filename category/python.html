@@ -33,10 +33,10 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../pelican.html">pelican</a></h1> 
+                    <h1 class="entry-title"><a href="../log.html">log</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-05-08T19:25:47">
-                Wed 08 May 2013
+        <abbr class="published" title="2013-05-18T22:32:41">
+                Sat 18 May 2013
         </abbr>
 
                 <address class="vcard author">
@@ -44,13 +44,87 @@
         </address>
         <p>In <a href="../category/python.html">python</a>. </p>
 
-</footer><!-- /.post-info --><h2>介绍</h2>                </article>
+</footer><!-- /.post-info --><h2>Logbook</h2>
+<p>Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
+logbook目前还处于开发阶段。可以参考官方<a href="https://logbook.readthedocs.org/en/latest/features.html#core-features">core feature</a></p>
+<p>logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
+filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供
+了更多的组件，如：processor。
+在logbook中。</p>
+<p>在logbook中一个非常大的变化是大量使用<a href="://logbook.readthedocs.org/en/latest/stacks.html">stack</a>,
+一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性，
+可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。</p>
+<p>logbook也增加了很多的handler，甚至都有将log发到twitter上的handler。</p>
+<p>logbook有非常多的特性，相信以后也会增加更多有趣的特性，建议阅读其官方文档：https://logbook.readthedocs.org/en/latest/</p>
+<p>下面给出一些简单的使用示例，有些是官方文档上给出的。</p>
+<p>开始使用logbook可以不用做任何配置：</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">warn</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">warn</span><span class="p">(</span><span class="s">&#39;This is too cool for stdlib&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="mi">2013</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">18</span> <span class="mi">14</span><span class="p">:</span><span class="mi">29</span><span class="p">]</span> <span class="n">WARNING</span><span class="p">:</span> <span class="n">Generic</span><span class="p">:</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">too</span> <span class="n">cool</span> <span class="k">for</span> <span class="n">stdlib</span>
+</pre></div>
+
+
+<p>上面的代码会将log记录到stderr中。是不是非常简单，都不需要设置handler，logbook有非常好的默认配置，
+在很多情况下你不需要改动即可直接使用。</p>
+<p>使用handler：</p>
+<h2>Django log</h2>
+<p>多进程导致rotated file log的问题</p>                </article>
                             </aside><!-- /#featured -->
                             <section id="content" class="body">
                     <h1>Other articles</h1>
                     <hr />
                     <ol id="posts-list" class="hfeed">
                                                 
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../gevent.html" rel="bookmark"
+                           title="Permalink to gevent">gevent</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-16T11:56:46">
+                Thu 16 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>Pool</h2>
+<p>什么时候执行Pool中的任务</p>
+                <a class="readmore" href="../gevent.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../pelican.html" rel="bookmark"
+                           title="Permalink to pelican">pelican</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-09T10:29:55">
+                Thu 09 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>介绍</h2>
+<p>peclian 是一个python版本的表态页面生成器，类似于jekyll</p>
+                <a class="readmore" href="../pelican.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
