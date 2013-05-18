@@ -35,7 +35,7 @@
                 <article>
                     <h1 class="entry-title"><a href="./log.html">log</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-05-18T22:38:54">
+        <abbr class="published" title="2013-05-18T22:47:04">
                 Sat 18 May 2013
         </abbr>
 
@@ -69,6 +69,14 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 <p>上面的代码会将log记录到stderr中。是不是非常简单，都不需要设置handler，logbook有非常好的默认配置，
 在很多情况下你不需要改动即可直接使用。</p>
 <p>使用handler：</p>
+<div class="highlight"><pre><span class="n">from</span> <span class="n">logbook</span> <span class="n">import</span> <span class="n">FileHandler</span><span class="p">,</span> <span class="n">info</span>
+
+<span class="n">file_handler</span> <span class="o">=</span> <span class="n">FileHandler</span><span class="p">(</span><span class="err">&#39;</span><span class="n">logbook</span><span class="p">.</span><span class="n">log</span><span class="err">&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="err">&#39;</span><span class="n">INFO</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="n">with</span> <span class="n">file_handler</span><span class="o">:</span>
+    <span class="n">info</span><span class="p">(</span><span class="err">&#39;</span><span class="n">This</span> <span class="n">is</span> <span class="n">logged</span> <span class="n">in</span> <span class="n">a</span> <span class="n">file</span><span class="err">&#39;</span><span class="p">)</span>
+</pre></div>
+
+
 <h2>Django log</h2>
 <p>多进程导致rotated file log的问题</p>                </article>
                             </aside><!-- /#featured -->

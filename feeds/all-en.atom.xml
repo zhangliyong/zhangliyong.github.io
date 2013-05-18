@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-18T22:38:54+02:00</updated><entry><title>log</title><link href="/log.html" rel="alternate"></link><updated>2013-05-18T22:38:54+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-18:log.html</id><summary type="html">&lt;h2&gt;Logbook&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-18T22:47:04+02:00</updated><entry><title>log</title><link href="/log.html" rel="alternate"></link><updated>2013-05-18T22:47:04+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-18:log.html</id><summary type="html">&lt;h2&gt;Logbook&lt;/h2&gt;
 &lt;h3&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
 logbook目前还处于开发阶段。可以参考官方&lt;a href="https://logbook.readthedocs.org/en/latest/features.html#core-features"&gt;core feature&lt;/a&gt;&lt;/p&gt;
@@ -24,6 +24,14 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 &lt;p&gt;上面的代码会将log记录到stderr中。是不是非常简单，都不需要设置handler，logbook有非常好的默认配置，
 在很多情况下你不需要改动即可直接使用。&lt;/p&gt;
 &lt;p&gt;使用handler：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;logbook&lt;/span&gt; &lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;FileHandler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;info&lt;/span&gt;
+
+&lt;span class="n"&gt;file_handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FileHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;logbook&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;INFO&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;file_handler&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;logged&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;h2&gt;Django log&lt;/h2&gt;
 &lt;p&gt;多进程导致rotated file log的问题&lt;/p&gt;</summary></entry><entry><title>Linux</title><link href="/linux.html" rel="alternate"></link><updated>2013-05-16T12:18:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-16:linux.html</id><summary type="html">&lt;h2&gt;Linux TCP Performance Tuning&lt;/h2&gt;
 &lt;p&gt;There are two ways to change tcp parameters.&lt;/p&gt;
