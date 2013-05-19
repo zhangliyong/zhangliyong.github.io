@@ -150,6 +150,30 @@ https://uwsgi-docs.readthedocs.org/en/latest/Install.html</p>
                  
                         <li><article class="hentry">    
                 <header>
+                    <h1><a href="../django-logbook.html" rel="bookmark"
+                           title="Permalink to django-logbook">django-logbook</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-19T17:52:40">
+                Sun 19 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                
+                <a class="readmore" href="../django-logbook.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
                     <h1><a href="../gevent.html" rel="bookmark"
                            title="Permalink to gevent">gevent</a></h1>
                 </header>
@@ -272,8 +296,8 @@ https://uwsgi-docs.readthedocs.org/en/latest/Install.html</p>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-        <abbr class="published" title="2013-05-18T22:48:18">
-                Sat 18 May 2013
+        <abbr class="published" title="2013-05-19T17:52:42">
+                Sun 19 May 2013
         </abbr>
 
                 <address class="vcard author">
@@ -292,13 +316,18 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 <p>在logbook中一个非常大的变化是大量使用<a href="://logbook.readthedocs.org/en/latest/stacks.html">stack</a>,
 一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性，
 可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。</p>
-<p>logbook也增加了很多的handler，甚至都有将log发到twitter上的handler。</p>
-<p>logbook有非常多的特性，相信以后也会增加更多有趣的特性，建议阅读其官方文档：https://logbook.readthedocs.org/en/latest/</p>
-<h3>Examples</h3>
-<p>下面给出一些简单的使用示例，有些是官方文档上给出的。</p>
-<p>开始使用logbook可以不用做任何配置：</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">warn</span>
-<span class="n">warn</span><span class="p">(</span><span class="s">&#39;This ...</span></pre></div>
+<p>目前logbook中存在三种stack，分别用来存储Handler, Processor, Flag。
+每一句log都会经过这三个stack中的每一个对象处理。假如目前存储handler的stack中目前
+有两个handler h1, h2:</p>
+<div class="highlight"><pre><span class="o">|</span> <span class="n">h1</span> <span class="o">|</span>
+<span class="o">|</span><span class="n">____</span><span class="o">|</span>
+<span class="o">|</span> <span class="n">h2</span> <span class="o">|</span>
+<span class="o">|</span><span class="n">____</span><span class="o">|</span>
+</pre></div>
+
+
+<p>那每一句log都会被h1处理完后被h2再处理。</p>
+<p>Handler, Processor, Flag必须加到stack中才能启到作用，可以使用 <code>push_application()</code> 及 <code>pop_application ...</code></p>
                 <a class="readmore" href="../log.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
@@ -361,35 +390,6 @@ http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html</p>
 As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.</p>
 <p>Updating documents that have been pushed to ...</p>
                 <a class="readmore" href="../mongo.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="bookmark"
-                           title="Permalink to Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-08T13:45:46">
-                Wed 08 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/mongo.html">mongo</a>. </p>
-
-</footer><!-- /.post-info -->                <p>最近升级了mongodb，用mongo连接mongod后出现如下warning:</p>
-<div class="highlight"><pre><span class="n">Server</span> <span class="n">has</span> <span class="n">startup</span> <span class="n">warnings</span><span class="o">:</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span> <span class="n">WARNING</span><span class="o">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">running</span> <span class="n">on</span> <span class="n">a</span> <span class="n">NUMA</span> <span class="n">machine</span><span class="p">.</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span>          <span class="n">We</span> <span class="n">suggest</span> <span class="n">launching</span> <span class="n">mongod</span> <span class="n">like</span> <span class="n">this</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">performance</span> <span class="n">problems</span><span class="o">:</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45 ...</span></pre></div>
-                <a class="readmore" href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
