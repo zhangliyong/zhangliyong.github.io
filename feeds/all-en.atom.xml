@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-19T17:52:42+02:00</updated><entry><title>log</title><link href="/log.html" rel="alternate"></link><updated>2013-05-19T17:52:42+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:log.html</id><summary type="html">&lt;h2&gt;Logbook&lt;/h2&gt;
-&lt;h3&gt;Introduction&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-19T17:55:35+02:00</updated><entry><title>django-logbook</title><link href="/django-logbook.html" rel="alternate"></link><updated>2013-05-19T17:55:35+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:django-logbook.html</id><summary type="html"></summary></entry><entry><title>Logbook</title><link href="/logbook.html" rel="alternate"></link><updated>2013-05-19T17:55:19+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:logbook.html</id><summary type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
 logbook目前还处于开发阶段。可以参考官方&lt;a href="https://logbook.readthedocs.org/en/latest/features.html#core-features"&gt;core feature&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
 filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供
 了更多的组件，如：processor。&lt;/p&gt;
-&lt;h3&gt;New Feature&lt;/h3&gt;
+&lt;h2&gt;New Feature&lt;/h2&gt;
 &lt;p&gt;在logbook中一个非常大的变化是大量使用&lt;a href="://logbook.readthedocs.org/en/latest/stacks.html"&gt;stack&lt;/a&gt;,
 一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性，
 可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。&lt;/p&gt;
@@ -25,7 +24,7 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 &lt;p&gt;logbook中也提供了&lt;code&gt;with&lt;/code&gt;来完成对stack的push和pop。&lt;/p&gt;
 &lt;p&gt;logbook增加了很多的handler，甚至都有将log发到twitter上的handler。&lt;/p&gt;
 &lt;p&gt;logbook有非常多的特性，相信以后也会增加更多有趣的特性，建议阅读其官方文档：https://logbook.readthedocs.org/en/latest/&lt;/p&gt;
-&lt;h3&gt;Examples&lt;/h3&gt;
+&lt;h2&gt;Examples&lt;/h2&gt;
 &lt;p&gt;下面给出一些简单的使用示例，有些是官方文档上给出的。&lt;/p&gt;
 &lt;p&gt;开始使用logbook可以不用做任何配置：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;logbook&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;warn&lt;/span&gt;
@@ -45,7 +44,7 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h4&gt;FingersCrossedHandler&lt;/h4&gt;
+&lt;h3&gt;FingersCrossedHandler&lt;/h3&gt;
 &lt;p&gt;logbook提供了一个特殊的"fingers crossed" handler，这个handler作为一个wrapper，是用来封装其它
 handler的，这个handler有一个特殊的功能，它会将所有的log记录到内存中，当某一些log的级别
 (debug, info, warning, error)超过FingersCrossedHandler设置的级别时，所有在内存中的log以及后面的log
@@ -86,10 +85,7 @@ handler的，这个handler有一个特殊的功能，它会将所有的log记录
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;： Processor只有当log被某一个handler处理的时候才会执行，否则processor永远不会招待。&lt;/p&gt;
-&lt;h2&gt;Django log&lt;/h2&gt;
-&lt;p&gt;写一个django app用logbook来记log&lt;/p&gt;
-&lt;p&gt;多进程导致rotated file log的问题&lt;/p&gt;</summary></entry><entry><title>django-logbook</title><link href="/django-logbook.html" rel="alternate"></link><updated>2013-05-19T17:52:40+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:django-logbook.html</id><summary type="html"></summary></entry><entry><title>Linux</title><link href="/linux.html" rel="alternate"></link><updated>2013-05-16T12:18:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-16:linux.html</id><summary type="html">&lt;h2&gt;Linux TCP Performance Tuning&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;： Processor只有当log被某一个handler处理的时候才会执行，否则processor永远不会招待。&lt;/p&gt;</summary></entry><entry><title>Linux</title><link href="/linux.html" rel="alternate"></link><updated>2013-05-16T12:18:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-16:linux.html</id><summary type="html">&lt;h2&gt;Linux TCP Performance Tuning&lt;/h2&gt;
 &lt;p&gt;There are two ways to change tcp parameters.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
