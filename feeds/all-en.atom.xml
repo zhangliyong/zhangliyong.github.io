@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-19T17:56:07+02:00</updated><entry><title>Logbook</title><link href="/logbook.html" rel="alternate"></link><updated>2013-05-19T17:56:07+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:logbook.html</id><summary type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-05-19T18:48:06+02:00</updated><entry><title>Logbook</title><link href="/logbook.html" rel="alternate"></link><updated>2013-05-19T18:48:06+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:logbook.html</id><summary type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
 logbook目前还处于开发阶段。可以参考官方&lt;a href="https://logbook.readthedocs.org/en/latest/features.html#core-features"&gt;core feature&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
@@ -44,6 +44,13 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;h3&gt;TestHandler&lt;/h3&gt;
+&lt;p&gt;logbook提供了TestHandler，可以用来测试log，使用非常方便，参考文档：
+https://logbook.readthedocs.org/en/latest/api/handlers.html#logbook.TestHandler&lt;/p&gt;
+&lt;h3&gt;MailHandler&lt;/h3&gt;
+&lt;p&gt;TODO&lt;/p&gt;
+&lt;h3&gt;ThreadedWrapperHandler&lt;/h3&gt;
+&lt;p&gt;TODO&lt;/p&gt;
 &lt;h3&gt;FingersCrossedHandler&lt;/h3&gt;
 &lt;p&gt;logbook提供了一个特殊的"fingers crossed" handler，这个handler作为一个wrapper，是用来封装其它
 handler的，这个handler有一个特殊的功能，它会将所有的log记录到内存中，当某一些log的级别
