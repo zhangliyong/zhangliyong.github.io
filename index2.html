@@ -15,7 +15,9 @@
                 <h1><a href="./">Lyon's Blog </a></h1>
                 <nav><ul>
                                                     <li><a href="./pages/about.html">About</a></li>
-                                                                    <li ><a href="./category/bash.html">bash</a></li>
+                                                                    <li ><a href="./category/algorithm.html">algorithm</a></li>
+                                    <li ><a href="./category/bash.html">bash</a></li>
+                                    <li ><a href="./category/db.html">db</a></li>
                                     <li ><a href="./category/git.html">git</a></li>
                                     <li ><a href="./category/linux.html">linux</a></li>
                                     <li ><a href="./category/misc.html">misc</a></li>
@@ -36,188 +38,14 @@
                     <ol id="posts-list" class="hfeed" start="9">
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="./python-build-dynamic-link-library.html" rel="bookmark"
-                           title="Permalink to python build Dynamic Link Library">python build Dynamic Link Library</a></h1>
+                    <h1><a href="./memory.html" rel="bookmark"
+                           title="Permalink to Memory">Memory</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-        <abbr class="published" title="2013-05-05T18:41:50">
-                Sun 05 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <p>当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：</p>
-<blockquote>
-<p>/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
-.../lib/libpython2.7.a: could not read symbols: Bad value
-collect2: ld returned 1 exit status</p>
-</blockquote>
-<p>这种情况需要安装动态库版本。</p>
-<p>下面介绍自己编译安装动态库的python版本。</p>
-<h2>安装 ...</h2>
-                <a class="readmore" href="./python-build-dynamic-link-library.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./munin.html" rel="bookmark"
-                           title="Permalink to munin">munin</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-04T16:36:47">
-                Sat 04 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/munin.html">munin</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>Writing plugins</h2>
-<p>global attribute: http://munin-monitoring.org/wiki/protocol-config</p>
-<p>redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch</p>
-<p>mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph</p>
-                <a class="readmore" href="./munin.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./python.html" rel="bookmark"
-                           title="Permalink to Python">Python</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-04T16:36:02">
-                Sat 04 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>decorator</h2>
-<h2>class method</h2>
-<h1>Django</h1>
-<h2>Django test</h2>
-<p>ref: http://mikegrouchy.com/blog/great-django-test-talks.html</p>
-                <a class="readmore" href="./python.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./pythonbrew.html" rel="bookmark"
-                           title="Permalink to Pythonbrew">Pythonbrew</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-04T16:35:56">
-                Sat 04 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <p>home page: https://github.com/utahta/pythonbrew</p>
-<h2>install packages over pythonbrew</h2>
-<p>pythonbrew can install multiple python versions on the same machine,
-if you want to install packages over a specified python version, a
-recommand way is to install pip first.</p>
-<h3>install pip</h3>
-<p>home page: http://www.pip-installer.org/en/latest ...</p>
-                <a class="readmore" href="./pythonbrew.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./mysql-xing-neng-diao-you.html" rel="bookmark"
-                           title="Permalink to Mysql 性能调优">Mysql 性能调优</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-04T16:35:42">
-                Sat 04 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/mysql.html">mysql</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>thread cache size</h2>
-<p>http://www.dbasquare.com/kb/mysql-and-thread-cache-size/</p>
-<p>query_cache_type可以设置为0(OFF)，1(ON)或者2(DEMOND)，分别表示完全不使用query cache，除显式要求不使用query cache（使用sql_no_cache）之外的所有的select都使用query cache，只有显示要求才使用query cache（使用sql_cache)</p>
-<p>show global status like '';
-show global variables like '';</p>
-<p>innodb_file_per_table</p>
-<p>mysql io 延时计算</p>
-<h2>mysql backup</h2>
-<p>相较前几种方法，备份数据文件最为直接、快速、方便，缺点是基本上不能实现增量备份。为了保证数据的一致性，需要在靠背文件前，执行以下 SQL 语句：</p>
-<p>FLUSH ...</p>
-                <a class="readmore" href="./mysql-xing-neng-diao-you.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./time_wait-in-netstat.html" rel="bookmark"
-                           title="Permalink to TIME_WAIT in netstat">TIME_WAIT in netstat</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-04-11T23:44:01">
-                Thu 11 April 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/network.html">network</a>. </p>
-
-</footer><!-- /.post-info -->                <p>netstat -tanp | grep -o '(10.18.10.20\|211.151.139.230\|127.0.0.1):[0-9]*' | sort -nr | uniq -c | sort -nr -k 1 | wc -l</p>
-                <a class="readmore" href="./time_wait-in-netstat.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./misc.html" rel="bookmark"
-                           title="Permalink to misc">misc</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-03-31T20:31:38">
-                Sun 31 March 2013
+        <abbr class="published" title="2013-05-19T21:42:19">
+                Sun 19 May 2013
         </abbr>
 
                 <address class="vcard author">
@@ -225,15 +53,8 @@ show global variables like '';</p>
         </address>
         <p>In <a href="./category/misc.html">misc</a>. </p>
 
-</footer><!-- /.post-info -->                <h1>Mac sshfs</h1>
-<p>Mac 挂载远程目录</p>
-<p>http://osxfuse.github.com/</p>
-<p>install OXSFUSE and SSHFS</p>
-<h2>TF-IDF</h2>
-<p>http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
-http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
-http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html</p>
-                <a class="readmore" href="./misc.html">read more</a>
+</footer><!-- /.post-info -->                
+                <a class="readmore" href="./memory.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             
@@ -241,29 +62,46 @@ http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html</p>
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="./mongo.html" rel="bookmark"
-                           title="Permalink to Mongo">Mongo</a></h1>
+                    <h1><a href="./sleeping.html" rel="bookmark"
+                           title="Permalink to Sleeping">Sleeping</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-        <abbr class="published" title="2013-03-31T20:30:41">
-                Sun 31 March 2013
+        <abbr class="published" title="2013-05-19T21:17:11">
+                Sun 19 May 2013
         </abbr>
 
                 <address class="vcard author">
                 By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
         </address>
-        <p>In <a href="./category/mongo.html">mongo</a>. </p>
+        <p>In <a href="./category/misc.html">misc</a>. </p>
 
-</footer><!-- /.post-info -->                <h2>Concurrency</h2>
-<p>MongoDB global lock to ga</p>
-<h2>Tips</h2>
-<h3>If Write Heavy</h3>
-<p>Global Lock is Global
-As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.</p>
-<p>Updating documents that have been pushed to ...</p>
-                <a class="readmore" href="./mongo.html">read more</a>
+</footer><!-- /.post-info -->                <h2>关于睡眠你应该知道的十件事</h2>
+<p>地址：http://v.163.com/movie/2013/5/V/Q/M8TDTH9BJ_M8TE2FFVQ.html</p>
+<p>网易分开课上有一期bbc拍摄的关于睡眠的记录片，里面提到了很多关于提高睡眠的问题，
+对于一些自己感觉有帮助的记录如下：</p>
+<ol>
+<li>
+<p>咖啡和洒精都会影响人的睡眠；咖啡会让人难以入睡，酒精会容易让人入睡，但会缩深度睡眠阶段。</p>
+</li>
+<li>
+<p>对于经常跨时区的人来说，睡眠也是个大问题，对于这种情况，可以尝试16小时不吃饭，可以喝水，到达目的地后，在当地的正常用餐时间用餐，按照当地的饮食时间。</p>
+</li>
+<li>
+<p>经常性的紧张也会影响睡眠，在睡觉前在床上适当做一些放松肌肉的锻炼，先做一些动作让肌肉紧张再放松。</p>
+</li>
+<li>
+<p>饮食也会影响睡觉，如果多食含蛋白质少的东西会影响发困，多食蛋白质多的会让人清醒。</p>
+</li>
+<li>
+<p>气味也能促进人的睡眠，睡前喝薰衣草泡的茶及闻薰衣草的气味会有得睡眠。</p>
+</li>
+<li>
+<p>睡觉前一小时泡个热水澡有利于睡眠。</p>
+</li>
+</ol>
+                <a class="readmore" href="./sleeping.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             
@@ -271,66 +109,14 @@ As you probably know, MongoDB has a global lock. The longer your writes take, th
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="./bash.html" rel="bookmark"
-                           title="Permalink to Bash">Bash</a></h1>
+                    <h1><a href="./logbook.html" rel="bookmark"
+                           title="Permalink to Logbook">Logbook</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-        <abbr class="published" title="2013-03-27T19:21:50">
-                Wed 27 March 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/bash.html">bash</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>alias</h2>
-<p>对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。</p>
-<p>e.g. 在.bashrc中加入</p>
-<div class="highlight"><pre><span class="nb">alias </span><span class="nv">servername</span><span class="o">=</span><span class="s1">&#39;ssh sns@hostname&#39;</span>
-</pre></div>
-
-
-<p>执行：</p>
-<div class="highlight"><pre><span class="nv">$ </span>servername
-</pre></div>
-
-
-<p>即可登陆到hostname机器。</p>
-<h2>rsync</h2>
-<p>大家常用rsync同步数据，有些数据是不需要同步的，可以用 --exclude 选项。</p>
-<p>e.g.</p>
-<div class="highlight"><pre>rsync -avz --exclude <span class="s2">&quot;.*&quot;</span> --exclude <span class="s2">&quot;dbconfig.py&quot;</span> src user@hostname:/dest
-
---exclude <span class="s2">&quot;.*&quot;</span> 不会同步以<span class="s2">&quot;.&quot;</span>开头的文件或文件夹，不会同步.git目录（.git目录是比较大的，不建议同步）。
-</pre></div>
-
-
-<h2>mail</h2>
-<p>所有crontab任务的运行结果都会输出到mail中，可以随时查看每个任务的运行情况。</p>
-<h2>tmux</h2>
-<p>工作中经常ssh到远程服务器，有时需要在远程服务器中开启多个终端，</p>
-<ul>
-<li>一种办法是在本地开启多个终端，分别远程到服务器。</li>
-<li>还有一种方式是利用<a href="http://tmux.sourceforge.net/">tmux ...</a></li></ul>
-                <a class="readmore" href="./bash.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./config-gevent-on-uwsgi.html" rel="bookmark"
-                           title="Permalink to config gevent on uwsgi">config gevent on uwsgi</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-03-27T19:21:50">
-                Wed 27 March 2013
+        <abbr class="published" title="2013-05-19T18:50:40">
+                Sun 19 May 2013
         </abbr>
 
                 <address class="vcard author">
@@ -338,18 +124,242 @@ As you probably know, MongoDB has a global lock. The longer your writes take, th
         </address>
         <p>In <a href="./category/python.html">python</a>. </p>
 
-</footer><!-- /.post-info -->                <p><strong>caution</strong>: need gevent(&gt;= 1.0), and uwsgi(&gt;= 1.4)</p>
-<p>https://github.com/SiteSupport/gevent/downloads</p>
-<p>uwsgi install
-https://uwsgi-docs.readthedocs.org/en/latest/Install.html</p>
-<p>https://uwsgi-docs.readthedocs.org/en/latest/Gevent.html</p>
-                <a class="readmore" href="./config-gevent-on-uwsgi.html">read more</a>
+</footer><!-- /.post-info -->                <h2>Introduction</h2>
+<p>Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
+logbook目前还处于开发阶段。可以参考官方<a href="https://logbook.readthedocs.org/en/latest/features.html#core-features">core feature</a></p>
+<p>logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
+filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供
+了更多的组件，如：processor。</p>
+<h2>New Feature</h2>
+<p>在logbook中一个非常大的变化是大量使用<a href="https://logbook.readthedocs.org/en/latest/stacks.html">stack</a>,
+一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性，
+可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。</p>
+<p>目前logbook中存在三种stack，分别用来存储Handler, Processor, Flag。
+每一句log都会经过这三个stack中的每一个对象处理。假如目前存储handler的stack中目前
+有两个handler h1, h2:</p>
+<div class="highlight"><pre><span class="o">|</span> <span class="n">h1</span> <span class="o">|</span>
+<span class="o">|</span><span class="n">____</span><span class="o">|</span>
+<span class="o">|</span> <span class="n">h2</span> <span class="o">|</span>
+<span class="o">|</span><span class="n">____</span><span class="o">|</span>
+</pre></div>
+
+
+<p>那每一句log都会被h1处理完后被h2再处理。</p>
+<p>Handler, Processor, Flag必须加到stack中才能启到作用，可以使用 <code>push_application()</code> 及 <code>pop_application()</code>。</p>
+<p>logbook中也提供了 ...</p>
+                <a class="readmore" href="./logbook.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./django-logbook.html" rel="bookmark"
+                           title="Permalink to django-logbook">django-logbook</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-19T17:55:35">
+                Sun 19 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                
+                <a class="readmore" href="./django-logbook.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./linux.html" rel="bookmark"
+                           title="Permalink to Linux">Linux</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-16T12:18:32">
+                Thu 16 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/linux.html">linux</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>Linux TCP Performance Tuning</h2>
+<p>There are two ways to change tcp parameters.</p>
+<ol>
+<li>
+<p>change the value of parameter files in /proc/sys/net/
+   e.g. increase the value of somaxconn
+        <code>echo 1024 &gt; /proc/sys/net/core/somaxconn</code>
+   when the server restart, the parameter will restore.</p>
+</li>
+<li>
+<p>change the vlaue in /etc/sysctl ...</p></li></ol>
+                <a class="readmore" href="./linux.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./nginx-tips.html" rel="bookmark"
+                           title="Permalink to nginx tips">nginx tips</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-13T16:11:31">
+                Mon 13 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/nginx.html">nginx</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>nginx backlog</h2>
+<h2>Root Directory</h2>
+<p>nginx 默认根目录，</p>
+<p>如果在配置文件中指定了root，则根目录即为root指定的目录</p>
+<p>如果通过编译安装的nginx，则根目录为编译时指定的prefix目录</p>
+<p>如果通过包管理器安装，则根目录与发行版相关。例如ubuntu版本的根目录为：
+/usr/share/nginx/www</p>
+<h2>Custome error page</h2>
+<p>nginx 有个默认的错误显示页面</p>
+<h2>Ref</h2>
+<p>http://wiki.nginx.org/Pitfalls</p>
+                <a class="readmore" href="./nginx-tips.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./todo.html" rel="bookmark"
+                           title="Permalink to TODO">TODO</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-09T10:30:16">
+                Thu 09 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>2013-05-08</h2>
+<h3>TODO TODAY</h3>
+<ul>
+<li>
+<p>蕃茄工作法做笔记（思维导图）</p>
+</li>
+<li>
+<p>总结peclian</p>
+</li>
+</ul>
+                <a class="readmore" href="./todo.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./pelican.html" rel="bookmark"
+                           title="Permalink to pelican">pelican</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-09T10:29:55">
+                Thu 09 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>介绍</h2>
+<p>peclian 是一个python版本的表态页面生成器，类似于jekyll</p>
+                <a class="readmore" href="./pelican.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="bookmark"
+                           title="Permalink to Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-08T13:45:46">
+                Wed 08 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/mongo.html">mongo</a>. </p>
+
+</footer><!-- /.post-info -->                <p>最近升级了mongodb，用mongo连接mongod后出现如下warning:</p>
+<div class="highlight"><pre><span class="n">Server</span> <span class="n">has</span> <span class="n">startup</span> <span class="n">warnings</span><span class="o">:</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span> <span class="n">WARNING</span><span class="o">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">running</span> <span class="n">on</span> <span class="n">a</span> <span class="n">NUMA</span> <span class="n">machine</span><span class="p">.</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span>          <span class="n">We</span> <span class="n">suggest</span> <span class="n">launching</span> <span class="n">mongod</span> <span class="n">like</span> <span class="n">this</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">performance</span> <span class="n">problems</span><span class="o">:</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45 ...</span></pre></div>
+                <a class="readmore" href="./mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./read-later.html" rel="bookmark"
+                           title="Permalink to Read Later">Read Later</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-06T10:42:10">
+                Mon 06 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>Python</h2>
+<p>Python Guide: http://docs.python-guide.org/en/latest/index.html</p>
+<p>fabfile(自动化工具):http://docs.fabfile.org/en/1.6/</p>
+<p>字符串匹配的KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html</p>
+                <a class="readmore" href="./read-later.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">
                         <a href="./index.html">&laquo;</a>
-                Page 2 / 3
+                Page 2 / 4
             <a href="./index3.html">&raquo;</a>
     </p>
                         </section><!-- /#content -->

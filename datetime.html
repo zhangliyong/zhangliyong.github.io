@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8">
-        <title>django-logbook</title>
+        <title>datetime</title>
         <link rel="stylesheet" href="./theme/css/main.css">
                 
         <!--[if IE]>
@@ -26,30 +26,36 @@
                                     <li ><a href="./category/mysql.html">mysql</a></li>
                                     <li ><a href="./category/network.html">network</a></li>
                                     <li ><a href="./category/nginx.html">nginx</a></li>
-                                    <li class="active"><a href="./category/python.html">python</a></li>
-                                    <li ><a href="./category/vim.html">vim</a></li>
+                                    <li ><a href="./category/python.html">python</a></li>
+                                    <li class="active"><a href="./category/vim.html">vim</a></li>
                                                 </ul></nav>
         </header><!-- /#banner -->
         <section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="./django-logbook.html" rel="bookmark"
-           title="Permalink to django-logbook">django-logbook</a></h1>
+        <a href="./datetime.html" rel="bookmark"
+           title="Permalink to datetime">datetime</a></h1>
           </header>
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2013-05-19T17:55:35">
-                Sun 19 May 2013
+        <abbr class="published" title="2013-06-25T10:38:50">
+                Tue 25 June 2013
         </abbr>
 
                 <address class="vcard author">
                 By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
         </address>
-        <p>In <a href="./category/python.html">python</a>. </p>
+        <p>In <a href="./category/vim.html">vim</a>. </p>
 
-</footer><!-- /.post-info -->      
+</footer><!-- /.post-info -->      <h2>insert current date</h2>
+<p>"map F3 to insert current date
+nnoremap <F3> "=strftime("%Y-%m-%d (%a)")<CR>P
+inoremap <F3> <C-R>=strftime("%Y-%m-%d (%a)")<CR></p>
+<p>http://vim.wikia.com/wiki/Insert_current_date_or_time</p>
+<p>http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-<em>Tutorial</em>(Part_1)</p>
+<p>http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118</p>
     </div><!-- /.entry-content -->
     
   </article>

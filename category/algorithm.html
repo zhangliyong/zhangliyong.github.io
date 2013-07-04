@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8">
-        <title>Lyon's Blog - network</title>
+        <title>Lyon's Blog - algorithm</title>
         <link rel="stylesheet" href="../theme/css/main.css">
                 
         <!--[if IE]>
@@ -15,7 +15,7 @@
                 <h1><a href="../">Lyon's Blog </a></h1>
                 <nav><ul>
                                                     <li><a href="../pages/about.html">About</a></li>
-                                                                    <li ><a href="../category/algorithm.html">algorithm</a></li>
+                                                                    <li class="active"><a href="../category/algorithm.html">algorithm</a></li>
                                     <li ><a href="../category/bash.html">bash</a></li>
                                     <li ><a href="../category/db.html">db</a></li>
                                     <li ><a href="../category/git.html">git</a></li>
@@ -24,7 +24,7 @@
                                     <li ><a href="../category/mongo.html">mongo</a></li>
                                     <li ><a href="../category/munin.html">munin</a></li>
                                     <li ><a href="../category/mysql.html">mysql</a></li>
-                                    <li class="active"><a href="../category/network.html">network</a></li>
+                                    <li ><a href="../category/network.html">network</a></li>
                                     <li ><a href="../category/nginx.html">nginx</a></li>
                                     <li ><a href="../category/python.html">python</a></li>
                                     <li ><a href="../category/vim.html">vim</a></li>
@@ -35,18 +35,54 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../time_wait-in-netstat.html">TIME_WAIT in netstat</a></h1> 
+                    <h1 class="entry-title"><a href="../suffix-tree.html">Suffix Tree</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-04-11T23:44:01">
-                Thu 11 April 2013
+        <abbr class="published" title="2013-07-04T16:47:15">
+                Thu 04 July 2013
         </abbr>
 
                 <address class="vcard author">
                 By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
         </address>
-        <p>In <a href="../category/network.html">network</a>. </p>
+        <p>In <a href="../category/algorithm.html">algorithm</a>. </p>
 
-</footer><!-- /.post-info --><p>netstat -tanp | grep -o '(10.18.10.20\|211.151.139.230\|127.0.0.1):[0-9]*' | sort -nr | uniq -c | sort -nr -k 1 | wc -l</p>                </article>
+</footer><!-- /.post-info --><p>后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，</p>
+<p>后缀树的搜索非常快，但是构造后缀树比较复杂， Ukkonen提出的构造后缀树的算法时间复杂度为O(nlogn), 构造原理推荐阅读
+http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english</p>
+<p><strong>在继续阅读前确保你已经理解后缀树的构造原理。</strong></p>
+<p>上面构造的后缀树只表示一个字符串，
+在很多情况下我们需要为多个字符串构造后缀树，例如查询包含'abc'的所有字符串，
+当需要为n个字符串（如s1, s2, s3, ..., sn）构造时，目前通用的做法是找到n个不同的字符, u1, u2,..., un，
+这n个字符不在这n个字符串中，然后组成一个字符串：s=s1u1s2u2.....snun，然后为s构造后缀树。</p>
+<p>当有少量字符串的时候，这种方式比较实用，我们可以很轻易找到n个不同的字符，但当有大量字符串时，
+我们很难找到这么多不同的字符，目前unicode的码点是从0到0x10ffff，也就是unicode最多能表示1114111个字符，仅仅是百万级。</p>
+<p>所以通过不同字符来连接字符串的方案对大量字符串并不实用。</p>
+<p>为此我们提供了另一种解决方案。
+此种方案不需要n个不同的字符，我们需要为每个字符串设置一个惟一的索引，用于区分字符串。</p>
+<p>下面先给出两种方案所构造的后缀树，以字符串"abc", "abcde"为例,</p>
+<ol>
+<li>为"abc#abcde$"构造后缀树，如图:</li>
+</ol>
+<p><img alt="" src="ab_abc.dot" /></p>
+<h3>suffix links</h3>
+<p>we are all talking about implicit node</p>
+<p>if a suffix split an edge, then the smaller suffix must split an edge, so we can create a suffix link.</p>
+<p><strong>Prove</strong></p>
+<p>If the smaller suffix's next char is the test char, then the char is also the suffix's next char, because
+the test char is add before for all suffix.</p>
+<p>所以有非叶结点非根结点都会有suffix link</p>
+<p>证明不需要split edge中的suffix link那条语句</p>
+<p>对于每一个字符串最后一个字符加入后，如果remainder不为0，说明还有多个suffix并没有添加index，
+<em> 如果某一suffix结束于explicit结点，我们只需要将index加入到此结点即可，
+    测试用例：ababa
+</em> 否则我们要对这些suffix创建explicit的结点，并加入index, 创建的结点之间也要建立suffix link，
+    测试用例：aa, aba</p>
+<p>几个说明事项：</p>
+<ol>
+<li>当为某一字符串构造了后缀树后，后缀树中会有suffix link, 当向这个后缀树中加入其它字符串后，这些suffix link依赖有效。</li>
+<li>canonize 之后acitve_length可能不为0</li>
+<li>leaf suffix link问题</li>
+</ol>                </article>
                                     <p class="paginator">
         Page 1 / 1
     </p>
