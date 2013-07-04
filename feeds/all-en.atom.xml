@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-04T17:20:23+02:00</updated><entry><title>Suffix Tree</title><link href="/suffix-tree.html" rel="alternate"></link><updated>2013-07-04T17:20:23+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-04:suffix-tree.html</id><summary type="html">&lt;p&gt;后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-04T17:21:06+02:00</updated><entry><title>Suffix Tree</title><link href="/suffix-tree.html" rel="alternate"></link><updated>2013-07-04T17:21:06+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-04:suffix-tree.html</id><summary type="html">&lt;p&gt;后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，&lt;/p&gt;
 &lt;p&gt;后缀树的搜索非常快，但是构造后缀树比较复杂， Ukkonen提出的构造后缀树的算法时间复杂度为O(nlogn), 构造原理推荐阅读
 http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;在继续阅读前确保你已经理解后缀树的构造原理。&lt;/strong&gt;&lt;/p&gt;
@@ -14,13 +14,15 @@ http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-pla
 此种方案不需要n个不同的字符，我们需要为每个字符串设置一个惟一的索引，用于区分字符串。&lt;/p&gt;
 &lt;p&gt;下面先给出两种方案所构造的后缀树，以字符串"ab", "abc"为例,&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;为"abc#abcde$"构造后缀树，如图:&lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;
+&lt;p&gt;为"abc#abcde$"构造后缀树，如图:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="static/images/ab_abc.png" /&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;设置"ab"的索引为0, "abc"的索引为1，为其创建后缀树为：&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置"ab"的索引为0, "abc"的索引为1，为其创建后缀树为：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="static/images/ab_abc_index.png" /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h3&gt;suffix links&lt;/h3&gt;
 &lt;p&gt;we are all talking about implicit node&lt;/p&gt;
 &lt;p&gt;if a suffix split an edge, then the smaller suffix must split an edge, so we can create a suffix link.&lt;/p&gt;
