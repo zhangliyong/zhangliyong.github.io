@@ -37,7 +37,7 @@
                 <article>
                     <h1 class="entry-title"><a href="./suffix-tree.html">Suffix Tree</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-07-04T17:21:06">
+        <abbr class="published" title="2013-07-04T17:21:49">
                 Thu 04 July 2013
         </abbr>
 
@@ -61,14 +61,10 @@ http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-pla
 此种方案不需要n个不同的字符，我们需要为每个字符串设置一个惟一的索引，用于区分字符串。</p>
 <p>下面先给出两种方案所构造的后缀树，以字符串"ab", "abc"为例,</p>
 <ol>
-<li>
-<p>为"abc#abcde$"构造后缀树，如图:</p>
-<p><img alt="" src="static/images/ab_abc.png" /></p>
-</li>
-<li>
-<p>设置"ab"的索引为0, "abc"的索引为1，为其创建后缀树为：</p>
-<p><img alt="" src="static/images/ab_abc_index.png" /></p>
-</li>
+<li>为"abc#abcde$"构造后缀树，如图:
+    <img alt="" src="static/images/ab_abc.png" /></li>
+<li>设置"ab"的索引为0, "abc"的索引为1，为其创建后缀树为：
+    <img alt="" src="static/images/ab_abc_index.png" /></li>
 </ol>
 <h3>suffix links</h3>
 <p>we are all talking about implicit node</p>
