@@ -37,7 +37,7 @@
                 <article>
                     <h1 class="entry-title"><a href="../generalized-suffix-tree.html">Generalized Suffix Tree</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-07-05T15:59:49">
+        <abbr class="published" title="2013-07-05T16:09:08">
                 Fri 05 July 2013
         </abbr>
 
@@ -50,24 +50,21 @@
 <p>后缀树的搜索非常快，但是构造后缀树比较复杂， Ukkonen提出的构造后缀树的算法时间复杂度为O(nlogn), 构造原理推荐阅读
 http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english</p>
 <p>本文提供了另一种构造generalized suffix tree的方法，此种方式不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
-构造原理依然采用Ukkonen提出的</p>
+构造原理依然采用Ukkonen提出的。</p>
 <p><strong>在继续阅读前确保你已经理解后缀树的构造原理。</strong></p>
 <p>suffix tree只表示一个字符串，
 在很多情况下我们需要为多个字符串构造后缀树 generalized suffix tree，例如查询包含'abc'的所有字符串，
 当需要为n个字符串（如s1, s2, s3, ..., sn）构造时，目前通用的做法是找到n个不同的字符, u1, u2,..., un，
 这n个字符不在这n个字符串中，然后组成一个字符串：s=s1u1s2u2.....snun，然后为s构造后缀树。</p>
+<p>为"abc#abcde$"构造后缀树，如图:</p>
+<p><img alt="" src="static/images/suffix_tree/ab_abc.png" /></p>
 <p>当有少量字符串的时候，这种方式比较实用，我们可以很轻易找到n个不同的字符，但当有大量字符串时，
-我们很难找到这么多不同的字符，目前unicode的码点是从0到0x10ffff，也就是unicode最多能表示1114111个字符，仅仅是百万级。</p>
+我们很难找到这么多不同的字符。目前unicode的码点是从0到0x10ffff，也就是unicode最多能表示1114111个字符，仅仅是百万级。</p>
 <p>所以通过不同字符来连接字符串的方案对大量字符串并不实用。</p>
 <p>为此我们提供了另一种解决方案。
-此种方案不需要n个不同的字符，我们需要为每个字符串设置一个惟一的索引，用于标识此字符串，即建立起索引到字符串的映射。</p>
-<p>下面先给出两种方案所构造的后缀树，以字符串"ab", "abc"为例,</p>
-<ol>
-<li>为"abc#abcde$"构造后缀树，如图:
-    <img alt="" src="static/images/suffix_tree/ab_abc.png" /></li>
-<li>设置"ab"的索引为1, "abc"的索引为2，为其创建后缀树为：
-    <img alt="" src="static/images/suffix_tree/ab_abc_index.png" /></li>
-</ol>
+我们需要为每个字符串设置一个惟一的索引，用于标识此字符串，建立起索引到字符串的映射。</p>
+<p>以字符串"ab", "abc"为例, 设置"ab"的索引为1, "abc"的索引为2，为其创建后缀树为：</p>
+<p><img alt="" src="static/images/suffix_tree/ab_abc_index.png" /></p>
 <p>当时行搜索时，从根结点向下查找，当成功到达某一结点时，此结点及其所有子结点中的索引值即是查找结果。</p>
 <p>例如查找'b'时，可找到索引1，2.</p>
 <p>下面介绍构造此generalize suffix tree的过程。</p>
