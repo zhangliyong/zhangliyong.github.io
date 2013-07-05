@@ -38,6 +38,34 @@
                     <ol id="posts-list" class="hfeed" start="9">
                         <li><article class="hentry">    
                 <header>
+                    <h1><a href="../python.html" rel="bookmark"
+                           title="Permalink to Python">Python</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-04T16:36:02">
+                Sat 04 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>decorator</h2>
+<h2>class method</h2>
+<h1>Django</h1>
+<h2>Django test</h2>
+<p>ref: http://mikegrouchy.com/blog/great-django-test-talks.html</p>
+                <a class="readmore" href="../python.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
                     <h1><a href="../python-build-dynamic-link-library.html" rel="bookmark"
                            title="Permalink to python build Dynamic Link Library">python build Dynamic Link Library</a></h1>
                 </header>
@@ -192,40 +220,6 @@ MongoDB and Redis: a different interpretation of what's wrong with Relational DB
 </li>
 </ol>
                 <a class="readmore" href="../sleeping.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../suffix-tree.html" rel="bookmark"
-                           title="Permalink to Suffix Tree">Suffix Tree</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-07-05T15:28:09">
-                Fri 05 July 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/algorithm.html">algorithm</a>. </p>
-
-</footer><!-- /.post-info -->                <p>后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，</p>
-<p>后缀树的搜索非常快，但是构造后缀树比较复杂， Ukkonen提出的构造后缀树的算法时间复杂度为O(nlogn), 构造原理推荐阅读
-http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english</p>
-<p><strong>在继续阅读前确保你已经理解后缀树的构造原理。</strong></p>
-<p>上面构造的后缀树只表示一个字符串，
-在很多情况下我们需要为多个字符串构造后缀树，例如查询包含'abc'的所有字符串，
-当需要为n个字符串（如s1, s2, s3, ..., sn）构造时，目前通用的做法是找到n个不同的字符, u1, u2,..., un，
-这n个字符不在这n个字符串中，然后组成一个字符串：s=s1u1s2u2.....snun，然后为s构造后缀树。</p>
-<p>当有少量字符串的时候，这种方式比较实用，我们可以很轻易找到n个不同的字符，但当有大量字符串时，
-我们很难找到这么多不同的字符，目前unicode的码点是从0到0x10ffff，也就是unicode最多能表示1114111个字符，仅仅是百万级。</p>
-<p>所以通过不同字符来连接字符串的方案对大量字符串并不实用 ...</p>
-                <a class="readmore" href="../suffix-tree.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             
