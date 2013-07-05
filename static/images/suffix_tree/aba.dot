@@ -1,0 +1,9 @@
+digraph {
+    rankdir=LR;
+    label="aba";
+    0 [label=""];
+    1 [lbael="0"];
+    2 [lbael="0"];
+    0 -> 1[label="aba"];
+    0 -> 2[label="ba"];
+}
