@@ -40,7 +40,7 @@
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2013-07-05T11:51:37">
+        <abbr class="published" title="2013-07-05T11:58:54">
                 Fri 05 July 2013
         </abbr>
 
@@ -88,6 +88,7 @@ http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-pla
 <p>此时remainder为1，active point为(root, aba, 1)，需要创建中间结点，并将索引加入其中，如图：</p>
 <p><img alt="" src="static/images/suffix_tree/aba_index.png" /></p>
 <p>如果某一suffix结束于某一结点，即此时active_length为0，则只需要在此结点加入索引即可，不需要创建；上例中active_length为1，则需要创建一中间结点。</p>
+<p>下面给出程序的伪代码：</p>
 <h3>suffix links</h3>
 <p>we are all talking about implicit node</p>
 <p>if a suffix split an edge, then the smaller suffix must split an edge, so we can create a suffix link.</p>
