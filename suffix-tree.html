@@ -40,7 +40,7 @@
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2013-07-05T14:43:33">
+        <abbr class="published" title="2013-07-05T15:28:09">
                 Fri 05 July 2013
         </abbr>
 
@@ -124,24 +124,12 @@ http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-pla
 
 
 <h3>suffix links</h3>
-<p>we are all talking about implicit node</p>
-<p>if a suffix split an edge, then the smaller suffix must split an edge, so we can create a suffix link.</p>
-<p><strong>Prove</strong></p>
-<p>If the smaller suffix's next char is the test char, then the char is also the suffix's next char, because
-the test char is add before for all suffix.</p>
-<p>所以有非叶结点非根结点都会有suffix link</p>
-<p>证明不需要split edge中的suffix link那条语句</p>
-<p>对于每一个字符串最后一个字符加入后，如果remainder不为0，说明还有多个suffix并没有添加index，
+<p>在原来的后缀树中，只有中间结点会有suffix link，在本版本中，同一结点在表示a字符串的后缀树时是叶结点，则表示b字符串时可能就是中间结点。
+所以我们统一给所以结点添加suffix link(根结点除外)。</p>
+<p>添加上一个字符串所创建的suffix link，在添加下一个字符串时依然有效。</p>
+<p>对于每一个字符串最后一个字符加入后，如果remainder不为0，说明还有remainder个suffix并没有添加index，
 <em> 如果某一suffix结束于explicit结点，我们只需要将index加入到此结点即可，
-    测试用例：ababa
-</em> 否则我们要对这些suffix创建explicit的结点，并加入index, 创建的结点之间也要建立suffix link，
-    测试用例：aa, aba</p>
-<p>几个说明事项：</p>
-<ol>
-<li>当为某一字符串构造了后缀树后，后缀树中会有suffix link, 当向这个后缀树中加入其它字符串后，这些suffix link依赖有效。</li>
-<li>canonize 之后acitve_length可能不为0</li>
-<li>leaf suffix link问题</li>
-</ol>
+</em> 否则我们要对这些suffix创建explicit的结点，并加入index, 创建的结点之间也要建立suffix link，</p>
     </div><!-- /.entry-content -->
     
   </article>
