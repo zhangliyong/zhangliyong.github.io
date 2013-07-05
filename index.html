@@ -37,7 +37,7 @@
                 <article>
                     <h1 class="entry-title"><a href="./suffix-tree.html">Suffix Tree</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-07-05T11:58:54">
+        <abbr class="published" title="2013-07-05T14:43:33">
                 Fri 05 July 2013
         </abbr>
 
@@ -86,6 +86,40 @@ http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-pla
 <p><img alt="" src="static/images/suffix_tree/aba_index.png" /></p>
 <p>如果某一suffix结束于某一结点，即此时active_length为0，则只需要在此结点加入索引即可，不需要创建；上例中active_length为1，则需要创建一中间结点。</p>
 <p>下面给出程序的伪代码：</p>
+<div class="highlight"><pre><span class="k">for</span> <span class="kt">char</span> <span class="n">in</span> <span class="n">text</span><span class="o">:</span>
+    <span class="n">remainder</span> <span class="o">++</span>
+    <span class="k">while</span> <span class="n">remainder</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">:</span>
+        <span class="n">canonize</span> <span class="c1">// make sure the active_length is no longer than active_edge</span>
+
+        <span class="k">if</span> <span class="n">active_length</span> <span class="n">is</span> <span class="mi">0</span>
+            <span class="n">edge</span> <span class="o">=</span> <span class="n">get</span> <span class="n">edge</span> <span class="n">whose</span> <span class="n">label</span> <span class="n">starts</span> <span class="n">with</span> <span class="kt">char</span> <span class="n">from</span> <span class="n">active</span> <span class="n">node</span>
+            <span class="k">if</span> <span class="n">edge</span> <span class="n">is</span> <span class="n">none</span><span class="o">:</span>
+                <span class="n">insert</span> <span class="n">a</span> <span class="n">edge</span> <span class="n">whose</span> <span class="n">label</span> <span class="n">starts</span> <span class="n">with</span> <span class="kt">char</span>
+                <span class="n">insert</span> <span class="n">index</span> <span class="n">to</span> <span class="n">the</span> <span class="n">leaf</span> <span class="n">node</span> <span class="n">of</span> <span class="n">the</span> <span class="n">edge</span>
+
+                <span class="n">update</span> <span class="n">suffix</span> <span class="n">link</span>
+            <span class="nl">else:</span>
+                <span class="n">update</span> <span class="n">active</span> <span class="n">point</span>
+                <span class="k">break</span>
+
+        <span class="nl">else:</span>
+            <span class="k">if</span> <span class="n">active_edge</span><span class="p">[</span><span class="n">active_length</span><span class="p">]</span> <span class="o">==</span> <span class="kt">char</span><span class="o">:</span>
+                <span class="n">update</span> <span class="n">active</span> <span class="n">point</span>
+
+                <span class="k">if</span> <span class="kt">char</span> <span class="n">is</span> <span class="n">the</span> <span class="n">last</span> <span class="kt">char</span><span class="o">:</span>
+                    <span class="n">add</span> <span class="n">index</span> <span class="n">to</span> <span class="n">all</span> <span class="n">the</span> <span class="n">remainder</span> <span class="n">suffix</span>
+                <span class="k">break</span>
+            <span class="nl">else:</span>
+                <span class="n">split</span> <span class="n">current</span> <span class="n">active_edge</span> <span class="n">at</span> <span class="n">active_length</span> <span class="n">with</span> <span class="n">an</span> <span class="n">internal</span> <span class="n">node</span>
+                <span class="n">insert</span> <span class="n">an</span> <span class="n">new</span> <span class="n">edge</span> <span class="n">starts</span> <span class="n">with</span> <span class="kt">char</span> <span class="n">at</span> <span class="n">the</span> <span class="n">internal</span> <span class="n">node</span>
+                <span class="n">insert</span> <span class="n">index</span> <span class="n">to</span> <span class="n">the</span> <span class="n">leaf</span> <span class="n">node</span> <span class="n">of</span> <span class="n">the</span> <span class="n">new</span> <span class="n">edge</span>
+
+                <span class="n">update</span> <span class="n">suffix</span> <span class="n">link</span>
+
+        <span class="n">update</span> <span class="n">active</span> <span class="n">point</span>
+</pre></div>
+
+
 <h3>suffix links</h3>
 <p>we are all talking about implicit node</p>
 <p>if a suffix split an edge, then the smaller suffix must split an edge, so we can create a suffix link.</p>
