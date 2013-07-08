@@ -1,42 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-05T16:09:08+02:00</updated><entry><title>Generalized Suffix Tree</title><link href="/generalized-suffix-tree.html" rel="alternate"></link><updated>2013-07-05T16:09:08+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-05:generalized-suffix-tree.html</id><summary type="html">&lt;p&gt;后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，&lt;/p&gt;
-&lt;p&gt;后缀树的搜索非常快，但是构造后缀树比较复杂， Ukkonen提出的构造后缀树的算法时间复杂度为O(nlogn), 构造原理推荐阅读
-http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english&lt;/p&gt;
-&lt;p&gt;本文提供了另一种构造generalized suffix tree的方法，此种方式不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
-构造原理依然采用Ukkonen提出的。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;在继续阅读前确保你已经理解后缀树的构造原理。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;suffix tree只表示一个字符串，
-在很多情况下我们需要为多个字符串构造后缀树 generalized suffix tree，例如查询包含'abc'的所有字符串，
-当需要为n个字符串（如s1, s2, s3, ..., sn）构造时，目前通用的做法是找到n个不同的字符, u1, u2,..., un，
-这n个字符不在这n个字符串中，然后组成一个字符串：s=s1u1s2u2.....snun，然后为s构造后缀树。&lt;/p&gt;
-&lt;p&gt;为"abc#abcde$"构造后缀树，如图:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-08T16:36:03+02:00</updated><entry><title>Generalized Suffix Tree</title><link href="/generalized-suffix-tree.html" rel="alternate"></link><updated>2013-07-08T16:36:03+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-08:generalized-suffix-tree.html</id><summary type="html">&lt;p&gt;本文提供了另一种构造generalized suffix tree的方法，不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
+构造原理依然采用Ukkonen提出的算法。下面我们由简入深分别介绍此种方式应对的问题。&lt;/p&gt;
+&lt;h2&gt;前言&lt;/h2&gt;
+&lt;p&gt;后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，&lt;/p&gt;
+&lt;p&gt;后缀树的搜索非常快，但是构造后缀树比较复杂， Ukkonen提出的构造后缀树的算法时间复杂度为O(nlogn), 构造原理阅读
+http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english，本文也是在此链接
+的基础上进行说明的。 &lt;strong&gt;所以在继续阅读前确保你已经阅读了此链接的内容。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;suffix tree是一个字符串的所有后缀组成的一棵树。
+在很多情况下我们有多个字符串，需要为这些字符串构造同一棵后缀树，即是generalized suffix tree，例如查询包含'abc'的所有字符串。&lt;/p&gt;
+&lt;p&gt;如需要为n个字符串（如s1, s2, s3, ..., sn）构造后缀树，目前通用的做法是找到n个不同的字符, 如u1, u2,..., un，
+这n个字符是惟一的，且不会出现在所有的字符串中，然后将每个字符加到一个字符串后，并将它们合并，组成一个字符串：
+s=s1u1s2u2.....snun，并为s构造后缀树。&lt;/p&gt;
+&lt;p&gt;例如为"ab", "abc"构造后缀树，找到两个字符"#", "$"，我们得到字符中abc#abcde$"，然后为其构造后缀树，如图:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc.png" /&gt;&lt;/p&gt;
-&lt;p&gt;当有少量字符串的时候，这种方式比较实用，我们可以很轻易找到n个不同的字符，但当有大量字符串时，
-我们很难找到这么多不同的字符。目前unicode的码点是从0到0x10ffff，也就是unicode最多能表示1114111个字符，仅仅是百万级。&lt;/p&gt;
-&lt;p&gt;所以通过不同字符来连接字符串的方案对大量字符串并不实用。&lt;/p&gt;
-&lt;p&gt;为此我们提供了另一种解决方案。
-我们需要为每个字符串设置一个惟一的索引，用于标识此字符串，建立起索引到字符串的映射。&lt;/p&gt;
-&lt;p&gt;以字符串"ab", "abc"为例, 设置"ab"的索引为1, "abc"的索引为2，为其创建后缀树为：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc_index.png" /&gt;&lt;/p&gt;
-&lt;p&gt;当时行搜索时，从根结点向下查找，当成功到达某一结点时，此结点及其所有子结点中的索引值即是查找结果。&lt;/p&gt;
-&lt;p&gt;例如查找'b'时，可找到索引1，2.&lt;/p&gt;
-&lt;p&gt;下面介绍构造此generalize suffix tree的过程。&lt;/p&gt;
-&lt;p&gt;给定字符串"aba"，其索引为0&lt;/p&gt;
+&lt;p&gt;当有少量字符串的时候，这种方式比较实用，我们可以很轻易找到n个不同的字符，当字符串比较多时，
+我们很难找到这么多不同的字符。目前unicode的码点是从0到0x10ffff，也就是unicode最多能表示1114111个字符，仅仅是百万级。
+所以假如我们有千万级的字符串时，我们就找不到如此多的字符了。&lt;/p&gt;
+&lt;p&gt;我们提供了另一种解决方案。&lt;/p&gt;
+&lt;h2&gt;准备&lt;/h2&gt;
+&lt;p&gt;我们在原有的基础上进行了改进。&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;根据Ukkonen算法构造后缀树。&lt;/li&gt;
-&lt;li&gt;将索引加入后缀树中的所有叶结点。&lt;/li&gt;
-&lt;li&gt;
-&lt;ul&gt;
-&lt;li&gt;如果最后一个字符加入后，remainder为0，则不需要做任何处理，此时后缀树已经创建成功；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;如果remainder不为0, 则还有remainder个后缀没有对应到索引，根据需要创建中间结点，并将索引加到中间结点中。&lt;/li&gt;
+&lt;li&gt;为每个字符串设置一个惟一的索引(index)，用于标识此字符串，根据索引可找到原来的字符串。&lt;/li&gt;
+&lt;li&gt;除根结点以外的所有结点都有suffix link。说明为什么加suffix link&lt;/li&gt;
+&lt;li&gt;每条边有三个属性index, start, length，根据这三个属性可找到此边代表的字符串。&lt;/li&gt;
+&lt;li&gt;叶结点会存储索引值（有些结点即为叶结点也为中间结点）。 //TODO 说明为什么加索引&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;构造完后缀树，并将索引加到叶结点后，如图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/aba.png" /&gt;&lt;/p&gt;
-&lt;p&gt;此时remainder为1，active point为(root, aba, 1)，需要创建中间结点，并将索引加入其中，如图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/aba_index.png" /&gt;&lt;/p&gt;
-&lt;p&gt;如果某一suffix结束于某一结点，即此时active_length为0，则只需要在此结点加入索引即可，不需要创建；上例中active_length为1，则需要创建一中间结点。&lt;/p&gt;
+&lt;p&gt;第3条很容易理解，第1条是为第3、4条准备的，是为降低空间复杂度。下面我们对2、3进行说明。&lt;/p&gt;
+&lt;p&gt;从根结点到每个叶结点的路径代表一个字符或多个字符串的后缀，叶结点上的索引即是这些字符串的索引。&lt;/p&gt;
+&lt;h2&gt;基本&lt;/h2&gt;
+&lt;p&gt;以字符串"ab"为例，其后缀树为：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab.png" /&gt;&lt;/p&gt;
+&lt;p&gt;设置"ab"的索引为0，将索引加到叶结点中为:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_index.png" /&gt;&lt;/p&gt;
+&lt;h2&gt;扩展一&lt;/h2&gt;
+&lt;p&gt;字符串末尾字符为重复字符，为"aba"为例，
+为其构造后缀树并将索引加到叶结点后：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/aba_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;此时active point为(root, 'a', 1), remainder为1，即我们还有一个后缀，隐含在后缀树中，
+而此时字符串中所有的字符都已加到后缀树中，我们需要为此后缀创建一个叶结点，并将索引0加到叶结点中。&lt;/p&gt;
+&lt;p&gt;如图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/aba_index_2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;红色的结点即是我们创建的，这个结点即是叶结点也是中间结点，对于后缀'a'来说是叶结点，
+对于后缀'aba'来说是中间结点。&lt;/p&gt;
+&lt;p&gt;对于叶结点在创建的时候我们即可将索引加到叶结点中。&lt;/p&gt;
+&lt;p&gt;当字符串的所有字符都加入到后缀树之后，remainder的值即是隐式后缀的数量，我们需要为这些后缀指定索引。&lt;/p&gt;
+&lt;p&gt;如果active length为0，不需要创建结点，只需要将索引加入到active node中即可。&lt;/p&gt;
+&lt;p&gt;如字符串"abcabdab"，将所以字符加到后缀树后：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/abcabdab_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;此时active point为(blue node, \0, 0), remainder为2。&lt;/p&gt;
+&lt;p&gt;后缀"ab", "a"为隐式，此时active length为0，将索引加到active node中后，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/abcabdab_index_2.png" /&gt;&lt;/p&gt;
+&lt;h2&gt;扩展二&lt;/h2&gt;
+&lt;p&gt;在后缀树中加入一个新的字符串。&lt;/p&gt;
+&lt;p&gt;在加入新的字符串之前，需要重置active point为(root, '\0', 0)。&lt;/p&gt;
+&lt;p&gt;以字符串"ab", "abc"为例, "ab"的索引为0, "abc"的索引为1，&lt;/p&gt;
+&lt;p&gt;"ab"的后缀树：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;我们需要向此后缀树中加入字符串"abc"，&lt;/p&gt;
+&lt;p&gt;在我们加入字符'ab'之后，后缀并没有发生变化，此时active point为(blue node, '\0', 0)，remainder为2.&lt;/p&gt;
+&lt;p&gt;我们继续加入字符"c"，在active node下加入一条边，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;此时remainder变为2，active node指向红色结点，由于我们之前为叶结点创建了suffix link，更新active node的时间复杂度依然为O(1)。&lt;/p&gt;
+&lt;p&gt;最终结果如图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc_index_2.png" /&gt;&lt;/p&gt;
 &lt;p&gt;下面给出程序的伪代码：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;remainder&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;
@@ -72,13 +98,21 @@ http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-pla
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;suffix links&lt;/h3&gt;
-&lt;p&gt;在原来的后缀树中，只有中间结点会有suffix link，在本版本中，同一结点在表示a字符串的后缀树时是叶结点，则表示b字符串时可能就是中间结点。
-所以我们统一给所以结点添加suffix link(根结点除外)。&lt;/p&gt;
-&lt;p&gt;添加上一个字符串所创建的suffix link，在添加下一个字符串时依然有效。&lt;/p&gt;
-&lt;p&gt;对于每一个字符串最后一个字符加入后，如果remainder不为0，说明还有remainder个suffix并没有添加index，
-&lt;em&gt; 如果某一suffix结束于explicit结点，我们只需要将index加入到此结点即可，
-&lt;/em&gt; 否则我们要对这些suffix创建explicit的结点，并加入index, 创建的结点之间也要建立suffix link，&lt;/p&gt;</summary></entry><entry><title>gevent</title><link href="/gevent.html" rel="alternate"></link><updated>2013-06-26T11:36:31+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-26:gevent.html</id><summary type="html">&lt;h2&gt;Pool&lt;/h2&gt;
+&lt;h2&gt;搜索&lt;/h2&gt;
+&lt;p&gt;搜索与普通的后缀树搜索类似，根据要搜索的字符串在树中依次匹配即可。&lt;/p&gt;
+&lt;p&gt;当模式最终匹配到某一条边后，后到这条边的目标结点，则以这个结点为根结点的子树中的所有索引就是此次的搜索结果。
+再根据索引可得到原来的字符串。&lt;/p&gt;
+&lt;p&gt;例如在后缀树&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc_index_2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;中查找'b'时，可找到索引0，1，再根据索引找到原来的字符串。&lt;/p&gt;
+&lt;h2&gt;复杂度&lt;/h2&gt;
+&lt;h3&gt;时间&lt;/h3&gt;
+&lt;p&gt;由于构造后缀树和搜索的原理与之前的一样，&lt;/p&gt;
+&lt;p&gt;假定所有字符串的长度之和为n，则构造后缀树的时间复杂度为O(nlogn)。&lt;/p&gt;
+&lt;p&gt;模式P的长度为|P|，则搜索的时间复杂度为O(|P|)&lt;/p&gt;
+&lt;h3&gt;空间&lt;/h3&gt;
+&lt;p&gt;TODO&lt;/p&gt;
+&lt;p&gt;笔者给出了一个python版本的实现。&lt;/p&gt;</summary></entry><entry><title>gevent</title><link href="/gevent.html" rel="alternate"></link><updated>2013-06-26T11:36:31+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-26:gevent.html</id><summary type="html">&lt;h2&gt;Pool&lt;/h2&gt;
 &lt;p&gt;什么时候执行Pool中的任务&lt;/p&gt;
 &lt;h2&gt;ref:&lt;/h2&gt;
 &lt;p&gt;Introduction to Gevent: http://blog.pythonisito.com/2012/07/introduction-to-gevent.html&lt;/p&gt;

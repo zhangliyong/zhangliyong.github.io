@@ -1,8 +1,7 @@
 digraph {
     rankdir=LR;
-    label="aba";
     0 [label=""];
-    1 [label="0"];
+    1 [label="0" color="red" shape="doublecircle"];
     2 [label="0"];
     3 [label="0"];
     0 -> 1[label="a"];
