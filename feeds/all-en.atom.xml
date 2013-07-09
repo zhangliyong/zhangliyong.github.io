@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-09T17:39:40+02:00</updated><entry><title>HTTP keep-alive</title><link href="/http-keep-alive.html" rel="alternate"></link><updated>2013-07-09T17:39:40+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-09:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-09T17:42:37+02:00</updated><entry><title>HTTP keep-alive</title><link href="/http-keep-alive.html" rel="alternate"></link><updated>2013-07-09T17:42:37+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-09:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Turn off KeepAlive
 I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing that, right?&lt;/p&gt;
@@ -43,9 +43,9 @@ I don’t totally understand how KeepAlive works, but turning it off on our Djan
 
 
 &lt;p&gt;下图给出了keepalive_timeout设置前后，http请求的header中connection的变化：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/nginx/keepalive.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/nginx/keepalive/keepalive.png" /&gt;&lt;/p&gt;
 &lt;p&gt;设置&lt;code&gt;keepalive_timeout  0;&lt;/code&gt;之后：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/nginx/notalive.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/nginx/keepalive/notalive.png" /&gt;&lt;/p&gt;
 &lt;p&gt;笔者并没有对keep-alive做相应性能方面的benchmark，所以不确定keep-alive对性能的影响，而且keep-alive对性能的影响也与应用场景有关。&lt;/p&gt;</summary></entry><entry><title>Generalized Suffix Tree</title><link href="/generalized-suffix-tree.html" rel="alternate"></link><updated>2013-07-09T11:16:16+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-09:generalized-suffix-tree.html</id><summary type="html">&lt;p&gt;本文提供了另一种构造generalized suffix tree的方法，不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
 构造原理依然采用Ukkonen提出的算法。下面我们由简入深分别介绍此种方式应对的问题。&lt;/p&gt;
 &lt;h2&gt;前言&lt;/h2&gt;
