@@ -40,7 +40,7 @@
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2013-07-09T17:36:56">
+        <abbr class="published" title="2013-07-09T17:39:40">
                 Tue 09 July 2013
         </abbr>
 
@@ -96,6 +96,7 @@ I don’t totally understand how KeepAlive works, but turning it off on our Djan
 <p><img alt="" src="static/images/nginx/keepalive.png" /></p>
 <p>设置<code>keepalive_timeout  0;</code>之后：</p>
 <p><img alt="" src="static/images/nginx/notalive.png" /></p>
+<p>笔者并没有对keep-alive做相应性能方面的benchmark，所以不确定keep-alive对性能的影响，而且keep-alive对性能的影响也与应用场景有关。</p>
     </div><!-- /.entry-content -->
     
   </article>
