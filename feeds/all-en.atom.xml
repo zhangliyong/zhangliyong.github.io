@@ -1,5 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-09T11:16:16+02:00</updated><entry><title>Generalized Suffix Tree</title><link href="/generalized-suffix-tree.html" rel="alternate"></link><updated>2013-07-09T11:16:16+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-09:generalized-suffix-tree.html</id><summary type="html">&lt;p&gt;本文提供了另一种构造generalized suffix tree的方法，不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-09T17:36:56+02:00</updated><entry><title>HTTP keep-alive</title><link href="/http-keep-alive.html" rel="alternate"></link><updated>2013-07-09T17:36:56+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-09:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Turn off KeepAlive
+I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing that, right?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;HTTP keep-alive即是HTTP persistent connection，维基百科有详细说明：http://en.wikipedia.org/wiki/HTTP_persistent_connection&lt;/p&gt;
+&lt;p&gt;如果使用keep-alive功能，多个http请求会使用同一个tcp连接，这样可节省多次建立连接的时间及资源消耗，&lt;/p&gt;
+&lt;p&gt;下图显示了是否使用keep-alive功能的tcp连接对比图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/HTTP_persistent_connection.svg/500px-HTTP_persistent_connection.svg.png" /&gt;&lt;/p&gt;
+&lt;p&gt;http 1.0默认不开启，可进行指定，http 1.1默认开启。&lt;/p&gt;
+&lt;p&gt;上面我们看到启用keep-alive可节省多次建立连接的时间，但是服务器端要保持连接状态(nginx默认保持74s)，
+这样会影响服务器端的性能。 而且目前网络带宽比较大，建立连接的延时比较少，
+所以keep-alive在很多情况下会导致性能下降。这就验证了一开始那篇文章指出的在django servers中关闭keep-alive
+功能可大约提升50%的性能。&lt;/p&gt;
+&lt;p&gt;所以建议关系keep-alive功能，除非有特殊需求。&lt;/p&gt;
+&lt;p&gt;下面介绍如何nginx中关系keep-alive功能&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://wiki.nginx.org/HttpCoreModule#keepalive_timeout"&gt;nginx文档&lt;/a&gt;中有详细说明:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;keepalive_timeout&lt;/p&gt;
+&lt;p&gt;Syntax: keepalive_timeout timeout [ header_timeout ]&lt;/p&gt;
+&lt;p&gt;Default:    75s&lt;/p&gt;
+&lt;p&gt;Context:    http
+           server
+           location&lt;/p&gt;
+&lt;p&gt;Reference:  keepalive_timeout&lt;/p&gt;
+&lt;p&gt;The first parameter assigns the timeout for keep-alive connections with the client. The server will close connections after this time.&lt;/p&gt;
+&lt;p&gt;The optional second parameter assigns the time value in the header Keep-Alive: timeout=time of the response. This header can convince some browsers to close the connection, so that the server does not have to. Without this parameter, nginx does not send a Keep-Alive header (though this is not what makes a connection "keep-alive").&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果我们要关闭keep-alive功能，可在http, server或location中设置&lt;code&gt;keepalive_timeout  0;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="n"&gt;listen&lt;/span&gt;          &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;server_name&lt;/span&gt;     &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;access_log&lt;/span&gt;      &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;access&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;error_log&lt;/span&gt;       &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;keepalive_timeout&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="p"&gt;........&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下图给出了keepalive_timeout设置前后，http请求的header中connection的变化：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/nginx/keepalive.png" /&gt;&lt;/p&gt;
+&lt;p&gt;设置&lt;code&gt;keepalive_timeout  0;&lt;/code&gt;之后：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/nginx/notalive.png" /&gt;&lt;/p&gt;</summary></entry><entry><title>Generalized Suffix Tree</title><link href="/generalized-suffix-tree.html" rel="alternate"></link><updated>2013-07-09T11:16:16+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-09:generalized-suffix-tree.html</id><summary type="html">&lt;p&gt;本文提供了另一种构造generalized suffix tree的方法，不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
 构造原理依然采用Ukkonen提出的算法。下面我们由简入深分别介绍此种方式应对的问题。&lt;/p&gt;
 &lt;h2&gt;前言&lt;/h2&gt;
 &lt;p&gt;后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，&lt;/p&gt;
