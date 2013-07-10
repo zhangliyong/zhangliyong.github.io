@@ -38,6 +38,35 @@
                     <ol id="posts-list" class="hfeed" start="9">
                         <li><article class="hentry">    
                 <header>
+                    <h1><a href="./mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="bookmark"
+                           title="Permalink to Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-08T13:45:46">
+                Wed 08 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/mongo.html">mongo</a>. </p>
+
+</footer><!-- /.post-info -->                <p>最近升级了mongodb，用mongo连接mongod后出现如下warning:</p>
+<div class="highlight"><pre><span class="n">Server</span> <span class="n">has</span> <span class="n">startup</span> <span class="n">warnings</span><span class="o">:</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span> <span class="n">WARNING</span><span class="o">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">running</span> <span class="n">on</span> <span class="n">a</span> <span class="n">NUMA</span> <span class="n">machine</span><span class="p">.</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span>          <span class="n">We</span> <span class="n">suggest</span> <span class="n">launching</span> <span class="n">mongod</span> <span class="n">like</span> <span class="n">this</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">performance</span> <span class="n">problems</span><span class="o">:</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45 ...</span></pre></div>
+                <a class="readmore" href="./mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
                     <h1><a href="./read-later.html" rel="bookmark"
                            title="Permalink to Read Later">Read Later</a></h1>
                 </header>
@@ -293,58 +322,6 @@ http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html</p>
 As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.</p>
 <p>Updating documents that have been pushed to ...</p>
                 <a class="readmore" href="./mongo.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./bash.html" rel="bookmark"
-                           title="Permalink to Bash">Bash</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-03-27T19:21:50">
-                Wed 27 March 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/bash.html">bash</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>alias</h2>
-<p>对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。</p>
-<p>e.g. 在.bashrc中加入</p>
-<div class="highlight"><pre><span class="nb">alias </span><span class="nv">servername</span><span class="o">=</span><span class="s1">&#39;ssh sns@hostname&#39;</span>
-</pre></div>
-
-
-<p>执行：</p>
-<div class="highlight"><pre><span class="nv">$ </span>servername
-</pre></div>
-
-
-<p>即可登陆到hostname机器。</p>
-<h2>rsync</h2>
-<p>大家常用rsync同步数据，有些数据是不需要同步的，可以用 --exclude 选项。</p>
-<p>e.g.</p>
-<div class="highlight"><pre>rsync -avz --exclude <span class="s2">&quot;.*&quot;</span> --exclude <span class="s2">&quot;dbconfig.py&quot;</span> src user@hostname:/dest
-
---exclude <span class="s2">&quot;.*&quot;</span> 不会同步以<span class="s2">&quot;.&quot;</span>开头的文件或文件夹，不会同步.git目录（.git目录是比较大的，不建议同步）。
-</pre></div>
-
-
-<h2>mail</h2>
-<p>所有crontab任务的运行结果都会输出到mail中，可以随时查看每个任务的运行情况。</p>
-<h2>tmux</h2>
-<p>工作中经常ssh到远程服务器，有时需要在远程服务器中开启多个终端，</p>
-<ul>
-<li>一种办法是在本地开启多个终端，分别远程到服务器。</li>
-<li>还有一种方式是利用<a href="http://tmux.sourceforge.net/">tmux ...</a></li></ul>
-                <a class="readmore" href="./bash.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->

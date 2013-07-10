@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-09T17:43:45+02:00</updated><entry><title>HTTP keep-alive</title><link href="/http-keep-alive.html" rel="alternate"></link><updated>2013-07-09T17:43:45+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-09:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-10T11:06:52+02:00</updated><entry><title>Job</title><link href="/job.html" rel="alternate"></link><updated>2013-07-10T11:06:52+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-10:job.html</id><summary type="html">&lt;p&gt;今天读了A. Jesse Jiryu Davis的一篇文章，关于计算机专业的学生如何让自己突出，找到
+自己喜欢的工作。&lt;/p&gt;
+&lt;p&gt;开篇作者就指出要想办法让自己突出，不要与其他学生都一样，如果你是一个黑客，那你就要表现出来。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;仅仅学校课堂学的东西是不够的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;要有气质、魅力。&lt;/p&gt;
+&lt;p&gt;好像计算机专业的学生不需要，错了！程序员也要和人交流，打交道，尤其是团队之间，如果你有魅力，会更容易和人交流，沟通效率更高。很多程序员也许都知道沟通的重要性，嘴上确说不需要，其实是在给自己找借口。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;独立的项目，不一样的语言，不一样的课程&lt;/p&gt;
+&lt;p&gt;如果有创意想法，就实现它，这将会给你增加很多的分数，
+学一门其它的编程语言，不要只局限于课堂上教的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从长远来看，最好参与一些开源项目，一开始可能很难找到开源项目的一些问题，即使找到了，可能也写不出高质量的patch，可以先自己建立一个项目，自己开发。&lt;/p&gt;
+&lt;p&gt;当然也有例外：你可以修改一些python的库，使其兼容python 3；或者将一种语言上热门的库移植到另一种语言上(在另一种语言上重新实现)，如果这个语言上还没有相应的库。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;对于我们在职的程序员，这些建议仍然适用，我们一定要有自己可拿出的东西来，有一些自己的项目，能与开源。&lt;/p&gt;
+&lt;p&gt;非常重要的一点，一定要有气质、魅力，善于和另人交流，杜绝屌丝。还有程序员要注意身体哦。&lt;/p&gt;</summary></entry><entry><title>HTTP keep-alive</title><link href="/http-keep-alive.html" rel="alternate"></link><updated>2013-07-09T17:43:45+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-09:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Turn off KeepAlive
 I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing that, right?&lt;/p&gt;

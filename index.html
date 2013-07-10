@@ -35,8 +35,56 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./http-keep-alive.html">HTTP keep-alive</a></h1> 
+                    <h1 class="entry-title"><a href="./job.html">Job</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-07-10T11:06:52">
+                Wed 10 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info --><p>今天读了A. Jesse Jiryu Davis的一篇文章，关于计算机专业的学生如何让自己突出，找到
+自己喜欢的工作。</p>
+<p>开篇作者就指出要想办法让自己突出，不要与其他学生都一样，如果你是一个黑客，那你就要表现出来。</p>
+<ol>
+<li>
+<p>仅仅学校课堂学的东西是不够的</p>
+</li>
+<li>
+<p>要有气质、魅力。</p>
+<p>好像计算机专业的学生不需要，错了！程序员也要和人交流，打交道，尤其是团队之间，如果你有魅力，会更容易和人交流，沟通效率更高。很多程序员也许都知道沟通的重要性，嘴上确说不需要，其实是在给自己找借口。</p>
+</li>
+<li>
+<p>独立的项目，不一样的语言，不一样的课程</p>
+<p>如果有创意想法，就实现它，这将会给你增加很多的分数，
+学一门其它的编程语言，不要只局限于课堂上教的。</p>
+</li>
+<li>
+<p>从长远来看，最好参与一些开源项目，一开始可能很难找到开源项目的一些问题，即使找到了，可能也写不出高质量的patch，可以先自己建立一个项目，自己开发。</p>
+<p>当然也有例外：你可以修改一些python的库，使其兼容python 3；或者将一种语言上热门的库移植到另一种语言上(在另一种语言上重新实现)，如果这个语言上还没有相应的库。</p>
+</li>
+</ol>
+<p>对于我们在职的程序员，这些建议仍然适用，我们一定要有自己可拿出的东西来，有一些自己的项目，能与开源。</p>
+<p>非常重要的一点，一定要有气质、魅力，善于和另人交流，杜绝屌丝。还有程序员要注意身体哦。</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./http-keep-alive.html" rel="bookmark"
+                           title="Permalink to HTTP keep-alive">HTTP keep-alive</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-07-09T17:43:45">
                 Tue 09 July 2013
         </abbr>
@@ -46,60 +94,14 @@
         </address>
         <p>In <a href="./category/nginx.html">nginx</a>. </p>
 
-</footer><!-- /.post-info --><p>今天在阅读<a href="http://jacobian.org/writing/django-performance-tips/">Django performance tips</a>时发现关闭keepalive可以提高效率，原文如下：</p>
+</footer><!-- /.post-info -->                <p>今天在阅读<a href="http://jacobian.org/writing/django-performance-tips/">Django performance tips</a>时发现关闭keepalive可以提高效率，原文如下：</p>
 <blockquote>
 <p>Turn off KeepAlive
-I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing that, right?</p>
-</blockquote>
-<p>HTTP keep-alive即是HTTP persistent connection，维基百科有详细说明：http://en.wikipedia.org/wiki/HTTP_persistent_connection</p>
-<p>如果使用keep-alive功能，多个http请求会使用同一个tcp连接，这样可节省多次建立连接的时间及资源消耗，</p>
-<p>下图显示了是否使用keep-alive功能的tcp连接对比图：</p>
-<p><img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/HTTP_persistent_connection.svg/500px-HTTP_persistent_connection.svg.png" /></p>
-<p>http 1.0默认不开启，可进行指定，http 1.1默认开启。</p>
-<p>上面我们看到启用keep-alive可节省多次建立连接的时间，但是服务器端要保持连接状态(nginx默认保持74s)，
-这样会影响服务器端的性能。 而且目前网络带宽比较大，建立连接的延时比较少，
-所以keep-alive在很多情况下会导致性能下降。这就验证了一开始那篇文章指出的在django servers中关闭keep-alive
-功能可大约提升50%的性能。</p>
-<p>所以建议关系keep-alive功能，除非有特殊需求。</p>
-<p>下面介绍如何nginx中关系keep-alive功能</p>
-<p><a href="http://wiki.nginx.org/HttpCoreModule#keepalive_timeout">nginx文档</a>中有详细说明:</p>
-<blockquote>
-<p>keepalive_timeout</p>
-<p>Syntax: keepalive_timeout timeout [ header_timeout ]</p>
-<p>Default:    75s</p>
-<p>Context:    http
-           server
-           location</p>
-<p>Reference:  keepalive_timeout</p>
-<p>The first parameter assigns the timeout for keep-alive connections with the client. The server will close connections after this time.</p>
-<p>The optional second parameter assigns the time value in the header Keep-Alive: timeout=time of the response. This header can convince some browsers to close the connection, so that the server does not have to. Without this parameter, nginx does not send a Keep-Alive header (though this is not what makes a connection "keep-alive").</p>
-</blockquote>
-<p>如果我们要关闭keep-alive功能，可在http, server或location中设置<code>keepalive_timeout  0;</code></p>
-<p>如：</p>
-<div class="highlight"><pre><span class="n">server</span> <span class="p">{</span>
-  <span class="n">listen</span>          <span class="n">port</span><span class="p">;</span>
-  <span class="n">server_name</span>     <span class="n">address</span><span class="p">;</span>
-  <span class="n">access_log</span>      <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">mysite</span><span class="o">-</span><span class="n">access</span><span class="p">.</span><span class="n">log</span> <span class="p">;</span>
-  <span class="n">error_log</span>       <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">mysite</span><span class="o">-</span><span class="n">error</span><span class="p">.</span><span class="n">log</span> <span class="p">;</span>
-  <span class="n">keepalive_timeout</span>  <span class="mi">0</span><span class="p">;</span>
-  <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
-    <span class="p">........</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>下图给出了keepalive_timeout设置前后，http请求的header中connection的变化：</p>
-<p><img alt="" src="/static/images/nginx/keepalive/keepalive.png" /></p>
-<p>设置<code>keepalive_timeout  0;</code>之后：</p>
-<p><img alt="" src="/static/images/nginx/keepalive/notalive.png" /></p>
-<p>笔者并没有对keep-alive做相应性能方面的benchmark，所以不确定keep-alive对性能的影响，而且keep-alive对性能的影响也与应用场景有关。</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing ...</p></blockquote>
+                <a class="readmore" href="./http-keep-alive.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -321,34 +323,6 @@ inoremap <F3> <C-R>=strftime("%Y-%m-%d (%a)")<CR></p>
 <p>pmap</p>
 <p>vmmap on mac</p>
                 <a class="readmore" href="./mem.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./concurrency.html" rel="bookmark"
-                           title="Permalink to concurrency">concurrency</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-06-19T14:50:55">
-                Wed 19 June 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <p>http://www.jeffknupp.com/blog/2012/03/31/pythons-hardest-problem/</p>
-<p>http://stackoverflow.com/questions/731993/multiprocessing-or-multithreading</p>
-<p>http://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python</p>
-<p>http://eli.thegreenplace.net/2012/01/16/python-parallelizing-cpu-bound-tasks-with-multiprocessing/</p>
-<p>http://stackoverflow.com/questions/1226584/multiprocess-or-threading-in-python</p>
-                <a class="readmore" href="./concurrency.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
