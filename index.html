@@ -35,8 +35,70 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./job.html">Job</a></h1> 
+                    <h1 class="entry-title"><a href="./munin.html">munin</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-07-19T15:52:05">
+                Fri 19 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/munin.html">munin</a>. </p>
+
+</footer><!-- /.post-info --><h2>Writing plugins</h2>
+<p>global attribute: http://munin-monitoring.org/wiki/protocol-config</p>
+<p>redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch</p>
+<p>mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph</p>
+<h2>fw_conntract timeout</h2>
+<p>配置好munin之后，fw_conntrack总是报警，读不到数据，主要原因是执行fw_conntrack超时，munin plugin的默认超时时间是10s，超时主要是因为<code>cat /proc/net/ip_conntrack</code>，对于网络请求少的服务器，此语句会很快执行完，但对于网络请求比较多的服务器，此语句耗时可能要超过30s。</p>
+<p>Google的相应问题，此问题早已被人解决，解决方案见如下链接：
+http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565</p>
+<p>主要就是用<code>conntrack -L</code> 代替<code>cat /proc/net/ip_conntrack</code>，要先安装<code>sudo apt-get install conntrack</code></p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./the-python-packages-i-love.html" rel="bookmark"
+                           title="Permalink to The python packages I love">The python packages I love</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-07-15T16:37:21">
+                Mon 15 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <p>gevent:</p>
+<p>arrow: Better dates &amp; times for Python https://github.com/crsmithdev/arrow http://crsmithdev.com/arrow</p>
+<p>requests: </p>
+<p>grequests:</p>
+<p>undead: https://github.com/waawal/undead</p>
+                <a class="readmore" href="./the-python-packages-i-love.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./job.html" rel="bookmark"
+                           title="Permalink to Job">Job</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-07-10T13:19:07">
                 Wed 10 July 2013
         </abbr>
@@ -46,7 +108,7 @@
         </address>
         <p>In <a href="./category/misc.html">misc</a>. </p>
 
-</footer><!-- /.post-info --><p>今天读了A. Jesse Jiryu Davis的一篇<a href="http://emptysqua.re/blog/so-youre-coming-to-a-career-fair/">文章</a>，关于计算机专业的学生如何让自己突出，找到
+</footer><!-- /.post-info -->                <p>今天读了A. Jesse Jiryu Davis的一篇<a href="http://emptysqua.re/blog/so-youre-coming-to-a-career-fair/">文章</a>，关于计算机专业的学生如何让自己突出，找到
 自己喜欢的工作。</p>
 <p>开篇作者就指出要想办法让自己突出，不要与其他学生都一样，如果你是一个黑客，那你就要表现出来。</p>
 <ol>
@@ -67,14 +129,11 @@
 <p>当然也有例外：你可以修改一些python的库，使其兼容python 3；或者将一种语言上热门的库移植到另一种语言上(在另一种语言上重新实现)，如果这个语言上还没有相应的库。</p>
 </li>
 </ol>
-<p>对于我们在职的程序员，这些建议仍然适用，我们一定要有自己可拿出的东西来，有一些自己的项目，能与开源。</p>
-<p>非常重要的一点，一定要有气质、魅力，善于和另人交流，杜绝屌丝。还有程序员要注意身体哦。</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<p>对于我们在职的程序员，这些建议仍然适用 ...</p>
+                <a class="readmore" href="./job.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -272,57 +331,6 @@ inoremap <F3> <C-R>=strftime("%Y-%m-%d (%a)")<CR></p>
 <p>http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-<em>Tutorial</em>(Part_1)</p>
 <p>http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118</p>
                 <a class="readmore" href="./datetime.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./vim.html" rel="bookmark"
-                           title="Permalink to vim">vim</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-06-25T10:36:37">
-                Tue 25 June 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/vim.html">vim</a>. </p>
-
-</footer><!-- /.post-info -->                <p>TODO: wrap my plugins</p>
-                <a class="readmore" href="./vim.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./mem.html" rel="bookmark"
-                           title="Permalink to mem">mem</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-06-19T14:54:04">
-                Wed 19 June 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/linux.html">linux</a>. </p>
-
-</footer><!-- /.post-info -->                <p>http://virtualthreads.blogspot.com/2006/02/understanding-memory-usage-on-linux.html</p>
-<p>http://www.cyberciti.biz/tips/howto-find-memory-used-by-program.html</p>
-<p>pmap</p>
-<p>vmmap on mac</p>
-                <a class="readmore" href="./mem.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->

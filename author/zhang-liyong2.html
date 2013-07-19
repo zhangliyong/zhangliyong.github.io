@@ -310,8 +310,8 @@ As you probably know, MongoDB has a global lock. The longer your writes take, th
                 
                 <div class="entry-content">
                 <footer class="post-info">
-        <abbr class="published" title="2013-05-04T16:36:47">
-                Sat 04 May 2013
+        <abbr class="published" title="2013-07-19T15:52:05">
+                Fri 19 July 2013
         </abbr>
 
                 <address class="vcard author">
@@ -323,6 +323,10 @@ As you probably know, MongoDB has a global lock. The longer your writes take, th
 <p>global attribute: http://munin-monitoring.org/wiki/protocol-config</p>
 <p>redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch</p>
 <p>mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph</p>
+<h2>fw_conntract timeout</h2>
+<p>配置好munin之后，fw_conntrack总是报警，读不到数据，主要原因是执行fw_conntrack超时，munin plugin的默认超时时间是10s，超时主要是因为<code>cat /proc/net/ip_conntrack</code>，对于网络请求少的服务器，此语句会很快执行完，但对于网络请求比较多的服务器，此语句耗时可能要超过30s。</p>
+<p>Google的相应问题，此问题早已被人解决，解决方案见如下链接：
+http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565 ...</p>
                 <a class="readmore" href="../munin.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
