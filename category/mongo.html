@@ -35,10 +35,10 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html">Mongodb NUMA 导致的性能问题</a></h1> 
+                    <h1 class="entry-title"><a href="../how-mongodb-use-memory.html">How mongodb use memory</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-05-08T13:45:46">
-                Wed 08 May 2013
+        <abbr class="published" title="2013-07-29T15:11:21">
+                Mon 29 July 2013
         </abbr>
 
                 <address class="vcard author">
@@ -46,50 +46,16 @@
         </address>
         <p>In <a href="../category/mongo.html">mongo</a>. </p>
 
-</footer><!-- /.post-info --><p>最近升级了mongodb，用mongo连接mongod后出现如下warning:</p>
-<div class="highlight"><pre><span class="n">Server</span> <span class="n">has</span> <span class="n">startup</span> <span class="n">warnings</span><span class="o">:</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span> <span class="n">WARNING</span><span class="o">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">running</span> <span class="n">on</span> <span class="n">a</span> <span class="n">NUMA</span> <span class="n">machine</span><span class="p">.</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span>          <span class="n">We</span> <span class="n">suggest</span> <span class="n">launching</span> <span class="n">mongod</span> <span class="n">like</span> <span class="n">this</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">performance</span> <span class="n">problems</span><span class="o">:</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span>              <span class="n">numactl</span> <span class="o">--</span><span class="n">interleave</span><span class="o">=</span><span class="n">all</span> <span class="n">mongod</span> <span class="p">[</span><span class="n">other</span> <span class="n">options</span><span class="p">]</span>
-</pre></div>
-
-
-<p>随即查了下<em>NUMA</em>是什么，有多篇文章均提到了NUMA会导致mongodb的性能问题，而且官方文档也有说明。</p>
-<blockquote>
-<p>To disable NUMA for MongoDB, use the numactl command and start mongod in the following manner:</p>
-</blockquote>
-<div class="highlight"><pre> <span class="n">numactl</span> <span class="o">--</span><span class="n">interleave</span><span class="o">=</span><span class="n">all</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">mongod</span>
-</pre></div>
-
-
-<blockquote>
-<p>Adjust the proc settings using the following command:</p>
-</blockquote>
-<div class="highlight"><pre><span class="n">echo</span> <span class="mi">0</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">vm</span><span class="o">/</span><span class="n">zone_reclaim_mode</span>
-</pre></div>
-
-
-<blockquote>
-<p>To fully disable NUMA you must perform both operations. However, you can change zone_reclaim_mode without restarting mongod. For more information, see documentation on Proc/sys/vm.</p>
-</blockquote>
-<p>在此做一个整理：</p>
-<p>NUMA：NUMA是多核心CPU架构中的一种，其全称为Non-Uniform Memory Access，简单来说就是在多核心CPU中，机器的物理内存是分配给各个核的，架构简图如下所示：</p>
-<p><img alt="NUMA" src="http://jcole.us/blog/files/numa-architecture.png" /></p>
-<p>每个核访问分配给自己的内存会比访问分配给其它核的内存要快，有下面几种访问控制策略：</p>
-<ol>
-<li>缺省(default)：总是在本地节点分配（分配在当前进程运行的节点上）；</li>
-<li>绑定(bind)：强制分配到指定节点上；</li>
-<li>交叉(interleave)：在所有节点或者指定的节点上交织分配；</li>
-<li>优先(preferred)：在指定节点上分配，失败则在其他节点上分配。</li>
-</ol>
-<p>上面文章中最后使用numactl –interleave命令就是指定其为交叉共享模式。</p>
-<p>我们知道虚拟内存机制是通过一个中断信号来通知虚拟内存系统进行内存swap的，所以这个irqbalance进程忙，是一个危险信号，在这里是由于在进行频繁的内存交换。这种频繁交换现象称为swap insanity，在MySQL中经常提到，也就是在NUMA框架中，采用不合适的策略，导致核心只能从指定内存块节点上分配内存，即使总内存还有富余，也会由于当前节点内存不足时产生大量的swap操作。</p>
-<h3>参考：</h3>
-<p>http://docs.mongodb.org/manual/administration/production-notes/#production-numa</p>
-<p>http://huoding.com/2011/08/09/104</p>
-<p>http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/</p>
-<p>http://blog.nosqlfan.com/html/2772.html</p>                </article>
+</footer><!-- /.post-info --><p>网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。</p>
+<p>MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。</p>
+<p>查看working set大小可用如下命令：<code>db.runCommand( { serverStatus: 1, workingSet: 1 } )</code></p>
+<p>serverStatus.mem.resident
+The value of resident is roughly equivalent to the amount of RAM, in megabytes (MB), currently used by the database process. In normal use this value tends to grow. In dedicated database servers this number tends to approach the total amount of system memory.</p>
+<p>所以如果resident没有超出总的内存大小，此时内存是足够的，当然也要看一下page faults是不是很频繁。</p>
+<p>Does MongoDB require a lot of RAM?
+Not necessarily. It’s certainly possible to run MongoDB on a machine with a small amount of free RAM.</p>
+<p>MongoDB automatically uses all free memory on the machine as its cache. System resource monitors show that MongoDB uses a lot of memory, but its usage is dynamic. If another process suddenly needs half the server’s RAM, MongoDB will yield cached memory to the other process.</p>
+<p>Technically, the operating system’s virtual memory subsystem manages MongoDB’s memory. This means that MongoDB will use as much free memory as it can, swapping to disk as needed. Deployments with enough memory to fit the application’s working data set in RAM will achieve the best performance.</p>                </article>
                             </aside><!-- /#featured -->
                             <section id="content" class="body">
                     <h1>Other articles</h1>
@@ -100,14 +66,14 @@
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="../mongo.html" rel="bookmark"
-                           title="Permalink to Mongo">Mongo</a></h1>
+                    <h1><a href="../mongo-performance.html" rel="bookmark"
+                           title="Permalink to Mongo Performance">Mongo Performance</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-        <abbr class="published" title="2013-03-31T20:30:41">
-                Sun 31 March 2013
+        <abbr class="published" title="2013-07-25T10:07:12">
+                Thu 25 July 2013
         </abbr>
 
                 <address class="vcard author">
@@ -115,14 +81,70 @@
         </address>
         <p>In <a href="../category/mongo.html">mongo</a>. </p>
 
-</footer><!-- /.post-info -->                <h2>Concurrency</h2>
+</footer><!-- /.post-info -->                <p>最近mongo的性能</p>
+                <a class="readmore" href="../mongo-performance.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../mongo.html" rel="bookmark"
+                           title="Permalink to Mongo">Mongo</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-07-24T17:36:09">
+                Wed 24 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/mongo.html">mongo</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>query after update slow</h2>
+<p>这两天有一个接口的速度非常慢，主要是执行一条查询语句非常慢，有时耗时达200秒，于是找到了这条查询语句单独在mongo shell中执行，在mongo shell中执行并不慢，慢慢调试后最终找到问题，原因是在查询语句执行之前执行了两次更新语句。</p>
+<p>利用pymongo执行更新时，如果不设置safe=True，mongo会及时返回函数调用，但更新并没有真正执行完，mongo进程在后台继续执行，所以当接着执行查询时，此时更新没有结束，数据库会处于lock状态，查询等待数据库解锁，所以查询非常慢。</p>
+<p>把更新语句去除后，查询恢复正常。</p>
+<h2>Concurrency</h2>
 <p>MongoDB global lock to ga</p>
 <h2>Tips</h2>
 <h3>If Write Heavy</h3>
 <p>Global Lock is Global
-As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.</p>
-<p>Updating documents that have been pushed to ...</p>
+As you probably know, MongoDB has a global lock. The ...</p>
                 <a class="readmore" href="../mongo.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="bookmark"
+                           title="Permalink to Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-08T13:45:46">
+                Wed 08 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/mongo.html">mongo</a>. </p>
+
+</footer><!-- /.post-info -->                <p>最近升级了mongodb，用mongo连接mongod后出现如下warning:</p>
+<div class="highlight"><pre><span class="n">Server</span> <span class="n">has</span> <span class="n">startup</span> <span class="n">warnings</span><span class="o">:</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span> <span class="n">WARNING</span><span class="o">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">running</span> <span class="n">on</span> <span class="n">a</span> <span class="n">NUMA</span> <span class="n">machine</span><span class="p">.</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span>          <span class="n">We</span> <span class="n">suggest</span> <span class="n">launching</span> <span class="n">mongod</span> <span class="n">like</span> <span class="n">this</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">performance</span> <span class="n">problems</span><span class="o">:</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45 ...</span></pre></div>
+                <a class="readmore" href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->

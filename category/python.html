@@ -35,8 +35,62 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../the-python-packages-i-love.html">The python packages I love</a></h1> 
+                    <h1 class="entry-title"><a href="../fabric.html">fabric</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-07-31T11:19:32">
+                Wed 31 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info --><p>下面介绍python下的一个用于项目部署的工具<a href="http://docs.fabfile.org/">fabric</a>，要学习fabric推荐阅读其官方文档，</p>
+<p>本文给只给出一个简单的介绍及一些基本的功能。</p>
+<p>根据官方文档的介绍:</p>
+<blockquote>
+<p>Fabric is:</p>
+<p>A tool that lets you execute arbitrary Python functions via the command line;
+A library of subroutines (built on top of a lower-level library) to make executing shell commands over SSH easy and Pythonic.</p>
+</blockquote>
+<p>首先安装fabric <code>pip install fabric</code>，安装完fabric之后，系统会多出fab命令。</p>
+<p>fab命令在执行时会读取当前目录下的fabfile.py文件，并根据fabric的参数来执行文件中的函数。</p>
+<p>fabfile.py</p>
+<div class="highlight"><pre><span class="n">def</span> <span class="n">hello</span><span class="p">()</span><span class="o">:</span>
+    <span class="n">print</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>hello为一个task，执行hello如下：</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">fab</span> <span class="n">hello</span>
+<span class="n">Hello</span> <span class="n">world</span><span class="o">!</span>
+
+<span class="n">Done</span><span class="p">.</span>
+</pre></div>
+
+
+<p>我们看到hello并没有参数，fab也支持给task加参数。</p>
+<p>fab可以用于项目部署，服务器管理。它可以通过ssh执行服务器上的shell命令，当然也可以执行本地的shell命令。</p>
+<p>例如： local执行本地命令，run执行服务器端命令，sudo以root权限执行服务器端命令。</p>
+<p>fab可以通过设置env.hosts变量来在所有host中执行某一task。</p>
+<p>fab也提供了一些decorator，如hosts, roles来设置在某些host上执行task。</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../the-python-packages-i-love.html" rel="bookmark"
+                           title="Permalink to The python packages I love">The python packages I love</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-07-15T16:37:21">
                 Mon 15 July 2013
         </abbr>
@@ -46,17 +100,15 @@
         </address>
         <p>In <a href="../category/python.html">python</a>. </p>
 
-</footer><!-- /.post-info --><p>gevent:</p>
+</footer><!-- /.post-info -->                <p>gevent:</p>
 <p>arrow: Better dates &amp; times for Python https://github.com/crsmithdev/arrow http://crsmithdev.com/arrow</p>
 <p>requests: </p>
 <p>grequests:</p>
-<p>undead: https://github.com/waawal/undead</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<p>undead: https://github.com/waawal/undead</p>
+                <a class="readmore" href="../the-python-packages-i-love.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -293,34 +345,6 @@ collect2: ld returned 1 exit status</p>
 <p>下面介绍自己编译安装动态库的python版本。</p>
 <h2>安装 ...</h2>
                 <a class="readmore" href="../python-build-dynamic-link-library.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../python.html" rel="bookmark"
-                           title="Permalink to Python">Python</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-04T16:36:02">
-                Sat 04 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>decorator</h2>
-<h2>class method</h2>
-<h1>Django</h1>
-<h2>Django test</h2>
-<p>ref: http://mikegrouchy.com/blog/great-django-test-talks.html</p>
-                <a class="readmore" href="../python.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->

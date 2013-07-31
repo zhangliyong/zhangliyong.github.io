@@ -1,13 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-19T15:52:05+02:00</updated><entry><title>munin</title><link href="/munin.html" rel="alternate"></link><updated>2013-07-19T15:52:05+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-19:munin.html</id><summary type="html">&lt;h2&gt;Writing plugins&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-07-31T11:19:32+02:00</updated><entry><title>fabric</title><link href="/fabric.html" rel="alternate"></link><updated>2013-07-31T11:19:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-31:fabric.html</id><summary type="html">&lt;p&gt;下面介绍python下的一个用于项目部署的工具&lt;a href="http://docs.fabfile.org/"&gt;fabric&lt;/a&gt;，要学习fabric推荐阅读其官方文档，&lt;/p&gt;
+&lt;p&gt;本文给只给出一个简单的介绍及一些基本的功能。&lt;/p&gt;
+&lt;p&gt;根据官方文档的介绍:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fabric is:&lt;/p&gt;
+&lt;p&gt;A tool that lets you execute arbitrary Python functions via the command line;
+A library of subroutines (built on top of a lower-level library) to make executing shell commands over SSH easy and Pythonic.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;首先安装fabric &lt;code&gt;pip install fabric&lt;/code&gt;，安装完fabric之后，系统会多出fab命令。&lt;/p&gt;
+&lt;p&gt;fab命令在执行时会读取当前目录下的fabfile.py文件，并根据fabric的参数来执行文件中的函数。&lt;/p&gt;
+&lt;p&gt;fabfile.py&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello world!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;hello为一个task，执行hello如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;fab&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;
+&lt;span class="n"&gt;Hello&lt;/span&gt; &lt;span class="n"&gt;world&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+
+&lt;span class="n"&gt;Done&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们看到hello并没有参数，fab也支持给task加参数。&lt;/p&gt;
+&lt;p&gt;fab可以用于项目部署，服务器管理。它可以通过ssh执行服务器上的shell命令，当然也可以执行本地的shell命令。&lt;/p&gt;
+&lt;p&gt;例如： local执行本地命令，run执行服务器端命令，sudo以root权限执行服务器端命令。&lt;/p&gt;
+&lt;p&gt;fab可以通过设置env.hosts变量来在所有host中执行某一task。&lt;/p&gt;
+&lt;p&gt;fab也提供了一些decorator，如hosts, roles来设置在某些host上执行task。&lt;/p&gt;</summary></entry><entry><title>transfer munin server</title><link href="/transfer-munin-server.html" rel="alternate"></link><updated>2013-07-30T13:29:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-30:transfer-munin-server.html</id><summary type="html">&lt;p&gt;当我们修改某一node的主机名时，那修改后此node的所有历史记录都会消失，我们可以恢复这些历史数据，在munin中所有数据都保存在rrd文件中，此文件在/var/lib/munin中，如：social/services.social-uptime-uptime-g.rrd 是主机名为services.social的其中一个数据文件。当修改了node的主机名时，只需要同时对数据文件重命名即可。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;取消munin crontab的执行， cd /etc/cron.d/; sudo mv munin munin.disable
+    crontab不会执行/etc/cron.d/下文件名中带有“.”的文件&lt;/li&gt;
+&lt;li&gt;生命名数据文件&lt;/li&gt;
+&lt;li&gt;修改munin配置/etc/munin/munin.conf中的node主机名&lt;/li&gt;
+&lt;li&gt;修改munin crontab执行，5分钟后将会看到更新的结果。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;： 改动数据文件前要先取消crontab的执行，否则可能会影响历史数据, 同时数据文件迁移之后，要保证用户munin有对这些rrd文件写的权限。因为用&lt;code&gt;sudo cp&lt;/code&gt;之后会改变这些文件的owner.&lt;/p&gt;
+&lt;p&gt;如果要将munin server转移到其它机器，只需要将rrd数据文件复制过去即可。&lt;/p&gt;</summary></entry><entry><title>How mongodb use memory</title><link href="/how-mongodb-use-memory.html" rel="alternate"></link><updated>2013-07-29T15:11:21+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-29:how-mongodb-use-memory.html</id><summary type="html">&lt;p&gt;网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。&lt;/p&gt;
+&lt;p&gt;MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。&lt;/p&gt;
+&lt;p&gt;查看working set大小可用如下命令：&lt;code&gt;db.runCommand( { serverStatus: 1, workingSet: 1 } )&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;serverStatus.mem.resident
+The value of resident is roughly equivalent to the amount of RAM, in megabytes (MB), currently used by the database process. In normal use this value tends to grow. In dedicated database servers this number tends to approach the total amount of system memory.&lt;/p&gt;
+&lt;p&gt;所以如果resident没有超出总的内存大小，此时内存是足够的，当然也要看一下page faults是不是很频繁。&lt;/p&gt;
+&lt;p&gt;Does MongoDB require a lot of RAM?
+Not necessarily. It’s certainly possible to run MongoDB on a machine with a small amount of free RAM.&lt;/p&gt;
+&lt;p&gt;MongoDB automatically uses all free memory on the machine as its cache. System resource monitors show that MongoDB uses a lot of memory, but its usage is dynamic. If another process suddenly needs half the server’s RAM, MongoDB will yield cached memory to the other process.&lt;/p&gt;
+&lt;p&gt;Technically, the operating system’s virtual memory subsystem manages MongoDB’s memory. This means that MongoDB will use as much free memory as it can, swapping to disk as needed. Deployments with enough memory to fit the application’s working data set in RAM will achieve the best performance.&lt;/p&gt;</summary></entry><entry><title>htop command</title><link href="/htop-command.html" rel="alternate"></link><updated>2013-07-28T11:11:13+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-28:htop-command.html</id><summary type="html">&lt;p&gt;推荐一个代替工具htop，显示信息很详细，功能丰富，一但上手操作也很简单，
+&lt;a href="http://www.thegeekstuff.com/2011/09/linux-htop-examples/"&gt;thegeekstuff&lt;/a&gt;上有
+一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。&lt;/p&gt;</summary></entry><entry><title>vmstat</title><link href="/vmstat.html" rel="alternate"></link><updated>2013-07-25T11:35:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-25:vmstat.html</id><summary type="html">&lt;p&gt;最近在分析mongo的性能问题，发现mongo所在机器的io比较频繁。&lt;/p&gt;
+&lt;p&gt;使用vmstat命令查看，发现b（The number of processes in uninterruptible sleep）这一列的数量比较大，持续在4左右。
+随后查询uninterruptible sleep状态的意义，引自：http://www.novell.com/support/kb/doc.php?id=7002725&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Processes in a "D" or uninterruptible sleep state are usually waiting on I/O. The ps command shows a "D" on processes in an uninterruptible sleep state. The vmstat command also shows the current processes that are "blocked" or waiting on I/O. The vmstat and ps will not agree on the number of processes in a "D" state, so don't be too concerned. You cannot kill "D" state processes, even with SIGKILL or kill -9. As the name implies, they are uninterruptible. You can only clear them by rebooting the server or waiting for the I/O to respond. It is normal to see processes in a "D" state when the server performs I/O intensive operations. &lt;/p&gt;
+&lt;p&gt;If performance becomes an issue, you may need to check the health of your disks. Make sure your firmware and kernel disk drivers are updated. &lt;/p&gt;
+&lt;p&gt;In the example above, there is heavy disk activity shown in the "io" columns and the server is currently swapping to disk. The example more likely represents a memory issue, rather than a disk I/O issue. &lt;/p&gt;
+&lt;p&gt;There are two ways to find more about the processes in D state.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;ps -eo ppid,pid,user,stat,pcpu,comm,wchan:32
+This prints a list of all processes where in the last column either a '-' is displayed when the process is running or the name of the kernel function in which the process is sleeping if the process is currently sleeping. This includes also processes which are interruptible. Processes that are in uninterruptible sleep can be determined via the fourth column which would then show a D.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;echo w &amp;gt; /proc/sysrq-trigger
+This command produces a report and a list of all processes in D state and a full kernel stack trace to /var/log/messages. This shows much more information than the first option described above.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;关于vmstat的使用参考：http://www.linuxintheshell.org/2013/05/22/episode-030-vmstat/&lt;/p&gt;</summary></entry><entry><title>Mongo Performance</title><link href="/mongo-performance.html" rel="alternate"></link><updated>2013-07-25T10:07:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-25:mongo-performance.html</id><summary type="html">&lt;p&gt;最近mongo的性能&lt;/p&gt;</summary></entry><entry><title>Mongo</title><link href="/mongo.html" rel="alternate"></link><updated>2013-07-24T17:36:09+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-24:mongo.html</id><summary type="html">&lt;h2&gt;query after update slow&lt;/h2&gt;
+&lt;p&gt;这两天有一个接口的速度非常慢，主要是执行一条查询语句非常慢，有时耗时达200秒，于是找到了这条查询语句单独在mongo shell中执行，在mongo shell中执行并不慢，慢慢调试后最终找到问题，原因是在查询语句执行之前执行了两次更新语句。&lt;/p&gt;
+&lt;p&gt;利用pymongo执行更新时，如果不设置safe=True，mongo会及时返回函数调用，但更新并没有真正执行完，mongo进程在后台继续执行，所以当接着执行查询时，此时更新没有结束，数据库会处于lock状态，查询等待数据库解锁，所以查询非常慢。&lt;/p&gt;
+&lt;p&gt;把更新语句去除后，查询恢复正常。&lt;/p&gt;
+&lt;h2&gt;Concurrency&lt;/h2&gt;
+&lt;p&gt;MongoDB global lock to ga&lt;/p&gt;
+&lt;h2&gt;Tips&lt;/h2&gt;
+&lt;h3&gt;If Write Heavy&lt;/h3&gt;
+&lt;p&gt;Global Lock is Global
+As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.&lt;/p&gt;
+&lt;p&gt;Updating documents that have been pushed to disk, first have to be read from disk, stored in memory, updated, then written back to disk. This operation is slow and happens while inside the lock.&lt;/p&gt;
+&lt;p&gt;Updating a lot of random documents that rarely get updated and have been pushed out of RAM can lead to slow writes and a high lock percentage.&lt;/p&gt;
+&lt;p&gt;More Reads Make For Faster Writes
+The trick to lowering your lock percentage and thus having faster updates is to query the document you are going to update, before you perform the update. Querying before doing an upsert might seem counter intuitive at first glance, but it makes sense when you think about it.&lt;/p&gt;
+&lt;p&gt;The read ensures that whatever document you are going to update is in RAM. This means the update, which will happen immediately after the read, always updates the document in RAM, which is super fast. I think of it as warming the database for the document you are about to update.&lt;/p&gt;
+&lt;p&gt;http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/&lt;/p&gt;</summary></entry><entry><title>munin</title><link href="/munin.html" rel="alternate"></link><updated>2013-07-19T16:48:03+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-19:munin.html</id><summary type="html">&lt;h2&gt;Writing plugins&lt;/h2&gt;
 &lt;p&gt;global attribute: http://munin-monitoring.org/wiki/protocol-config&lt;/p&gt;
 &lt;p&gt;redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch&lt;/p&gt;
 &lt;p&gt;mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph&lt;/p&gt;
-&lt;h2&gt;fw_conntract timeout&lt;/h2&gt;
+&lt;h2&gt;fw_conntract fw_forwarded_local timeout&lt;/h2&gt;
 &lt;p&gt;配置好munin之后，fw_conntrack总是报警，读不到数据，主要原因是执行fw_conntrack超时，munin plugin的默认超时时间是10s，超时主要是因为&lt;code&gt;cat /proc/net/ip_conntrack&lt;/code&gt;，对于网络请求少的服务器，此语句会很快执行完，但对于网络请求比较多的服务器，此语句耗时可能要超过30s。&lt;/p&gt;
 &lt;p&gt;Google的相应问题，此问题早已被人解决，解决方案见如下链接：
 http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565&lt;/p&gt;
-&lt;p&gt;主要就是用&lt;code&gt;conntrack -L&lt;/code&gt; 代替&lt;code&gt;cat /proc/net/ip_conntrack&lt;/code&gt;，要先安装&lt;code&gt;sudo apt-get install conntrack&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>The python packages I love</title><link href="/the-python-packages-i-love.html" rel="alternate"></link><updated>2013-07-15T16:37:21+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-15:the-python-packages-i-love.html</id><summary type="html">&lt;p&gt;gevent:&lt;/p&gt;
+&lt;p&gt;主要就是用&lt;code&gt;conntrack -L&lt;/code&gt; 代替&lt;code&gt;cat /proc/net/ip_conntrack&lt;/code&gt;，要先安装&lt;code&gt;sudo apt-get install conntrack&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;limits&lt;/h2&gt;
+&lt;p&gt;env.critical
+evn.warning  global&lt;/p&gt;
+&lt;p&gt;http://munin-monitoring.org/wiki/protocol-config&lt;/p&gt;
+&lt;p&gt;http://munin-monitoring.org/wiki/munin-man#munin-html&lt;/p&gt;</summary></entry><entry><title>The python packages I love</title><link href="/the-python-packages-i-love.html" rel="alternate"></link><updated>2013-07-15T16:37:21+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-15:the-python-packages-i-love.html</id><summary type="html">&lt;p&gt;gevent:&lt;/p&gt;
 &lt;p&gt;arrow: Better dates &amp;amp; times for Python https://github.com/crsmithdev/arrow http://crsmithdev.com/arrow&lt;/p&gt;
 &lt;p&gt;requests: &lt;/p&gt;
 &lt;p&gt;grequests:&lt;/p&gt;
@@ -588,18 +675,7 @@ The accounts created by these statements have the following properties:&lt;/p&gt
 &lt;h2&gt;TF-IDF&lt;/h2&gt;
 &lt;p&gt;http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
 http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
-http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</summary></entry><entry><title>Mongo</title><link href="/mongo.html" rel="alternate"></link><updated>2013-03-31T20:30:41+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-31:mongo.html</id><summary type="html">&lt;h2&gt;Concurrency&lt;/h2&gt;
-&lt;p&gt;MongoDB global lock to ga&lt;/p&gt;
-&lt;h2&gt;Tips&lt;/h2&gt;
-&lt;h3&gt;If Write Heavy&lt;/h3&gt;
-&lt;p&gt;Global Lock is Global
-As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.&lt;/p&gt;
-&lt;p&gt;Updating documents that have been pushed to disk, first have to be read from disk, stored in memory, updated, then written back to disk. This operation is slow and happens while inside the lock.&lt;/p&gt;
-&lt;p&gt;Updating a lot of random documents that rarely get updated and have been pushed out of RAM can lead to slow writes and a high lock percentage.&lt;/p&gt;
-&lt;p&gt;More Reads Make For Faster Writes
-The trick to lowering your lock percentage and thus having faster updates is to query the document you are going to update, before you perform the update. Querying before doing an upsert might seem counter intuitive at first glance, but it makes sense when you think about it.&lt;/p&gt;
-&lt;p&gt;The read ensures that whatever document you are going to update is in RAM. This means the update, which will happen immediately after the read, always updates the document in RAM, which is super fast. I think of it as warming the database for the document you are about to update.&lt;/p&gt;
-&lt;p&gt;http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/&lt;/p&gt;</summary></entry><entry><title>Bash</title><link href="/bash.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:bash.html</id><summary type="html">&lt;h2&gt;alias&lt;/h2&gt;
+http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</summary></entry><entry><title>Bash</title><link href="/bash.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:bash.html</id><summary type="html">&lt;h2&gt;alias&lt;/h2&gt;
 &lt;p&gt;对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。&lt;/p&gt;
 &lt;p&gt;e.g. 在.bashrc中加入&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;servername&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ssh sns@hostname&amp;#39;&lt;/span&gt;

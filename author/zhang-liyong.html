@@ -234,6 +234,39 @@ inoremap <F3> <C-R>=strftime("%Y-%m-%d (%a)")<CR></p>
                  
                         <li><article class="hentry">    
                 <header>
+                    <h1><a href="../fabric.html" rel="bookmark"
+                           title="Permalink to fabric">fabric</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-07-31T11:19:32">
+                Wed 31 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <p>下面介绍python下的一个用于项目部署的工具<a href="http://docs.fabfile.org/">fabric</a>，要学习fabric推荐阅读其官方文档，</p>
+<p>本文给只给出一个简单的介绍及一些基本的功能。</p>
+<p>根据官方文档的介绍:</p>
+<blockquote>
+<p>Fabric is:</p>
+<p>A tool that lets you execute arbitrary Python functions via the command line;
+A library of subroutines (built on top of a lower-level library) to make executing shell commands over SSH easy and Pythonic.</p>
+</blockquote>
+<p>首先安装fabric <code>pip install fabric</code>，安装完fabric之后，系统会多出fab命令。</p>
+<p>fab命令在执行时会读取当前目录下的fabfile.py文件，并根据fabric的参数来执行文件中的函数 ...</p>
+                <a class="readmore" href="../fabric.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
                     <h1><a href="../generalized-suffix-tree.html" rel="bookmark"
                            title="Permalink to Generalized Suffix Tree">Generalized Suffix Tree</a></h1>
                 </header>
@@ -329,52 +362,27 @@ http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-pla
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="../http-keep-alive.html" rel="bookmark"
-                           title="Permalink to HTTP keep-alive">HTTP keep-alive</a></h1>
+                    <h1><a href="../how-mongodb-use-memory.html" rel="bookmark"
+                           title="Permalink to How mongodb use memory">How mongodb use memory</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-        <abbr class="published" title="2013-07-09T17:43:45">
-                Tue 09 July 2013
+        <abbr class="published" title="2013-07-29T15:11:21">
+                Mon 29 July 2013
         </abbr>
 
                 <address class="vcard author">
                 By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
         </address>
-        <p>In <a href="../category/nginx.html">nginx</a>. </p>
+        <p>In <a href="../category/mongo.html">mongo</a>. </p>
 
-</footer><!-- /.post-info -->                <p>今天在阅读<a href="http://jacobian.org/writing/django-performance-tips/">Django performance tips</a>时发现关闭keepalive可以提高效率，原文如下：</p>
-<blockquote>
-<p>Turn off KeepAlive
-I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing ...</p></blockquote>
-                <a class="readmore" href="../http-keep-alive.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../iptables.html" rel="bookmark"
-                           title="Permalink to iptables">iptables</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-06-25T14:52:10">
-                Tue 25 June 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/linux.html">linux</a>. </p>
-
-</footer><!-- /.post-info -->                <p>/etc/sysconfig/iptables - The system scripts that activate the firewall by reading this file.</p>
-<h2>Ref:</h2>
-<p>http://www.cyberciti.biz/faq/rhel-fedorta-linux-iptables-firewall-configuration-tutorial/</p>
-                <a class="readmore" href="../iptables.html">read more</a>
+</footer><!-- /.post-info -->                <p>网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。</p>
+<p>MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。</p>
+<p>查看working set大小可用如下命令：<code>db.runCommand( { serverStatus: 1, workingSet: 1 } )</code></p>
+<p>serverStatus.mem.resident
+The value of resident is roughly equivalent to the amount of RAM, in megabytes (MB), currently used by the database process. In normal use this ...</p>
+                <a class="readmore" href="../how-mongodb-use-memory.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->

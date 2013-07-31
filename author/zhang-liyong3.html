@@ -38,6 +38,123 @@
                     <ol id="posts-list" class="hfeed" start="9">
                         <li><article class="hentry">    
                 <header>
+                    <h1><a href="../mongo-performance.html" rel="bookmark"
+                           title="Permalink to Mongo Performance">Mongo Performance</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-07-25T10:07:12">
+                Thu 25 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/mongo.html">mongo</a>. </p>
+
+</footer><!-- /.post-info -->                <p>最近mongo的性能</p>
+                <a class="readmore" href="../mongo-performance.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="bookmark"
+                           title="Permalink to Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-08T13:45:46">
+                Wed 08 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/mongo.html">mongo</a>. </p>
+
+</footer><!-- /.post-info -->                <p>最近升级了mongodb，用mongo连接mongod后出现如下warning:</p>
+<div class="highlight"><pre><span class="n">Server</span> <span class="n">has</span> <span class="n">startup</span> <span class="n">warnings</span><span class="o">:</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span> <span class="n">WARNING</span><span class="o">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">running</span> <span class="n">on</span> <span class="n">a</span> <span class="n">NUMA</span> <span class="n">machine</span><span class="p">.</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span>          <span class="n">We</span> <span class="n">suggest</span> <span class="n">launching</span> <span class="n">mongod</span> <span class="n">like</span> <span class="n">this</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">performance</span> <span class="n">problems</span><span class="o">:</span>
+<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45 ...</span></pre></div>
+                <a class="readmore" href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../munin.html" rel="bookmark"
+                           title="Permalink to munin">munin</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-07-19T16:48:03">
+                Fri 19 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/munin.html">munin</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>Writing plugins</h2>
+<p>global attribute: http://munin-monitoring.org/wiki/protocol-config</p>
+<p>redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch</p>
+<p>mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph</p>
+<h2>fw_conntract fw_forwarded_local timeout</h2>
+<p>配置好munin之后，fw_conntrack总是报警，读不到数据，主要原因是执行fw_conntrack超时，munin plugin的默认超时时间是10s，超时主要是因为<code>cat /proc/net/ip_conntrack</code>，对于网络请求少的服务器，此语句会很快执行完，但对于网络请求比较多的服务器，此语句耗时可能要超过30s。</p>
+<p>Google的相应问题，此问题早已被人解决，解决方案见如下链接：
+http://bugs.debian.org/cgi-bin/bugreport.cgi?bug ...</p>
+                <a class="readmore" href="../munin.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../mysql-xing-neng-diao-you.html" rel="bookmark"
+                           title="Permalink to Mysql 性能调优">Mysql 性能调优</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-04T16:35:42">
+                Sat 04 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/mysql.html">mysql</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>thread cache size</h2>
+<p>http://www.dbasquare.com/kb/mysql-and-thread-cache-size/</p>
+<p>query_cache_type可以设置为0(OFF)，1(ON)或者2(DEMOND)，分别表示完全不使用query cache，除显式要求不使用query cache（使用sql_no_cache）之外的所有的select都使用query cache，只有显示要求才使用query cache（使用sql_cache)</p>
+<p>show global status like '';
+show global variables like '';</p>
+<p>innodb_file_per_table</p>
+<p>mysql io 延时计算</p>
+<h2>mysql backup</h2>
+<p>相较前几种方法，备份数据文件最为直接、快速、方便，缺点是基本上不能实现增量备份。为了保证数据的一致性，需要在靠背文件前，执行以下 SQL 语句：</p>
+<p>FLUSH ...</p>
+                <a class="readmore" href="../mysql-xing-neng-diao-you.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
                     <h1><a href="../nginx-tips.html" rel="bookmark"
                            title="Permalink to nginx tips">nginx tips</a></h1>
                 </header>
@@ -207,130 +324,6 @@ recommand way is to install pip first.</p>
 <p>fabfile(自动化工具):http://docs.fabfile.org/en/1.6/</p>
 <p>字符串匹配的KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html</p>
                 <a class="readmore" href="../read-later.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../redis-vs-mongodb.html" rel="bookmark"
-                           title="Permalink to Redis vs Mongodb">Redis vs Mongodb</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-06-04T14:33:16">
-                Tue 04 June 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/db.html">db</a>. </p>
-
-</footer><!-- /.post-info -->                <p>Redis and MongoDB insertion performance analysis: http://blog.axant.it/archives/236
-MongoDB and Redis: a different interpretation of what's wrong with Relational DBs: http://oldblog.antirez.com/post/MongoDB-and-Redis.html</p>
-                <a class="readmore" href="../redis-vs-mongodb.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../sleeping.html" rel="bookmark"
-                           title="Permalink to Sleeping">Sleeping</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-19T21:17:11">
-                Sun 19 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>关于睡眠你应该知道的十件事</h2>
-<p>地址：http://v.163.com/movie/2013/5/V/Q/M8TDTH9BJ_M8TE2FFVQ.html</p>
-<p>网易分开课上有一期bbc拍摄的关于睡眠的记录片，里面提到了很多关于提高睡眠的问题，
-对于一些自己感觉有帮助的记录如下：</p>
-<ol>
-<li>
-<p>咖啡和洒精都会影响人的睡眠；咖啡会让人难以入睡，酒精会容易让人入睡，但会缩深度睡眠阶段。</p>
-</li>
-<li>
-<p>对于经常跨时区的人来说，睡眠也是个大问题，对于这种情况，可以尝试16小时不吃饭，可以喝水，到达目的地后，在当地的正常用餐时间用餐，按照当地的饮食时间。</p>
-</li>
-<li>
-<p>经常性的紧张也会影响睡眠，在睡觉前在床上适当做一些放松肌肉的锻炼，先做一些动作让肌肉紧张再放松。</p>
-</li>
-<li>
-<p>饮食也会影响睡觉，如果多食含蛋白质少的东西会影响发困，多食蛋白质多的会让人清醒。</p>
-</li>
-<li>
-<p>气味也能促进人的睡眠，睡前喝薰衣草泡的茶及闻薰衣草的气味会有得睡眠。</p>
-</li>
-<li>
-<p>睡觉前一小时泡个热水澡有利于睡眠。</p>
-</li>
-</ol>
-                <a class="readmore" href="../sleeping.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../the-python-packages-i-love.html" rel="bookmark"
-                           title="Permalink to The python packages I love">The python packages I love</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-07-15T16:37:21">
-                Mon 15 July 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <p>gevent:</p>
-<p>arrow: Better dates &amp; times for Python https://github.com/crsmithdev/arrow http://crsmithdev.com/arrow</p>
-<p>requests: </p>
-<p>grequests:</p>
-<p>undead: https://github.com/waawal/undead</p>
-                <a class="readmore" href="../the-python-packages-i-love.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../time_wait-in-netstat.html" rel="bookmark"
-                           title="Permalink to TIME_WAIT in netstat">TIME_WAIT in netstat</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-04-11T23:44:01">
-                Thu 11 April 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/network.html">network</a>. </p>
-
-</footer><!-- /.post-info -->                <p>netstat -tanp | grep -o '(10.18.10.20\|211.151.139.230\|127.0.0.1):[0-9]*' | sort -nr | uniq -c | sort -nr -k 1 | wc -l</p>
-                <a class="readmore" href="../time_wait-in-netstat.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->

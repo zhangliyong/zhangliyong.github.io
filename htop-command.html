@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8">
-        <title>Mongo</title>
+        <title>htop command</title>
         <link rel="stylesheet" href="./theme/css/main.css">
                 
         <!--[if IE]>
@@ -19,9 +19,9 @@
                                     <li ><a href="./category/bash.html">bash</a></li>
                                     <li ><a href="./category/db.html">db</a></li>
                                     <li ><a href="./category/git.html">git</a></li>
-                                    <li ><a href="./category/linux.html">linux</a></li>
+                                    <li class="active"><a href="./category/linux.html">linux</a></li>
                                     <li ><a href="./category/misc.html">misc</a></li>
-                                    <li class="active"><a href="./category/mongo.html">mongo</a></li>
+                                    <li ><a href="./category/mongo.html">mongo</a></li>
                                     <li ><a href="./category/munin.html">munin</a></li>
                                     <li ><a href="./category/mysql.html">mysql</a></li>
                                     <li ><a href="./category/network.html">network</a></li>
@@ -34,37 +34,24 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="./mongo.html" rel="bookmark"
-           title="Permalink to Mongo">Mongo</a></h1>
+        <a href="./htop-command.html" rel="bookmark"
+           title="Permalink to htop command">htop command</a></h1>
           </header>
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2013-07-24T17:36:09">
-                Wed 24 July 2013
+        <abbr class="published" title="2013-07-28T11:11:13">
+                Sun 28 July 2013
         </abbr>
 
                 <address class="vcard author">
                 By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
         </address>
-        <p>In <a href="./category/mongo.html">mongo</a>. </p>
+        <p>In <a href="./category/linux.html">linux</a>. </p>
 
-</footer><!-- /.post-info -->      <h2>query after update slow</h2>
-<p>这两天有一个接口的速度非常慢，主要是执行一条查询语句非常慢，有时耗时达200秒，于是找到了这条查询语句单独在mongo shell中执行，在mongo shell中执行并不慢，慢慢调试后最终找到问题，原因是在查询语句执行之前执行了两次更新语句。</p>
-<p>利用pymongo执行更新时，如果不设置safe=True，mongo会及时返回函数调用，但更新并没有真正执行完，mongo进程在后台继续执行，所以当接着执行查询时，此时更新没有结束，数据库会处于lock状态，查询等待数据库解锁，所以查询非常慢。</p>
-<p>把更新语句去除后，查询恢复正常。</p>
-<h2>Concurrency</h2>
-<p>MongoDB global lock to ga</p>
-<h2>Tips</h2>
-<h3>If Write Heavy</h3>
-<p>Global Lock is Global
-As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.</p>
-<p>Updating documents that have been pushed to disk, first have to be read from disk, stored in memory, updated, then written back to disk. This operation is slow and happens while inside the lock.</p>
-<p>Updating a lot of random documents that rarely get updated and have been pushed out of RAM can lead to slow writes and a high lock percentage.</p>
-<p>More Reads Make For Faster Writes
-The trick to lowering your lock percentage and thus having faster updates is to query the document you are going to update, before you perform the update. Querying before doing an upsert might seem counter intuitive at first glance, but it makes sense when you think about it.</p>
-<p>The read ensures that whatever document you are going to update is in RAM. This means the update, which will happen immediately after the read, always updates the document in RAM, which is super fast. I think of it as warming the database for the document you are about to update.</p>
-<p>http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/</p>
+</footer><!-- /.post-info -->      <p>推荐一个代替工具htop，显示信息很详细，功能丰富，一但上手操作也很简单，
+<a href="http://www.thegeekstuff.com/2011/09/linux-htop-examples/">thegeekstuff</a>上有
+一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。</p>
     </div><!-- /.entry-content -->
     
   </article>

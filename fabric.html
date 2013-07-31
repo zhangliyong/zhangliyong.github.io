@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8">
-        <title>Mongo</title>
+        <title>fabric</title>
         <link rel="stylesheet" href="./theme/css/main.css">
                 
         <!--[if IE]>
@@ -21,12 +21,12 @@
                                     <li ><a href="./category/git.html">git</a></li>
                                     <li ><a href="./category/linux.html">linux</a></li>
                                     <li ><a href="./category/misc.html">misc</a></li>
-                                    <li class="active"><a href="./category/mongo.html">mongo</a></li>
+                                    <li ><a href="./category/mongo.html">mongo</a></li>
                                     <li ><a href="./category/munin.html">munin</a></li>
                                     <li ><a href="./category/mysql.html">mysql</a></li>
                                     <li ><a href="./category/network.html">network</a></li>
                                     <li ><a href="./category/nginx.html">nginx</a></li>
-                                    <li ><a href="./category/python.html">python</a></li>
+                                    <li class="active"><a href="./category/python.html">python</a></li>
                                     <li ><a href="./category/vim.html">vim</a></li>
                                                 </ul></nav>
         </header><!-- /#banner -->
@@ -34,37 +34,50 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="./mongo.html" rel="bookmark"
-           title="Permalink to Mongo">Mongo</a></h1>
+        <a href="./fabric.html" rel="bookmark"
+           title="Permalink to fabric">fabric</a></h1>
           </header>
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2013-07-24T17:36:09">
-                Wed 24 July 2013
+        <abbr class="published" title="2013-07-31T11:19:32">
+                Wed 31 July 2013
         </abbr>
 
                 <address class="vcard author">
                 By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
         </address>
-        <p>In <a href="./category/mongo.html">mongo</a>. </p>
+        <p>In <a href="./category/python.html">python</a>. </p>
 
-</footer><!-- /.post-info -->      <h2>query after update slow</h2>
-<p>这两天有一个接口的速度非常慢，主要是执行一条查询语句非常慢，有时耗时达200秒，于是找到了这条查询语句单独在mongo shell中执行，在mongo shell中执行并不慢，慢慢调试后最终找到问题，原因是在查询语句执行之前执行了两次更新语句。</p>
-<p>利用pymongo执行更新时，如果不设置safe=True，mongo会及时返回函数调用，但更新并没有真正执行完，mongo进程在后台继续执行，所以当接着执行查询时，此时更新没有结束，数据库会处于lock状态，查询等待数据库解锁，所以查询非常慢。</p>
-<p>把更新语句去除后，查询恢复正常。</p>
-<h2>Concurrency</h2>
-<p>MongoDB global lock to ga</p>
-<h2>Tips</h2>
-<h3>If Write Heavy</h3>
-<p>Global Lock is Global
-As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.</p>
-<p>Updating documents that have been pushed to disk, first have to be read from disk, stored in memory, updated, then written back to disk. This operation is slow and happens while inside the lock.</p>
-<p>Updating a lot of random documents that rarely get updated and have been pushed out of RAM can lead to slow writes and a high lock percentage.</p>
-<p>More Reads Make For Faster Writes
-The trick to lowering your lock percentage and thus having faster updates is to query the document you are going to update, before you perform the update. Querying before doing an upsert might seem counter intuitive at first glance, but it makes sense when you think about it.</p>
-<p>The read ensures that whatever document you are going to update is in RAM. This means the update, which will happen immediately after the read, always updates the document in RAM, which is super fast. I think of it as warming the database for the document you are about to update.</p>
-<p>http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/</p>
+</footer><!-- /.post-info -->      <p>下面介绍python下的一个用于项目部署的工具<a href="http://docs.fabfile.org/">fabric</a>，要学习fabric推荐阅读其官方文档，</p>
+<p>本文给只给出一个简单的介绍及一些基本的功能。</p>
+<p>根据官方文档的介绍:</p>
+<blockquote>
+<p>Fabric is:</p>
+<p>A tool that lets you execute arbitrary Python functions via the command line;
+A library of subroutines (built on top of a lower-level library) to make executing shell commands over SSH easy and Pythonic.</p>
+</blockquote>
+<p>首先安装fabric <code>pip install fabric</code>，安装完fabric之后，系统会多出fab命令。</p>
+<p>fab命令在执行时会读取当前目录下的fabfile.py文件，并根据fabric的参数来执行文件中的函数。</p>
+<p>fabfile.py</p>
+<div class="highlight"><pre><span class="n">def</span> <span class="n">hello</span><span class="p">()</span><span class="o">:</span>
+    <span class="n">print</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>hello为一个task，执行hello如下：</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">fab</span> <span class="n">hello</span>
+<span class="n">Hello</span> <span class="n">world</span><span class="o">!</span>
+
+<span class="n">Done</span><span class="p">.</span>
+</pre></div>
+
+
+<p>我们看到hello并没有参数，fab也支持给task加参数。</p>
+<p>fab可以用于项目部署，服务器管理。它可以通过ssh执行服务器上的shell命令，当然也可以执行本地的shell命令。</p>
+<p>例如： local执行本地命令，run执行服务器端命令，sudo以root权限执行服务器端命令。</p>
+<p>fab可以通过设置env.hosts变量来在所有host中执行某一task。</p>
+<p>fab也提供了一些decorator，如hosts, roles来设置在某些host上执行task。</p>
     </div><!-- /.entry-content -->
     
   </article>

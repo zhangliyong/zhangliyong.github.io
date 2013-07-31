@@ -40,7 +40,7 @@
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2013-07-19T15:52:05">
+        <abbr class="published" title="2013-07-19T16:48:03">
                 Fri 19 July 2013
         </abbr>
 
@@ -53,11 +53,16 @@
 <p>global attribute: http://munin-monitoring.org/wiki/protocol-config</p>
 <p>redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch</p>
 <p>mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph</p>
-<h2>fw_conntract timeout</h2>
+<h2>fw_conntract fw_forwarded_local timeout</h2>
 <p>配置好munin之后，fw_conntrack总是报警，读不到数据，主要原因是执行fw_conntrack超时，munin plugin的默认超时时间是10s，超时主要是因为<code>cat /proc/net/ip_conntrack</code>，对于网络请求少的服务器，此语句会很快执行完，但对于网络请求比较多的服务器，此语句耗时可能要超过30s。</p>
 <p>Google的相应问题，此问题早已被人解决，解决方案见如下链接：
 http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565</p>
 <p>主要就是用<code>conntrack -L</code> 代替<code>cat /proc/net/ip_conntrack</code>，要先安装<code>sudo apt-get install conntrack</code></p>
+<h2>limits</h2>
+<p>env.critical
+evn.warning  global</p>
+<p>http://munin-monitoring.org/wiki/protocol-config</p>
+<p>http://munin-monitoring.org/wiki/munin-man#munin-html</p>
     </div><!-- /.entry-content -->
     
   </article>
