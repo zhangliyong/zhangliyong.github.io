@@ -37,7 +37,7 @@
                 <article>
                     <h1 class="entry-title"><a href="../munin.html">munin</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-08-05T13:14:22">
+        <abbr class="published" title="2013-08-05T13:17:46">
                 Mon 05 August 2013
         </abbr>
 
@@ -57,7 +57,8 @@ http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565</p>
 <p>主要就是用<code>conntrack -L</code> 代替<code>cat /proc/net/ip_conntrack</code>，要先安装<code>sudo apt-get install conntrack</code></p>
 <h2>limits</h2>
 <p>limit 用于检查每个plugin的field的值是否超出设定的warning和critical，并做出相应的警报。</p>
-<p>warning和critical是运行插件config输出的每个filed的warning和critical来设置的。有时我们在<code>/etc/munin/plugin-conf.d/</code>中会看到<code>env.warning value</code>，这是因为插件会读取<code>env.warning</code>的值，并根据此值设置每个field的warning。如果插件不读取<code>env.warning</code>的值，即使设置也不会启作用，munin不会自动设置。</p>
+<p>warning和critical是运行插件config输出的每个filed的warning和critical来设置的。</p>
+<p>有时我们在<code>/etc/munin/plugin-conf.d/</code>中会看到<code>env.warning value</code>，这是因为插件会读取<code>env.warning</code>的值，并根据此值设置每个field的warning。如果插件不读取<code>env.warning</code>的值，即使设置也不会启作用，munin不会自动设置。</p>
 <p>关于warning, critical的设置可参考: <a href="http://munin-monitoring.org/wiki/fieldname.warning">{fieldname}.warning</a>, <a href="http://munin-monitoring.org/wiki/fieldname.critical">{fieldname}.critical}</a></p>
 <p>http://munin-monitoring.org/wiki/protocol-config</p>
 <p>http://munin-monitoring.org/wiki/munin-man#munin-html</p>                </article>
