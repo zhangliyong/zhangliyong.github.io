@@ -35,8 +35,59 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../htop-command.html">htop command</a></h1> 
+                    <h1 class="entry-title"><a href="../find-out-which-process-open-a-linux-port.html">Find out which process open a linux port</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-08-08T13:13:35">
+                Thu 08 August 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/linux.html">linux</a>. </p>
+
+</footer><!-- /.post-info --><p>最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。</p>
+<p>那么可以到ip机器上查询port对应的进程号，进而找到发出此查询的应用。</p>
+<p>根据port来查询进程号有多种方案：
+1. netstat， <code>sudo netstat -anp | grep &lt;port&gt;</code></p>
+<div class="highlight"><pre><span class="err">关于</span><span class="n">netstat</span><span class="err">的使用参考：</span><span class="n">http</span><span class="o">:</span><span class="c1">//www.thegeekstuff.com/2010/03/netstat-command-examples/</span>
+</pre></div>
+
+
+<ol>
+<li>
+<p>fuser，找到使用tcp 7000端口号的进程：<code>sudo fuser 7000/tcp</code></p>
+</li>
+<li>
+<p>lsof</p>
+<div class="highlight"><pre><span class="n">lsof</span> <span class="o">-</span><span class="n">i</span> <span class="o">:</span><span class="n">portNumber</span>
+<span class="n">lsof</span> <span class="o">-</span><span class="n">i</span> <span class="n">tcp</span><span class="o">:</span><span class="n">portNumber</span>
+<span class="n">lsof</span> <span class="o">-</span><span class="n">i</span> <span class="n">udp</span><span class="o">:</span><span class="n">portNumber</span>
+<span class="n">lsof</span> <span class="o">-</span><span class="n">i</span> <span class="o">:</span><span class="mi">80</span>
+</pre></div>
+
+
+</li>
+</ol>
+<p>通过这几种方式找到进程号后，可以利用<code>ps -eaf | grep &lt;pid&gt;</code>找到此进程的执行命令，
+并可以通过<code>/proc/&lt;pid&gt;/cwd</code>找到此进程的执行目录。</p>
+<p>参考：http://www.cyberciti.biz/faq/what-process-has-open-linux-port/</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../htop-command.html" rel="bookmark"
+                           title="Permalink to htop command">htop command</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-07-28T11:11:13">
                 Sun 28 July 2013
         </abbr>
@@ -46,15 +97,13 @@
         </address>
         <p>In <a href="../category/linux.html">linux</a>. </p>
 
-</footer><!-- /.post-info --><p>推荐一个代替工具htop，显示信息很详细，功能丰富，一但上手操作也很简单，
+</footer><!-- /.post-info -->                <p>推荐一个代替工具htop，显示信息很详细，功能丰富，一但上手操作也很简单，
 <a href="http://www.thegeekstuff.com/2011/09/linux-htop-examples/">thegeekstuff</a>上有
-一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。</p>
+                <a class="readmore" href="../htop-command.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    

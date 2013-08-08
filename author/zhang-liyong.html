@@ -267,6 +267,53 @@ A library of subroutines (built on top of a lower-level library) to make executi
                  
                         <li><article class="hentry">    
                 <header>
+                    <h1><a href="../find-out-which-process-open-a-linux-port.html" rel="bookmark"
+                           title="Permalink to Find out which process open a linux port">Find out which process open a linux port</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-08-08T13:13:35">
+                Thu 08 August 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/linux.html">linux</a>. </p>
+
+</footer><!-- /.post-info -->                <p>最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。</p>
+<p>那么可以到ip机器上查询port对应的进程号，进而找到发出此查询的应用。</p>
+<p>根据port来查询进程号有多种方案：
+1. netstat， <code>sudo netstat -anp | grep &lt;port&gt;</code></p>
+<div class="highlight"><pre><span class="err">关于</span><span class="n">netstat</span><span class="err">的使用参考：</span><span class="n">http</span><span class="o">:</span><span class="c1">//www.thegeekstuff.com/2010/03/netstat-command-examples/</span>
+</pre></div>
+
+
+<ol>
+<li>
+<p>fuser，找到使用tcp 7000端口号的进程：<code>sudo fuser 7000/tcp</code></p>
+</li>
+<li>
+<p>lsof</p>
+<div class="highlight"><pre><span class="n">lsof</span> <span class="o">-</span><span class="n">i</span> <span class="o">:</span><span class="n">portNumber</span>
+<span class="n">lsof</span> <span class="o">-</span><span class="n">i</span> <span class="n">tcp</span><span class="o">:</span><span class="n">portNumber</span>
+<span class="n">lsof</span> <span class="o">-</span><span class="n">i</span> <span class="n">udp</span><span class="o">:</span><span class="n">portNumber</span>
+<span class="n">lsof</span> <span class="o">-</span><span class="n">i</span> <span class="o">:</span><span class="mi">80</span>
+</pre></div>
+
+
+</li>
+</ol>
+<p>通过这几种方式找到进程号后，可以利用<code>ps -eaf ...</code></p>
+                <a class="readmore" href="../find-out-which-process-open-a-linux-port.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
                     <h1><a href="../generalized-suffix-tree.html" rel="bookmark"
                            title="Permalink to Generalized Suffix Tree">Generalized Suffix Tree</a></h1>
                 </header>
@@ -357,37 +404,9 @@ http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-pla
                 <a class="readmore" href="../git.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../how-mongodb-use-memory.html" rel="bookmark"
-                           title="Permalink to How mongodb use memory">How mongodb use memory</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-07-29T15:11:21">
-                Mon 29 July 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/mongo.html">mongo</a>. </p>
-
-</footer><!-- /.post-info -->                <p>网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。</p>
-<p>MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。</p>
-<p>查看working set大小可用如下命令：<code>db.runCommand( { serverStatus: 1, workingSet: 1 } )</code></p>
-<p>serverStatus.mem.resident
-The value of resident is roughly equivalent to the amount of RAM, in megabytes (MB), currently used by the database process. In normal use this ...</p>
-                <a class="readmore" href="../how-mongodb-use-memory.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">
-        Page 1 / 4
+        Page 1 / 5
             <a href="../author/zhang-liyong2.html">&raquo;</a>
     </p>
                         </section><!-- /#content -->

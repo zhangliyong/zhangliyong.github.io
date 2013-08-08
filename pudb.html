@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8">
-        <title>transfer munin server</title>
+        <title>PuDB</title>
         <link rel="stylesheet" href="./theme/css/main.css">
                 
         <!--[if IE]>
@@ -22,11 +22,11 @@
                                     <li ><a href="./category/linux.html">linux</a></li>
                                     <li ><a href="./category/misc.html">misc</a></li>
                                     <li ><a href="./category/mongo.html">mongo</a></li>
-                                    <li class="active"><a href="./category/munin.html">munin</a></li>
+                                    <li ><a href="./category/munin.html">munin</a></li>
                                     <li ><a href="./category/mysql.html">mysql</a></li>
                                     <li ><a href="./category/network.html">network</a></li>
                                     <li ><a href="./category/nginx.html">nginx</a></li>
-                                    <li ><a href="./category/python.html">python</a></li>
+                                    <li class="active"><a href="./category/python.html">python</a></li>
                                     <li ><a href="./category/vim.html">vim</a></li>
                                                 </ul></nav>
         </header><!-- /#banner -->
@@ -34,31 +34,22 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="./transfer-munin-server.html" rel="bookmark"
-           title="Permalink to transfer munin server">transfer munin server</a></h1>
+        <a href="./pudb.html" rel="bookmark"
+           title="Permalink to PuDB">PuDB</a></h1>
           </header>
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2013-08-05T13:27:23">
-                Mon 05 August 2013
+        <abbr class="published" title="2013-08-06T10:31:12">
+                Tue 06 August 2013
         </abbr>
 
                 <address class="vcard author">
                 By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
         </address>
-        <p>In <a href="./category/munin.html">munin</a>. </p>
+        <p>In <a href="./category/python.html">python</a>. </p>
 
-</footer><!-- /.post-info -->      <p>当修改某一node的主机名时，修改后此node的所有历史记录都会消失，可以恢复这些历史数据，在munin中所有数据都保存在rrd文件中，此文件在/var/lib/munin中，如：social/services.social-uptime-uptime-g.rrd 是主机名为services.social的其中一个数据文件。当修改了node的主机名时，只需要同时对数据文件重命名即可。</p>
-<ol>
-<li>取消munin crontab的执行， cd /etc/cron.d/; sudo mv munin munin.disable
-    crontab不会执行/etc/cron.d/下文件名中带有“.”的文件</li>
-<li>生命名数据文件</li>
-<li>修改munin配置/etc/munin/munin.conf中的node主机名</li>
-<li>修改munin crontab执行，5分钟后将会看到更新的结果。</li>
-</ol>
-<p><strong>NOTE</strong>： 改动数据文件前要先取消crontab的执行，否则可能会影响历史数据, 同时数据文件迁移之后，要保证用户munin有对这些rrd文件写的权限。因为用<code>sudo cp</code>之后会改变这些文件的owner.</p>
-<p>如果要将munin server转移到其它机器，只需要将rrd数据文件复制过去即可。</p>
+</footer><!-- /.post-info -->      <p>https://pypi.python.org/pypi/pudb</p>
     </div><!-- /.entry-content -->
     
   </article>

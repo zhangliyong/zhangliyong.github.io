@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-08-05T13:17:46+02:00</updated><entry><title>munin</title><link href="/munin.html" rel="alternate"></link><updated>2013-08-05T13:17:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-05:munin.html</id><summary type="html">&lt;h2&gt;Writing plugins&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-08-08T13:13:35+02:00</updated><entry><title>Find out which process open a linux port</title><link href="/find-out-which-process-open-a-linux-port.html" rel="alternate"></link><updated>2013-08-08T13:13:35+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-08:find-out-which-process-open-a-linux-port.html</id><summary type="html">&lt;p&gt;最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。&lt;/p&gt;
+&lt;p&gt;那么可以到ip机器上查询port对应的进程号，进而找到发出此查询的应用。&lt;/p&gt;
+&lt;p&gt;根据port来查询进程号有多种方案：
+1. netstat， &lt;code&gt;sudo netstat -anp | grep &amp;lt;port&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;关于&lt;/span&gt;&lt;span class="n"&gt;netstat&lt;/span&gt;&lt;span class="err"&gt;的使用参考：&lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//www.thegeekstuff.com/2010/03/netstat-command-examples/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;fuser，找到使用tcp 7000端口号的进程：&lt;code&gt;sudo fuser 7000/tcp&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;lsof&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;lsof&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;portNumber&lt;/span&gt;
+&lt;span class="n"&gt;lsof&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;tcp&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;portNumber&lt;/span&gt;
+&lt;span class="n"&gt;lsof&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;udp&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;portNumber&lt;/span&gt;
+&lt;span class="n"&gt;lsof&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;80&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过这几种方式找到进程号后，可以利用&lt;code&gt;ps -eaf | grep &amp;lt;pid&amp;gt;&lt;/code&gt;找到此进程的执行命令，
+并可以通过&lt;code&gt;/proc/&amp;lt;pid&amp;gt;/cwd&lt;/code&gt;找到此进程的执行目录。&lt;/p&gt;
+&lt;p&gt;参考：http://www.cyberciti.biz/faq/what-process-has-open-linux-port/&lt;/p&gt;</summary></entry><entry><title>PuDB</title><link href="/pudb.html" rel="alternate"></link><updated>2013-08-06T10:31:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-06:pudb.html</id><summary type="html">&lt;p&gt;https://pypi.python.org/pypi/pudb&lt;/p&gt;</summary></entry><entry><title>transfer munin server</title><link href="/transfer-munin-server.html" rel="alternate"></link><updated>2013-08-05T13:27:23+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-05:transfer-munin-server.html</id><summary type="html">&lt;p&gt;当修改某一node的主机名时，修改后此node的所有历史记录都会消失，可以恢复这些历史数据，在munin中所有数据都保存在rrd文件中，此文件在/var/lib/munin中，如：social/services.social-uptime-uptime-g.rrd 是主机名为services.social的其中一个数据文件。当修改了node的主机名时，只需要同时对数据文件重命名即可。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;取消munin crontab的执行， cd /etc/cron.d/; sudo mv munin munin.disable
+    crontab不会执行/etc/cron.d/下文件名中带有“.”的文件&lt;/li&gt;
+&lt;li&gt;生命名数据文件&lt;/li&gt;
+&lt;li&gt;修改munin配置/etc/munin/munin.conf中的node主机名&lt;/li&gt;
+&lt;li&gt;修改munin crontab执行，5分钟后将会看到更新的结果。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;： 改动数据文件前要先取消crontab的执行，否则可能会影响历史数据, 同时数据文件迁移之后，要保证用户munin有对这些rrd文件写的权限。因为用&lt;code&gt;sudo cp&lt;/code&gt;之后会改变这些文件的owner.&lt;/p&gt;
+&lt;p&gt;如果要将munin server转移到其它机器，只需要将rrd数据文件复制过去即可。&lt;/p&gt;</summary></entry><entry><title>munin</title><link href="/munin.html" rel="alternate"></link><updated>2013-08-05T13:17:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-05:munin.html</id><summary type="html">&lt;h2&gt;Writing plugins&lt;/h2&gt;
 &lt;p&gt;global attribute: http://munin-monitoring.org/wiki/protocol-config&lt;/p&gt;
 &lt;p&gt;redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch&lt;/p&gt;
 &lt;p&gt;mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph&lt;/p&gt;
@@ -42,16 +76,7 @@ A library of subroutines (built on top of a lower-level library) to make executi
 &lt;p&gt;fab可以用于项目部署，服务器管理。它可以通过ssh执行服务器上的shell命令，当然也可以执行本地的shell命令。&lt;/p&gt;
 &lt;p&gt;例如： local执行本地命令，run执行服务器端命令，sudo以root权限执行服务器端命令。&lt;/p&gt;
 &lt;p&gt;fab可以通过设置env.hosts变量来在所有host中执行某一task。&lt;/p&gt;
-&lt;p&gt;fab也提供了一些decorator，如hosts, roles来设置在某些host上执行task。&lt;/p&gt;</summary></entry><entry><title>transfer munin server</title><link href="/transfer-munin-server.html" rel="alternate"></link><updated>2013-07-30T13:29:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-30:transfer-munin-server.html</id><summary type="html">&lt;p&gt;当我们修改某一node的主机名时，那修改后此node的所有历史记录都会消失，我们可以恢复这些历史数据，在munin中所有数据都保存在rrd文件中，此文件在/var/lib/munin中，如：social/services.social-uptime-uptime-g.rrd 是主机名为services.social的其中一个数据文件。当修改了node的主机名时，只需要同时对数据文件重命名即可。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;取消munin crontab的执行， cd /etc/cron.d/; sudo mv munin munin.disable
-    crontab不会执行/etc/cron.d/下文件名中带有“.”的文件&lt;/li&gt;
-&lt;li&gt;生命名数据文件&lt;/li&gt;
-&lt;li&gt;修改munin配置/etc/munin/munin.conf中的node主机名&lt;/li&gt;
-&lt;li&gt;修改munin crontab执行，5分钟后将会看到更新的结果。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;： 改动数据文件前要先取消crontab的执行，否则可能会影响历史数据, 同时数据文件迁移之后，要保证用户munin有对这些rrd文件写的权限。因为用&lt;code&gt;sudo cp&lt;/code&gt;之后会改变这些文件的owner.&lt;/p&gt;
-&lt;p&gt;如果要将munin server转移到其它机器，只需要将rrd数据文件复制过去即可。&lt;/p&gt;</summary></entry><entry><title>How mongodb use memory</title><link href="/how-mongodb-use-memory.html" rel="alternate"></link><updated>2013-07-29T15:11:21+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-29:how-mongodb-use-memory.html</id><summary type="html">&lt;p&gt;网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。&lt;/p&gt;
+&lt;p&gt;fab也提供了一些decorator，如hosts, roles来设置在某些host上执行task。&lt;/p&gt;</summary></entry><entry><title>How mongodb use memory</title><link href="/how-mongodb-use-memory.html" rel="alternate"></link><updated>2013-07-29T15:11:21+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-29:how-mongodb-use-memory.html</id><summary type="html">&lt;p&gt;网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。&lt;/p&gt;
 &lt;p&gt;MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。&lt;/p&gt;
 &lt;p&gt;查看working set大小可用如下命令：&lt;code&gt;db.runCommand( { serverStatus: 1, workingSet: 1 } )&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;serverStatus.mem.resident

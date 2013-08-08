@@ -35,8 +35,34 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../fabric.html">fabric</a></h1> 
+                    <h1 class="entry-title"><a href="../pudb.html">PuDB</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-08-06T10:31:12">
+                Tue 06 August 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info --><p>https://pypi.python.org/pypi/pudb</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../fabric.html" rel="bookmark"
+                           title="Permalink to fabric">fabric</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-07-31T11:19:32">
                 Wed 31 July 2013
         </abbr>
@@ -46,7 +72,7 @@
         </address>
         <p>In <a href="../category/python.html">python</a>. </p>
 
-</footer><!-- /.post-info --><p>下面介绍python下的一个用于项目部署的工具<a href="http://docs.fabfile.org/">fabric</a>，要学习fabric推荐阅读其官方文档，</p>
+</footer><!-- /.post-info -->                <p>下面介绍python下的一个用于项目部署的工具<a href="http://docs.fabfile.org/">fabric</a>，要学习fabric推荐阅读其官方文档，</p>
 <p>本文给只给出一个简单的介绍及一些基本的功能。</p>
 <p>根据官方文档的介绍:</p>
 <blockquote>
@@ -55,32 +81,11 @@
 A library of subroutines (built on top of a lower-level library) to make executing shell commands over SSH easy and Pythonic.</p>
 </blockquote>
 <p>首先安装fabric <code>pip install fabric</code>，安装完fabric之后，系统会多出fab命令。</p>
-<p>fab命令在执行时会读取当前目录下的fabfile.py文件，并根据fabric的参数来执行文件中的函数。</p>
-<p>fabfile.py</p>
-<div class="highlight"><pre><span class="n">def</span> <span class="n">hello</span><span class="p">()</span><span class="o">:</span>
-    <span class="n">print</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">)</span>
-</pre></div>
-
-
-<p>hello为一个task，执行hello如下：</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">fab</span> <span class="n">hello</span>
-<span class="n">Hello</span> <span class="n">world</span><span class="o">!</span>
-
-<span class="n">Done</span><span class="p">.</span>
-</pre></div>
-
-
-<p>我们看到hello并没有参数，fab也支持给task加参数。</p>
-<p>fab可以用于项目部署，服务器管理。它可以通过ssh执行服务器上的shell命令，当然也可以执行本地的shell命令。</p>
-<p>例如： local执行本地命令，run执行服务器端命令，sudo以root权限执行服务器端命令。</p>
-<p>fab可以通过设置env.hosts变量来在所有host中执行某一task。</p>
-<p>fab也提供了一些decorator，如hosts, roles来设置在某些host上执行task。</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<p>fab命令在执行时会读取当前目录下的fabfile.py文件，并根据fabric的参数来执行文件中的函数 ...</p>
+                <a class="readmore" href="../fabric.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -313,38 +318,6 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 </footer><!-- /.post-info -->                <h2>介绍</h2>
 <p>peclian 是一个python版本的表态页面生成器，类似于jekyll</p>
                 <a class="readmore" href="../pelican.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../python-build-dynamic-link-library.html" rel="bookmark"
-                           title="Permalink to python build Dynamic Link Library">python build Dynamic Link Library</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-05T18:41:50">
-                Sun 05 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <p>当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：</p>
-<blockquote>
-<p>/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
-.../lib/libpython2.7.a: could not read symbols: Bad value
-collect2: ld returned 1 exit status</p>
-</blockquote>
-<p>这种情况需要安装动态库版本。</p>
-<p>下面介绍自己编译安装动态库的python版本。</p>
-<h2>安装 ...</h2>
-                <a class="readmore" href="../python-build-dynamic-link-library.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
