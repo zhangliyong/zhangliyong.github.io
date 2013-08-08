@@ -35,9 +35,9 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./locale.html">locale</a></h1> 
+                    <h1 class="entry-title"><a href="./find-out-which-process-open-a-linux-port.html">Find out which process open a linux port</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-08-08T13:45:42">
+        <abbr class="published" title="2013-08-08T13:53:35">
                 Thu 08 August 2013
         </abbr>
 
@@ -46,49 +46,11 @@
         </address>
         <p>In <a href="./category/linux.html">linux</a>. </p>
 
-</footer><!-- /.post-info --><p>当在终端下执行某些操作，提示编码问题时，基本是因为终端的locale环境的编码不支持。</p>
-<p>有些终端下默认的LC_*设置为<code>C</code>，可运行<code>locale</code>查看，也可查看<code>/etc/default/locale</code>，
-此时终端环境的默认编码是<code>ASCII</code>。</p>
-<p>可将其改为<code>UTF8</code>编码。</p>
-<p>修改方式如下：</p>
-<ol>
-<li>用<code>locale -a</code>命令查看系统支持的category。</li>
-<li>在终端下进行<code>export LANG=&lt;category&gt;</code>，此时终端的<code>LC_*</code>变量发生了变化。
-    如果不想每次手动设置，可将<code>export LANG=&lt;category&gt;</code>加到<code>.bashrc</code>中。</li>
-</ol>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./find-out-which-process-open-a-linux-port.html" rel="bookmark"
-                           title="Permalink to Find out which process open a linux port">Find out which process open a linux port</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-08-08T13:13:35">
-                Thu 08 August 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/linux.html">linux</a>. </p>
-
-</footer><!-- /.post-info -->                <p>最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。</p>
+</footer><!-- /.post-info --><p>最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。</p>
 <p>那么可以到ip机器上查询port对应的进程号，进而找到发出此查询的应用。</p>
 <p>根据port来查询进程号有多种方案：
-1. netstat， <code>sudo netstat -anp | grep &lt;port&gt;</code></p>
-<div class="highlight"><pre><span class="err">关于</span><span class="n">netstat</span><span class="err">的使用参考：</span><span class="n">http</span><span class="o">:</span><span class="c1">//www.thegeekstuff.com/2010/03/netstat-command-examples/</span>
-</pre></div>
-
-
+1. netstat， <code>sudo netstat -anp | grep &lt;port&gt;</code>
+    关于netstat的使用参考：http://www.thegeekstuff.com/2010/03/netstat-command-examples/</p>
 <ol>
 <li>
 <p>fuser，找到使用tcp 7000端口号的进程：<code>sudo fuser 7000/tcp</code></p>
@@ -104,8 +66,45 @@
 
 </li>
 </ol>
-<p>通过这几种方式找到进程号后，可以利用<code>ps -eaf ...</code></p>
-                <a class="readmore" href="./find-out-which-process-open-a-linux-port.html">read more</a>
+<p>通过这几种方式找到进程号后，可以利用<code>ps -eaf | grep &lt;pid&gt;</code>找到此进程的执行命令，
+并可以通过<code>/proc/&lt;pid&gt;/cwd</code>找到此进程的执行目录。</p>
+<p>参考：http://www.cyberciti.biz/faq/what-process-has-open-linux-port/</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./locale.html" rel="bookmark"
+                           title="Permalink to locale">locale</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-08-08T13:45:42">
+                Thu 08 August 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/linux.html">linux</a>. </p>
+
+</footer><!-- /.post-info -->                <p>当在终端下执行某些操作，提示编码问题时，基本是因为终端的locale环境的编码不支持。</p>
+<p>有些终端下默认的LC_*设置为<code>C</code>，可运行<code>locale</code>查看，也可查看<code>/etc/default/locale</code>，
+此时终端环境的默认编码是<code>ASCII</code>。</p>
+<p>可将其改为<code>UTF8</code>编码。</p>
+<p>修改方式如下：</p>
+<ol>
+<li>用<code>locale -a</code>命令查看系统支持的category。</li>
+<li>在终端下进行<code>export LANG=&lt;category&gt;</code>，此时终端的<code>LC_*</code>变量发生了变化。
+    如果不想每次手动设置，可将<code>export LANG=&lt;category&gt;</code>加到<code>.bashrc</code>中。</li>
+</ol>
+                <a class="readmore" href="./locale.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             
