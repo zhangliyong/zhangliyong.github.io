@@ -224,6 +224,38 @@ I don’t totally understand how KeepAlive works, but turning it off on our Djan
                  
                         <li><article class="hentry">    
                 <header>
+                    <h1><a href="../locale.html" rel="bookmark"
+                           title="Permalink to locale">locale</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-08-08T13:40:59">
+                Thu 08 August 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="../category/linux.html">linux</a>. </p>
+
+</footer><!-- /.post-info -->                <p>当在终端下执行某些操作，提示编码问题时，基本是因为终端的locale环境的编码不支持。</p>
+<p>有些终端下默认的LC_*设置为<code>C</code>，可运行<code>locale</code>查看，此时终端环境的默认编码是<code>ASCII</code>。</p>
+<p>可将其改为<code>UTF8</code>编码。</p>
+<p>修改方式如下：</p>
+<ol>
+<li>用<code>locale -a</code>命令查看系统支持的category。</li>
+<li>在终端下进行<code>export LANG=&lt;category&gt;</code>，此时终端的<code>LC_*</code>变量发生了变化。
+    如果不想每次手动设置，可将<code>export LANG=&lt;category&gt;</code>加到<code>.bashrc</code>中。</li>
+</ol>
+                <a class="readmore" href="../locale.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
                     <h1><a href="../logbook.html" rel="bookmark"
                            title="Permalink to Logbook">Logbook</a></h1>
                 </header>
@@ -314,37 +346,6 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 
 </footer><!-- /.post-info -->                
                 <a class="readmore" href="../memory.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../misc.html" rel="bookmark"
-                           title="Permalink to misc">misc</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-03-31T20:31:38">
-                Sun 31 March 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <h1>Mac sshfs</h1>
-<p>Mac 挂载远程目录</p>
-<p>http://osxfuse.github.com/</p>
-<p>install OXSFUSE and SSHFS</p>
-<h2>TF-IDF</h2>
-<p>http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
-http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
-http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html</p>
-                <a class="readmore" href="../misc.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
