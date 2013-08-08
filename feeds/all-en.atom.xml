@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-08-08T13:53:35+02:00</updated><entry><title>Find out which process open a linux port</title><link href="/find-out-which-process-open-a-linux-port.html" rel="alternate"></link><updated>2013-08-08T13:53:35+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-08:find-out-which-process-open-a-linux-port.html</id><summary type="html">&lt;p&gt;最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-08-08T13:54:04+02:00</updated><entry><title>Find out which process open a linux port</title><link href="/find-out-which-process-open-a-linux-port.html" rel="alternate"></link><updated>2013-08-08T13:54:04+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-08:find-out-which-process-open-a-linux-port.html</id><summary type="html">&lt;p&gt;最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。&lt;/p&gt;
 &lt;p&gt;那么可以到ip机器上查询port对应的进程号，进而找到发出此查询的应用。&lt;/p&gt;
-&lt;p&gt;根据port来查询进程号有多种方案：
-1. netstat， &lt;code&gt;sudo netstat -anp | grep &amp;lt;port&amp;gt;&lt;/code&gt;
-    关于netstat的使用参考：http://www.thegeekstuff.com/2010/03/netstat-command-examples/&lt;/p&gt;
+&lt;p&gt;根据port来查询进程号有多种方案：&lt;/p&gt;
 &lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;netstat， &lt;code&gt;sudo netstat -anp | grep &amp;lt;port&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;关于netstat的使用参考：http://www.thegeekstuff.com/2010/03/netstat-command-examples/&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;fuser，找到使用tcp 7000端口号的进程：&lt;code&gt;sudo fuser 7000/tcp&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;

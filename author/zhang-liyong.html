@@ -273,7 +273,7 @@ A library of subroutines (built on top of a lower-level library) to make executi
                 
                 <div class="entry-content">
                 <footer class="post-info">
-        <abbr class="published" title="2013-08-08T13:53:35">
+        <abbr class="published" title="2013-08-08T13:54:04">
                 Thu 08 August 2013
         </abbr>
 
@@ -284,10 +284,12 @@ A library of subroutines (built on top of a lower-level library) to make executi
 
 </footer><!-- /.post-info -->                <p>最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。</p>
 <p>那么可以到ip机器上查询port对应的进程号，进而找到发出此查询的应用。</p>
-<p>根据port来查询进程号有多种方案：
-1. netstat， <code>sudo netstat -anp | grep &lt;port&gt;</code>
-    关于netstat的使用参考：http://www.thegeekstuff.com/2010/03/netstat-command-examples/</p>
+<p>根据port来查询进程号有多种方案：</p>
 <ol>
+<li>
+<p>netstat， <code>sudo netstat -anp | grep &lt;port&gt;</code></p>
+<p>关于netstat的使用参考：http://www.thegeekstuff.com/2010/03/netstat-command-examples/</p>
+</li>
 <li>
 <p>fuser，找到使用tcp 7000端口号的进程：<code>sudo fuser 7000/tcp</code></p>
 </li>
@@ -302,7 +304,7 @@ A library of subroutines (built on top of a lower-level library) to make executi
 
 </li>
 </ol>
-<p>通过这几种方式找到进程号后，可以利用<code>ps -eaf | grep &lt;pid ...</code></p>
+<p>通过这几种方式找到进程号后，可以利用<code>ps -eaf | grep &lt;pid&gt;</code>找到此进程的执行命令 ...</p>
                 <a class="readmore" href="../find-out-which-process-open-a-linux-port.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
