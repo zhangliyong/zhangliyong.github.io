@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-08-20T17:51:18+02:00</updated><entry><title>Problems I encouter with emacs</title><link href="/problems-i-encouter-with-emacs.html" rel="alternate"></link><updated>2013-08-20T17:51:18+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-20:problems-i-encouter-with-emacs.html</id><summary type="html">&lt;p&gt;emacs with zsh&lt;/p&gt;</summary></entry><entry><title>The python packages I love</title><link href="/the-python-packages-i-love.html" rel="alternate"></link><updated>2013-08-12T13:26:18+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-12:the-python-packages-i-love.html</id><summary type="html">&lt;p&gt;gevent:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-08-20T18:06:34+02:00</updated><entry><title>Problems I encouter with emacs</title><link href="/problems-i-encouter-with-emacs.html" rel="alternate"></link><updated>2013-08-20T18:06:34+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-20:problems-i-encouter-with-emacs.html</id><summary type="html">&lt;p&gt;emacs with zsh&lt;/p&gt;
+&lt;p&gt;when I first open zsh in emacs using:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;term&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It always print strange characters like "4m", that's because I don't have eterm-color terminfo,
+I solve this problem by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# If you use Cocoa Emacs or Carbon Emacs&lt;/span&gt;
+&lt;span class="n"&gt;tic&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;terminfo&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Applications&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Emacs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Contents&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Resources&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;eterm&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ti&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;in terminal.&lt;/p&gt;
+&lt;p&gt;ref: http://stackoverflow.com/questions/8918910/weird-character-zsh-in-emacs-terminal&lt;/p&gt;</summary></entry><entry><title>The python packages I love</title><link href="/the-python-packages-i-love.html" rel="alternate"></link><updated>2013-08-12T13:26:18+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-12:the-python-packages-i-love.html</id><summary type="html">&lt;p&gt;gevent:&lt;/p&gt;
 &lt;p&gt;arrow: Better dates &amp;amp; times for Python https://github.com/crsmithdev/arrow http://crsmithdev.com/arrow&lt;/p&gt;
 &lt;p&gt;requests: &lt;/p&gt;
 &lt;p&gt;grequests:&lt;/p&gt;

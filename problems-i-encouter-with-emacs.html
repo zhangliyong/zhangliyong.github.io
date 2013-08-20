@@ -41,7 +41,7 @@
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2013-08-20T17:51:18">
+        <abbr class="published" title="2013-08-20T18:06:34">
                 Tue 20 August 2013
         </abbr>
 
@@ -51,6 +51,20 @@
         <p>In <a href="./category/emacs.html">emacs</a>. </p>
 
 </footer><!-- /.post-info -->      <p>emacs with zsh</p>
+<p>when I first open zsh in emacs using:</p>
+<div class="highlight"><pre><span class="n">M</span><span class="o">-</span><span class="n">x</span> <span class="n">term</span>
+</pre></div>
+
+
+<p>It always print strange characters like "4m", that's because I don't have eterm-color terminfo,
+I solve this problem by running:</p>
+<div class="highlight"><pre><span class="cp"># If you use Cocoa Emacs or Carbon Emacs</span>
+<span class="n">tic</span> <span class="o">-</span><span class="n">o</span> <span class="o">~/</span><span class="p">.</span><span class="n">terminfo</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Emacs</span><span class="p">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">Resources</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">eterm</span><span class="o">-</span><span class="n">color</span><span class="p">.</span><span class="n">ti</span>
+</pre></div>
+
+
+<p>in terminal.</p>
+<p>ref: http://stackoverflow.com/questions/8918910/weird-character-zsh-in-emacs-terminal</p>
     </div><!-- /.entry-content -->
     
   </article>
