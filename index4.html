@@ -18,6 +18,7 @@
                                                                     <li ><a href="./category/algorithm.html">algorithm</a></li>
                                     <li ><a href="./category/bash.html">bash</a></li>
                                     <li ><a href="./category/db.html">db</a></li>
+                                    <li ><a href="./category/emacs.html">emacs</a></li>
                                     <li ><a href="./category/git.html">git</a></li>
                                     <li ><a href="./category/linux.html">linux</a></li>
                                     <li ><a href="./category/misc.html">misc</a></li>
@@ -36,6 +37,74 @@
                  
                             <section id="content" class="body">
                     <ol id="posts-list" class="hfeed" start="9">
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./linux.html" rel="bookmark"
+                           title="Permalink to Linux">Linux</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-16T12:18:32">
+                Thu 16 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/linux.html">linux</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>Linux TCP Performance Tuning</h2>
+<p>There are two ways to change tcp parameters.</p>
+<ol>
+<li>
+<p>change the value of parameter files in /proc/sys/net/
+   e.g. increase the value of somaxconn
+        <code>echo 1024 &gt; /proc/sys/net/core/somaxconn</code>
+   when the server restart, the parameter will restore.</p>
+</li>
+<li>
+<p>change the vlaue in /etc/sysctl ...</p></li></ol>
+                <a class="readmore" href="./linux.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./nginx-tips.html" rel="bookmark"
+                           title="Permalink to nginx tips">nginx tips</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-13T16:11:31">
+                Mon 13 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/nginx.html">nginx</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>nginx backlog</h2>
+<h2>Root Directory</h2>
+<p>nginx 默认根目录，</p>
+<p>如果在配置文件中指定了root，则根目录即为root指定的目录</p>
+<p>如果通过编译安装的nginx，则根目录为编译时指定的prefix目录</p>
+<p>如果通过包管理器安装，则根目录与发行版相关。例如ubuntu版本的根目录为：
+/usr/share/nginx/www</p>
+<h2>Custome error page</h2>
+<p>nginx 有个默认的错误显示页面</p>
+<h2>Ref</h2>
+<p>http://wiki.nginx.org/Pitfalls</p>
+                <a class="readmore" href="./nginx-tips.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
                         <li><article class="hentry">    
                 <header>
                     <h1><a href="./todo.html" rel="bookmark"
@@ -268,61 +337,6 @@ show global variables like '';</p>
 <p>相较前几种方法，备份数据文件最为直接、快速、方便，缺点是基本上不能实现增量备份。为了保证数据的一致性，需要在靠背文件前，执行以下 SQL 语句：</p>
 <p>FLUSH ...</p>
                 <a class="readmore" href="./mysql-xing-neng-diao-you.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./time_wait-in-netstat.html" rel="bookmark"
-                           title="Permalink to TIME_WAIT in netstat">TIME_WAIT in netstat</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-04-11T23:44:01">
-                Thu 11 April 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/network.html">network</a>. </p>
-
-</footer><!-- /.post-info -->                <p>netstat -tanp | grep -o '(10.18.10.20\|211.151.139.230\|127.0.0.1):[0-9]*' | sort -nr | uniq -c | sort -nr -k 1 | wc -l</p>
-                <a class="readmore" href="./time_wait-in-netstat.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./misc.html" rel="bookmark"
-                           title="Permalink to misc">misc</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-03-31T20:31:38">
-                Sun 31 March 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <h1>Mac sshfs</h1>
-<p>Mac 挂载远程目录</p>
-<p>http://osxfuse.github.com/</p>
-<p>install OXSFUSE and SSHFS</p>
-<h2>TF-IDF</h2>
-<p>http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
-http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
-http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html</p>
-                <a class="readmore" href="./misc.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->

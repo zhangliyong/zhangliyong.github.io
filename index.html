@@ -18,6 +18,7 @@
                                                                     <li ><a href="./category/algorithm.html">algorithm</a></li>
                                     <li ><a href="./category/bash.html">bash</a></li>
                                     <li ><a href="./category/db.html">db</a></li>
+                                    <li ><a href="./category/emacs.html">emacs</a></li>
                                     <li ><a href="./category/git.html">git</a></li>
                                     <li ><a href="./category/linux.html">linux</a></li>
                                     <li ><a href="./category/misc.html">misc</a></li>
@@ -35,10 +36,97 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./find-out-which-process-open-a-linux-port.html">Find out which process open a linux port</a></h1> 
+                    <h1 class="entry-title"><a href="./problems-i-encouter-with-emacs.html">Problems I encouter with emacs</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-08-08T13:54:04">
-                Thu 08 August 2013
+        <abbr class="published" title="2013-08-20T17:51:18">
+                Tue 20 August 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/emacs.html">emacs</a>. </p>
+
+</footer><!-- /.post-info --><p>emacs with zsh</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./the-python-packages-i-love.html" rel="bookmark"
+                           title="Permalink to The python packages I love">The python packages I love</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-08-12T13:26:18">
+                Mon 12 August 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <p>gevent:</p>
+<p>arrow: Better dates &amp; times for Python https://github.com/crsmithdev/arrow http://crsmithdev.com/arrow</p>
+<p>requests: </p>
+<p>grequests:</p>
+<p>undead: https://github.com/waawal/undead</p>
+<p>legit
+envoy
+tablib
+clint
+autoenv</p>
+                <a class="readmore" href="./the-python-packages-i-love.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./urwid.html" rel="bookmark"
+                           title="Permalink to urwid">urwid</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-08-09T16:21:44">
+                Fri 09 August 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
+        </address>
+        <p>In <a href="./category/python.html">python</a>. </p>
+
+</footer><!-- /.post-info -->                <p>最近要写一个mongo current op的管理工具，</p>
+<p>http://www.nicosphere.net/urwid-for-python-a-ncurses-library-2541/</p>
+<p>https://github.com/intnull/videotop/blob/master/videotop.py</p>
+<p>Why can't I select text in an Urwid program?</p>
+<p>By default Urwid's MainLoop tells the terminal that it will handle mouse input so it can react to things like selecting widgets ...</p>
+                <a class="readmore" href="./urwid.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./find-out-which-process-open-a-linux-port.html" rel="bookmark"
+                           title="Permalink to Find out which process open a linux port">Find out which process open a linux port</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-08-09T15:48:46">
+                Fri 09 August 2013
         </abbr>
 
                 <address class="vcard author">
@@ -46,7 +134,7 @@
         </address>
         <p>In <a href="./category/linux.html">linux</a>. </p>
 
-</footer><!-- /.post-info --><p>最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。</p>
+</footer><!-- /.post-info -->                <p>最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。</p>
 <p>那么可以到ip机器上查询port对应的进程号，进而找到发出此查询的应用。</p>
 <p>根据port来查询进程号有多种方案：</p>
 <ol>
@@ -68,15 +156,11 @@
 
 </li>
 </ol>
-<p>通过这几种方式找到进程号后，可以利用<code>ps -eaf | grep &lt;pid&gt;</code>找到此进程的执行命令，
-并可以通过<code>/proc/&lt;pid&gt;/cwd</code>找到此进程的执行目录。</p>
-<p>参考：http://www.cyberciti.biz/faq/what-process-has-open-linux-port/</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<p>通过这几种方式找到进程号后，可以利用<code>ps -eaf | grep &lt;pid&gt;</code>找到此进程的执行命令 ...</p>
+                <a class="readmore" href="./find-out-which-process-open-a-linux-port.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -255,84 +339,6 @@ A library of subroutines (built on top of a lower-level library) to make executi
 <p>serverStatus.mem.resident
 The value of resident is roughly equivalent to the amount of RAM, in megabytes (MB), currently used by the database process. In normal use this ...</p>
                 <a class="readmore" href="./how-mongodb-use-memory.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./htop-command.html" rel="bookmark"
-                           title="Permalink to htop command">htop command</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-07-28T11:11:13">
-                Sun 28 July 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/linux.html">linux</a>. </p>
-
-</footer><!-- /.post-info -->                <p>推荐一个代替工具htop，显示信息很详细，功能丰富，一但上手操作也很简单，
-<a href="http://www.thegeekstuff.com/2011/09/linux-htop-examples/">thegeekstuff</a>上有
-一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。</p>
-                <a class="readmore" href="./htop-command.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./vmstat.html" rel="bookmark"
-                           title="Permalink to vmstat">vmstat</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-07-25T11:35:02">
-                Thu 25 July 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/linux.html">linux</a>. </p>
-
-</footer><!-- /.post-info -->                <p>最近在分析mongo的性能问题，发现mongo所在机器的io比较频繁。</p>
-<p>使用vmstat命令查看，发现b（The number of processes in uninterruptible sleep）这一列的数量比较大，持续在4左右。
-随后查询uninterruptible sleep状态的意义，引自：http://www.novell.com/support/kb/doc.php?id=7002725</p>
-<blockquote>
-<p>Processes in a "D" or uninterruptible sleep state are usually waiting on I/O. The ps command shows a "D" on processes in an ...</p></blockquote>
-                <a class="readmore" href="./vmstat.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./mongo-performance.html" rel="bookmark"
-                           title="Permalink to Mongo Performance">Mongo Performance</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-07-25T10:07:12">
-                Thu 25 July 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/mongo.html">mongo</a>. </p>
-
-</footer><!-- /.post-info -->                <p>最近mongo的性能</p>
-                <a class="readmore" href="./mongo-performance.html">read more</a>
                                 </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->

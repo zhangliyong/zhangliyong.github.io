@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-08-08T13:54:04+02:00</updated><entry><title>Find out which process open a linux port</title><link href="/find-out-which-process-open-a-linux-port.html" rel="alternate"></link><updated>2013-08-08T13:54:04+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-08:find-out-which-process-open-a-linux-port.html</id><summary type="html">&lt;p&gt;最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.com/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-08-20T17:51:18+02:00</updated><entry><title>Problems I encouter with emacs</title><link href="/problems-i-encouter-with-emacs.html" rel="alternate"></link><updated>2013-08-20T17:51:18+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-20:problems-i-encouter-with-emacs.html</id><summary type="html">&lt;p&gt;emacs with zsh&lt;/p&gt;</summary></entry><entry><title>The python packages I love</title><link href="/the-python-packages-i-love.html" rel="alternate"></link><updated>2013-08-12T13:26:18+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-12:the-python-packages-i-love.html</id><summary type="html">&lt;p&gt;gevent:&lt;/p&gt;
+&lt;p&gt;arrow: Better dates &amp;amp; times for Python https://github.com/crsmithdev/arrow http://crsmithdev.com/arrow&lt;/p&gt;
+&lt;p&gt;requests: &lt;/p&gt;
+&lt;p&gt;grequests:&lt;/p&gt;
+&lt;p&gt;undead: https://github.com/waawal/undead&lt;/p&gt;
+&lt;p&gt;legit
+envoy
+tablib
+clint
+autoenv&lt;/p&gt;</summary></entry><entry><title>urwid</title><link href="/urwid.html" rel="alternate"></link><updated>2013-08-09T16:21:44+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-09:urwid.html</id><summary type="html">&lt;p&gt;最近要写一个mongo current op的管理工具，&lt;/p&gt;
+&lt;p&gt;http://www.nicosphere.net/urwid-for-python-a-ncurses-library-2541/&lt;/p&gt;
+&lt;p&gt;https://github.com/intnull/videotop/blob/master/videotop.py&lt;/p&gt;
+&lt;p&gt;Why can't I select text in an Urwid program?&lt;/p&gt;
+&lt;p&gt;By default Urwid's MainLoop tells the terminal that it will handle mouse input so it can react to things like selecting widgets with the mouse or activating check boxes.&lt;/p&gt;
+&lt;p&gt;If you wrote this program and you want to disable Urwid's mouse handling you can set handle_mouse=False when creating your MainLoop or screen object.&lt;/p&gt;
+&lt;p&gt;Or you can just hold the SHIFT key while clicking and dragging in to get the normal select text/copy behavior.&lt;/p&gt;</summary></entry><entry><title>Find out which process open a linux port</title><link href="/find-out-which-process-open-a-linux-port.html" rel="alternate"></link><updated>2013-08-09T15:48:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-09:find-out-which-process-open-a-linux-port.html</id><summary type="html">&lt;p&gt;最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。&lt;/p&gt;
 &lt;p&gt;那么可以到ip机器上查询port对应的进程号，进而找到发出此查询的应用。&lt;/p&gt;
 &lt;p&gt;根据port来查询进程号有多种方案：&lt;/p&gt;
 &lt;ol&gt;
@@ -129,11 +144,7 @@ As you probably know, MongoDB has a global lock. The longer your writes take, th
 &lt;p&gt;More Reads Make For Faster Writes
 The trick to lowering your lock percentage and thus having faster updates is to query the document you are going to update, before you perform the update. Querying before doing an upsert might seem counter intuitive at first glance, but it makes sense when you think about it.&lt;/p&gt;
 &lt;p&gt;The read ensures that whatever document you are going to update is in RAM. This means the update, which will happen immediately after the read, always updates the document in RAM, which is super fast. I think of it as warming the database for the document you are about to update.&lt;/p&gt;
-&lt;p&gt;http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/&lt;/p&gt;</summary></entry><entry><title>The python packages I love</title><link href="/the-python-packages-i-love.html" rel="alternate"></link><updated>2013-07-15T16:37:21+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-15:the-python-packages-i-love.html</id><summary type="html">&lt;p&gt;gevent:&lt;/p&gt;
-&lt;p&gt;arrow: Better dates &amp;amp; times for Python https://github.com/crsmithdev/arrow http://crsmithdev.com/arrow&lt;/p&gt;
-&lt;p&gt;requests: &lt;/p&gt;
-&lt;p&gt;grequests:&lt;/p&gt;
-&lt;p&gt;undead: https://github.com/waawal/undead&lt;/p&gt;</summary></entry><entry><title>Job</title><link href="/job.html" rel="alternate"></link><updated>2013-07-10T13:19:07+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-10:job.html</id><summary type="html">&lt;p&gt;今天读了A. Jesse Jiryu Davis的一篇&lt;a href="http://emptysqua.re/blog/so-youre-coming-to-a-career-fair/"&gt;文章&lt;/a&gt;，关于计算机专业的学生如何让自己突出，找到
+&lt;p&gt;http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/&lt;/p&gt;</summary></entry><entry><title>Job</title><link href="/job.html" rel="alternate"></link><updated>2013-07-10T13:19:07+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-10:job.html</id><summary type="html">&lt;p&gt;今天读了A. Jesse Jiryu Davis的一篇&lt;a href="http://emptysqua.re/blog/so-youre-coming-to-a-career-fair/"&gt;文章&lt;/a&gt;，关于计算机专业的学生如何让自己突出，找到
 自己喜欢的工作。&lt;/p&gt;
 &lt;p&gt;开篇作者就指出要想办法让自己突出，不要与其他学生都一样，如果你是一个黑客，那你就要表现出来。&lt;/p&gt;
 &lt;ol&gt;
