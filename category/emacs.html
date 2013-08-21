@@ -1,33 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Lyon's Blog - emacs</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
-        <link href="../" type="application/atom+xml" rel="alternate" title="Lyon's Blog ATOM Feed" />
+	<meta charset="utf-8">
+	<title>Lyon's Blog</title>
+	<meta name="description" content="">
+	<meta name="author" content="zhang liyong">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="../theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="../theme/bootstrap.min.css" rel="stylesheet">
+	<link href="../theme/local.css" rel="stylesheet">
+	<link href="../theme/pygments.css" rel="stylesheet">
+
+    <!-- Feeds -->
         
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="../css/ie.css"/>
-                <script src="../js/IE8.js" type="text/javascript"></script><![endif]-->
-
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
-
-</head>
-
+		</head>
 <body>
-                
-            
+			<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="../">Lyon's Blog</a>
+			<ul class="nav">
+																			<li><a href="../pages/about.html">About</a></li>
+																		<li ><a href="../category/algorithm.html">algorithm</a></li>
+									<li ><a href="../category/bash.html">bash</a></li>
+									<li ><a href="../category/db.html">db</a></li>
+									<li class="active"><a href="../category/emacs.html">emacs</a></li>
+									<li ><a href="../category/git.html">git</a></li>
+									<li ><a href="../category/linux.html">linux</a></li>
+									<li ><a href="../category/misc.html">misc</a></li>
+									<li ><a href="../category/mongo.html">mongo</a></li>
+									<li ><a href="../category/munin.html">munin</a></li>
+									<li ><a href="../category/mysql.html">mysql</a></li>
+									<li ><a href="../category/network.html">network</a></li>
+									<li ><a href="../category/nginx.html">nginx</a></li>
+									<li ><a href="../category/python.html">python</a></li>
+									<li ><a href="../category/vim.html">vim</a></li>
+							</ul>
+			<p class="pull-right"><a href="../archives.html">[archives]</a> <a href="../tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
 
-                            <header>
-                <h1><a href=".." id="site-title">Lyon's Blog </a> : <a href="../problems-i-encouter-with-emacs.html" id="page-title">Problems I encouter with emacs</a></h1>
-                <time datetime="2013-08-20T18:06:34">Tue 20 August 2013</time>            </header>
-
-            <article>
-                <p>emacs with zsh</p>
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+								<li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+								<li><a href="http://python.org">Python.org</a></li>
+								<li><a href="http://jinja.pocoo.org">Jinja2</a></li>
+								<li><a href="#">You can modify those links in your config file</a></li>
+							</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+								<li><a href="#">You can add links in your config file</a></li>
+								<li><a href="#">Another social link</a></li>
+							</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+			<div class="page-header"><h1>Lyon's Blog <small>emacs</small></h1></div>			
+<div class='article'>
+	<h2>Problems I encouter with emacs</h2>
+	<div class="well small">Permalink: <a class="more" href="../problems-i-encouter-with-emacs.html">2013-08-20 18:06:34</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/emacs.html">emacs</a>
+</div>
+	<div class="summary"><p>emacs with zsh</p>
 <p>when I first open zsh in emacs using:</p>
 <div class="highlight"><pre><span class="n">M</span><span class="o">-</span><span class="n">x</span> <span class="n">term</span>
 </pre></div>
@@ -36,22 +82,17 @@
 <p>It always print strange characters like "4m", that's because I don't have eterm-color terminfo,
 I solve this problem by running:</p>
 <div class="highlight"><pre><span class="cp"># If you use Cocoa Emacs or Carbon Emacs</span>
-<span class="n">tic</span> <span class="o">-</span><span class="n">o</span> <span class="o">~/</span><span class="p">.</span><span class="n">terminfo</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Emacs</span><span class="p">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">Resources</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">eterm</span><span class="o">-</span><span class="n">color</span><span class="p">.</span><span class="n">ti</span>
-</pre></div>
+<span class="n">tic</span> <span class="o">-</span><span class="n">o</span> <span class="o">~/</span><span class="p">.</span><span class="n">terminfo</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Emacs</span><span class="p">.</span><span class="n">app ...</span></pre></div> <a class="btn primary xsmall" href="../problems-i-encouter-with-emacs.html">more…</a>
+	</div>
+</div>	
 
 
-<p>in terminal.</p>
-<p>ref: http://stackoverflow.com/questions/8918910/weird-character-zsh-in-emacs-terminal</p>            </article>
-                                
-        <footer>
-            <nav>
-                <ul>
-                                    <li><a href="../pages/about.html">About</a></li>
-                                                    <li>:: <a href="../categories.html">Catégories</a></li>
-                                                </ul>
-            </nav>
-                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
-        </footer>
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; zhang liyong</p>
+		</footer>
+	  </div>
 
+	</div>
 </body>
 </html>

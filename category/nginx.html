@@ -1,99 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Lyon's Blog - nginx</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
-        <link href="../" type="application/atom+xml" rel="alternate" title="Lyon's Blog ATOM Feed" />
+	<meta charset="utf-8">
+	<title>Lyon's Blog</title>
+	<meta name="description" content="">
+	<meta name="author" content="zhang liyong">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="../theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="../theme/bootstrap.min.css" rel="stylesheet">
+	<link href="../theme/local.css" rel="stylesheet">
+	<link href="../theme/pygments.css" rel="stylesheet">
+
+    <!-- Feeds -->
         
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="../css/ie.css"/>
-                <script src="../js/IE8.js" type="text/javascript"></script><![endif]-->
-
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
-
-</head>
-
+		</head>
 <body>
-                
-            
+			<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="../">Lyon's Blog</a>
+			<ul class="nav">
+																			<li><a href="../pages/about.html">About</a></li>
+																		<li ><a href="../category/algorithm.html">algorithm</a></li>
+									<li ><a href="../category/bash.html">bash</a></li>
+									<li ><a href="../category/db.html">db</a></li>
+									<li ><a href="../category/emacs.html">emacs</a></li>
+									<li ><a href="../category/git.html">git</a></li>
+									<li ><a href="../category/linux.html">linux</a></li>
+									<li ><a href="../category/misc.html">misc</a></li>
+									<li ><a href="../category/mongo.html">mongo</a></li>
+									<li ><a href="../category/munin.html">munin</a></li>
+									<li ><a href="../category/mysql.html">mysql</a></li>
+									<li ><a href="../category/network.html">network</a></li>
+									<li class="active"><a href="../category/nginx.html">nginx</a></li>
+									<li ><a href="../category/python.html">python</a></li>
+									<li ><a href="../category/vim.html">vim</a></li>
+							</ul>
+			<p class="pull-right"><a href="../archives.html">[archives]</a> <a href="../tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
 
-                            <header>
-                <h1><a href=".." id="site-title">Lyon's Blog </a> : <a href="../http-keep-alive.html" id="page-title">HTTP keep-alive</a></h1>
-                <time datetime="2013-07-09T17:43:45">Tue 09 July 2013</time>            </header>
-
-            <article>
-                <p>今天在阅读<a href="http://jacobian.org/writing/django-performance-tips/">Django performance tips</a>时发现关闭keepalive可以提高效率，原文如下：</p>
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+								<li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+								<li><a href="http://python.org">Python.org</a></li>
+								<li><a href="http://jinja.pocoo.org">Jinja2</a></li>
+								<li><a href="#">You can modify those links in your config file</a></li>
+							</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+								<li><a href="#">You can add links in your config file</a></li>
+								<li><a href="#">Another social link</a></li>
+							</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+			<div class="page-header"><h1>Lyon's Blog <small>nginx</small></h1></div>			
+<div class='article'>
+	<h2>HTTP keep-alive</h2>
+	<div class="well small">Permalink: <a class="more" href="../http-keep-alive.html">2013-07-09 17:43:45</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/nginx.html">nginx</a>
+</div>
+	<div class="summary"><p>今天在阅读<a href="http://jacobian.org/writing/django-performance-tips/">Django performance tips</a>时发现关闭keepalive可以提高效率，原文如下：</p>
 <blockquote>
 <p>Turn off KeepAlive
-I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing that, right?</p>
-</blockquote>
-<p>HTTP keep-alive即是HTTP persistent connection，维基百科有详细说明：http://en.wikipedia.org/wiki/HTTP_persistent_connection</p>
-<p>如果使用keep-alive功能，多个http请求会使用同一个tcp连接，这样可节省多次建立连接的时间及资源消耗，</p>
-<p>下图显示了是否使用keep-alive功能的tcp连接对比图：</p>
-<p><img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/HTTP_persistent_connection.svg/500px-HTTP_persistent_connection.svg.png" /></p>
-<p>http 1.0默认不开启，可进行指定，http 1.1默认开启。</p>
-<p>上面我们看到启用keep-alive可节省多次建立连接的时间，但是服务器端要保持连接状态(nginx默认保持74s)，
-这样会影响服务器端的性能。 而且目前网络带宽比较大，建立连接的延时比较少，
-所以keep-alive在很多情况下会导致性能下降。这就验证了一开始那篇文章指出的在django servers中关闭keep-alive
-功能可大约提升50%的性能。</p>
-<p>所以建议关系keep-alive功能，除非有特殊需求。</p>
-<p>下面介绍如何nginx中关系keep-alive功能</p>
-<p><a href="http://wiki.nginx.org/HttpCoreModule#keepalive_timeout">nginx文档</a>中有详细说明:</p>
-<blockquote>
-<p>keepalive_timeout</p>
-<p>Syntax: keepalive_timeout timeout [ header_timeout ]</p>
-<p>Default:    75s</p>
-<p>Context:    http
-           server
-           location</p>
-<p>Reference:  keepalive_timeout</p>
-<p>The first parameter assigns the timeout for keep-alive connections with the client. The server will close connections after this time.</p>
-<p>The optional second parameter assigns the time value in the header Keep-Alive: timeout=time of the response. This header can convince some browsers to close the connection, so that the server does not have to. Without this parameter, nginx does not send a Keep-Alive header (though this is not what makes a connection "keep-alive").</p>
-</blockquote>
-<p>如果我们要关闭keep-alive功能，可在http, server或location中设置<code>keepalive_timeout  0;</code></p>
-<p>如：</p>
-<div class="highlight"><pre><span class="n">server</span> <span class="p">{</span>
-  <span class="n">listen</span>          <span class="n">port</span><span class="p">;</span>
-  <span class="n">server_name</span>     <span class="n">address</span><span class="p">;</span>
-  <span class="n">access_log</span>      <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">mysite</span><span class="o">-</span><span class="n">access</span><span class="p">.</span><span class="n">log</span> <span class="p">;</span>
-  <span class="n">error_log</span>       <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">mysite</span><span class="o">-</span><span class="n">error</span><span class="p">.</span><span class="n">log</span> <span class="p">;</span>
-  <span class="n">keepalive_timeout</span>  <span class="mi">0</span><span class="p">;</span>
-  <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
-    <span class="p">........</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
+I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing ...</p></blockquote> <a class="btn primary xsmall" href="../http-keep-alive.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>nginx tips</h2>
+	<div class="well small">Permalink: <a class="more" href="../nginx-tips.html">2013-05-13 16:11:31</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/nginx.html">nginx</a>
+</div>
+	<div class="summary"><h2>nginx backlog</h2>
+<h2>Root Directory</h2>
+<p>nginx 默认根目录，</p>
+<p>如果在配置文件中指定了root，则根目录即为root指定的目录</p>
+<p>如果通过编译安装的nginx，则根目录为编译时指定的prefix目录</p>
+<p>如果通过包管理器安装，则根目录与发行版相关。例如ubuntu版本的根目录为：
+/usr/share/nginx/www</p>
+<h2>Custome error page</h2>
+<p>nginx 有个默认的错误显示页面</p>
+<h2>Ref</h2>
+<p>http://wiki.nginx.org/Pitfalls</p> <a class="btn primary xsmall" href="../nginx-tips.html">more…</a>
+	</div>
+</div>	
 
 
-<p>下图给出了keepalive_timeout设置前后，http请求的header中connection的变化：</p>
-<p><img alt="" src="/static/images/nginx/keepalive/keepalive.png" /></p>
-<p>设置<code>keepalive_timeout  0;</code>之后：</p>
-<p><img alt="" src="/static/images/nginx/keepalive/notalive.png" /></p>
-<p>笔者并没有对keep-alive做相应性能方面的benchmark，所以不确定keep-alive对性能的影响，而且keep-alive对性能的影响也与应用场景有关。</p>            </article>
-                            <section id="article-list">
-                    <h2>All posts</h2>
-                    <ol>
-                                    
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; zhang liyong</p>
+		</footer>
+	  </div>
 
-                 
-            <li><a href="../nginx-tips.html" rel="bookmark" title="Permalink to nginx tips">nginx tips</a></li>
-                </ol>
-    </section><!-- #article-list -->
-
-        <footer>
-            <nav>
-                <ul>
-                                    <li><a href="../pages/about.html">About</a></li>
-                                                    <li>:: <a href="../categories.html">Catégories</a></li>
-                                                </ul>
-            </nav>
-                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
-        </footer>
-
+	</div>
 </body>
 </html>

@@ -1,291 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Lyon's Blog - zhang liyong</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
-        <link href="../" type="application/atom+xml" rel="alternate" title="Lyon's Blog ATOM Feed" />
+	<meta charset="utf-8">
+	<title>Lyon's Blog</title>
+	<meta name="description" content="">
+	<meta name="author" content="zhang liyong">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="../theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="../theme/bootstrap.min.css" rel="stylesheet">
+	<link href="../theme/local.css" rel="stylesheet">
+	<link href="../theme/pygments.css" rel="stylesheet">
+
+    <!-- Feeds -->
         
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="../css/ie.css"/>
-                <script src="../js/IE8.js" type="text/javascript"></script><![endif]-->
-
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
-
-</head>
-
+		</head>
 <body>
-                
-            
+			<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="../">Lyon's Blog</a>
+			<ul class="nav">
+																			<li><a href="../pages/about.html">About</a></li>
+																		<li ><a href="../category/algorithm.html">algorithm</a></li>
+									<li ><a href="../category/bash.html">bash</a></li>
+									<li ><a href="../category/db.html">db</a></li>
+									<li ><a href="../category/emacs.html">emacs</a></li>
+									<li ><a href="../category/git.html">git</a></li>
+									<li ><a href="../category/linux.html">linux</a></li>
+									<li ><a href="../category/misc.html">misc</a></li>
+									<li ><a href="../category/mongo.html">mongo</a></li>
+									<li ><a href="../category/munin.html">munin</a></li>
+									<li ><a href="../category/mysql.html">mysql</a></li>
+									<li ><a href="../category/network.html">network</a></li>
+									<li ><a href="../category/nginx.html">nginx</a></li>
+									<li ><a href="../category/python.html">python</a></li>
+									<li ><a href="../category/vim.html">vim</a></li>
+							</ul>
+			<p class="pull-right"><a href="../archives.html">[archives]</a> <a href="../tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
 
-                            <header>
-                <h1><a href=".." id="site-title">Lyon's Blog </a> : <a href="../bash.html" id="page-title">Bash</a></h1>
-                <time datetime="2013-03-27T19:21:50">Wed 27 March 2013</time>            </header>
-
-            <article>
-                <h2>alias</h2>
-<p>对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。</p>
-<p>e.g. 在.bashrc中加入</p>
-<div class="highlight"><pre><span class="nb">alias </span><span class="nv">servername</span><span class="o">=</span><span class="s1">&#39;ssh sns@hostname&#39;</span>
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+								<li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+								<li><a href="http://python.org">Python.org</a></li>
+								<li><a href="http://jinja.pocoo.org">Jinja2</a></li>
+								<li><a href="#">You can modify those links in your config file</a></li>
+							</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+								<li><a href="#">You can add links in your config file</a></li>
+								<li><a href="#">Another social link</a></li>
+							</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+			<div class="page-header"><h1>Lyon's Blog <small>zhang liyong</small></h1></div>			
+<div class='article'>
+	<h2>How mongodb use memory</h2>
+	<div class="well small">Permalink: <a class="more" href="../how-mongodb-use-memory.html">2013-07-29 15:11:21</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/mongo.html">mongo</a>
+</div>
+	<div class="summary"><p>网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。</p>
+<p>MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。</p>
+<p>查看working set大小可用如下命令：<code>db.runCommand( { serverStatus: 1, workingSet: 1 } )</code></p>
+<p>serverStatus.mem.resident
+The value of resident is roughly equivalent to the amount of RAM, in megabytes (MB), currently used by the database process. In normal use this ...</p> <a class="btn primary xsmall" href="../how-mongodb-use-memory.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>htop command</h2>
+	<div class="well small">Permalink: <a class="more" href="../htop-command.html">2013-07-28 11:11:13</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/linux.html">linux</a>
+</div>
+	<div class="summary"><p>推荐一个代替工具htop，显示信息很详细，功能丰富，一但上手操作也很简单，
+<a href="http://www.thegeekstuff.com/2011/09/linux-htop-examples/">thegeekstuff</a>上有
+一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。</p> <a class="btn primary xsmall" href="../htop-command.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>HTTP keep-alive</h2>
+	<div class="well small">Permalink: <a class="more" href="../http-keep-alive.html">2013-07-09 17:43:45</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/nginx.html">nginx</a>
+</div>
+	<div class="summary"><p>今天在阅读<a href="http://jacobian.org/writing/django-performance-tips/">Django performance tips</a>时发现关闭keepalive可以提高效率，原文如下：</p>
+<blockquote>
+<p>Turn off KeepAlive
+I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing ...</p></blockquote> <a class="btn primary xsmall" href="../http-keep-alive.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>iptables</h2>
+	<div class="well small">Permalink: <a class="more" href="../iptables.html">2013-06-25 14:52:10</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/linux.html">linux</a>
+</div>
+	<div class="summary"><p>/etc/sysconfig/iptables - The system scripts that activate the firewall by reading this file.</p>
+<h2>Ref:</h2>
+<p>http://www.cyberciti.biz/faq/rhel-fedorta-linux-iptables-firewall-configuration-tutorial/</p> <a class="btn primary xsmall" href="../iptables.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>Job</h2>
+	<div class="well small">Permalink: <a class="more" href="../job.html">2013-07-10 13:19:07</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/misc.html">misc</a>
+</div>
+	<div class="summary"><p>今天读了A. Jesse Jiryu Davis的一篇<a href="http://emptysqua.re/blog/so-youre-coming-to-a-career-fair/">文章</a>，关于计算机专业的学生如何让自己突出，找到
+自己喜欢的工作。</p>
+<p>开篇作者就指出要想办法让自己突出，不要与其他学生都一样，如果你是一个黑客，那你就要表现出来。</p>
+<ol>
+<li>
+<p>仅仅学校课堂学的东西是不够的</p>
+</li>
+<li>
+<p>要有气质、魅力。</p>
+<p>好像计算机专业的学生不需要，错了！程序员也要和人交流，打交道，尤其是团队之间，如果你有魅力，会更容易和人交流，沟通效率更高。很多程序员也许都知道沟通的重要性，嘴上确说不需要，其实是在给自己找借口。</p>
+</li>
+<li>
+<p>独立的项目，不一样的语言，不一样的课程</p>
+<p>如果有创意想法，就实现它，这将会给你增加很多的分数，
+学一门其它的编程语言，不要只局限于课堂上教的。</p>
+</li>
+<li>
+<p>从长远来看，最好参与一些开源项目，一开始可能很难找到开源项目的一些问题，即使找到了，可能也写不出高质量的patch，可以先自己建立一个项目，自己开发。</p>
+<p>当然也有例外：你可以修改一些python的库，使其兼容python 3；或者将一种语言上热门的库移植到另一种语言上(在另一种语言上重新实现)，如果这个语言上还没有相应的库。</p>
+</li>
+</ol>
+<p>对于我们在职的程序员，这些建议仍然适用 ...</p> <a class="btn primary xsmall" href="../job.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>Linux</h2>
+	<div class="well small">Permalink: <a class="more" href="../linux.html">2013-05-16 12:18:32</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/linux.html">linux</a>
+</div>
+	<div class="summary"><h2>Linux TCP Performance Tuning</h2>
+<p>There are two ways to change tcp parameters.</p>
+<ol>
+<li>
+<p>change the value of parameter files in /proc/sys/net/
+   e.g. increase the value of somaxconn
+        <code>echo 1024 &gt; /proc/sys/net/core/somaxconn</code>
+   when the server restart, the parameter will restore.</p>
+</li>
+<li>
+<p>change the vlaue in /etc/sysctl ...</p></li></ol> <a class="btn primary xsmall" href="../linux.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>locale</h2>
+	<div class="well small">Permalink: <a class="more" href="../locale.html">2013-08-08 13:45:42</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/linux.html">linux</a>
+</div>
+	<div class="summary"><p>当在终端下执行某些操作，提示编码问题时，基本是因为终端的locale环境的编码不支持。</p>
+<p>有些终端下默认的LC_*设置为<code>C</code>，可运行<code>locale</code>查看，也可查看<code>/etc/default/locale</code>，
+此时终端环境的默认编码是<code>ASCII</code>。</p>
+<p>可将其改为<code>UTF8</code>编码。</p>
+<p>修改方式如下：</p>
+<ol>
+<li>用<code>locale -a</code>命令查看系统支持的category。</li>
+<li>在终端下进行<code>export LANG=&lt;category&gt;</code>，此时终端的<code>LC_*</code>变量发生了变化。
+    如果不想每次手动设置，可将<code>export LANG=&lt;category&gt;</code>加到<code>.bashrc</code>中。</li>
+</ol> <a class="btn primary xsmall" href="../locale.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>Logbook</h2>
+	<div class="well small">Permalink: <a class="more" href="../logbook.html">2013-05-19 18:50:40</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/python.html">python</a>
+</div>
+	<div class="summary"><h2>Introduction</h2>
+<p>Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
+logbook目前还处于开发阶段。可以参考官方<a href="https://logbook.readthedocs.org/en/latest/features.html#core-features">core feature</a></p>
+<p>logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
+filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供
+了更多的组件，如：processor。</p>
+<h2>New Feature</h2>
+<p>在logbook中一个非常大的变化是大量使用<a href="https://logbook.readthedocs.org/en/latest/stacks.html">stack</a>,
+一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性，
+可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。</p>
+<p>目前logbook中存在三种stack，分别用来存储Handler, Processor, Flag。
+每一句log都会经过这三个stack中的每一个对象处理。假如目前存储handler的stack中目前
+有两个handler h1, h2:</p>
+<div class="highlight"><pre><span class="o">|</span> <span class="n">h1</span> <span class="o">|</span>
+<span class="o">|</span><span class="n">____</span><span class="o">|</span>
+<span class="o">|</span> <span class="n">h2</span> <span class="o">|</span>
+<span class="o">|</span><span class="n">____</span><span class="o">|</span>
 </pre></div>
 
 
-<p>执行：</p>
-<div class="highlight"><pre><span class="nv">$ </span>servername
-</pre></div>
+<p>那每一句log都会被h1处理完后被h2再处理。</p>
+<p>Handler, Processor, Flag必须加到stack中才能启到作用，可以使用 <code>push_application()</code> 及 <code>pop_application()</code>。</p>
+<p>logbook中也提供了 ...</p> <a class="btn primary xsmall" href="../logbook.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>mem</h2>
+	<div class="well small">Permalink: <a class="more" href="../mem.html">2013-06-19 14:54:04</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/linux.html">linux</a>
+</div>
+	<div class="summary"><p>http://virtualthreads.blogspot.com/2006/02/understanding-memory-usage-on-linux.html</p>
+<p>http://www.cyberciti.biz/tips/howto-find-memory-used-by-program.html</p>
+<p>pmap</p>
+<p>vmmap on mac</p> <a class="btn primary xsmall" href="../mem.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>Memory</h2>
+	<div class="well small">Permalink: <a class="more" href="../memory.html">2013-05-19 21:42:19</a>
+by <a class="url fn" href="../author/zhang-liyong.html">zhang liyong </a>
+ in <a href="../category/misc.html">misc</a>
+</div>
+	<div class="summary"> <a class="btn primary xsmall" href="../memory.html">more…</a>
+	</div>
+</div>	
 
-
-<p>即可登陆到hostname机器。</p>
-<h2>rsync</h2>
-<p>大家常用rsync同步数据，有些数据是不需要同步的，可以用 --exclude 选项。</p>
-<p>e.g.</p>
-<div class="highlight"><pre>rsync -avz --exclude <span class="s2">&quot;.*&quot;</span> --exclude <span class="s2">&quot;dbconfig.py&quot;</span> src user@hostname:/dest
-
---exclude <span class="s2">&quot;.*&quot;</span> 不会同步以<span class="s2">&quot;.&quot;</span>开头的文件或文件夹，不会同步.git目录（.git目录是比较大的，不建议同步）。
-</pre></div>
-
-
-<h2>mail</h2>
-<p>所有crontab任务的运行结果都会输出到mail中，可以随时查看每个任务的运行情况。</p>
-<h2>tmux</h2>
-<p>工作中经常ssh到远程服务器，有时需要在远程服务器中开启多个终端，</p>
+<div class="pagination">
 <ul>
-<li>一种办法是在本地开启多个终端，分别远程到服务器。</li>
-<li>还有一种方式是利用<a href="http://tmux.sourceforge.net/">tmux</a>。</li>
-</ul>
-<p>install:</p>
-<div class="highlight"><pre><span class="nv">$sudo</span> apt-get install tmux
-</pre></div>
+					<li class="prev"><a href="../author/zhang-liyong.html">&larr; Previous</a></li>
+				<li class=""><a href="../author/zhang-liyong.html">1</a></li>
+			<li class="active"><a href="../author/zhang-liyong2.html">2</a></li>
+			<li class=""><a href="../author/zhang-liyong3.html">3</a></li>
+			<li class=""><a href="../author/zhang-liyong4.html">4</a></li>
+			<li class=""><a href="../author/zhang-liyong5.html">5</a></li>
+				<li class="next"><a href="../author/zhang-liyong3.html">Next &rarr;</a></li>
+	</ul>
+</div>
 
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; zhang liyong</p>
+		</footer>
+	  </div>
 
-<p>basic usage:</p>
-<div class="highlight"><pre><span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">p</span><span class="o">&gt;</span> <span class="n">go</span> <span class="n">to</span> <span class="n">previous</span> <span class="n">window</span>
-<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">n</span><span class="o">&gt;</span> <span class="n">go</span> <span class="n">to</span> <span class="n">next</span> <span class="n">window</span>
-<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">c</span><span class="o">&gt;</span> <span class="n">create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">window</span>
-<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="mi">1</span><span class="o">&gt;</span> <span class="n">go</span> <span class="n">to</span> <span class="n">No</span><span class="mf">.1</span> <span class="n">window</span>
-<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">d</span><span class="o">&gt;</span> <span class="n">detach</span> <span class="n">this</span> <span class="n">tmux</span> <span class="n">session</span>
-</pre></div>
-
-
-<p>tmux 的功能非常强，但命令较多，学习成本较高，可以先使用上面几个命令。</p>
-<p>推荐介绍视频: http://happycasts.net/episodes/41?autoplay=true</p>
-<h2>ssh</h2>
-<p>今天搞清楚了ssh的标准输入输出，下面是ssh命令的使用方式</p>
-<div class="highlight"><pre><span class="n">ssh</span> <span class="p">[</span><span class="o">-</span><span class="mi">1246</span><span class="n">AaCfgKkMNnqsTtVvXxYy</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">bind_address</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">cipher_spec</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">D</span> <span class="p">[</span><span class="n">bind_address</span><span class="o">:</span><span class="p">]</span><span class="n">port</span><span class="p">]</span>
-    <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="n">escape_char</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">F</span> <span class="n">configfile</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">I</span> <span class="n">pkcs11</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="n">identity_file</span><span class="p">]</span>
-    <span class="p">[</span><span class="o">-</span><span class="n">L</span> <span class="p">[</span><span class="n">bind_address</span><span class="o">:</span><span class="p">]</span><span class="n">port</span><span class="o">:</span><span class="n">host</span><span class="o">:</span><span class="n">hostport</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">login_name</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span> <span class="n">mac_spec</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">O</span> <span class="n">ctl_cmd</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">option</span><span class="p">]</span>
-    <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">port</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">R</span> <span class="p">[</span><span class="n">bind_address</span><span class="o">:</span><span class="p">]</span><span class="n">port</span><span class="o">:</span><span class="n">host</span><span class="o">:</span><span class="n">hostport</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">S</span> <span class="n">ctl_path</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">W</span> <span class="n">host</span><span class="o">:</span><span class="n">port</span><span class="p">]</span>
-    <span class="p">[</span><span class="o">-</span><span class="n">w</span> <span class="n">local_tun</span><span class="p">[</span><span class="o">:</span><span class="n">remote_tun</span><span class="p">]]</span> <span class="p">[</span><span class="n">user</span><span class="err">@</span><span class="p">]</span><span class="n">hostname</span> <span class="p">[</span><span class="n">command</span><span class="p">]</span>
-</pre></div>
-
-
-<p>最后的<code>command</code>是在<code>hostname</code>机器上执行<code>command</code>命令，那么<code>command</code>命令的标准输入输出是远程机器<code>hostname</code>上，还是在本地机器上？ 很多初学者可能会认为是远程机器的标准输入输出（本人以前也是这么认为的），其实是在本地机器上。</p>
-<p>下面我们做个试验，可以在本地执行远程机器的程序并获得输出结果。</p>
-<div class="highlight"><pre><span class="nv">$echo</span> <span class="s2">&quot;local host&quot;</span> | ssh user@hostname <span class="s2">&quot;(echo server; cat; echo server)&quot;</span>
-server
-<span class="nb">local </span>host
-server
-</pre></div>
-
-
-<p>我们用将"local host"输出到标准输出，在hostname机器上<code>cat</code>从标准输入获取"local host"并再次输出到标准输出(本地机器的标准输出)。</p>
-<p>虽然<code>command</code>中的标准输入输出是在本地机器，但<code>command</code>中的命令和目录等都是相对于hostname的，与本地机器无法。</p>
-<p>fuser</p>            </article>
-                            <section id="article-list">
-                    <h2>All posts</h2>
-                    <ol>
-                                    
-
-                 
-            <li><a href="../concurrency.html" rel="bookmark" title="Permalink to concurrency">concurrency</a></li>
-                
-
-                 
-            <li><a href="../config-gevent-on-uwsgi.html" rel="bookmark" title="Permalink to config gevent on uwsgi">config gevent on uwsgi</a></li>
-                
-
-                 
-            <li><a href="../datetime.html" rel="bookmark" title="Permalink to datetime">datetime</a></li>
-                
-
-                 
-            <li><a href="../django-logbook.html" rel="bookmark" title="Permalink to django-logbook">django-logbook</a></li>
-                
-
-                 
-            <li><a href="../fabric.html" rel="bookmark" title="Permalink to fabric">fabric</a></li>
-                
-
-                 
-            <li><a href="../find-out-which-process-open-a-linux-port.html" rel="bookmark" title="Permalink to Find out which process open a linux port">Find out which process open a linux port</a></li>
-                
-
-                 
-            <li><a href="../generalized-suffix-tree.html" rel="bookmark" title="Permalink to Generalized Suffix Tree">Generalized Suffix Tree</a></li>
-                
-
-                 
-            <li><a href="../gevent.html" rel="bookmark" title="Permalink to gevent">gevent</a></li>
-                
-
-                 
-            <li><a href="../git.html" rel="bookmark" title="Permalink to Git">Git</a></li>
-                
-
-                 
-            <li><a href="../how-mongodb-use-memory.html" rel="bookmark" title="Permalink to How mongodb use memory">How mongodb use memory</a></li>
-                
-
-                 
-            <li><a href="../htop-command.html" rel="bookmark" title="Permalink to htop command">htop command</a></li>
-                
-
-                 
-            <li><a href="../http-keep-alive.html" rel="bookmark" title="Permalink to HTTP keep-alive">HTTP keep-alive</a></li>
-                
-
-                 
-            <li><a href="../iptables.html" rel="bookmark" title="Permalink to iptables">iptables</a></li>
-                
-
-                 
-            <li><a href="../job.html" rel="bookmark" title="Permalink to Job">Job</a></li>
-                
-
-                 
-            <li><a href="../linux.html" rel="bookmark" title="Permalink to Linux">Linux</a></li>
-                
-
-                 
-            <li><a href="../locale.html" rel="bookmark" title="Permalink to locale">locale</a></li>
-                
-
-                 
-            <li><a href="../logbook.html" rel="bookmark" title="Permalink to Logbook">Logbook</a></li>
-                
-
-                 
-            <li><a href="../mem.html" rel="bookmark" title="Permalink to mem">mem</a></li>
-                
-
-                 
-            <li><a href="../memory.html" rel="bookmark" title="Permalink to Memory">Memory</a></li>
-                
-
-                 
-            <li><a href="../misc.html" rel="bookmark" title="Permalink to misc">misc</a></li>
-                
-
-                 
-            <li><a href="../mongo.html" rel="bookmark" title="Permalink to Mongo">Mongo</a></li>
-                
-
-                 
-            <li><a href="../mongo-performance.html" rel="bookmark" title="Permalink to Mongo Performance">Mongo Performance</a></li>
-                
-
-                 
-            <li><a href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="bookmark" title="Permalink to Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a></li>
-                
-
-                 
-            <li><a href="../munin.html" rel="bookmark" title="Permalink to munin">munin</a></li>
-                
-
-                 
-            <li><a href="../mysql-xing-neng-diao-you.html" rel="bookmark" title="Permalink to Mysql 性能调优">Mysql 性能调优</a></li>
-                
-
-                 
-            <li><a href="../nginx-tips.html" rel="bookmark" title="Permalink to nginx tips">nginx tips</a></li>
-                
-
-                 
-            <li><a href="../pelican.html" rel="bookmark" title="Permalink to pelican">pelican</a></li>
-                
-
-                 
-            <li><a href="../problems-i-encouter-with-emacs.html" rel="bookmark" title="Permalink to Problems I encouter with emacs">Problems I encouter with emacs</a></li>
-                
-
-                 
-            <li><a href="../pudb.html" rel="bookmark" title="Permalink to PuDB">PuDB</a></li>
-                
-
-                 
-            <li><a href="../python.html" rel="bookmark" title="Permalink to Python">Python</a></li>
-                
-
-                 
-            <li><a href="../python-build-dynamic-link-library.html" rel="bookmark" title="Permalink to python build Dynamic Link Library">python build Dynamic Link Library</a></li>
-                
-
-                 
-            <li><a href="../pythonbrew.html" rel="bookmark" title="Permalink to Pythonbrew">Pythonbrew</a></li>
-                
-
-                 
-            <li><a href="../read-later.html" rel="bookmark" title="Permalink to Read Later">Read Later</a></li>
-                
-
-                 
-            <li><a href="../redis-vs-mongodb.html" rel="bookmark" title="Permalink to Redis vs Mongodb">Redis vs Mongodb</a></li>
-                
-
-                 
-            <li><a href="../sleeping.html" rel="bookmark" title="Permalink to Sleeping">Sleeping</a></li>
-                
-
-                 
-            <li><a href="../the-python-packages-i-love.html" rel="bookmark" title="Permalink to The python packages I love">The python packages I love</a></li>
-                
-
-                 
-            <li><a href="../time_wait-in-netstat.html" rel="bookmark" title="Permalink to TIME_WAIT in netstat">TIME_WAIT in netstat</a></li>
-                
-
-                 
-            <li><a href="../todo.html" rel="bookmark" title="Permalink to TODO">TODO</a></li>
-                
-
-                 
-            <li><a href="../transfer-munin-server.html" rel="bookmark" title="Permalink to transfer munin server">transfer munin server</a></li>
-                
-
-                 
-            <li><a href="../urwid.html" rel="bookmark" title="Permalink to urwid">urwid</a></li>
-                
-
-                 
-            <li><a href="../vim.html" rel="bookmark" title="Permalink to vim">vim</a></li>
-                
-
-                 
-            <li><a href="../vmstat.html" rel="bookmark" title="Permalink to vmstat">vmstat</a></li>
-                
-
-                 
-            <li><a href="../wsgi.html" rel="bookmark" title="Permalink to wsgi">wsgi</a></li>
-                
-
-                 
-            <li><a href="../wsgi.html" rel="bookmark" title="Permalink to wsgi">wsgi</a></li>
-                </ol>
-    </section><!-- #article-list -->
-
-        <footer>
-            <nav>
-                <ul>
-                                    <li><a href="../pages/about.html">About</a></li>
-                                                    <li>:: <a href="../categories.html">Catégories</a></li>
-                                                </ul>
-            </nav>
-                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
-        </footer>
-
+	</div>
 </body>
 </html>
