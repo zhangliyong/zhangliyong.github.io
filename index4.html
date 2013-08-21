@@ -1,379 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8">
         <title>Lyon's Blog</title>
-        <link rel="stylesheet" href="./theme/css/main.css">
-                
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+        <link href="./" type="application/atom+xml" rel="alternate" title="Lyon's Blog ATOM Feed" />
+        
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
+                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="./">Lyon's Blog </a></h1>
-                <nav><ul>
-                                                    <li><a href="./pages/about.html">About</a></li>
-                                                                    <li ><a href="./category/algorithm.html">algorithm</a></li>
-                                    <li ><a href="./category/bash.html">bash</a></li>
-                                    <li ><a href="./category/db.html">db</a></li>
-                                    <li ><a href="./category/emacs.html">emacs</a></li>
-                                    <li ><a href="./category/git.html">git</a></li>
-                                    <li ><a href="./category/linux.html">linux</a></li>
-                                    <li ><a href="./category/misc.html">misc</a></li>
-                                    <li ><a href="./category/mongo.html">mongo</a></li>
-                                    <li ><a href="./category/munin.html">munin</a></li>
-                                    <li ><a href="./category/mysql.html">mysql</a></li>
-                                    <li ><a href="./category/network.html">network</a></li>
-                                    <li ><a href="./category/nginx.html">nginx</a></li>
-                                    <li ><a href="./category/python.html">python</a></li>
-                                    <li ><a href="./category/vim.html">vim</a></li>
-                                                </ul></nav>
-        </header><!-- /#banner -->
+<body>
                 
             
 
-                 
-                            <section id="content" class="body">
-                    <ol id="posts-list" class="hfeed" start="9">
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./linux.html" rel="bookmark"
-                           title="Permalink to Linux">Linux</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-16T12:18:32">
-                Thu 16 May 2013
-        </abbr>
+                            <header>
+                <h1><a href="." id="site-title">Lyon's Blog </a> : <a href="./problems-i-encouter-with-emacs.html" id="page-title">Problems I encouter with emacs</a></h1>
+                <time datetime="2013-08-20T18:06:34">Tue 20 August 2013</time>            </header>
 
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/linux.html">linux</a>. </p>
+            <article>
+                <p>emacs with zsh</p>
+<p>when I first open zsh in emacs using:</p>
+<div class="highlight"><pre><span class="n">M</span><span class="o">-</span><span class="n">x</span> <span class="n">term</span>
+</pre></div>
 
-</footer><!-- /.post-info -->                <h2>Linux TCP Performance Tuning</h2>
-<p>There are two ways to change tcp parameters.</p>
-<ol>
-<li>
-<p>change the value of parameter files in /proc/sys/net/
-   e.g. increase the value of somaxconn
-        <code>echo 1024 &gt; /proc/sys/net/core/somaxconn</code>
-   when the server restart, the parameter will restore.</p>
-</li>
-<li>
-<p>change the vlaue in /etc/sysctl ...</p></li></ol>
-                <a class="readmore" href="./linux.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
+
+<p>It always print strange characters like "4m", that's because I don't have eterm-color terminfo,
+I solve this problem by running:</p>
+<div class="highlight"><pre><span class="cp"># If you use Cocoa Emacs or Carbon Emacs</span>
+<span class="n">tic</span> <span class="o">-</span><span class="n">o</span> <span class="o">~/</span><span class="p">.</span><span class="n">terminfo</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Emacs</span><span class="p">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">Resources</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">eterm</span><span class="o">-</span><span class="n">color</span><span class="p">.</span><span class="n">ti</span>
+</pre></div>
+
+
+<p>in terminal.</p>
+<p>ref: http://stackoverflow.com/questions/8918910/weird-character-zsh-in-emacs-terminal</p>            </article>
+                            <section id="article-list">
+                    <h2>All posts</h2>
+                    <ol>
+                                    
 
                  
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./nginx-tips.html" rel="bookmark"
-                           title="Permalink to nginx tips">nginx tips</a></h1>
-                </header>
+            <li><a href="./the-python-packages-i-love.html" rel="bookmark" title="Permalink to The python packages I love">The python packages I love</a></li>
                 
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-13T16:11:31">
-                Mon 13 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/nginx.html">nginx</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>nginx backlog</h2>
-<h2>Root Directory</h2>
-<p>nginx 默认根目录，</p>
-<p>如果在配置文件中指定了root，则根目录即为root指定的目录</p>
-<p>如果通过编译安装的nginx，则根目录为编译时指定的prefix目录</p>
-<p>如果通过包管理器安装，则根目录与发行版相关。例如ubuntu版本的根目录为：
-/usr/share/nginx/www</p>
-<h2>Custome error page</h2>
-<p>nginx 有个默认的错误显示页面</p>
-<h2>Ref</h2>
-<p>http://wiki.nginx.org/Pitfalls</p>
-                <a class="readmore" href="./nginx-tips.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
 
                  
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./todo.html" rel="bookmark"
-                           title="Permalink to TODO">TODO</a></h1>
-                </header>
+            <li><a href="./urwid.html" rel="bookmark" title="Permalink to urwid">urwid</a></li>
                 
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-09T10:30:16">
-                Thu 09 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>2013-05-08</h2>
-<h3>TODO TODAY</h3>
-<ul>
-<li>
-<p>蕃茄工作法做笔记（思维导图）</p>
-</li>
-<li>
-<p>总结peclian</p>
-</li>
-</ul>
-                <a class="readmore" href="./todo.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
 
                  
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./pelican.html" rel="bookmark"
-                           title="Permalink to pelican">pelican</a></h1>
-                </header>
+            <li><a href="./find-out-which-process-open-a-linux-port.html" rel="bookmark" title="Permalink to Find out which process open a linux port">Find out which process open a linux port</a></li>
                 
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-09T10:29:55">
-                Thu 09 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>介绍</h2>
-<p>peclian 是一个python版本的表态页面生成器，类似于jekyll</p>
-                <a class="readmore" href="./pelican.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
 
                  
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="bookmark"
-                           title="Permalink to Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a></h1>
-                </header>
+            <li><a href="./locale.html" rel="bookmark" title="Permalink to locale">locale</a></li>
                 
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-08T13:45:46">
-                Wed 08 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/mongo.html">mongo</a>. </p>
-
-</footer><!-- /.post-info -->                <p>最近升级了mongodb，用mongo连接mongod后出现如下warning:</p>
-<div class="highlight"><pre><span class="n">Server</span> <span class="n">has</span> <span class="n">startup</span> <span class="n">warnings</span><span class="o">:</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span> <span class="n">WARNING</span><span class="o">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">running</span> <span class="n">on</span> <span class="n">a</span> <span class="n">NUMA</span> <span class="n">machine</span><span class="p">.</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span>          <span class="n">We</span> <span class="n">suggest</span> <span class="n">launching</span> <span class="n">mongod</span> <span class="n">like</span> <span class="n">this</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">performance</span> <span class="n">problems</span><span class="o">:</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45 ...</span></pre></div>
-                <a class="readmore" href="./mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
 
                  
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./read-later.html" rel="bookmark"
-                           title="Permalink to Read Later">Read Later</a></h1>
-                </header>
+            <li><a href="./pudb.html" rel="bookmark" title="Permalink to PuDB">PuDB</a></li>
                 
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-06T10:42:10">
-                Mon 06 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>Python</h2>
-<p>Python Guide: http://docs.python-guide.org/en/latest/index.html</p>
-<p>fabfile(自动化工具):http://docs.fabfile.org/en/1.6/</p>
-<p>字符串匹配的KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html</p>
-                <a class="readmore" href="./read-later.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
 
                  
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./python-build-dynamic-link-library.html" rel="bookmark"
-                           title="Permalink to python build Dynamic Link Library">python build Dynamic Link Library</a></h1>
-                </header>
+            <li><a href="./transfer-munin-server.html" rel="bookmark" title="Permalink to transfer munin server">transfer munin server</a></li>
                 
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-05T18:41:50">
-                Sun 05 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <p>当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：</p>
-<blockquote>
-<p>/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
-.../lib/libpython2.7.a: could not read symbols: Bad value
-collect2: ld returned 1 exit status</p>
-</blockquote>
-<p>这种情况需要安装动态库版本。</p>
-<p>下面介绍自己编译安装动态库的python版本。</p>
-<h2>安装 ...</h2>
-                <a class="readmore" href="./python-build-dynamic-link-library.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
 
                  
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./python.html" rel="bookmark"
-                           title="Permalink to Python">Python</a></h1>
-                </header>
+            <li><a href="./munin.html" rel="bookmark" title="Permalink to munin">munin</a></li>
                 
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-04T16:36:02">
-                Sat 04 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>decorator</h2>
-<h2>class method</h2>
-<h1>Django</h1>
-<h2>Django test</h2>
-<p>ref: http://mikegrouchy.com/blog/great-django-test-talks.html</p>
-                <a class="readmore" href="./python.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
 
                  
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./pythonbrew.html" rel="bookmark"
-                           title="Permalink to Pythonbrew">Pythonbrew</a></h1>
-                </header>
+            <li><a href="./fabric.html" rel="bookmark" title="Permalink to fabric">fabric</a></li>
                 
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-04T16:35:56">
-                Sat 04 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <p>home page: https://github.com/utahta/pythonbrew</p>
-<h2>install packages over pythonbrew</h2>
-<p>pythonbrew can install multiple python versions on the same machine,
-if you want to install packages over a specified python version, a
-recommand way is to install pip first.</p>
-<h3>install pip</h3>
-<p>home page: http://www.pip-installer.org/en/latest ...</p>
-                <a class="readmore" href="./pythonbrew.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
 
                  
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./mysql-xing-neng-diao-you.html" rel="bookmark"
-                           title="Permalink to Mysql 性能调优">Mysql 性能调优</a></h1>
-                </header>
+            <li><a href="./how-mongodb-use-memory.html" rel="bookmark" title="Permalink to How mongodb use memory">How mongodb use memory</a></li>
                 
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-04T16:35:42">
-                Sat 04 May 2013
-        </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="./author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="./category/mysql.html">mysql</a>. </p>
+                 
+            <li><a href="./htop-command.html" rel="bookmark" title="Permalink to htop command">htop command</a></li>
+                
 
-</footer><!-- /.post-info -->                <h2>thread cache size</h2>
-<p>http://www.dbasquare.com/kb/mysql-and-thread-cache-size/</p>
-<p>query_cache_type可以设置为0(OFF)，1(ON)或者2(DEMOND)，分别表示完全不使用query cache，除显式要求不使用query cache（使用sql_no_cache）之外的所有的select都使用query cache，只有显示要求才使用query cache（使用sql_cache)</p>
-<p>show global status like '';
-show global variables like '';</p>
-<p>innodb_file_per_table</p>
-<p>mysql io 延时计算</p>
-<h2>mysql backup</h2>
-<p>相较前几种方法，备份数据文件最为直接、快速、方便，缺点是基本上不能实现增量备份。为了保证数据的一致性，需要在靠背文件前，执行以下 SQL 语句：</p>
-<p>FLUSH ...</p>
-                <a class="readmore" href="./mysql-xing-neng-diao-you.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            </ol><!-- /#posts-list -->
-                            <p class="paginator">
-                        <a href="./index3.html">&laquo;</a>
-                Page 4 / 5
-            <a href="./index5.html">&raquo;</a>
-    </p>
-                        </section><!-- /#content -->
-                    <section id="extras" class="body">
-                        <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
-                                                    <li><a href="http://python.org">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
-                                                    <li><a href="#">You can modify those links in your config file</a></li>
+                 
+            <li><a href="./vmstat.html" rel="bookmark" title="Permalink to vmstat">vmstat</a></li>
+                
+
+                 
+            <li><a href="./mongo-performance.html" rel="bookmark" title="Permalink to Mongo Performance">Mongo Performance</a></li>
+                
+
+                 
+            <li><a href="./mongo.html" rel="bookmark" title="Permalink to Mongo">Mongo</a></li>
+                
+
+                 
+            <li><a href="./job.html" rel="bookmark" title="Permalink to Job">Job</a></li>
+                
+
+                 
+            <li><a href="./http-keep-alive.html" rel="bookmark" title="Permalink to HTTP keep-alive">HTTP keep-alive</a></li>
+                
+
+                 
+            <li><a href="./generalized-suffix-tree.html" rel="bookmark" title="Permalink to Generalized Suffix Tree">Generalized Suffix Tree</a></li>
+                
+
+                 
+            <li><a href="./gevent.html" rel="bookmark" title="Permalink to gevent">gevent</a></li>
+                
+
+                 
+            <li><a href="./wsgi.html" rel="bookmark" title="Permalink to wsgi">wsgi</a></li>
+                
+
+                 
+            <li><a href="./wsgi.html" rel="bookmark" title="Permalink to wsgi">wsgi</a></li>
+                
+
+                 
+            <li><a href="./iptables.html" rel="bookmark" title="Permalink to iptables">iptables</a></li>
+                
+
+                 
+            <li><a href="./datetime.html" rel="bookmark" title="Permalink to datetime">datetime</a></li>
+                
+
+                 
+            <li><a href="./vim.html" rel="bookmark" title="Permalink to vim">vim</a></li>
+                
+
+                 
+            <li><a href="./mem.html" rel="bookmark" title="Permalink to mem">mem</a></li>
+                
+
+                 
+            <li><a href="./concurrency.html" rel="bookmark" title="Permalink to concurrency">concurrency</a></li>
+                
+
+                 
+            <li><a href="./redis-vs-mongodb.html" rel="bookmark" title="Permalink to Redis vs Mongodb">Redis vs Mongodb</a></li>
+                
+
+                 
+            <li><a href="./memory.html" rel="bookmark" title="Permalink to Memory">Memory</a></li>
+                
+
+                 
+            <li><a href="./sleeping.html" rel="bookmark" title="Permalink to Sleeping">Sleeping</a></li>
+                
+
+                 
+            <li><a href="./logbook.html" rel="bookmark" title="Permalink to Logbook">Logbook</a></li>
+                
+
+                 
+            <li><a href="./django-logbook.html" rel="bookmark" title="Permalink to django-logbook">django-logbook</a></li>
+                
+
+                 
+            <li><a href="./linux.html" rel="bookmark" title="Permalink to Linux">Linux</a></li>
+                
+
+                 
+            <li><a href="./nginx-tips.html" rel="bookmark" title="Permalink to nginx tips">nginx tips</a></li>
+                
+
+                 
+            <li><a href="./todo.html" rel="bookmark" title="Permalink to TODO">TODO</a></li>
+                
+
+                 
+            <li><a href="./pelican.html" rel="bookmark" title="Permalink to pelican">pelican</a></li>
+                
+
+                 
+            <li><a href="./mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="bookmark" title="Permalink to Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a></li>
+                
+
+                 
+            <li><a href="./read-later.html" rel="bookmark" title="Permalink to Read Later">Read Later</a></li>
+                
+
+                 
+            <li><a href="./python-build-dynamic-link-library.html" rel="bookmark" title="Permalink to python build Dynamic Link Library">python build Dynamic Link Library</a></li>
+                
+
+                 
+            <li><a href="./python.html" rel="bookmark" title="Permalink to Python">Python</a></li>
+                
+
+                 
+            <li><a href="./pythonbrew.html" rel="bookmark" title="Permalink to Pythonbrew">Pythonbrew</a></li>
+                
+
+                 
+            <li><a href="./mysql-xing-neng-diao-you.html" rel="bookmark" title="Permalink to Mysql 性能调优">Mysql 性能调优</a></li>
+                
+
+                 
+            <li><a href="./time_wait-in-netstat.html" rel="bookmark" title="Permalink to TIME_WAIT in netstat">TIME_WAIT in netstat</a></li>
+                
+
+                 
+            <li><a href="./misc.html" rel="bookmark" title="Permalink to misc">misc</a></li>
+                
+
+                 
+            <li><a href="./bash.html" rel="bookmark" title="Permalink to Bash">Bash</a></li>
+                
+
+                 
+            <li><a href="./config-gevent-on-uwsgi.html" rel="bookmark" title="Permalink to config gevent on uwsgi">config gevent on uwsgi</a></li>
+                
+
+                 
+            <li><a href="./git.html" rel="bookmark" title="Permalink to Git">Git</a></li>
+                </ol>
+    </section><!-- #article-list -->
+
+        <footer>
+            <nav>
+                <ul>
+                                    <li><a href="./pages/about.html">About</a></li>
+                                                    <li>:: <a href="./categories.html">Catégories</a></li>
                                                 </ul>
-                </div><!-- /.blogroll -->
-                                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="http://zhangliyong.github.com/None" type="application/atom+xml" rel="alternate">atom feed</a></li>
-                            
-                                                    <li><a href="#">You can add links in your config file</a></li>
-                                                    <li><a href="#">Another social link</a></li>
-                                                </ul>
-                </div><!-- /.social -->
-                </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+            </nav>
+                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
+        </footer>
 
 </body>
 </html>

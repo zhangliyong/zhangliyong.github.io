@@ -1,371 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8">
         <title>Lyon's Blog - zhang liyong</title>
-        <link rel="stylesheet" href="../theme/css/main.css">
-                
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
+        <link href="../" type="application/atom+xml" rel="alternate" title="Lyon's Blog ATOM Feed" />
+        
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="../css/ie.css"/>
+                <script src="../js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
+
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="../">Lyon's Blog </a></h1>
-                <nav><ul>
-                                                    <li><a href="../pages/about.html">About</a></li>
-                                                                    <li ><a href="../category/algorithm.html">algorithm</a></li>
-                                    <li ><a href="../category/bash.html">bash</a></li>
-                                    <li ><a href="../category/db.html">db</a></li>
-                                    <li ><a href="../category/emacs.html">emacs</a></li>
-                                    <li ><a href="../category/git.html">git</a></li>
-                                    <li ><a href="../category/linux.html">linux</a></li>
-                                    <li ><a href="../category/misc.html">misc</a></li>
-                                    <li ><a href="../category/mongo.html">mongo</a></li>
-                                    <li ><a href="../category/munin.html">munin</a></li>
-                                    <li ><a href="../category/mysql.html">mysql</a></li>
-                                    <li ><a href="../category/network.html">network</a></li>
-                                    <li ><a href="../category/nginx.html">nginx</a></li>
-                                    <li ><a href="../category/python.html">python</a></li>
-                                    <li ><a href="../category/vim.html">vim</a></li>
-                                                </ul></nav>
-        </header><!-- /#banner -->
+<body>
                 
             
 
-                 
-                            <section id="content" class="body">
-                    <ol id="posts-list" class="hfeed" start="9">
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../misc.html" rel="bookmark"
-                           title="Permalink to misc">misc</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-03-31T20:31:38">
-                Sun 31 March 2013
-        </abbr>
+                            <header>
+                <h1><a href=".." id="site-title">Lyon's Blog </a> : <a href="../bash.html" id="page-title">Bash</a></h1>
+                <time datetime="2013-03-27T19:21:50">Wed 27 March 2013</time>            </header>
 
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <h1>Mac sshfs</h1>
-<p>Mac 挂载远程目录</p>
-<p>http://osxfuse.github.com/</p>
-<p>install OXSFUSE and SSHFS</p>
-<h2>TF-IDF</h2>
-<p>http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
-http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
-http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html</p>
-                <a class="readmore" href="../misc.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../mongo.html" rel="bookmark"
-                           title="Permalink to Mongo">Mongo</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-07-24T17:36:09">
-                Wed 24 July 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/mongo.html">mongo</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>query after update slow</h2>
-<p>这两天有一个接口的速度非常慢，主要是执行一条查询语句非常慢，有时耗时达200秒，于是找到了这条查询语句单独在mongo shell中执行，在mongo shell中执行并不慢，慢慢调试后最终找到问题，原因是在查询语句执行之前执行了两次更新语句。</p>
-<p>利用pymongo执行更新时，如果不设置safe=True，mongo会及时返回函数调用，但更新并没有真正执行完，mongo进程在后台继续执行，所以当接着执行查询时，此时更新没有结束，数据库会处于lock状态，查询等待数据库解锁，所以查询非常慢。</p>
-<p>把更新语句去除后，查询恢复正常。</p>
-<h2>Concurrency</h2>
-<p>MongoDB global lock to ga</p>
-<h2>Tips</h2>
-<h3>If Write Heavy</h3>
-<p>Global Lock is Global
-As you probably know, MongoDB has a global lock. The ...</p>
-                <a class="readmore" href="../mongo.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../mongo-performance.html" rel="bookmark"
-                           title="Permalink to Mongo Performance">Mongo Performance</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-07-25T10:07:12">
-                Thu 25 July 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/mongo.html">mongo</a>. </p>
-
-</footer><!-- /.post-info -->                <p>最近mongo的性能</p>
-                <a class="readmore" href="../mongo-performance.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="bookmark"
-                           title="Permalink to Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-08T13:45:46">
-                Wed 08 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/mongo.html">mongo</a>. </p>
-
-</footer><!-- /.post-info -->                <p>最近升级了mongodb，用mongo连接mongod后出现如下warning:</p>
-<div class="highlight"><pre><span class="n">Server</span> <span class="n">has</span> <span class="n">startup</span> <span class="n">warnings</span><span class="o">:</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span> <span class="n">WARNING</span><span class="o">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">running</span> <span class="n">on</span> <span class="n">a</span> <span class="n">NUMA</span> <span class="n">machine</span><span class="p">.</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45</span><span class="o">:</span><span class="mi">23</span> <span class="p">[</span><span class="n">initandlisten</span><span class="p">]</span> <span class="o">**</span>          <span class="n">We</span> <span class="n">suggest</span> <span class="n">launching</span> <span class="n">mongod</span> <span class="n">like</span> <span class="n">this</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">performance</span> <span class="n">problems</span><span class="o">:</span>
-<span class="n">Mon</span> <span class="n">Oct</span> <span class="mi">29</span> <span class="mi">14</span><span class="o">:</span><span class="mi">45 ...</span></pre></div>
-                <a class="readmore" href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../munin.html" rel="bookmark"
-                           title="Permalink to munin">munin</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-08-05T13:17:46">
-                Mon 05 August 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/munin.html">munin</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>Writing plugins</h2>
-<p>global attribute: http://munin-monitoring.org/wiki/protocol-config</p>
-<p>redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch</p>
-<p>mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph</p>
-<h2>fw_conntract fw_forwarded_local timeout</h2>
-<p>配置好munin之后，fw_conntrack总是报警，读不到数据，主要原因是执行fw_conntrack超时，munin plugin的默认超时时间是10s，超时主要是因为<code>cat /proc/net/ip_conntrack</code>，对于网络请求少的服务器，此语句会很快执行完，但对于网络请求比较多的服务器，此语句耗时可能要超过30s。</p>
-<p>Google的相应问题，此问题早已被人解决，解决方案见如下链接：
-http://bugs.debian.org/cgi-bin/bugreport.cgi?bug ...</p>
-                <a class="readmore" href="../munin.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../mysql-xing-neng-diao-you.html" rel="bookmark"
-                           title="Permalink to Mysql 性能调优">Mysql 性能调优</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-04T16:35:42">
-                Sat 04 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/mysql.html">mysql</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>thread cache size</h2>
-<p>http://www.dbasquare.com/kb/mysql-and-thread-cache-size/</p>
-<p>query_cache_type可以设置为0(OFF)，1(ON)或者2(DEMOND)，分别表示完全不使用query cache，除显式要求不使用query cache（使用sql_no_cache）之外的所有的select都使用query cache，只有显示要求才使用query cache（使用sql_cache)</p>
-<p>show global status like '';
-show global variables like '';</p>
-<p>innodb_file_per_table</p>
-<p>mysql io 延时计算</p>
-<h2>mysql backup</h2>
-<p>相较前几种方法，备份数据文件最为直接、快速、方便，缺点是基本上不能实现增量备份。为了保证数据的一致性，需要在靠背文件前，执行以下 SQL 语句：</p>
-<p>FLUSH ...</p>
-                <a class="readmore" href="../mysql-xing-neng-diao-you.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../nginx-tips.html" rel="bookmark"
-                           title="Permalink to nginx tips">nginx tips</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-13T16:11:31">
-                Mon 13 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/nginx.html">nginx</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>nginx backlog</h2>
-<h2>Root Directory</h2>
-<p>nginx 默认根目录，</p>
-<p>如果在配置文件中指定了root，则根目录即为root指定的目录</p>
-<p>如果通过编译安装的nginx，则根目录为编译时指定的prefix目录</p>
-<p>如果通过包管理器安装，则根目录与发行版相关。例如ubuntu版本的根目录为：
-/usr/share/nginx/www</p>
-<h2>Custome error page</h2>
-<p>nginx 有个默认的错误显示页面</p>
-<h2>Ref</h2>
-<p>http://wiki.nginx.org/Pitfalls</p>
-                <a class="readmore" href="../nginx-tips.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../pelican.html" rel="bookmark"
-                           title="Permalink to pelican">pelican</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-05-09T10:29:55">
-                Thu 09 May 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/python.html">python</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>介绍</h2>
-<p>peclian 是一个python版本的表态页面生成器，类似于jekyll</p>
-                <a class="readmore" href="../pelican.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../problems-i-encouter-with-emacs.html" rel="bookmark"
-                           title="Permalink to Problems I encouter with emacs">Problems I encouter with emacs</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-08-20T18:06:34">
-                Tue 20 August 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/emacs.html">emacs</a>. </p>
-
-</footer><!-- /.post-info -->                <p>emacs with zsh</p>
-<p>when I first open zsh in emacs using:</p>
-<div class="highlight"><pre><span class="n">M</span><span class="o">-</span><span class="n">x</span> <span class="n">term</span>
+            <article>
+                <h2>alias</h2>
+<p>对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。</p>
+<p>e.g. 在.bashrc中加入</p>
+<div class="highlight"><pre><span class="nb">alias </span><span class="nv">servername</span><span class="o">=</span><span class="s1">&#39;ssh sns@hostname&#39;</span>
 </pre></div>
 
 
-<p>It always print strange characters like "4m", that's because I don't have eterm-color terminfo,
-I solve this problem by running:</p>
-<div class="highlight"><pre><span class="cp"># If you use Cocoa Emacs or Carbon Emacs</span>
-<span class="n">tic</span> <span class="o">-</span><span class="n">o</span> <span class="o">~/</span><span class="p">.</span><span class="n">terminfo</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Emacs</span><span class="p">.</span><span class="n">app ...</span></pre></div>
-                <a class="readmore" href="../problems-i-encouter-with-emacs.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            
+<p>执行：</p>
+<div class="highlight"><pre><span class="nv">$ </span>servername
+</pre></div>
+
+
+<p>即可登陆到hostname机器。</p>
+<h2>rsync</h2>
+<p>大家常用rsync同步数据，有些数据是不需要同步的，可以用 --exclude 选项。</p>
+<p>e.g.</p>
+<div class="highlight"><pre>rsync -avz --exclude <span class="s2">&quot;.*&quot;</span> --exclude <span class="s2">&quot;dbconfig.py&quot;</span> src user@hostname:/dest
+
+--exclude <span class="s2">&quot;.*&quot;</span> 不会同步以<span class="s2">&quot;.&quot;</span>开头的文件或文件夹，不会同步.git目录（.git目录是比较大的，不建议同步）。
+</pre></div>
+
+
+<h2>mail</h2>
+<p>所有crontab任务的运行结果都会输出到mail中，可以随时查看每个任务的运行情况。</p>
+<h2>tmux</h2>
+<p>工作中经常ssh到远程服务器，有时需要在远程服务器中开启多个终端，</p>
+<ul>
+<li>一种办法是在本地开启多个终端，分别远程到服务器。</li>
+<li>还有一种方式是利用<a href="http://tmux.sourceforge.net/">tmux</a>。</li>
+</ul>
+<p>install:</p>
+<div class="highlight"><pre><span class="nv">$sudo</span> apt-get install tmux
+</pre></div>
+
+
+<p>basic usage:</p>
+<div class="highlight"><pre><span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">p</span><span class="o">&gt;</span> <span class="n">go</span> <span class="n">to</span> <span class="n">previous</span> <span class="n">window</span>
+<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">n</span><span class="o">&gt;</span> <span class="n">go</span> <span class="n">to</span> <span class="n">next</span> <span class="n">window</span>
+<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">c</span><span class="o">&gt;</span> <span class="n">create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">window</span>
+<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="mi">1</span><span class="o">&gt;</span> <span class="n">go</span> <span class="n">to</span> <span class="n">No</span><span class="mf">.1</span> <span class="n">window</span>
+<span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">b</span> <span class="n">d</span><span class="o">&gt;</span> <span class="n">detach</span> <span class="n">this</span> <span class="n">tmux</span> <span class="n">session</span>
+</pre></div>
+
+
+<p>tmux 的功能非常强，但命令较多，学习成本较高，可以先使用上面几个命令。</p>
+<p>推荐介绍视频: http://happycasts.net/episodes/41?autoplay=true</p>
+<h2>ssh</h2>
+<p>今天搞清楚了ssh的标准输入输出，下面是ssh命令的使用方式</p>
+<div class="highlight"><pre><span class="n">ssh</span> <span class="p">[</span><span class="o">-</span><span class="mi">1246</span><span class="n">AaCfgKkMNnqsTtVvXxYy</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">bind_address</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">cipher_spec</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">D</span> <span class="p">[</span><span class="n">bind_address</span><span class="o">:</span><span class="p">]</span><span class="n">port</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="n">escape_char</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">F</span> <span class="n">configfile</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">I</span> <span class="n">pkcs11</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="n">identity_file</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">L</span> <span class="p">[</span><span class="n">bind_address</span><span class="o">:</span><span class="p">]</span><span class="n">port</span><span class="o">:</span><span class="n">host</span><span class="o">:</span><span class="n">hostport</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">login_name</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span> <span class="n">mac_spec</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">O</span> <span class="n">ctl_cmd</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">option</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">port</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">R</span> <span class="p">[</span><span class="n">bind_address</span><span class="o">:</span><span class="p">]</span><span class="n">port</span><span class="o">:</span><span class="n">host</span><span class="o">:</span><span class="n">hostport</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">S</span> <span class="n">ctl_path</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">W</span> <span class="n">host</span><span class="o">:</span><span class="n">port</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">w</span> <span class="n">local_tun</span><span class="p">[</span><span class="o">:</span><span class="n">remote_tun</span><span class="p">]]</span> <span class="p">[</span><span class="n">user</span><span class="err">@</span><span class="p">]</span><span class="n">hostname</span> <span class="p">[</span><span class="n">command</span><span class="p">]</span>
+</pre></div>
+
+
+<p>最后的<code>command</code>是在<code>hostname</code>机器上执行<code>command</code>命令，那么<code>command</code>命令的标准输入输出是远程机器<code>hostname</code>上，还是在本地机器上？ 很多初学者可能会认为是远程机器的标准输入输出（本人以前也是这么认为的），其实是在本地机器上。</p>
+<p>下面我们做个试验，可以在本地执行远程机器的程序并获得输出结果。</p>
+<div class="highlight"><pre><span class="nv">$echo</span> <span class="s2">&quot;local host&quot;</span> | ssh user@hostname <span class="s2">&quot;(echo server; cat; echo server)&quot;</span>
+server
+<span class="nb">local </span>host
+server
+</pre></div>
+
+
+<p>我们用将"local host"输出到标准输出，在hostname机器上<code>cat</code>从标准输入获取"local host"并再次输出到标准输出(本地机器的标准输出)。</p>
+<p>虽然<code>command</code>中的标准输入输出是在本地机器，但<code>command</code>中的命令和目录等都是相对于hostname的，与本地机器无法。</p>
+<p>fuser</p>            </article>
+                            <section id="article-list">
+                    <h2>All posts</h2>
+                    <ol>
+                                    
 
                  
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../pudb.html" rel="bookmark"
-                           title="Permalink to PuDB">PuDB</a></h1>
-                </header>
+            <li><a href="../concurrency.html" rel="bookmark" title="Permalink to concurrency">concurrency</a></li>
                 
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-08-06T10:31:12">
-                Tue 06 August 2013
-        </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="../author/zhang-liyong.html">zhang liyong</a>
-        </address>
-        <p>In <a href="../category/python.html">python</a>. </p>
+                 
+            <li><a href="../config-gevent-on-uwsgi.html" rel="bookmark" title="Permalink to config gevent on uwsgi">config gevent on uwsgi</a></li>
+                
 
-</footer><!-- /.post-info -->                <p>https://pypi.python.org/pypi/pudb</p>
-                <a class="readmore" href="../pudb.html">read more</a>
-                                </div><!-- /.entry-content -->
-            </article></li>
-                            </ol><!-- /#posts-list -->
-                            <p class="paginator">
-                        <a href="../author/zhang-liyong2.html">&laquo;</a>
-                Page 3 / 5
-            <a href="../author/zhang-liyong4.html">&raquo;</a>
-    </p>
-                        </section><!-- /#content -->
-                    <section id="extras" class="body">
-                        <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
-                                                    <li><a href="http://python.org">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
-                                                    <li><a href="#">You can modify those links in your config file</a></li>
+                 
+            <li><a href="../datetime.html" rel="bookmark" title="Permalink to datetime">datetime</a></li>
+                
+
+                 
+            <li><a href="../django-logbook.html" rel="bookmark" title="Permalink to django-logbook">django-logbook</a></li>
+                
+
+                 
+            <li><a href="../fabric.html" rel="bookmark" title="Permalink to fabric">fabric</a></li>
+                
+
+                 
+            <li><a href="../find-out-which-process-open-a-linux-port.html" rel="bookmark" title="Permalink to Find out which process open a linux port">Find out which process open a linux port</a></li>
+                
+
+                 
+            <li><a href="../generalized-suffix-tree.html" rel="bookmark" title="Permalink to Generalized Suffix Tree">Generalized Suffix Tree</a></li>
+                
+
+                 
+            <li><a href="../gevent.html" rel="bookmark" title="Permalink to gevent">gevent</a></li>
+                
+
+                 
+            <li><a href="../git.html" rel="bookmark" title="Permalink to Git">Git</a></li>
+                
+
+                 
+            <li><a href="../how-mongodb-use-memory.html" rel="bookmark" title="Permalink to How mongodb use memory">How mongodb use memory</a></li>
+                
+
+                 
+            <li><a href="../htop-command.html" rel="bookmark" title="Permalink to htop command">htop command</a></li>
+                
+
+                 
+            <li><a href="../http-keep-alive.html" rel="bookmark" title="Permalink to HTTP keep-alive">HTTP keep-alive</a></li>
+                
+
+                 
+            <li><a href="../iptables.html" rel="bookmark" title="Permalink to iptables">iptables</a></li>
+                
+
+                 
+            <li><a href="../job.html" rel="bookmark" title="Permalink to Job">Job</a></li>
+                
+
+                 
+            <li><a href="../linux.html" rel="bookmark" title="Permalink to Linux">Linux</a></li>
+                
+
+                 
+            <li><a href="../locale.html" rel="bookmark" title="Permalink to locale">locale</a></li>
+                
+
+                 
+            <li><a href="../logbook.html" rel="bookmark" title="Permalink to Logbook">Logbook</a></li>
+                
+
+                 
+            <li><a href="../mem.html" rel="bookmark" title="Permalink to mem">mem</a></li>
+                
+
+                 
+            <li><a href="../memory.html" rel="bookmark" title="Permalink to Memory">Memory</a></li>
+                
+
+                 
+            <li><a href="../misc.html" rel="bookmark" title="Permalink to misc">misc</a></li>
+                
+
+                 
+            <li><a href="../mongo.html" rel="bookmark" title="Permalink to Mongo">Mongo</a></li>
+                
+
+                 
+            <li><a href="../mongo-performance.html" rel="bookmark" title="Permalink to Mongo Performance">Mongo Performance</a></li>
+                
+
+                 
+            <li><a href="../mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="bookmark" title="Permalink to Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a></li>
+                
+
+                 
+            <li><a href="../munin.html" rel="bookmark" title="Permalink to munin">munin</a></li>
+                
+
+                 
+            <li><a href="../mysql-xing-neng-diao-you.html" rel="bookmark" title="Permalink to Mysql 性能调优">Mysql 性能调优</a></li>
+                
+
+                 
+            <li><a href="../nginx-tips.html" rel="bookmark" title="Permalink to nginx tips">nginx tips</a></li>
+                
+
+                 
+            <li><a href="../pelican.html" rel="bookmark" title="Permalink to pelican">pelican</a></li>
+                
+
+                 
+            <li><a href="../problems-i-encouter-with-emacs.html" rel="bookmark" title="Permalink to Problems I encouter with emacs">Problems I encouter with emacs</a></li>
+                
+
+                 
+            <li><a href="../pudb.html" rel="bookmark" title="Permalink to PuDB">PuDB</a></li>
+                
+
+                 
+            <li><a href="../python.html" rel="bookmark" title="Permalink to Python">Python</a></li>
+                
+
+                 
+            <li><a href="../python-build-dynamic-link-library.html" rel="bookmark" title="Permalink to python build Dynamic Link Library">python build Dynamic Link Library</a></li>
+                
+
+                 
+            <li><a href="../pythonbrew.html" rel="bookmark" title="Permalink to Pythonbrew">Pythonbrew</a></li>
+                
+
+                 
+            <li><a href="../read-later.html" rel="bookmark" title="Permalink to Read Later">Read Later</a></li>
+                
+
+                 
+            <li><a href="../redis-vs-mongodb.html" rel="bookmark" title="Permalink to Redis vs Mongodb">Redis vs Mongodb</a></li>
+                
+
+                 
+            <li><a href="../sleeping.html" rel="bookmark" title="Permalink to Sleeping">Sleeping</a></li>
+                
+
+                 
+            <li><a href="../the-python-packages-i-love.html" rel="bookmark" title="Permalink to The python packages I love">The python packages I love</a></li>
+                
+
+                 
+            <li><a href="../time_wait-in-netstat.html" rel="bookmark" title="Permalink to TIME_WAIT in netstat">TIME_WAIT in netstat</a></li>
+                
+
+                 
+            <li><a href="../todo.html" rel="bookmark" title="Permalink to TODO">TODO</a></li>
+                
+
+                 
+            <li><a href="../transfer-munin-server.html" rel="bookmark" title="Permalink to transfer munin server">transfer munin server</a></li>
+                
+
+                 
+            <li><a href="../urwid.html" rel="bookmark" title="Permalink to urwid">urwid</a></li>
+                
+
+                 
+            <li><a href="../vim.html" rel="bookmark" title="Permalink to vim">vim</a></li>
+                
+
+                 
+            <li><a href="../vmstat.html" rel="bookmark" title="Permalink to vmstat">vmstat</a></li>
+                
+
+                 
+            <li><a href="../wsgi.html" rel="bookmark" title="Permalink to wsgi">wsgi</a></li>
+                
+
+                 
+            <li><a href="../wsgi.html" rel="bookmark" title="Permalink to wsgi">wsgi</a></li>
+                </ol>
+    </section><!-- #article-list -->
+
+        <footer>
+            <nav>
+                <ul>
+                                    <li><a href="../pages/about.html">About</a></li>
+                                                    <li>:: <a href="../categories.html">Catégories</a></li>
                                                 </ul>
-                </div><!-- /.blogroll -->
-                                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="http://zhangliyong.github.com/None" type="application/atom+xml" rel="alternate">atom feed</a></li>
-                            
-                                                    <li><a href="#">You can add links in your config file</a></li>
-                                                    <li><a href="#">Another social link</a></li>
-                                                </ul>
-                </div><!-- /.social -->
-                </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+            </nav>
+                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
+        </footer>
 
 </body>
 </html>
