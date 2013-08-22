@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-08-20T18:06:34+02:00</updated><entry><title>Problems I encouter with emacs</title><link href="/problems-i-encouter-with-emacs.html" rel="alternate"></link><updated>2013-08-20T18:06:34+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-20:problems-i-encouter-with-emacs.html</id><summary type="html">&lt;p&gt;emacs with zsh&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-08-21T20:45:46+02:00</updated><entry><title>TODO</title><link href="/todo.html" rel="alternate"></link><updated>2013-08-21T20:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-21:todo.html</id><summary type="html">&lt;h2&gt;2013-05-08&lt;/h2&gt;
+&lt;h3&gt;TODO TODAY&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;蕃茄工作法做笔记（思维导图）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;总结peclian&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;mysql replication, mysql 索引树&lt;/p&gt;</summary></entry><entry><title>Problems I encouter with emacs</title><link href="/problems-i-encouter-with-emacs.html" rel="alternate"></link><updated>2013-08-20T18:06:34+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-20:problems-i-encouter-with-emacs.html</id><summary type="html">&lt;p&gt;emacs with zsh&lt;/p&gt;
 &lt;p&gt;when I first open zsh in emacs using:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;term&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -515,16 +525,7 @@ need logout and login to work&lt;/p&gt;</summary></entry><entry><title>nginx tip
 &lt;h2&gt;Custome error page&lt;/h2&gt;
 &lt;p&gt;nginx 有个默认的错误显示页面&lt;/p&gt;
 &lt;h2&gt;Ref&lt;/h2&gt;
-&lt;p&gt;http://wiki.nginx.org/Pitfalls&lt;/p&gt;</summary></entry><entry><title>TODO</title><link href="/todo.html" rel="alternate"></link><updated>2013-05-09T10:30:16+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-09:todo.html</id><summary type="html">&lt;h2&gt;2013-05-08&lt;/h2&gt;
-&lt;h3&gt;TODO TODAY&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;蕃茄工作法做笔记（思维导图）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;总结peclian&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>pelican</title><link href="/pelican.html" rel="alternate"></link><updated>2013-05-09T10:29:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-09:pelican.html</id><summary type="html">&lt;h2&gt;介绍&lt;/h2&gt;
+&lt;p&gt;http://wiki.nginx.org/Pitfalls&lt;/p&gt;</summary></entry><entry><title>pelican</title><link href="/pelican.html" rel="alternate"></link><updated>2013-05-09T10:29:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-09:pelican.html</id><summary type="html">&lt;h2&gt;介绍&lt;/h2&gt;
 &lt;p&gt;peclian 是一个python版本的表态页面生成器，类似于jekyll&lt;/p&gt;</summary></entry><entry><title>Mongodb NUMA 导致的性能问题</title><link href="/mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="alternate"></link><updated>2013-05-08T13:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-08:mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html</id><summary type="html">&lt;p&gt;最近升级了mongodb，用mongo连接mongod后出现如下warning:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Server&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;startup&lt;/span&gt; &lt;span class="n"&gt;warnings&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
 &lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;

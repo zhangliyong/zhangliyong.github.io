@@ -68,6 +68,19 @@
 	  <div class="content">
 			<div class="page-header"><h1> Lyon's Blog </h1></div>			
 <div class='article'>
+	<h2>How mongodb use memory</h2>
+	<div class="well small">Permalink: <a class="more" href="./how-mongodb-use-memory.html">2013-07-29 15:11:21</a>
+by <a class="url fn" href="./author/zhang-liyong.html">zhang liyong </a>
+ in <a href="./category/mongo.html">mongo</a>
+</div>
+	<div class="summary"><p>网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。</p>
+<p>MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。</p>
+<p>查看working set大小可用如下命令：<code>db.runCommand( { serverStatus: 1, workingSet: 1 } )</code></p>
+<p>serverStatus.mem.resident
+The value of resident is roughly equivalent to the amount of RAM, in megabytes (MB), currently used by the database process. In normal use this ...</p> <a class="btn primary xsmall" href="./how-mongodb-use-memory.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
 	<h2>htop command</h2>
 	<div class="well small">Permalink: <a class="more" href="./htop-command.html">2013-07-28 11:11:13</a>
 by <a class="url fn" href="./author/zhang-liyong.html">zhang liyong </a>
@@ -200,17 +213,6 @@ by <a class="url fn" href="./author/zhang-liyong.html">zhang liyong </a>
  in <a href="./category/python.html">python</a>
 </div>
 	<div class="summary"><p>http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html</p> <a class="btn primary xsmall" href="./wsgi.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>wsgi</h2>
-	<div class="well small">Permalink: <a class="more" href="./wsgi.html">2013-06-25 17:20:07</a>
-by <a class="url fn" href="./author/zhang-liyong.html">zhang liyong </a>
- in <a href="./category/python.html">python</a>
-</div>
-	<div class="summary"><p>http://lucumr.pocoo.org/2007/5/21/getting-started-with-wsgi/</p>
-<p>http://webpython.codepoint.net/wsgi_request_parsing_post</p>
-<p>http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html</p> <a class="btn primary xsmall" href="./wsgi.html">more…</a>
 	</div>
 </div>	
 

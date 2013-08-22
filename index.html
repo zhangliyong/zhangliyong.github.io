@@ -68,6 +68,25 @@
 	  <div class="content">
 			<div class="page-header"><h1> Lyon's Blog </h1></div>			
 <div class='article'>
+	<h2>TODO</h2>
+	<div class="well small">Permalink: <a class="more" href="./todo.html">2013-08-21 20:45:46</a>
+by <a class="url fn" href="./author/zhang-liyong.html">zhang liyong </a>
+ in <a href="./category/misc.html">misc</a>
+</div>
+	<div class="summary"><h2>2013-05-08</h2>
+<h3>TODO TODAY</h3>
+<ul>
+<li>
+<p>蕃茄工作法做笔记（思维导图）</p>
+</li>
+<li>
+<p>总结peclian</p>
+</li>
+</ul>
+<p>mysql replication, mysql 索引树</p> <a class="btn primary xsmall" href="./todo.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
 	<h2>Problems I encouter with emacs</h2>
 	<div class="well small">Permalink: <a class="more" href="./problems-i-encouter-with-emacs.html">2013-08-20 18:06:34</a>
 by <a class="url fn" href="./author/zhang-liyong.html">zhang liyong </a>
@@ -223,19 +242,6 @@ A library of subroutines (built on top of a lower-level library) to make executi
 </blockquote>
 <p>首先安装fabric <code>pip install fabric</code>，安装完fabric之后，系统会多出fab命令。</p>
 <p>fab命令在执行时会读取当前目录下的fabfile.py文件，并根据fabric的参数来执行文件中的函数 ...</p> <a class="btn primary xsmall" href="./fabric.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>How mongodb use memory</h2>
-	<div class="well small">Permalink: <a class="more" href="./how-mongodb-use-memory.html">2013-07-29 15:11:21</a>
-by <a class="url fn" href="./author/zhang-liyong.html">zhang liyong </a>
- in <a href="./category/mongo.html">mongo</a>
-</div>
-	<div class="summary"><p>网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。</p>
-<p>MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。</p>
-<p>查看working set大小可用如下命令：<code>db.runCommand( { serverStatus: 1, workingSet: 1 } )</code></p>
-<p>serverStatus.mem.resident
-The value of resident is roughly equivalent to the amount of RAM, in megabytes (MB), currently used by the database process. In normal use this ...</p> <a class="btn primary xsmall" href="./how-mongodb-use-memory.html">more…</a>
 	</div>
 </div>	
 
