@@ -4,6 +4,9 @@ Title: gevent
 什么时候执行Pool中的任务
 
 
+用gevent spawn的greenlet何时执行，无论是用group, pool, gevent, 当spawn时，新spawn的greenlet已经处理准备执行状态，
+当主进程或其它greenlet sleep或有其它switch操作时，新spawn的greenlet会被执行。
+
 ## ref:
 
 Introduction to Gevent: http://blog.pythonisito.com/2012/07/introduction-to-gevent.html

@@ -7,3 +7,5 @@ Title: TODO
 * 蕃茄工作法做笔记（思维导图）
 
 * 总结peclian
+
+mysql replication, mysql 索引树

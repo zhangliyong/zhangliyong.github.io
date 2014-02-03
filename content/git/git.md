@@ -15,3 +15,7 @@ Title: Git
 http://danielkummer.github.com/git-flow-cheatsheet/
 
 ##Git submodules
+
+
+http://git-scm.com/docs/gitignore
+http://git-scm.com/docs/git-check-ignore.html
