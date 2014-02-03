@@ -6,7 +6,8 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-        <title>Lyon's Blog
+<meta name="keywords" content=", munin, " />
+        <title>munin  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
@@ -33,7 +34,7 @@
                     <a class="brand" href="./"><span class=site-name>Lyon's Blog</span></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right top-menu">
-                            <li  class="active"><a href=".">Home</a></li>
+                            <li ><a href=".">Home</a></li>
                             <li ><a href="./pages/about.html">About</a></li>
                             <li ><a href="./categories.html">Categories</a></li>
                             <li ><a href="./tags.html">Tags</a></li>
@@ -48,80 +49,56 @@
             <div class="row-fluid">
                 <div class="span1"></div>
                 <div class="span10">
+<article>
 <div class="row-fluid">
-
-    <div class="row-fluid">
-
-    </div>
-
-    <div class="row-fluid">
-        <div class="span12">
-            <header>
-            <h1 id="recent-posts">Recent Posts <a id="allposts" href="./archives.html">all posts</a></h1>
-            </header>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./wsgi.html">wsgi  </a> 
-                <time pubdate="pubdate" datetime="2014-02-03T19:20:22">Mon 03 February 2014</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./read-later.html">Read Later  </a> 
-                <time pubdate="pubdate" datetime="2014-01-24T13:46:17">Fri 24 January 2014</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./git.html">Git  </a> 
-                <time pubdate="pubdate" datetime="2014-01-09T14:52:21">Thu 09 January 2014</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./gevent.html">gevent  </a> 
-                <time pubdate="pubdate" datetime="2013-12-04T15:56:56">Wed 04 December 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./todo.html">TODO  </a> 
-                <time pubdate="pubdate" datetime="2013-08-21T20:45:46">Wed 21 August 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./problems-i-encouter-with-emacs.html">Problems I encouter with emacs  </a> 
-                <time pubdate="pubdate" datetime="2013-08-20T18:06:34">Tue 20 August 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./the-python-packages-i-love.html">The python packages I love  </a> 
-                <time pubdate="pubdate" datetime="2013-08-12T13:26:18">Mon 12 August 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./urwid.html">urwid  </a> 
-                <time pubdate="pubdate" datetime="2013-08-09T16:21:44">Fri 09 August 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./find-out-which-process-open-a-linux-port.html">Find out which process open a linux port  </a> 
-                <time pubdate="pubdate" datetime="2013-08-09T15:48:46">Fri 09 August 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./locale.html">locale  </a> 
-                <time pubdate="pubdate" datetime="2013-08-08T13:45:42">Thu 08 August 2013</time>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <header class="page_header span10 offset2">
+    <h1><a href="./munin.html"> munin  </a></h1>
+    </header>
 </div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            <h2>Writing plugins</h2>
+<p>global attribute: http://munin-monitoring.org/wiki/protocol-config</p>
+<p>redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch</p>
+<p>mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph</p>
+<h2>fw_conntract fw_forwarded_local timeout</h2>
+<p>配置好munin之后，fw_conntrack总是报警，读不到数据，主要原因是执行fw_conntrack超时，munin plugin的默认超时时间是10s，超时主要是因为<code>cat /proc/net/ip_conntrack</code>，对于网络请求少的服务器，此语句会很快执行完，但对于网络请求比较多的服务器，此语句耗时可能要超过30s。</p>
+<p>Google的相应问题，此问题早已被人解决，解决方案见如下链接：
+http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565</p>
+<p>主要就是用<code>conntrack -L</code> 代替<code>cat /proc/net/ip_conntrack</code>，要先安装<code>sudo apt-get install conntrack</code></p>
+<h2>limits</h2>
+<p>limit 用于检查每个plugin的field的值是否超出设定的warning和critical，并做出相应的警报。</p>
+<p>warning和critical是运行插件config输出的每个filed的warning和critical来设置的。</p>
+<p>有时我们在<code>/etc/munin/plugin-conf.d/</code>中会看到<code>env.warning value</code>，这是因为插件会读取<code>env.warning</code>的值，并根据此值设置每个field的warning。如果插件不读取<code>env.warning</code>的值，即使设置也不会启作用，munin不会自动设置。</p>
+<p>关于warning, critical的设置可参考: <a href="http://munin-monitoring.org/wiki/fieldname.warning">{fieldname}.warning</a>, <a href="http://munin-monitoring.org/wiki/fieldname.critical">{fieldname}.critical}</a></p>
+<p>http://munin-monitoring.org/wiki/protocol-config</p>
+<p>http://munin-monitoring.org/wiki/munin-man#munin-html</p>
+            <aside>
+            <hr/>
+            <nav>
+            <ul class="articles_timeline">
+ 
+                <li class="previous_article">« <a href="./fabric.html" title="Previous: fabric">fabric</a></li>
+ 
+                <li class="next_article"><a href="./transfer-munin-server.html" title="Next: transfer munin server">transfer munin server</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+ 
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-08-05T13:17:46">Aug 5, 2013</time>
+            <h4>Category</h4>
+            <a class="category-link" href="/categories.html#munin-ref">munin</a> 
+
+        </div>
+        </section>
+</div>
+</article>
                 </div>
                 <div class="span1"></div>
             </div>
@@ -133,7 +110,7 @@
         <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
     </ul>
 </div>
-</footer>        <script src="http://code.jquery.com/jquery.min.js"></script>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
         <script>
             function validateForm(query)
@@ -141,5 +118,6 @@
                 return (query.length > 0);
             }
         </script>
+
     </body>
 </html>

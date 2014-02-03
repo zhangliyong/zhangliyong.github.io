@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2014-02-03T19:20:22+01:00</updated><entry><title>wsgi</title><link href="/wsgi.html" rel="alternate"></link><updated>2014-02-03T19:20:22+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-02-03:wsgi.html</id><summary type="html">&lt;p&gt;http://lucumr.pocoo.org/2007/5/21/getting-started-with-wsgi/&lt;/p&gt;
+&lt;p&gt;http://webpython.codepoint.net/wsgi_request_parsing_post&lt;/p&gt;
+&lt;p&gt;http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html&lt;/p&gt;</summary></entry><entry><title>Read Later</title><link href="/read-later.html" rel="alternate"></link><updated>2014-01-24T13:46:17+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-01-24:read-later.html</id><summary type="html">&lt;h2&gt;Python&lt;/h2&gt;
+&lt;p&gt;Python Guide: http://docs.python-guide.org/en/latest/index.html&lt;/p&gt;
+&lt;p&gt;字符串匹配的KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html&lt;/p&gt;</summary></entry><entry><title>Git</title><link href="/git.html" rel="alternate"></link><updated>2014-01-09T14:52:21+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-01-09:git.html</id><summary type="html">&lt;h2&gt;Basic&lt;/h2&gt;
+&lt;p&gt;使用Git前，要先理解三个概念（与其它的VCS不同）：working directory, index, repository.&lt;/p&gt;
+&lt;h3&gt;working directory&lt;/h3&gt;
+&lt;p&gt;即是你当前的工作目录，你所编辑的文件都在此目录下。&lt;/p&gt;
+&lt;h3&gt;index&lt;/h3&gt;
+&lt;h2&gt;git add&lt;/h2&gt;
+&lt;h2&gt;Git Flow&lt;/h2&gt;
+&lt;p&gt;http://danielkummer.github.com/git-flow-cheatsheet/&lt;/p&gt;
+&lt;h2&gt;Git submodules&lt;/h2&gt;
+&lt;p&gt;http://git-scm.com/docs/gitignore
+http://git-scm.com/docs/git-check-ignore.html&lt;/p&gt;</summary></entry><entry><title>gevent</title><link href="/gevent.html" rel="alternate"></link><updated>2013-12-04T15:56:56+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-12-04:gevent.html</id><summary type="html">&lt;h2&gt;Pool&lt;/h2&gt;
+&lt;p&gt;什么时候执行Pool中的任务&lt;/p&gt;
+&lt;p&gt;用gevent spawn的greenlet何时执行，无论是用group, pool, gevent, 当spawn时，新spawn的greenlet已经处理准备执行状态，
+当主进程或其它greenlet sleep或有其它switch操作时，新spawn的greenlet会被执行。&lt;/p&gt;
+&lt;h2&gt;ref:&lt;/h2&gt;
+&lt;p&gt;Introduction to Gevent: http://blog.pythonisito.com/2012/07/introduction-to-gevent.html&lt;/p&gt;
+&lt;p&gt;Gevent, Threads, and Benchmarks: http://blog.pythonisito.com/2012/07/gevent-threads-and-benchmarks.html&lt;/p&gt;
+&lt;p&gt;Gevent and Greenlets: http://blog.pythonisito.com/2012/07/gevent-and-greenlets.html&lt;/p&gt;
+&lt;p&gt;Greening the Python Standard Library with Gevent: http://blog.pythonisito.com/2012/08/gevent-monkey-patch.html&lt;/p&gt;
+&lt;p&gt;Building TCP Servers with Gevent: http://blog.pythonisito.com/2012/08/building-tcp-servers-with-gevent.html&lt;/p&gt;
+&lt;p&gt;Building Web Applications with Gevent's WSGI Server: http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html&lt;/p&gt;</summary></entry><entry><title>TODO</title><link href="/todo.html" rel="alternate"></link><updated>2013-08-21T20:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-21:todo.html</id><summary type="html">&lt;h2&gt;2013-05-08&lt;/h2&gt;
+&lt;h3&gt;TODO TODAY&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;蕃茄工作法做笔记（思维导图）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;总结peclian&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;mysql replication, mysql 索引树&lt;/p&gt;</summary></entry><entry><title>Problems I encouter with emacs</title><link href="/problems-i-encouter-with-emacs.html" rel="alternate"></link><updated>2013-08-20T18:06:34+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-20:problems-i-encouter-with-emacs.html</id><summary type="html">&lt;p&gt;emacs with zsh&lt;/p&gt;
+&lt;p&gt;when I first open zsh in emacs using:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;term&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It always print strange characters like "4m", that's because I don't have eterm-color terminfo,
+I solve this problem by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# If you use Cocoa Emacs or Carbon Emacs&lt;/span&gt;
+&lt;span class="n"&gt;tic&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;terminfo&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Applications&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Emacs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Contents&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Resources&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;eterm&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ti&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;in terminal.&lt;/p&gt;
+&lt;p&gt;ref: http://stackoverflow.com/questions/8918910/weird-character-zsh-in-emacs-terminal&lt;/p&gt;</summary></entry><entry><title>The python packages I love</title><link href="/the-python-packages-i-love.html" rel="alternate"></link><updated>2013-08-12T13:26:18+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-12:the-python-packages-i-love.html</id><summary type="html">&lt;p&gt;gevent:&lt;/p&gt;
+&lt;p&gt;arrow: Better dates &amp;amp; times for Python https://github.com/crsmithdev/arrow http://crsmithdev.com/arrow&lt;/p&gt;
+&lt;p&gt;requests: &lt;/p&gt;
+&lt;p&gt;grequests:&lt;/p&gt;
+&lt;p&gt;undead: https://github.com/waawal/undead&lt;/p&gt;
+&lt;p&gt;legit
+envoy
+tablib
+clint
+autoenv&lt;/p&gt;</summary></entry><entry><title>urwid</title><link href="/urwid.html" rel="alternate"></link><updated>2013-08-09T16:21:44+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-09:urwid.html</id><summary type="html">&lt;p&gt;最近要写一个mongo current op的管理工具，&lt;/p&gt;
+&lt;p&gt;http://www.nicosphere.net/urwid-for-python-a-ncurses-library-2541/&lt;/p&gt;
+&lt;p&gt;https://github.com/intnull/videotop/blob/master/videotop.py&lt;/p&gt;
+&lt;p&gt;Why can't I select text in an Urwid program?&lt;/p&gt;
+&lt;p&gt;By default Urwid's MainLoop tells the terminal that it will handle mouse input so it can react to things like selecting widgets with the mouse or activating check boxes.&lt;/p&gt;
+&lt;p&gt;If you wrote this program and you want to disable Urwid's mouse handling you can set handle_mouse=False when creating your MainLoop or screen object.&lt;/p&gt;
+&lt;p&gt;Or you can just hold the SHIFT key while clicking and dragging in to get the normal select text/copy behavior.&lt;/p&gt;</summary></entry><entry><title>Find out which process open a linux port</title><link href="/find-out-which-process-open-a-linux-port.html" rel="alternate"></link><updated>2013-08-09T15:48:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-09:find-out-which-process-open-a-linux-port.html</id><summary type="html">&lt;p&gt;最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。&lt;/p&gt;
+&lt;p&gt;那么可以到ip机器上查询port对应的进程号，进而找到发出此查询的应用。&lt;/p&gt;
+&lt;p&gt;根据port来查询进程号有多种方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;netstat， &lt;code&gt;sudo netstat -anp | grep &amp;lt;port&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;关于netstat的使用参考：http://www.thegeekstuff.com/2010/03/netstat-command-examples/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;fuser，找到使用tcp 7000端口号的进程：&lt;code&gt;sudo fuser 7000/tcp&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;lsof&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;lsof&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;portNumber&lt;/span&gt;
+&lt;span class="n"&gt;lsof&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;tcp&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;portNumber&lt;/span&gt;
+&lt;span class="n"&gt;lsof&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;udp&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;portNumber&lt;/span&gt;
+&lt;span class="n"&gt;lsof&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;80&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过这几种方式找到进程号后，可以利用&lt;code&gt;ps -eaf | grep &amp;lt;pid&amp;gt;&lt;/code&gt;找到此进程的执行命令，
+并可以通过&lt;code&gt;/proc/&amp;lt;pid&amp;gt;/cwd&lt;/code&gt;找到此进程的执行目录。&lt;/p&gt;
+&lt;p&gt;参考：http://www.cyberciti.biz/faq/what-process-has-open-linux-port/&lt;/p&gt;</summary></entry><entry><title>locale</title><link href="/locale.html" rel="alternate"></link><updated>2013-08-08T13:45:42+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-08:locale.html</id><summary type="html">&lt;p&gt;当在终端下执行某些操作，提示编码问题时，基本是因为终端的locale环境的编码不支持。&lt;/p&gt;
+&lt;p&gt;有些终端下默认的LC_*设置为&lt;code&gt;C&lt;/code&gt;，可运行&lt;code&gt;locale&lt;/code&gt;查看，也可查看&lt;code&gt;/etc/default/locale&lt;/code&gt;，
+此时终端环境的默认编码是&lt;code&gt;ASCII&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;可将其改为&lt;code&gt;UTF8&lt;/code&gt;编码。&lt;/p&gt;
+&lt;p&gt;修改方式如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用&lt;code&gt;locale -a&lt;/code&gt;命令查看系统支持的category。&lt;/li&gt;
+&lt;li&gt;在终端下进行&lt;code&gt;export LANG=&amp;lt;category&amp;gt;&lt;/code&gt;，此时终端的&lt;code&gt;LC_*&lt;/code&gt;变量发生了变化。
+    如果不想每次手动设置，可将&lt;code&gt;export LANG=&amp;lt;category&amp;gt;&lt;/code&gt;加到&lt;code&gt;.bashrc&lt;/code&gt;中。&lt;/li&gt;
+&lt;/ol&gt;</summary></entry><entry><title>PuDB</title><link href="/pudb.html" rel="alternate"></link><updated>2013-08-06T10:31:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-06:pudb.html</id><summary type="html">&lt;p&gt;https://pypi.python.org/pypi/pudb&lt;/p&gt;</summary></entry><entry><title>transfer munin server</title><link href="/transfer-munin-server.html" rel="alternate"></link><updated>2013-08-05T13:27:23+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-05:transfer-munin-server.html</id><summary type="html">&lt;p&gt;当修改某一node的主机名时，修改后此node的所有历史记录都会消失，可以恢复这些历史数据，在munin中所有数据都保存在rrd文件中，此文件在/var/lib/munin中，如：social/services.social-uptime-uptime-g.rrd 是主机名为services.social的其中一个数据文件。当修改了node的主机名时，只需要同时对数据文件重命名即可。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;取消munin crontab的执行， cd /etc/cron.d/; sudo mv munin munin.disable
+    crontab不会执行/etc/cron.d/下文件名中带有“.”的文件&lt;/li&gt;
+&lt;li&gt;生命名数据文件&lt;/li&gt;
+&lt;li&gt;修改munin配置/etc/munin/munin.conf中的node主机名&lt;/li&gt;
+&lt;li&gt;修改munin crontab执行，5分钟后将会看到更新的结果。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;： 改动数据文件前要先取消crontab的执行，否则可能会影响历史数据, 同时数据文件迁移之后，要保证用户munin有对这些rrd文件写的权限。因为用&lt;code&gt;sudo cp&lt;/code&gt;之后会改变这些文件的owner.&lt;/p&gt;
+&lt;p&gt;如果要将munin server转移到其它机器，只需要将rrd数据文件复制过去即可。&lt;/p&gt;</summary></entry><entry><title>munin</title><link href="/munin.html" rel="alternate"></link><updated>2013-08-05T13:17:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-05:munin.html</id><summary type="html">&lt;h2&gt;Writing plugins&lt;/h2&gt;
+&lt;p&gt;global attribute: http://munin-monitoring.org/wiki/protocol-config&lt;/p&gt;
+&lt;p&gt;redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch&lt;/p&gt;
+&lt;p&gt;mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph&lt;/p&gt;
+&lt;h2&gt;fw_conntract fw_forwarded_local timeout&lt;/h2&gt;
+&lt;p&gt;配置好munin之后，fw_conntrack总是报警，读不到数据，主要原因是执行fw_conntrack超时，munin plugin的默认超时时间是10s，超时主要是因为&lt;code&gt;cat /proc/net/ip_conntrack&lt;/code&gt;，对于网络请求少的服务器，此语句会很快执行完，但对于网络请求比较多的服务器，此语句耗时可能要超过30s。&lt;/p&gt;
+&lt;p&gt;Google的相应问题，此问题早已被人解决，解决方案见如下链接：
+http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565&lt;/p&gt;
+&lt;p&gt;主要就是用&lt;code&gt;conntrack -L&lt;/code&gt; 代替&lt;code&gt;cat /proc/net/ip_conntrack&lt;/code&gt;，要先安装&lt;code&gt;sudo apt-get install conntrack&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;limits&lt;/h2&gt;
+&lt;p&gt;limit 用于检查每个plugin的field的值是否超出设定的warning和critical，并做出相应的警报。&lt;/p&gt;
+&lt;p&gt;warning和critical是运行插件config输出的每个filed的warning和critical来设置的。&lt;/p&gt;
+&lt;p&gt;有时我们在&lt;code&gt;/etc/munin/plugin-conf.d/&lt;/code&gt;中会看到&lt;code&gt;env.warning value&lt;/code&gt;，这是因为插件会读取&lt;code&gt;env.warning&lt;/code&gt;的值，并根据此值设置每个field的warning。如果插件不读取&lt;code&gt;env.warning&lt;/code&gt;的值，即使设置也不会启作用，munin不会自动设置。&lt;/p&gt;
+&lt;p&gt;关于warning, critical的设置可参考: &lt;a href="http://munin-monitoring.org/wiki/fieldname.warning"&gt;{fieldname}.warning&lt;/a&gt;, &lt;a href="http://munin-monitoring.org/wiki/fieldname.critical"&gt;{fieldname}.critical}&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;http://munin-monitoring.org/wiki/protocol-config&lt;/p&gt;
+&lt;p&gt;http://munin-monitoring.org/wiki/munin-man#munin-html&lt;/p&gt;</summary></entry><entry><title>fabric</title><link href="/fabric.html" rel="alternate"></link><updated>2013-07-31T11:19:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-31:fabric.html</id><summary type="html">&lt;p&gt;下面介绍python下的一个用于项目部署的工具&lt;a href="http://docs.fabfile.org/"&gt;fabric&lt;/a&gt;，要学习fabric推荐阅读其官方文档，&lt;/p&gt;
+&lt;p&gt;本文给只给出一个简单的介绍及一些基本的功能。&lt;/p&gt;
+&lt;p&gt;根据官方文档的介绍:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fabric is:&lt;/p&gt;
+&lt;p&gt;A tool that lets you execute arbitrary Python functions via the command line;
+A library of subroutines (built on top of a lower-level library) to make executing shell commands over SSH easy and Pythonic.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;首先安装fabric &lt;code&gt;pip install fabric&lt;/code&gt;，安装完fabric之后，系统会多出fab命令。&lt;/p&gt;
+&lt;p&gt;fab命令在执行时会读取当前目录下的fabfile.py文件，并根据fabric的参数来执行文件中的函数。&lt;/p&gt;
+&lt;p&gt;fabfile.py&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello world!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;hello为一个task，执行hello如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;fab&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;
+&lt;span class="n"&gt;Hello&lt;/span&gt; &lt;span class="n"&gt;world&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+
+&lt;span class="n"&gt;Done&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们看到hello并没有参数，fab也支持给task加参数。&lt;/p&gt;
+&lt;p&gt;fab可以用于项目部署，服务器管理。它可以通过ssh执行服务器上的shell命令，当然也可以执行本地的shell命令。&lt;/p&gt;
+&lt;p&gt;例如： local执行本地命令，run执行服务器端命令，sudo以root权限执行服务器端命令。&lt;/p&gt;
+&lt;p&gt;fab可以通过设置env.hosts变量来在所有host中执行某一task。&lt;/p&gt;
+&lt;p&gt;fab也提供了一些decorator，如hosts, roles来设置在某些host上执行task。&lt;/p&gt;</summary></entry><entry><title>How mongodb use memory</title><link href="/how-mongodb-use-memory.html" rel="alternate"></link><updated>2013-07-29T15:11:21+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-29:how-mongodb-use-memory.html</id><summary type="html">&lt;p&gt;网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。&lt;/p&gt;
+&lt;p&gt;MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。&lt;/p&gt;
+&lt;p&gt;查看working set大小可用如下命令：&lt;code&gt;db.runCommand( { serverStatus: 1, workingSet: 1 } )&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;serverStatus.mem.resident
+The value of resident is roughly equivalent to the amount of RAM, in megabytes (MB), currently used by the database process. In normal use this value tends to grow. In dedicated database servers this number tends to approach the total amount of system memory.&lt;/p&gt;
+&lt;p&gt;所以如果resident没有超出总的内存大小，此时内存是足够的，当然也要看一下page faults是不是很频繁。&lt;/p&gt;
+&lt;p&gt;Does MongoDB require a lot of RAM?
+Not necessarily. It’s certainly possible to run MongoDB on a machine with a small amount of free RAM.&lt;/p&gt;
+&lt;p&gt;MongoDB automatically uses all free memory on the machine as its cache. System resource monitors show that MongoDB uses a lot of memory, but its usage is dynamic. If another process suddenly needs half the server’s RAM, MongoDB will yield cached memory to the other process.&lt;/p&gt;
+&lt;p&gt;Technically, the operating system’s virtual memory subsystem manages MongoDB’s memory. This means that MongoDB will use as much free memory as it can, swapping to disk as needed. Deployments with enough memory to fit the application’s working data set in RAM will achieve the best performance.&lt;/p&gt;</summary></entry><entry><title>htop command</title><link href="/htop-command.html" rel="alternate"></link><updated>2013-07-28T11:11:13+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-28:htop-command.html</id><summary type="html">&lt;p&gt;推荐一个代替工具htop，显示信息很详细，功能丰富，一但上手操作也很简单，
+&lt;a href="http://www.thegeekstuff.com/2011/09/linux-htop-examples/"&gt;thegeekstuff&lt;/a&gt;上有
+一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。&lt;/p&gt;</summary></entry><entry><title>vmstat</title><link href="/vmstat.html" rel="alternate"></link><updated>2013-07-25T11:35:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-25:vmstat.html</id><summary type="html">&lt;p&gt;最近在分析mongo的性能问题，发现mongo所在机器的io比较频繁。&lt;/p&gt;
+&lt;p&gt;使用vmstat命令查看，发现b（The number of processes in uninterruptible sleep）这一列的数量比较大，持续在4左右。
+随后查询uninterruptible sleep状态的意义，引自：http://www.novell.com/support/kb/doc.php?id=7002725&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Processes in a "D" or uninterruptible sleep state are usually waiting on I/O. The ps command shows a "D" on processes in an uninterruptible sleep state. The vmstat command also shows the current processes that are "blocked" or waiting on I/O. The vmstat and ps will not agree on the number of processes in a "D" state, so don't be too concerned. You cannot kill "D" state processes, even with SIGKILL or kill -9. As the name implies, they are uninterruptible. You can only clear them by rebooting the server or waiting for the I/O to respond. It is normal to see processes in a "D" state when the server performs I/O intensive operations. &lt;/p&gt;
+&lt;p&gt;If performance becomes an issue, you may need to check the health of your disks. Make sure your firmware and kernel disk drivers are updated. &lt;/p&gt;
+&lt;p&gt;In the example above, there is heavy disk activity shown in the "io" columns and the server is currently swapping to disk. The example more likely represents a memory issue, rather than a disk I/O issue. &lt;/p&gt;
+&lt;p&gt;There are two ways to find more about the processes in D state.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;ps -eo ppid,pid,user,stat,pcpu,comm,wchan:32
+This prints a list of all processes where in the last column either a '-' is displayed when the process is running or the name of the kernel function in which the process is sleeping if the process is currently sleeping. This includes also processes which are interruptible. Processes that are in uninterruptible sleep can be determined via the fourth column which would then show a D.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;echo w &amp;gt; /proc/sysrq-trigger
+This command produces a report and a list of all processes in D state and a full kernel stack trace to /var/log/messages. This shows much more information than the first option described above.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;关于vmstat的使用参考：http://www.linuxintheshell.org/2013/05/22/episode-030-vmstat/&lt;/p&gt;</summary></entry><entry><title>Mongo Performance</title><link href="/mongo-performance.html" rel="alternate"></link><updated>2013-07-25T10:07:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-25:mongo-performance.html</id><summary type="html">&lt;p&gt;最近mongo的性能&lt;/p&gt;</summary></entry><entry><title>Mongo</title><link href="/mongo.html" rel="alternate"></link><updated>2013-07-24T17:36:09+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-24:mongo.html</id><summary type="html">&lt;h2&gt;query after update slow&lt;/h2&gt;
+&lt;p&gt;这两天有一个接口的速度非常慢，主要是执行一条查询语句非常慢，有时耗时达200秒，于是找到了这条查询语句单独在mongo shell中执行，在mongo shell中执行并不慢，慢慢调试后最终找到问题，原因是在查询语句执行之前执行了两次更新语句。&lt;/p&gt;
+&lt;p&gt;利用pymongo执行更新时，如果不设置safe=True，mongo会及时返回函数调用，但更新并没有真正执行完，mongo进程在后台继续执行，所以当接着执行查询时，此时更新没有结束，数据库会处于lock状态，查询等待数据库解锁，所以查询非常慢。&lt;/p&gt;
+&lt;p&gt;把更新语句去除后，查询恢复正常。&lt;/p&gt;
+&lt;h2&gt;Concurrency&lt;/h2&gt;
+&lt;p&gt;MongoDB global lock to ga&lt;/p&gt;
+&lt;h2&gt;Tips&lt;/h2&gt;
+&lt;h3&gt;If Write Heavy&lt;/h3&gt;
+&lt;p&gt;Global Lock is Global
+As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.&lt;/p&gt;
+&lt;p&gt;Updating documents that have been pushed to disk, first have to be read from disk, stored in memory, updated, then written back to disk. This operation is slow and happens while inside the lock.&lt;/p&gt;
+&lt;p&gt;Updating a lot of random documents that rarely get updated and have been pushed out of RAM can lead to slow writes and a high lock percentage.&lt;/p&gt;
+&lt;p&gt;More Reads Make For Faster Writes
+The trick to lowering your lock percentage and thus having faster updates is to query the document you are going to update, before you perform the update. Querying before doing an upsert might seem counter intuitive at first glance, but it makes sense when you think about it.&lt;/p&gt;
+&lt;p&gt;The read ensures that whatever document you are going to update is in RAM. This means the update, which will happen immediately after the read, always updates the document in RAM, which is super fast. I think of it as warming the database for the document you are about to update.&lt;/p&gt;
+&lt;p&gt;http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/&lt;/p&gt;</summary></entry><entry><title>Job</title><link href="/job.html" rel="alternate"></link><updated>2013-07-10T13:19:07+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-10:job.html</id><summary type="html">&lt;p&gt;今天读了A. Jesse Jiryu Davis的一篇&lt;a href="http://emptysqua.re/blog/so-youre-coming-to-a-career-fair/"&gt;文章&lt;/a&gt;，关于计算机专业的学生如何让自己突出，找到
+自己喜欢的工作。&lt;/p&gt;
+&lt;p&gt;开篇作者就指出要想办法让自己突出，不要与其他学生都一样，如果你是一个黑客，那你就要表现出来。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;仅仅学校课堂学的东西是不够的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;要有气质、魅力。&lt;/p&gt;
+&lt;p&gt;好像计算机专业的学生不需要，错了！程序员也要和人交流，打交道，尤其是团队之间，如果你有魅力，会更容易和人交流，沟通效率更高。很多程序员也许都知道沟通的重要性，嘴上确说不需要，其实是在给自己找借口。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;独立的项目，不一样的语言，不一样的课程&lt;/p&gt;
+&lt;p&gt;如果有创意想法，就实现它，这将会给你增加很多的分数，
+学一门其它的编程语言，不要只局限于课堂上教的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从长远来看，最好参与一些开源项目，一开始可能很难找到开源项目的一些问题，即使找到了，可能也写不出高质量的patch，可以先自己建立一个项目，自己开发。&lt;/p&gt;
+&lt;p&gt;当然也有例外：你可以修改一些python的库，使其兼容python 3；或者将一种语言上热门的库移植到另一种语言上(在另一种语言上重新实现)，如果这个语言上还没有相应的库。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;对于我们在职的程序员，这些建议仍然适用，我们一定要有自己可拿出的东西来，有一些自己的项目，能与开源。&lt;/p&gt;
+&lt;p&gt;非常重要的一点，一定要有气质、魅力，善于和另人交流，杜绝屌丝。还有程序员要注意身体哦。&lt;/p&gt;</summary></entry><entry><title>HTTP keep-alive</title><link href="/http-keep-alive.html" rel="alternate"></link><updated>2013-07-09T17:43:45+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-09:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Turn off KeepAlive
+I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing that, right?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;HTTP keep-alive即是HTTP persistent connection，维基百科有详细说明：http://en.wikipedia.org/wiki/HTTP_persistent_connection&lt;/p&gt;
+&lt;p&gt;如果使用keep-alive功能，多个http请求会使用同一个tcp连接，这样可节省多次建立连接的时间及资源消耗，&lt;/p&gt;
+&lt;p&gt;下图显示了是否使用keep-alive功能的tcp连接对比图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/HTTP_persistent_connection.svg/500px-HTTP_persistent_connection.svg.png" /&gt;&lt;/p&gt;
+&lt;p&gt;http 1.0默认不开启，可进行指定，http 1.1默认开启。&lt;/p&gt;
+&lt;p&gt;上面我们看到启用keep-alive可节省多次建立连接的时间，但是服务器端要保持连接状态(nginx默认保持74s)，
+这样会影响服务器端的性能。 而且目前网络带宽比较大，建立连接的延时比较少，
+所以keep-alive在很多情况下会导致性能下降。这就验证了一开始那篇文章指出的在django servers中关闭keep-alive
+功能可大约提升50%的性能。&lt;/p&gt;
+&lt;p&gt;所以建议关系keep-alive功能，除非有特殊需求。&lt;/p&gt;
+&lt;p&gt;下面介绍如何nginx中关系keep-alive功能&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://wiki.nginx.org/HttpCoreModule#keepalive_timeout"&gt;nginx文档&lt;/a&gt;中有详细说明:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;keepalive_timeout&lt;/p&gt;
+&lt;p&gt;Syntax: keepalive_timeout timeout [ header_timeout ]&lt;/p&gt;
+&lt;p&gt;Default:    75s&lt;/p&gt;
+&lt;p&gt;Context:    http
+           server
+           location&lt;/p&gt;
+&lt;p&gt;Reference:  keepalive_timeout&lt;/p&gt;
+&lt;p&gt;The first parameter assigns the timeout for keep-alive connections with the client. The server will close connections after this time.&lt;/p&gt;
+&lt;p&gt;The optional second parameter assigns the time value in the header Keep-Alive: timeout=time of the response. This header can convince some browsers to close the connection, so that the server does not have to. Without this parameter, nginx does not send a Keep-Alive header (though this is not what makes a connection "keep-alive").&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果我们要关闭keep-alive功能，可在http, server或location中设置&lt;code&gt;keepalive_timeout  0;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="n"&gt;listen&lt;/span&gt;          &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;server_name&lt;/span&gt;     &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;access_log&lt;/span&gt;      &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;access&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;error_log&lt;/span&gt;       &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;keepalive_timeout&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="p"&gt;........&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下图给出了keepalive_timeout设置前后，http请求的header中connection的变化：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/images/nginx/keepalive/keepalive.png" /&gt;&lt;/p&gt;
+&lt;p&gt;设置&lt;code&gt;keepalive_timeout  0;&lt;/code&gt;之后：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/images/nginx/keepalive/notalive.png" /&gt;&lt;/p&gt;
+&lt;p&gt;笔者并没有对keep-alive做相应性能方面的benchmark，所以不确定keep-alive对性能的影响，而且keep-alive对性能的影响也与应用场景有关。&lt;/p&gt;</summary></entry><entry><title>Generalized Suffix Tree</title><link href="/generalized-suffix-tree.html" rel="alternate"></link><updated>2013-07-09T11:16:16+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-09:generalized-suffix-tree.html</id><summary type="html">&lt;p&gt;本文提供了另一种构造generalized suffix tree的方法，不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
+构造原理依然采用Ukkonen提出的算法。下面我们由简入深分别介绍此种方式应对的问题。&lt;/p&gt;
+&lt;h2&gt;前言&lt;/h2&gt;
+&lt;p&gt;后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，&lt;/p&gt;
+&lt;p&gt;后缀树的搜索非常快，但是构造后缀树比较复杂， Ukkonen提出的构造后缀树的算法时间复杂度为O(nlogn), 构造原理阅读
+http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english，本文也是在此链接
+的基础上进行说明的。 &lt;strong&gt;所以在继续阅读前确保你已经阅读了此链接的内容。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;suffix tree是一个字符串的所有后缀组成的一棵树。
+在很多情况下我们有多个字符串，需要为这些字符串构造同一棵后缀树，即是generalized suffix tree，例如查询包含'abc'的所有字符串。&lt;/p&gt;
+&lt;p&gt;如需要为n个字符串（如s1, s2, s3, ..., sn）构造后缀树，目前通用的做法是找到n个不同的字符, 如u1, u2,..., un，
+这n个字符是惟一的，且不会出现在所有的字符串中，然后将每个字符加到一个字符串后，并将它们合并，组成一个字符串：
+s=s1u1s2u2.....snun，并为s构造后缀树。&lt;/p&gt;
+&lt;p&gt;例如为"ab", "abc"构造后缀树，找到两个字符"#", "$"，我们得到字符中abc#abcde$"，然后为其构造后缀树，如图:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc.png" /&gt;&lt;/p&gt;
+&lt;p&gt;当有少量字符串的时候，这种方式比较实用，我们可以很轻易找到n个不同的字符，当字符串比较多时，
+我们很难找到这么多不同的字符。目前unicode的码点是从0到0x10ffff，也就是unicode最多能表示1114111个字符，仅仅是百万级。
+所以假如我们有千万级的字符串时，我们就找不到如此多的字符了。&lt;/p&gt;
+&lt;p&gt;我们提供了另一种解决方案。&lt;/p&gt;
+&lt;h2&gt;准备&lt;/h2&gt;
+&lt;p&gt;我们在原有的基础上进行了改进。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为每个字符串设置一个惟一的索引(index)，用于标识此字符串，根据索引可找到原来的字符串。&lt;/li&gt;
+&lt;li&gt;除根结点以外的所有结点都有suffix link。说明为什么加suffix link&lt;/li&gt;
+&lt;li&gt;每条边有三个属性index, start, length，根据这三个属性可找到此边代表的字符串。&lt;/li&gt;
+&lt;li&gt;叶结点会存储索引值（有些结点即为叶结点也为中间结点）。 //TODO 说明为什么加索引&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;第3条很容易理解，第1条是为第3、4条准备的，是为降低空间复杂度。下面我们对2、3进行说明。&lt;/p&gt;
+&lt;p&gt;从根结点到每个叶结点的路径代表一个字符或多个字符串的后缀，叶结点上的索引即是这些字符串的索引。&lt;/p&gt;
+&lt;h2&gt;基本&lt;/h2&gt;
+&lt;p&gt;以字符串"ab"为例，其后缀树为：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab.png" /&gt;&lt;/p&gt;
+&lt;p&gt;设置"ab"的索引为0，将索引加到叶结点中为:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_index.png" /&gt;&lt;/p&gt;
+&lt;h2&gt;扩展一&lt;/h2&gt;
+&lt;p&gt;字符串末尾字符为重复字符，为"aba"为例，
+为其构造后缀树并将索引加到叶结点后：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/aba_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;此时active point为(root, 'a', 1), remainder为1，即我们还有一个后缀，隐含在后缀树中，
+而此时字符串中所有的字符都已加到后缀树中，我们需要为此后缀创建一个叶结点，并将索引0加到叶结点中。&lt;/p&gt;
+&lt;p&gt;如图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/aba_index_2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;红色的结点即是我们创建的，这个结点即是叶结点也是中间结点，对于后缀'a'来说是叶结点，
+对于后缀'aba'来说是中间结点。&lt;/p&gt;
+&lt;p&gt;对于叶结点在创建的时候我们即可将索引加到叶结点中。&lt;/p&gt;
+&lt;p&gt;当字符串的所有字符都加入到后缀树之后，remainder的值即是隐式后缀的数量，我们需要为这些后缀指定索引。&lt;/p&gt;
+&lt;p&gt;如果active length为0，不需要创建结点，只需要将索引加入到active node中即可。&lt;/p&gt;
+&lt;p&gt;如字符串"abcabdab"，将所以字符加到后缀树后：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/abcabdab_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;此时active point为(blue node, \0, 0), remainder为2。&lt;/p&gt;
+&lt;p&gt;后缀"ab", "a"为隐式，此时active length为0，将索引加到active node中后，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/abcabdab_index_2.png" /&gt;&lt;/p&gt;
+&lt;h2&gt;扩展二&lt;/h2&gt;
+&lt;p&gt;在后缀树中加入一个新的字符串。&lt;/p&gt;
+&lt;p&gt;在加入新的字符串之前，需要重置active point为(root, '\0', 0)。&lt;/p&gt;
+&lt;p&gt;以字符串"ab", "abc"为例, "ab"的索引为0, "abc"的索引为1，&lt;/p&gt;
+&lt;p&gt;"ab"的后缀树：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;我们需要向此后缀树中加入字符串"abc"，&lt;/p&gt;
+&lt;p&gt;在我们加入字符'ab'之后，后缀并没有发生变化，此时active point为(blue node, '\0', 0)，remainder为2.&lt;/p&gt;
+&lt;p&gt;我们继续加入字符"c"，在active node下加入一条边，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;此时remainder变为2，active node指向红色结点，由于我们之前为叶结点创建了suffix link，更新active node的时间复杂度依然为O(1)。&lt;/p&gt;
+&lt;p&gt;最终结果如图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc_index_2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;下面给出程序的伪代码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;remainder&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;remainder&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;canonize&lt;/span&gt; &lt;span class="c1"&gt;// make sure the active_length is no longer than active_edge&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;active_length&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+            &lt;span class="n"&gt;edge&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;edge&lt;/span&gt; &lt;span class="n"&gt;whose&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="n"&gt;starts&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;edge&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;none&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;insert&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;edge&lt;/span&gt; &lt;span class="n"&gt;whose&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="n"&gt;starts&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt;
+                &lt;span class="n"&gt;insert&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;leaf&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;edge&lt;/span&gt;
+
+                &lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="n"&gt;suffix&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt;
+            &lt;span class="nl"&gt;else:&lt;/span&gt;
+                &lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt; &lt;span class="n"&gt;point&lt;/span&gt;
+                &lt;span class="k"&gt;break&lt;/span&gt;
+
+        &lt;span class="nl"&gt;else:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;active_edge&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;active_length&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt; &lt;span class="n"&gt;point&lt;/span&gt;
+
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                    &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;remainder&lt;/span&gt; &lt;span class="n"&gt;suffix&lt;/span&gt;
+                &lt;span class="k"&gt;break&lt;/span&gt;
+            &lt;span class="nl"&gt;else:&lt;/span&gt;
+                &lt;span class="n"&gt;split&lt;/span&gt; &lt;span class="n"&gt;current&lt;/span&gt; &lt;span class="n"&gt;active_edge&lt;/span&gt; &lt;span class="n"&gt;at&lt;/span&gt; &lt;span class="n"&gt;active_length&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;internal&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;
+                &lt;span class="n"&gt;insert&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;edge&lt;/span&gt; &lt;span class="n"&gt;starts&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;at&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;internal&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;
+                &lt;span class="n"&gt;insert&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;leaf&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;edge&lt;/span&gt;
+
+                &lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="n"&gt;suffix&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt;
+
+        &lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt; &lt;span class="n"&gt;point&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;搜索&lt;/h2&gt;
+&lt;p&gt;搜索与普通的后缀树搜索类似，根据要搜索的字符串在树中依次匹配即可。&lt;/p&gt;
+&lt;p&gt;当模式最终匹配到某一条边后，后到这条边的目标结点，则以这个结点为根结点的子树中的所有索引就是此次的搜索结果。
+再根据索引可得到原来的字符串。&lt;/p&gt;
+&lt;p&gt;例如在后缀树&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc_index_2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;中查找'b'时，可找到索引0，1，再根据索引找到原来的字符串。&lt;/p&gt;
+&lt;h2&gt;复杂度&lt;/h2&gt;
+&lt;h3&gt;时间&lt;/h3&gt;
+&lt;p&gt;由于构造后缀树和搜索的原理与之前的一样，&lt;/p&gt;
+&lt;p&gt;假定所有字符串的长度之和为n，则构造后缀树的时间复杂度为O(nlogn)。&lt;/p&gt;
+&lt;p&gt;模式P的长度为|P|，则搜索的时间复杂度为O(|P|)&lt;/p&gt;
+&lt;h3&gt;空间&lt;/h3&gt;
+&lt;p&gt;TODO&lt;/p&gt;
+&lt;p&gt;笔者给出了一个python版本的实现。&lt;/p&gt;</summary></entry><entry><title>iptables</title><link href="/iptables.html" rel="alternate"></link><updated>2013-06-25T14:52:10+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-25:iptables.html</id><summary type="html">&lt;p&gt;/etc/sysconfig/iptables - The system scripts that activate the firewall by reading this file.&lt;/p&gt;
+&lt;h2&gt;Ref:&lt;/h2&gt;
+&lt;p&gt;http://www.cyberciti.biz/faq/rhel-fedorta-linux-iptables-firewall-configuration-tutorial/&lt;/p&gt;</summary></entry><entry><title>datetime</title><link href="/datetime.html" rel="alternate"></link><updated>2013-06-25T10:38:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-25:datetime.html</id><summary type="html">&lt;h2&gt;insert current date&lt;/h2&gt;
+&lt;p&gt;"map F3 to insert current date
+nnoremap &lt;F3&gt; "=strftime("%Y-%m-%d (%a)")&lt;CR&gt;P
+inoremap &lt;F3&gt; &lt;C-R&gt;=strftime("%Y-%m-%d (%a)")&lt;CR&gt;&lt;/p&gt;
+&lt;p&gt;http://vim.wikia.com/wiki/Insert_current_date_or_time&lt;/p&gt;
+&lt;p&gt;http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-&lt;em&gt;Tutorial&lt;/em&gt;(Part_1)&lt;/p&gt;
+&lt;p&gt;http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118&lt;/p&gt;</summary></entry><entry><title>vim</title><link href="/vim.html" rel="alternate"></link><updated>2013-06-25T10:36:37+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-25:vim.html</id><summary type="html">&lt;p&gt;TODO: wrap my plugins&lt;/p&gt;</summary></entry><entry><title>mem</title><link href="/mem.html" rel="alternate"></link><updated>2013-06-19T14:54:04+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-19:mem.html</id><summary type="html">&lt;p&gt;http://virtualthreads.blogspot.com/2006/02/understanding-memory-usage-on-linux.html&lt;/p&gt;
+&lt;p&gt;http://www.cyberciti.biz/tips/howto-find-memory-used-by-program.html&lt;/p&gt;
+&lt;p&gt;pmap&lt;/p&gt;
+&lt;p&gt;vmmap on mac&lt;/p&gt;</summary></entry><entry><title>concurrency</title><link href="/concurrency.html" rel="alternate"></link><updated>2013-06-19T14:50:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-19:concurrency.html</id><summary type="html">&lt;p&gt;http://www.jeffknupp.com/blog/2012/03/31/pythons-hardest-problem/&lt;/p&gt;
+&lt;p&gt;http://stackoverflow.com/questions/731993/multiprocessing-or-multithreading&lt;/p&gt;
+&lt;p&gt;http://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python&lt;/p&gt;
+&lt;p&gt;http://eli.thegreenplace.net/2012/01/16/python-parallelizing-cpu-bound-tasks-with-multiprocessing/&lt;/p&gt;
+&lt;p&gt;http://stackoverflow.com/questions/1226584/multiprocess-or-threading-in-python&lt;/p&gt;</summary></entry><entry><title>Redis vs Mongodb</title><link href="/redis-vs-mongodb.html" rel="alternate"></link><updated>2013-06-04T14:33:16+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-04:redis-vs-mongodb.html</id><summary type="html">&lt;p&gt;Redis and MongoDB insertion performance analysis: http://blog.axant.it/archives/236
+MongoDB and Redis: a different interpretation of what's wrong with Relational DBs: http://oldblog.antirez.com/post/MongoDB-and-Redis.html&lt;/p&gt;</summary></entry><entry><title>Memory</title><link href="/memory.html" rel="alternate"></link><updated>2013-05-19T21:42:19+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:memory.html</id><summary type="html"></summary></entry><entry><title>Sleeping</title><link href="/sleeping.html" rel="alternate"></link><updated>2013-05-19T21:17:11+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:sleeping.html</id><summary type="html">&lt;h2&gt;关于睡眠你应该知道的十件事&lt;/h2&gt;
+&lt;p&gt;地址：http://v.163.com/movie/2013/5/V/Q/M8TDTH9BJ_M8TE2FFVQ.html&lt;/p&gt;
+&lt;p&gt;网易分开课上有一期bbc拍摄的关于睡眠的记录片，里面提到了很多关于提高睡眠的问题，
+对于一些自己感觉有帮助的记录如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;咖啡和洒精都会影响人的睡眠；咖啡会让人难以入睡，酒精会容易让人入睡，但会缩深度睡眠阶段。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对于经常跨时区的人来说，睡眠也是个大问题，对于这种情况，可以尝试16小时不吃饭，可以喝水，到达目的地后，在当地的正常用餐时间用餐，按照当地的饮食时间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;经常性的紧张也会影响睡眠，在睡觉前在床上适当做一些放松肌肉的锻炼，先做一些动作让肌肉紧张再放松。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;饮食也会影响睡觉，如果多食含蛋白质少的东西会影响发困，多食蛋白质多的会让人清醒。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;气味也能促进人的睡眠，睡前喝薰衣草泡的茶及闻薰衣草的气味会有得睡眠。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;睡觉前一小时泡个热水澡有利于睡眠。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</summary></entry><entry><title>Logbook</title><link href="/logbook.html" rel="alternate"></link><updated>2013-05-19T18:50:40+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:logbook.html</id><summary type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
+logbook目前还处于开发阶段。可以参考官方&lt;a href="https://logbook.readthedocs.org/en/latest/features.html#core-features"&gt;core feature&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
+filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供
+了更多的组件，如：processor。&lt;/p&gt;
+&lt;h2&gt;New Feature&lt;/h2&gt;
+&lt;p&gt;在logbook中一个非常大的变化是大量使用&lt;a href="https://logbook.readthedocs.org/en/latest/stacks.html"&gt;stack&lt;/a&gt;,
+一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性，
+可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。&lt;/p&gt;
+&lt;p&gt;目前logbook中存在三种stack，分别用来存储Handler, Processor, Flag。
+每一句log都会经过这三个stack中的每一个对象处理。假如目前存储handler的stack中目前
+有两个handler h1, h2:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;h1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;____&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;h2&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;____&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;那每一句log都会被h1处理完后被h2再处理。&lt;/p&gt;
+&lt;p&gt;Handler, Processor, Flag必须加到stack中才能启到作用，可以使用 &lt;code&gt;push_application()&lt;/code&gt; 及 &lt;code&gt;pop_application()&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;logbook中也提供了&lt;code&gt;with&lt;/code&gt;来完成对stack的push和pop。&lt;/p&gt;
+&lt;p&gt;logbook增加了很多的handler，甚至都有将log发到twitter上的handler。&lt;/p&gt;
+&lt;p&gt;logbook有非常多的特性，相信以后也会增加更多有趣的特性，建议阅读其官方文档：https://logbook.readthedocs.org/en/latest/&lt;/p&gt;
+&lt;h2&gt;Examples&lt;/h2&gt;
+&lt;p&gt;下面给出一些简单的使用示例，有些是官方文档上给出的。&lt;/p&gt;
+&lt;p&gt;开始使用logbook可以不用做任何配置：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;logbook&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;warn&lt;/span&gt;
+&lt;span class="n"&gt;warn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;This is too cool for stdlib&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2013&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mo"&gt;05&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;18&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;29&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;WARNING&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Generic&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="n"&gt;too&lt;/span&gt; &lt;span class="n"&gt;cool&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;stdlib&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面的代码会将log记录到stderr中。是不是非常简单，都不需要设置handler，logbook有非常好的默认配置，
+在很多情况下你不需要改动即可直接使用。&lt;/p&gt;
+&lt;p&gt;使用handler：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;logbook&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;FileHandler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;info&lt;/span&gt;
+
+&lt;span class="n"&gt;file_handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FileHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;logbook.log&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;INFO&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;file_handler&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;This is logged in a file&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;TestHandler&lt;/h3&gt;
+&lt;p&gt;logbook提供了TestHandler，可以用来测试log，使用非常方便，参考文档：
+https://logbook.readthedocs.org/en/latest/api/handlers.html#logbook.TestHandler&lt;/p&gt;
+&lt;h3&gt;MailHandler&lt;/h3&gt;
+&lt;p&gt;https://logbook.readthedocs.org/en/latest/api/handlers.html#logbook.MailHandler
+TODO&lt;/p&gt;
+&lt;h3&gt;ThreadedWrapperHandler&lt;/h3&gt;
+&lt;p&gt;https://logbook.readthedocs.org/en/latest/api/queues.html#logbook.queues.ThreadedWrapperHandler
+TODO&lt;/p&gt;
+&lt;h3&gt;FingersCrossedHandler&lt;/h3&gt;
+&lt;p&gt;logbook提供了一个特殊的"fingers crossed" handler，这个handler作为一个wrapper，是用来封装其它
+handler的，这个handler有一个特殊的功能，它会将所有的log记录到内存中，当某一些log的级别
+(debug, info, warning, error)超过FingersCrossedHandler设置的级别时，所有在内存中的log以及后面的log
+都将被记录到这个handler中。当log级别没有到达时，所有的log都不会被FingersCrossedHandler处理。&lt;/p&gt;
+&lt;p&gt;这一handler很适合用在web application中，当某一错误产生时记录相关的request。&lt;/p&gt;
+&lt;p&gt;FingersCrossedHandler默认设置的级别为ERROR&lt;/p&gt;
+&lt;p&gt;下面给出两个示例代码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;logbook&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FingersCrossedHandler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FileHandler&lt;/span&gt;
+&lt;span class="n"&gt;file_handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FileHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;bar.log&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FingersCrossedHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file_handler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;handler&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hello info&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hello error&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;会在bar.log文件中输出两句log&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;logbook&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FingersCrossedHandler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FileHandler&lt;/span&gt;
+&lt;span class="n"&gt;file_handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FileHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;bar.log&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FingersCrossedHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file_handler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;handler&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hello info&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hello info2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;不会有任何log输出&lt;/p&gt;
+&lt;p&gt;使用Processors&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;inject_cwd&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;record&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extra&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;cwd&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getcwd&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;Processor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;inject_cwd&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c"&gt;# all logging calls inside this block in this thread will now&lt;/span&gt;
+    &lt;span class="c"&gt;# have the current working directory information attached.&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;： Processor只有当log被某一个handler处理的时候才会执行，否则processor永远不会招待。&lt;/p&gt;</summary></entry><entry><title>django-logbook</title><link href="/django-logbook.html" rel="alternate"></link><updated>2013-05-19T17:55:35+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:django-logbook.html</id><summary type="html"></summary></entry><entry><title>Linux</title><link href="/linux.html" rel="alternate"></link><updated>2013-05-16T12:18:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-16:linux.html</id><summary type="html">&lt;h2&gt;Linux TCP Performance Tuning&lt;/h2&gt;
+&lt;p&gt;There are two ways to change tcp parameters.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;change the value of parameter files in /proc/sys/net/
+   e.g. increase the value of somaxconn
+        &lt;code&gt;echo 1024 &amp;gt; /proc/sys/net/core/somaxconn&lt;/code&gt;
+   when the server restart, the parameter will restore.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;change the vlaue in /etc/sysctl.con, and run &lt;code&gt;sudo sysctl -p&lt;/code&gt; to apply the changes immediately,
+   this can change the value permanently.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Parameters&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;/proc/sys/fs/file-max: The maximum number of concurrently open files.&lt;/li&gt;
+&lt;li&gt;/proc/sys/net/ipv4/tcp_max_syn_backlog: Maximum number of remembered connection requests, which are still did not receive an acknowledgment from connecting client. The default value is 1024 for systems with more than 128Mb of memory, and 128 for low memory machines. If server suffers of overload, try to increase this number.&lt;/li&gt;
+&lt;li&gt;/proc/sys/net/core/somaxconn: Limit of socket listen() backlog, known in userspace as SOMAXCONN. Defaults to 128. The value should be raised substantially to support bursts of request. For example, to support a burst of 1024 requests, set somaxconn to 1024.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;change userlevel file-max
+need logout and login to work&lt;/p&gt;</summary></entry><entry><title>nginx tips</title><link href="/nginx-tips.html" rel="alternate"></link><updated>2013-05-13T16:11:31+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-13:nginx-tips.html</id><summary type="html">&lt;h2&gt;nginx backlog&lt;/h2&gt;
+&lt;h2&gt;Root Directory&lt;/h2&gt;
+&lt;p&gt;nginx 默认根目录，&lt;/p&gt;
+&lt;p&gt;如果在配置文件中指定了root，则根目录即为root指定的目录&lt;/p&gt;
+&lt;p&gt;如果通过编译安装的nginx，则根目录为编译时指定的prefix目录&lt;/p&gt;
+&lt;p&gt;如果通过包管理器安装，则根目录与发行版相关。例如ubuntu版本的根目录为：
+/usr/share/nginx/www&lt;/p&gt;
+&lt;h2&gt;Custome error page&lt;/h2&gt;
+&lt;p&gt;nginx 有个默认的错误显示页面&lt;/p&gt;
+&lt;h2&gt;Ref&lt;/h2&gt;
+&lt;p&gt;http://wiki.nginx.org/Pitfalls&lt;/p&gt;</summary></entry><entry><title>pelican</title><link href="/pelican.html" rel="alternate"></link><updated>2013-05-09T10:29:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-09:pelican.html</id><summary type="html">&lt;h2&gt;介绍&lt;/h2&gt;
+&lt;p&gt;peclian 是一个python版本的表态页面生成器，类似于jekyll&lt;/p&gt;</summary></entry><entry><title>Mongodb NUMA 导致的性能问题</title><link href="/mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="alternate"></link><updated>2013-05-08T13:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-08:mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html</id><summary type="html">&lt;p&gt;最近升级了mongodb，用mongo连接mongod后出现如下warning:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Server&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;startup&lt;/span&gt; &lt;span class="n"&gt;warnings&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;WARNING&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;You&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;running&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;NUMA&lt;/span&gt; &lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;          &lt;span class="n"&gt;We&lt;/span&gt; &lt;span class="n"&gt;suggest&lt;/span&gt; &lt;span class="n"&gt;launching&lt;/span&gt; &lt;span class="n"&gt;mongod&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;avoid&lt;/span&gt; &lt;span class="n"&gt;performance&lt;/span&gt; &lt;span class="n"&gt;problems&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;              &lt;span class="n"&gt;numactl&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;interleave&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;mongod&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;other&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;随即查了下&lt;em&gt;NUMA&lt;/em&gt;是什么，有多篇文章均提到了NUMA会导致mongodb的性能问题，而且官方文档也有说明。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To disable NUMA for MongoDB, use the numactl command and start mongod in the following manner:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt; &lt;span class="n"&gt;numactl&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;interleave&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mongod&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;Adjust the proc settings using the following command:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;proc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;zone_reclaim_mode&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;To fully disable NUMA you must perform both operations. However, you can change zone_reclaim_mode without restarting mongod. For more information, see documentation on Proc/sys/vm.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在此做一个整理：&lt;/p&gt;
+&lt;p&gt;NUMA：NUMA是多核心CPU架构中的一种，其全称为Non-Uniform Memory Access，简单来说就是在多核心CPU中，机器的物理内存是分配给各个核的，架构简图如下所示：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="NUMA" src="http://jcole.us/blog/files/numa-architecture.png" /&gt;&lt;/p&gt;
+&lt;p&gt;每个核访问分配给自己的内存会比访问分配给其它核的内存要快，有下面几种访问控制策略：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;缺省(default)：总是在本地节点分配（分配在当前进程运行的节点上）；&lt;/li&gt;
+&lt;li&gt;绑定(bind)：强制分配到指定节点上；&lt;/li&gt;
+&lt;li&gt;交叉(interleave)：在所有节点或者指定的节点上交织分配；&lt;/li&gt;
+&lt;li&gt;优先(preferred)：在指定节点上分配，失败则在其他节点上分配。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;上面文章中最后使用numactl –interleave命令就是指定其为交叉共享模式。&lt;/p&gt;
+&lt;p&gt;我们知道虚拟内存机制是通过一个中断信号来通知虚拟内存系统进行内存swap的，所以这个irqbalance进程忙，是一个危险信号，在这里是由于在进行频繁的内存交换。这种频繁交换现象称为swap insanity，在MySQL中经常提到，也就是在NUMA框架中，采用不合适的策略，导致核心只能从指定内存块节点上分配内存，即使总内存还有富余，也会由于当前节点内存不足时产生大量的swap操作。&lt;/p&gt;
+&lt;h3&gt;参考：&lt;/h3&gt;
+&lt;p&gt;http://docs.mongodb.org/manual/administration/production-notes/#production-numa&lt;/p&gt;
+&lt;p&gt;http://huoding.com/2011/08/09/104&lt;/p&gt;
+&lt;p&gt;http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/&lt;/p&gt;
+&lt;p&gt;http://blog.nosqlfan.com/html/2772.html&lt;/p&gt;</summary></entry><entry><title>python build Dynamic Link Library</title><link href="/python-build-dynamic-link-library.html" rel="alternate"></link><updated>2013-05-05T18:41:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-05:python-build-dynamic-link-library.html</id><summary type="html">&lt;p&gt;当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
+.../lib/libpython2.7.a: could not read symbols: Bad value
+collect2: ld returned 1 exit status&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这种情况需要安装动态库版本。&lt;/p&gt;
+&lt;p&gt;下面介绍自己编译安装动态库的python版本。&lt;/p&gt;
+&lt;h2&gt;安装&lt;/h2&gt;
+&lt;p&gt;通过ubuntu软件库安装的python版本带有动态链接库，位置为&lt;code&gt;/usr/lib/libpython&amp;lt;version&amp;gt;.so&lt;/code&gt;,&lt;/p&gt;
+&lt;p&gt;如果系统中默认的python版本太低，软件库中又没有高版本时，需要手动编译安装。&lt;/p&gt;
+&lt;p&gt;下面以python2.7.4为例，其它版本类似&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;./configure
+&lt;span class="nv"&gt;$ &lt;/span&gt;make
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;默认情况下，&lt;code&gt;make&lt;/code&gt;会在当前目录下编译生成一个libpython2.7.a的静态链接库。&lt;/p&gt;
+&lt;p&gt;如果要生成动态链接库，我们需要在&lt;code&gt;configure&lt;/code&gt;命令后加选项&lt;code&gt;--enable-shared&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Building a shared libpython&lt;/p&gt;
+&lt;p&gt;Starting with Python 2.3, the majority of the interpreter can be built
+into a shared library, which can then be used by the interpreter
+executable, and by applications embedding Python. To enable this feature,
+configure with --enable-shared.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;./configure --enable-shared
+&lt;span class="nv"&gt;$ &lt;/span&gt;make
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;通过这种方式会生成动态链接库，并安装到系统库目录下,地址：&lt;code&gt;/usr/local/lib/libpython2.7.so&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;问题&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在make的过程可能会失败，提示如下错误：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
+.../lib/libpython2.7.a: could not read symbols: Bad value
+collect2: ld returned 1 exit status&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原因是系统链接库目前下存在一个表态链接库&lt;code&gt;libpython2.7.a&lt;/code&gt;，可能是之前安装的，&lt;/p&gt;
+&lt;p&gt;对于这种情况，我们要把系统原有的Python库的路径从编译参数中除去，让链接器先搜索当前目前，当前路径为”.”，通过设置LDFLAGS，如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;./configure --enable-shared &lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;-L.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;同时建议：如果你之前运行过&lt;code&gt;make&lt;/code&gt;，那么在下一次运行&lt;code&gt;make&lt;/code&gt;之前，运行&lt;code&gt;make clean&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装完成之后运行&lt;code&gt;python&lt;/code&gt;，可能会提示如下错误：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ImportError: libpython2.7.so.1.0: cannot open shared object file: No such file or directory&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是因为新安装的动态链接库&lt;code&gt;libpython2.7.so&lt;/code&gt;并不在系统的cache中。&lt;/p&gt;
+&lt;p&gt;Linux上需要链接动态库时，系统会从cache文件（/etc/ld.so.cache）中找到此链接库。&lt;/p&gt;
+&lt;p&gt;此时需要运行 &lt;code&gt;sudo ldconfig&lt;/code&gt;更新cache。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;参考&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html"&gt;http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://blog.csdn.net/huzhenwei/article/details/7339548"&gt;http://blog.csdn.net/huzhenwei/article/details/7339548&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://linux.101hacks.com/unix/ldconfig/"&gt;http://linux.101hacks.com/unix/ldconfig/&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Python</title><link href="/python.html" rel="alternate"></link><updated>2013-05-04T16:36:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-04:python.html</id><summary type="html">&lt;h2&gt;decorator&lt;/h2&gt;
+&lt;h2&gt;class method&lt;/h2&gt;
+&lt;h1&gt;Django&lt;/h1&gt;
+&lt;h2&gt;Django test&lt;/h2&gt;
+&lt;p&gt;ref: http://mikegrouchy.com/blog/great-django-test-talks.html&lt;/p&gt;</summary></entry><entry><title>Pythonbrew</title><link href="/pythonbrew.html" rel="alternate"></link><updated>2013-05-04T16:35:56+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-04:pythonbrew.html</id><summary type="html">&lt;p&gt;home page: https://github.com/utahta/pythonbrew&lt;/p&gt;
+&lt;h2&gt;install packages over pythonbrew&lt;/h2&gt;
+&lt;p&gt;pythonbrew can install multiple python versions on the same machine,
+if you want to install packages over a specified python version, a
+recommand way is to install pip first.&lt;/p&gt;
+&lt;h3&gt;install pip&lt;/h3&gt;
+&lt;p&gt;home page: http://www.pip-installer.org/en/latest/&lt;/p&gt;
+&lt;p&gt;pip is just a python pacakge&lt;/p&gt;
+&lt;p&gt;first use pythonbrew switch to the desired python version, then&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;O&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//raw.github.com/pypa/pip/master/contrib/get-pip.py&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;after that you can use pip to install whatever pacakges over the python version.&lt;/p&gt;
+&lt;p&gt;If you want to install package on a different python version, re-do "install pip" section.&lt;/p&gt;</summary></entry><entry><title>Mysql 性能调优</title><link href="/mysql-xing-neng-diao-you.html" rel="alternate"></link><updated>2013-05-04T16:35:42+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-04:mysql-xing-neng-diao-you.html</id><summary type="html">&lt;h2&gt;thread cache size&lt;/h2&gt;
+&lt;p&gt;http://www.dbasquare.com/kb/mysql-and-thread-cache-size/&lt;/p&gt;
+&lt;p&gt;query_cache_type可以设置为0(OFF)，1(ON)或者2(DEMOND)，分别表示完全不使用query cache，除显式要求不使用query cache（使用sql_no_cache）之外的所有的select都使用query cache，只有显示要求才使用query cache（使用sql_cache)&lt;/p&gt;
+&lt;p&gt;show global status like '';
+show global variables like '';&lt;/p&gt;
+&lt;p&gt;innodb_file_per_table&lt;/p&gt;
+&lt;p&gt;mysql io 延时计算&lt;/p&gt;
+&lt;h2&gt;mysql backup&lt;/h2&gt;
+&lt;p&gt;相较前几种方法，备份数据文件最为直接、快速、方便，缺点是基本上不能实现增量备份。为了保证数据的一致性，需要在靠背文件前，执行以下 SQL 语句：&lt;/p&gt;
+&lt;p&gt;FLUSH TABLES WITH READ LOCK;
+也就是把内存中的数据都刷新到磁盘中，同时锁定数据表，以保证拷贝过程中不会有新的数据写入。这种方法备份出来的数据恢复也很简单，直接拷贝回原来的数据库目录下即可。&lt;/p&gt;
+&lt;p&gt;注意，对于 Innodb 类型表来说，还需要备份其日志文件，即 ib_logfile* 文件。因为当 Innodb 表损坏时，就可以依靠这些日志文件来恢复。&lt;/p&gt;
+&lt;p&gt;Innodb 表则可以通过执行以下语句来整理碎片，提高索引速度：&lt;/p&gt;
+&lt;p&gt;ALTER TABLE tbl_name ENGINE = Innodb;
+这其实是一个 NULL 操作，表面上看什么也不做，实际上重新整理碎片了。&lt;/p&gt;
+&lt;p&gt;为了不影响线上业务，实现在线备份，并且能增量备份，最好的办法就是采用主从复制机制(replication)，在 slave 机器上做备份。&lt;/p&gt;
+&lt;h2&gt;mysql replication&lt;/h2&gt;
+&lt;h3&gt;switch master and slave&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;one slave and one master&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Master: set read lock
+          FLUSH TABLES WITH READ LOCK;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Slave: show processlist;  when you see 'Has read all relay log', it means the slave is updated with master.
+         stop slave; reset master;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;chane the code to operate on slave;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Master: UNLOCK TABLES;
+          make the old master to be a slave;
+          change master to MASTER_HOST = '10.18.10.21', MASTER_USER = 'sns', MASTER_PASSWORD = '123';&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[mysqld]
+log-bin=mysql-bin
+server-id=1
+After making the changes, restart the server.&lt;/p&gt;
+&lt;p&gt;Note
+If you omit server-id (or set it explicitly to its default value of 0), a master refuses connections from all slaves.&lt;/p&gt;
+&lt;p&gt;Note
+For the greatest possible durability and consistency in a replication setup using InnoDB with transactions, you should use innodb_flush_log_at_trx_commit=1 and sync_binlog=1 in the master my.cnf file.&lt;/p&gt;
+&lt;p&gt;Note
+Ensure that the skip-networking option is not enabled on your replication master. If networking has been disabled, your slave will not able to communicate with the master and replication will fail.&lt;/p&gt;
+&lt;p&gt;2.&lt;/p&gt;
+&lt;p&gt;After connecting to the server as root, you can add new accounts. The following statements use GRANT to set up four new accounts:&lt;/p&gt;
+&lt;p&gt;mysql&amp;gt; CREATE USER 'monty'@'localhost' IDENTIFIED BY 'some_pass';
+mysql&amp;gt; GRANT ALL PRIVILEGES ON &lt;em&gt;.&lt;/em&gt; TO 'monty'@'localhost'
+    -&amp;gt;     WITH GRANT OPTION;
+mysql&amp;gt; CREATE USER 'monty'@'%' IDENTIFIED BY 'some_pass';
+mysql&amp;gt; GRANT ALL PRIVILEGES ON &lt;em&gt;.&lt;/em&gt; TO 'monty'@'%'
+    -&amp;gt;     WITH GRANT OPTION;
+mysql&amp;gt; CREATE USER 'admin'@'localhost';
+mysql&amp;gt; GRANT RELOAD,PROCESS ON &lt;em&gt;.&lt;/em&gt; TO 'admin'@'localhost';
+mysql&amp;gt; CREATE USER 'dummy'@'localhost';
+The accounts created by these statements have the following properties:&lt;/p&gt;
+&lt;p&gt;Two of the accounts have a user name of monty and a password of some_pass. Both accounts are superuser accounts with full privileges to do anything. The 'monty'@'localhost' account can be used only when connecting from the local host. The 'monty'@'%' account uses the '%' wildcard for the host part, so it can be used to connect from any host.&lt;/p&gt;
+&lt;p&gt;It is necessary to have both accounts for monty to be able to connect from anywhere as monty. Without the localhost account, the anonymous-user account for localhost that is created by mysql_install_db would take precedence when monty connects from the local host. As a result, monty would be treated as an anonymous user. The reason for this is that the anonymous-user account has a more specific Host column value than the 'monty'@'%' account and thus comes earlier in the user table sort order. (user table sorting is discussed in Section 6.2.4, “Access Control, Stage 1: Connection Verification”.)&lt;/p&gt;
+&lt;p&gt;The 'admin'@'localhost' account has no password. This account can be used only by admin to connect from the local host. It is granted the RELOAD and PROCESS administrative privileges. These privileges enable the admin user to execute the mysqladmin reload, mysqladmin refresh, and mysqladmin flush-xxx commands, as well as mysqladmin processlist . No privileges are granted for accessing any databases. You could add such privileges later by issuing other GRANT statements.&lt;/p&gt;
+&lt;p&gt;The 'dummy'@'localhost' account has no password. This account can be used only to connect from the local host. No privileges are granted. It is assumed that you will grant specific privileges to the account later.&lt;/p&gt;
+&lt;p&gt;The statements that create accounts with no password will fail if the NO_AUTO_CREATE_USER SQL mode is enabled. To deal with this, use an IDENTIFIED BY clause that specifies a nonempty password.&lt;/p&gt;
+&lt;p&gt;To check the privileges for an account, use SHOW GRANTS:&lt;/p&gt;
+&lt;p&gt;mysql&amp;gt; SHOW GRANTS FOR 'admin'@'localhost';
++-----------------------------------------------------+
+| Grants for admin@localhost                          |
++-----------------------------------------------------+
+| GRANT RELOAD, PROCESS ON &lt;em&gt;.&lt;/em&gt; TO 'admin'@'localhost' |
++-----------------------------------------------------+&lt;/p&gt;
+&lt;p&gt;16.1.1.5. Creating a Data Snapshot Using mysqldump  :  http://dev.mysql.com/doc/refman/5.1/en/replication-howto-mysqldump.html&lt;/p&gt;
+&lt;p&gt;Obtaining the Replication Master Binary Log Coordinates : http://dev.mysql.com/doc/refman/5.1/en/replication-howto-masterstatus.html&lt;/p&gt;
+&lt;p&gt;If a slave uses the default host-based relay log file names, changing a slave's host name after replication has been set up can cause replication to fail with the errors Failed to open the relay log and Could not find target log during relay log initialization. This is a known issue (see Bug #2122). If you anticipate that a slave's host name might change in the future (for example, if networking is set up on the slave such that its host name can be modified using DHCP), you can avoid this issue entirely by using the --relay-log and --relay-log-index options to specify relay log file names explicitly when you initially set up the slave. This will make the names independent of server host name changes.&lt;/p&gt;</summary></entry><entry><title>TIME_WAIT in netstat</title><link href="/time_wait-in-netstat.html" rel="alternate"></link><updated>2013-04-11T23:44:01+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-04-11:time_wait-in-netstat.html</id><summary type="html">&lt;p&gt;netstat -tanp | grep -o '(10.18.10.20\|211.151.139.230\|127.0.0.1):[0-9]*' | sort -nr | uniq -c | sort -nr -k 1 | wc -l&lt;/p&gt;</summary></entry><entry><title>misc</title><link href="/misc.html" rel="alternate"></link><updated>2013-03-31T20:31:38+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-31:misc.html</id><summary type="html">&lt;h1&gt;Mac sshfs&lt;/h1&gt;
+&lt;p&gt;Mac 挂载远程目录&lt;/p&gt;
+&lt;p&gt;http://osxfuse.github.com/&lt;/p&gt;
+&lt;p&gt;install OXSFUSE and SSHFS&lt;/p&gt;
+&lt;h2&gt;TF-IDF&lt;/h2&gt;
+&lt;p&gt;http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
+http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
+http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</summary></entry><entry><title>Bash</title><link href="/bash.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:bash.html</id><summary type="html">&lt;h2&gt;alias&lt;/h2&gt;
+&lt;p&gt;对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。&lt;/p&gt;
+&lt;p&gt;e.g. 在.bashrc中加入&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;servername&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ssh sns@hostname&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;执行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;servername
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;即可登陆到hostname机器。&lt;/p&gt;
+&lt;h2&gt;rsync&lt;/h2&gt;
+&lt;p&gt;大家常用rsync同步数据，有些数据是不需要同步的，可以用 --exclude 选项。&lt;/p&gt;
+&lt;p&gt;e.g.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;rsync -avz --exclude &lt;span class="s2"&gt;&amp;quot;.*&amp;quot;&lt;/span&gt; --exclude &lt;span class="s2"&gt;&amp;quot;dbconfig.py&amp;quot;&lt;/span&gt; src user@hostname:/dest
+
+--exclude &lt;span class="s2"&gt;&amp;quot;.*&amp;quot;&lt;/span&gt; 不会同步以&lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;开头的文件或文件夹，不会同步.git目录（.git目录是比较大的，不建议同步）。
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;mail&lt;/h2&gt;
+&lt;p&gt;所有crontab任务的运行结果都会输出到mail中，可以随时查看每个任务的运行情况。&lt;/p&gt;
+&lt;h2&gt;tmux&lt;/h2&gt;
+&lt;p&gt;工作中经常ssh到远程服务器，有时需要在远程服务器中开启多个终端，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一种办法是在本地开启多个终端，分别远程到服务器。&lt;/li&gt;
+&lt;li&gt;还有一种方式是利用&lt;a href="http://tmux.sourceforge.net/"&gt;tmux&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;install:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$sudo&lt;/span&gt; apt-get install tmux
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;basic usage:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;go&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;previous&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;go&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;go&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;No&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;detach&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;tmux&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;tmux 的功能非常强，但命令较多，学习成本较高，可以先使用上面几个命令。&lt;/p&gt;
+&lt;p&gt;推荐介绍视频: http://happycasts.net/episodes/41?autoplay=true&lt;/p&gt;
+&lt;h2&gt;ssh&lt;/h2&gt;
+&lt;p&gt;今天搞清楚了ssh的标准输入输出，下面是ssh命令的使用方式&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1246&lt;/span&gt;&lt;span class="n"&gt;AaCfgKkMNnqsTtVvXxYy&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;cipher_spec&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="n"&gt;escape_char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;F&lt;/span&gt; &lt;span class="n"&gt;configfile&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="n"&gt;pkcs11&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;identity_file&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;hostport&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="n"&gt;login_name&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;mac_spec&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;O&lt;/span&gt; &lt;span class="n"&gt;ctl_cmd&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;hostport&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;S&lt;/span&gt; &lt;span class="n"&gt;ctl_path&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;W&lt;/span&gt; &lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="n"&gt;local_tun&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;remote_tun&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;hostname&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;最后的&lt;code&gt;command&lt;/code&gt;是在&lt;code&gt;hostname&lt;/code&gt;机器上执行&lt;code&gt;command&lt;/code&gt;命令，那么&lt;code&gt;command&lt;/code&gt;命令的标准输入输出是远程机器&lt;code&gt;hostname&lt;/code&gt;上，还是在本地机器上？ 很多初学者可能会认为是远程机器的标准输入输出（本人以前也是这么认为的），其实是在本地机器上。&lt;/p&gt;
+&lt;p&gt;下面我们做个试验，可以在本地执行远程机器的程序并获得输出结果。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;local host&amp;quot;&lt;/span&gt; | ssh user@hostname &lt;span class="s2"&gt;&amp;quot;(echo server; cat; echo server)&amp;quot;&lt;/span&gt;
+server
+&lt;span class="nb"&gt;local &lt;/span&gt;host
+server
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们用将"local host"输出到标准输出，在hostname机器上&lt;code&gt;cat&lt;/code&gt;从标准输入获取"local host"并再次输出到标准输出(本地机器的标准输出)。&lt;/p&gt;
+&lt;p&gt;虽然&lt;code&gt;command&lt;/code&gt;中的标准输入输出是在本地机器，但&lt;code&gt;command&lt;/code&gt;中的命令和目录等都是相对于hostname的，与本地机器无法。&lt;/p&gt;
+&lt;p&gt;fuser&lt;/p&gt;</summary></entry><entry><title>config gevent on uwsgi</title><link href="/config-gevent-on-uwsgi.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:config-gevent-on-uwsgi.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;caution&lt;/strong&gt;: need gevent(&amp;gt;= 1.0), and uwsgi(&amp;gt;= 1.4)&lt;/p&gt;
+&lt;p&gt;https://github.com/SiteSupport/gevent/downloads&lt;/p&gt;
+&lt;p&gt;uwsgi install
+https://uwsgi-docs.readthedocs.org/en/latest/Install.html&lt;/p&gt;
+&lt;p&gt;https://uwsgi-docs.readthedocs.org/en/latest/Gevent.html&lt;/p&gt;</summary></entry></feed>

@@ -6,7 +6,8 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-        <title>Lyon's Blog
+<meta name="keywords" content=", mongo, " />
+        <title>How mongodb use memory  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
@@ -33,7 +34,7 @@
                     <a class="brand" href="./"><span class=site-name>Lyon's Blog</span></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right top-menu">
-                            <li  class="active"><a href=".">Home</a></li>
+                            <li ><a href=".">Home</a></li>
                             <li ><a href="./pages/about.html">About</a></li>
                             <li ><a href="./categories.html">Categories</a></li>
                             <li ><a href="./tags.html">Tags</a></li>
@@ -48,80 +49,50 @@
             <div class="row-fluid">
                 <div class="span1"></div>
                 <div class="span10">
+<article>
 <div class="row-fluid">
-
-    <div class="row-fluid">
-
-    </div>
-
-    <div class="row-fluid">
-        <div class="span12">
-            <header>
-            <h1 id="recent-posts">Recent Posts <a id="allposts" href="./archives.html">all posts</a></h1>
-            </header>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./wsgi.html">wsgi  </a> 
-                <time pubdate="pubdate" datetime="2014-02-03T19:20:22">Mon 03 February 2014</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./read-later.html">Read Later  </a> 
-                <time pubdate="pubdate" datetime="2014-01-24T13:46:17">Fri 24 January 2014</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./git.html">Git  </a> 
-                <time pubdate="pubdate" datetime="2014-01-09T14:52:21">Thu 09 January 2014</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./gevent.html">gevent  </a> 
-                <time pubdate="pubdate" datetime="2013-12-04T15:56:56">Wed 04 December 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./todo.html">TODO  </a> 
-                <time pubdate="pubdate" datetime="2013-08-21T20:45:46">Wed 21 August 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./problems-i-encouter-with-emacs.html">Problems I encouter with emacs  </a> 
-                <time pubdate="pubdate" datetime="2013-08-20T18:06:34">Tue 20 August 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./the-python-packages-i-love.html">The python packages I love  </a> 
-                <time pubdate="pubdate" datetime="2013-08-12T13:26:18">Mon 12 August 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./urwid.html">urwid  </a> 
-                <time pubdate="pubdate" datetime="2013-08-09T16:21:44">Fri 09 August 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./find-out-which-process-open-a-linux-port.html">Find out which process open a linux port  </a> 
-                <time pubdate="pubdate" datetime="2013-08-09T15:48:46">Fri 09 August 2013</time>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="./locale.html">locale  </a> 
-                <time pubdate="pubdate" datetime="2013-08-08T13:45:42">Thu 08 August 2013</time>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <header class="page_header span10 offset2">
+    <h1><a href="./how-mongodb-use-memory.html"> How mongodb use memory  </a></h1>
+    </header>
 </div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            <p>网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。</p>
+<p>MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。</p>
+<p>查看working set大小可用如下命令：<code>db.runCommand( { serverStatus: 1, workingSet: 1 } )</code></p>
+<p>serverStatus.mem.resident
+The value of resident is roughly equivalent to the amount of RAM, in megabytes (MB), currently used by the database process. In normal use this value tends to grow. In dedicated database servers this number tends to approach the total amount of system memory.</p>
+<p>所以如果resident没有超出总的内存大小，此时内存是足够的，当然也要看一下page faults是不是很频繁。</p>
+<p>Does MongoDB require a lot of RAM?
+Not necessarily. It’s certainly possible to run MongoDB on a machine with a small amount of free RAM.</p>
+<p>MongoDB automatically uses all free memory on the machine as its cache. System resource monitors show that MongoDB uses a lot of memory, but its usage is dynamic. If another process suddenly needs half the server’s RAM, MongoDB will yield cached memory to the other process.</p>
+<p>Technically, the operating system’s virtual memory subsystem manages MongoDB’s memory. This means that MongoDB will use as much free memory as it can, swapping to disk as needed. Deployments with enough memory to fit the application’s working data set in RAM will achieve the best performance.</p>
+            <aside>
+            <hr/>
+            <nav>
+            <ul class="articles_timeline">
+ 
+                <li class="previous_article">« <a href="./htop-command.html" title="Previous: htop command">htop command</a></li>
+ 
+                <li class="next_article"><a href="./fabric.html" title="Next: fabric">fabric</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+ 
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-07-29T15:11:21">Jul 29, 2013</time>
+            <h4>Category</h4>
+            <a class="category-link" href="/categories.html#mongo-ref">mongo</a> 
+
+        </div>
+        </section>
+</div>
+</article>
                 </div>
                 <div class="span1"></div>
             </div>
@@ -133,7 +104,7 @@
         <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
     </ul>
 </div>
-</footer>        <script src="http://code.jquery.com/jquery.min.js"></script>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
         <script>
             function validateForm(query)
@@ -141,5 +112,6 @@
                 return (query.length > 0);
             }
         </script>
+
     </body>
 </html>
