@@ -89,40 +89,40 @@ s=s1u1s2u2.....snun，并为s构造后缀树。</p>
 <p>从根结点到每个叶结点的路径代表一个字符或多个字符串的后缀，叶结点上的索引即是这些字符串的索引。</p>
 <h2>基本</h2>
 <p>以字符串"ab"为例，其后缀树为：</p>
-<p><img alt="" src="static/images/suffix_tree/ab.png" /></p>
+<p><img alt="" src="/images/suffix_tree/ab.png" /></p>
 <p>设置"ab"的索引为0，将索引加到叶结点中为:</p>
-<p><img alt="" src="static/images/suffix_tree/ab_index.png" /></p>
+<p><img alt="" src="/images/suffix_tree/ab_index.png" /></p>
 <h2>扩展一</h2>
 <p>字符串末尾字符为重复字符，为"aba"为例，
 为其构造后缀树并将索引加到叶结点后：</p>
-<p><img alt="" src="static/images/suffix_tree/aba_index_1.png" /></p>
+<p><img alt="" src="/images/suffix_tree/aba_index_1.png" /></p>
 <p>此时active point为(root, 'a', 1), remainder为1，即我们还有一个后缀，隐含在后缀树中，
 而此时字符串中所有的字符都已加到后缀树中，我们需要为此后缀创建一个叶结点，并将索引0加到叶结点中。</p>
 <p>如图：</p>
-<p><img alt="" src="static/images/suffix_tree/aba_index_2.png" /></p>
+<p><img alt="" src="/images/suffix_tree/aba_index_2.png" /></p>
 <p>红色的结点即是我们创建的，这个结点即是叶结点也是中间结点，对于后缀'a'来说是叶结点，
 对于后缀'aba'来说是中间结点。</p>
 <p>对于叶结点在创建的时候我们即可将索引加到叶结点中。</p>
 <p>当字符串的所有字符都加入到后缀树之后，remainder的值即是隐式后缀的数量，我们需要为这些后缀指定索引。</p>
 <p>如果active length为0，不需要创建结点，只需要将索引加入到active node中即可。</p>
 <p>如字符串"abcabdab"，将所以字符加到后缀树后：</p>
-<p><img alt="" src="static/images/suffix_tree/abcabdab_index_1.png" /></p>
+<p><img alt="" src="/images/suffix_tree/abcabdab_index_1.png" /></p>
 <p>此时active point为(blue node, \0, 0), remainder为2。</p>
 <p>后缀"ab", "a"为隐式，此时active length为0，将索引加到active node中后，如图：</p>
-<p><img alt="" src="static/images/suffix_tree/abcabdab_index_2.png" /></p>
+<p><img alt="" src="/images/suffix_tree/abcabdab_index_2.png" /></p>
 <h2>扩展二</h2>
 <p>在后缀树中加入一个新的字符串。</p>
 <p>在加入新的字符串之前，需要重置active point为(root, '\0', 0)。</p>
 <p>以字符串"ab", "abc"为例, "ab"的索引为0, "abc"的索引为1，</p>
 <p>"ab"的后缀树：</p>
-<p><img alt="" src="static/images/suffix_tree/ab_index_1.png" /></p>
+<p><img alt="" src="/images/suffix_tree/ab_index_1.png" /></p>
 <p>我们需要向此后缀树中加入字符串"abc"，</p>
 <p>在我们加入字符'ab'之后，后缀并没有发生变化，此时active point为(blue node, '\0', 0)，remainder为2.</p>
 <p>我们继续加入字符"c"，在active node下加入一条边，如图：</p>
-<p><img alt="" src="static/images/suffix_tree/ab_abc_index_1.png" /></p>
+<p><img alt="" src="/images/suffix_tree/ab_abc_index_1.png" /></p>
 <p>此时remainder变为2，active node指向红色结点，由于我们之前为叶结点创建了suffix link，更新active node的时间复杂度依然为O(1)。</p>
 <p>最终结果如图：</p>
-<p><img alt="" src="static/images/suffix_tree/ab_abc_index_2.png" /></p>
+<p><img alt="" src="/images/suffix_tree/ab_abc_index_2.png" /></p>
 <p>下面给出程序的伪代码：</p>
 <div class="highlight"><pre><span class="k">for</span> <span class="kt">char</span> <span class="n">in</span> <span class="n">text</span><span class="o">:</span>
     <span class="n">remainder</span> <span class="o">++</span>
@@ -163,7 +163,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。</p>
 <p>当模式最终匹配到某一条边后，后到这条边的目标结点，则以这个结点为根结点的子树中的所有索引就是此次的搜索结果。
 再根据索引可得到原来的字符串。</p>
 <p>例如在后缀树</p>
-<p><img alt="" src="static/images/suffix_tree/ab_abc_index_2.png" /></p>
+<p><img alt="" src="/images/suffix_tree/ab_abc_index_2.png" /></p>
 <p>中查找'b'时，可找到索引0，1，再根据索引找到原来的字符串。</p>
 <h2>复杂度</h2>
 <h3>时间</h3>
@@ -179,6 +179,8 @@ s=s1u1s2u2.....snun，并为s构造后缀树。</p>
             <ul class="articles_timeline">
  
                 <li class="previous_article">« <a href="./wsgi.html" title="Previous: wsgi">wsgi</a></li>
+ 
+                <li class="next_article"><a href="./http-keep-alive.html" title="Next: HTTP keep-alive">HTTP keep-alive</a> »</li>
             </ul>
             </nav>
             </aside>
@@ -187,7 +189,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。</p>
         <div class="span2" style="float:right;font-size:0.9em;">
  
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2014-02-03T19:46:51">Feb 3, 2014</time>
+            <time pubdate="pubdate" datetime="2014-02-03T19:47:50">Feb 3, 2014</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#algorithm-ref">algorithm</a> 
 

@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2014-02-03T19:46:51+01:00</updated><entry><title>Generalized Suffix Tree</title><link href="/generalized-suffix-tree.html" rel="alternate"></link><updated>2014-02-03T19:46:51+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-02-03:generalized-suffix-tree.html</id><summary type="html">&lt;p&gt;本文提供了另一种构造generalized suffix tree的方法，不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2014-02-03T19:48:15+01:00</updated><entry><title>HTTP keep-alive</title><link href="/http-keep-alive.html" rel="alternate"></link><updated>2014-02-03T19:48:15+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-02-03:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Turn off KeepAlive
+I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing that, right?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;HTTP keep-alive即是HTTP persistent connection，维基百科有详细说明：http://en.wikipedia.org/wiki/HTTP_persistent_connection&lt;/p&gt;
+&lt;p&gt;如果使用keep-alive功能，多个http请求会使用同一个tcp连接，这样可节省多次建立连接的时间及资源消耗，&lt;/p&gt;
+&lt;p&gt;下图显示了是否使用keep-alive功能的tcp连接对比图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/HTTP_persistent_connection.svg/500px-HTTP_persistent_connection.svg.png" /&gt;&lt;/p&gt;
+&lt;p&gt;http 1.0默认不开启，可进行指定，http 1.1默认开启。&lt;/p&gt;
+&lt;p&gt;上面我们看到启用keep-alive可节省多次建立连接的时间，但是服务器端要保持连接状态(nginx默认保持74s)，
+这样会影响服务器端的性能。 而且目前网络带宽比较大，建立连接的延时比较少，
+所以keep-alive在很多情况下会导致性能下降。这就验证了一开始那篇文章指出的在django servers中关闭keep-alive
+功能可大约提升50%的性能。&lt;/p&gt;
+&lt;p&gt;所以建议关系keep-alive功能，除非有特殊需求。&lt;/p&gt;
+&lt;p&gt;下面介绍如何nginx中关系keep-alive功能&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://wiki.nginx.org/HttpCoreModule#keepalive_timeout"&gt;nginx文档&lt;/a&gt;中有详细说明:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;keepalive_timeout&lt;/p&gt;
+&lt;p&gt;Syntax: keepalive_timeout timeout [ header_timeout ]&lt;/p&gt;
+&lt;p&gt;Default:    75s&lt;/p&gt;
+&lt;p&gt;Context:    http
+           server
+           location&lt;/p&gt;
+&lt;p&gt;Reference:  keepalive_timeout&lt;/p&gt;
+&lt;p&gt;The first parameter assigns the timeout for keep-alive connections with the client. The server will close connections after this time.&lt;/p&gt;
+&lt;p&gt;The optional second parameter assigns the time value in the header Keep-Alive: timeout=time of the response. This header can convince some browsers to close the connection, so that the server does not have to. Without this parameter, nginx does not send a Keep-Alive header (though this is not what makes a connection "keep-alive").&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果我们要关闭keep-alive功能，可在http, server或location中设置&lt;code&gt;keepalive_timeout  0;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="n"&gt;listen&lt;/span&gt;          &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;server_name&lt;/span&gt;     &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;access_log&lt;/span&gt;      &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;access&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;error_log&lt;/span&gt;       &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;keepalive_timeout&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="p"&gt;........&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下图给出了keepalive_timeout设置前后，http请求的header中connection的变化：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/nginx/keepalive/keepalive.png" /&gt;&lt;/p&gt;
+&lt;p&gt;设置&lt;code&gt;keepalive_timeout  0;&lt;/code&gt;之后：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/nginx/keepalive/notalive.png" /&gt;&lt;/p&gt;
+&lt;p&gt;笔者并没有对keep-alive做相应性能方面的benchmark，所以不确定keep-alive对性能的影响，而且keep-alive对性能的影响也与应用场景有关。&lt;/p&gt;</summary></entry><entry><title>Generalized Suffix Tree</title><link href="/generalized-suffix-tree.html" rel="alternate"></link><updated>2014-02-03T19:47:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-02-03:generalized-suffix-tree.html</id><summary type="html">&lt;p&gt;本文提供了另一种构造generalized suffix tree的方法，不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
 构造原理依然采用Ukkonen提出的算法。下面我们由简入深分别介绍此种方式应对的问题。&lt;/p&gt;
 &lt;h2&gt;前言&lt;/h2&gt;
 &lt;p&gt;后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，&lt;/p&gt;
@@ -29,40 +76,40 @@ s=s1u1s2u2.....snun，并为s构造后缀树。&lt;/p&gt;
 &lt;p&gt;从根结点到每个叶结点的路径代表一个字符或多个字符串的后缀，叶结点上的索引即是这些字符串的索引。&lt;/p&gt;
 &lt;h2&gt;基本&lt;/h2&gt;
 &lt;p&gt;以字符串"ab"为例，其后缀树为：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/suffix_tree/ab.png" /&gt;&lt;/p&gt;
 &lt;p&gt;设置"ab"的索引为0，将索引加到叶结点中为:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_index.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/suffix_tree/ab_index.png" /&gt;&lt;/p&gt;
 &lt;h2&gt;扩展一&lt;/h2&gt;
 &lt;p&gt;字符串末尾字符为重复字符，为"aba"为例，
 为其构造后缀树并将索引加到叶结点后：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/aba_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/suffix_tree/aba_index_1.png" /&gt;&lt;/p&gt;
 &lt;p&gt;此时active point为(root, 'a', 1), remainder为1，即我们还有一个后缀，隐含在后缀树中，
 而此时字符串中所有的字符都已加到后缀树中，我们需要为此后缀创建一个叶结点，并将索引0加到叶结点中。&lt;/p&gt;
 &lt;p&gt;如图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/aba_index_2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/suffix_tree/aba_index_2.png" /&gt;&lt;/p&gt;
 &lt;p&gt;红色的结点即是我们创建的，这个结点即是叶结点也是中间结点，对于后缀'a'来说是叶结点，
 对于后缀'aba'来说是中间结点。&lt;/p&gt;
 &lt;p&gt;对于叶结点在创建的时候我们即可将索引加到叶结点中。&lt;/p&gt;
 &lt;p&gt;当字符串的所有字符都加入到后缀树之后，remainder的值即是隐式后缀的数量，我们需要为这些后缀指定索引。&lt;/p&gt;
 &lt;p&gt;如果active length为0，不需要创建结点，只需要将索引加入到active node中即可。&lt;/p&gt;
 &lt;p&gt;如字符串"abcabdab"，将所以字符加到后缀树后：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/abcabdab_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/suffix_tree/abcabdab_index_1.png" /&gt;&lt;/p&gt;
 &lt;p&gt;此时active point为(blue node, \0, 0), remainder为2。&lt;/p&gt;
 &lt;p&gt;后缀"ab", "a"为隐式，此时active length为0，将索引加到active node中后，如图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/abcabdab_index_2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/suffix_tree/abcabdab_index_2.png" /&gt;&lt;/p&gt;
 &lt;h2&gt;扩展二&lt;/h2&gt;
 &lt;p&gt;在后缀树中加入一个新的字符串。&lt;/p&gt;
 &lt;p&gt;在加入新的字符串之前，需要重置active point为(root, '\0', 0)。&lt;/p&gt;
 &lt;p&gt;以字符串"ab", "abc"为例, "ab"的索引为0, "abc"的索引为1，&lt;/p&gt;
 &lt;p&gt;"ab"的后缀树：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/suffix_tree/ab_index_1.png" /&gt;&lt;/p&gt;
 &lt;p&gt;我们需要向此后缀树中加入字符串"abc"，&lt;/p&gt;
 &lt;p&gt;在我们加入字符'ab'之后，后缀并没有发生变化，此时active point为(blue node, '\0', 0)，remainder为2.&lt;/p&gt;
 &lt;p&gt;我们继续加入字符"c"，在active node下加入一条边，如图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc_index_1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/suffix_tree/ab_abc_index_1.png" /&gt;&lt;/p&gt;
 &lt;p&gt;此时remainder变为2，active node指向红色结点，由于我们之前为叶结点创建了suffix link，更新active node的时间复杂度依然为O(1)。&lt;/p&gt;
 &lt;p&gt;最终结果如图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc_index_2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/suffix_tree/ab_abc_index_2.png" /&gt;&lt;/p&gt;
 &lt;p&gt;下面给出程序的伪代码：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;remainder&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;
@@ -103,7 +150,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。&lt;/p&gt;
 &lt;p&gt;当模式最终匹配到某一条边后，后到这条边的目标结点，则以这个结点为根结点的子树中的所有索引就是此次的搜索结果。
 再根据索引可得到原来的字符串。&lt;/p&gt;
 &lt;p&gt;例如在后缀树&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="static/images/suffix_tree/ab_abc_index_2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/suffix_tree/ab_abc_index_2.png" /&gt;&lt;/p&gt;
 &lt;p&gt;中查找'b'时，可找到索引0，1，再根据索引找到原来的字符串。&lt;/p&gt;
 &lt;h2&gt;复杂度&lt;/h2&gt;
 &lt;h3&gt;时间&lt;/h3&gt;
@@ -327,54 +374,7 @@ The trick to lowering your lock percentage and thus having faster updates is to 
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;对于我们在职的程序员，这些建议仍然适用，我们一定要有自己可拿出的东西来，有一些自己的项目，能与开源。&lt;/p&gt;
-&lt;p&gt;非常重要的一点，一定要有气质、魅力，善于和另人交流，杜绝屌丝。还有程序员要注意身体哦。&lt;/p&gt;</summary></entry><entry><title>HTTP keep-alive</title><link href="/http-keep-alive.html" rel="alternate"></link><updated>2013-07-09T17:43:45+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-09:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Turn off KeepAlive
-I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing that, right?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;HTTP keep-alive即是HTTP persistent connection，维基百科有详细说明：http://en.wikipedia.org/wiki/HTTP_persistent_connection&lt;/p&gt;
-&lt;p&gt;如果使用keep-alive功能，多个http请求会使用同一个tcp连接，这样可节省多次建立连接的时间及资源消耗，&lt;/p&gt;
-&lt;p&gt;下图显示了是否使用keep-alive功能的tcp连接对比图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/HTTP_persistent_connection.svg/500px-HTTP_persistent_connection.svg.png" /&gt;&lt;/p&gt;
-&lt;p&gt;http 1.0默认不开启，可进行指定，http 1.1默认开启。&lt;/p&gt;
-&lt;p&gt;上面我们看到启用keep-alive可节省多次建立连接的时间，但是服务器端要保持连接状态(nginx默认保持74s)，
-这样会影响服务器端的性能。 而且目前网络带宽比较大，建立连接的延时比较少，
-所以keep-alive在很多情况下会导致性能下降。这就验证了一开始那篇文章指出的在django servers中关闭keep-alive
-功能可大约提升50%的性能。&lt;/p&gt;
-&lt;p&gt;所以建议关系keep-alive功能，除非有特殊需求。&lt;/p&gt;
-&lt;p&gt;下面介绍如何nginx中关系keep-alive功能&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://wiki.nginx.org/HttpCoreModule#keepalive_timeout"&gt;nginx文档&lt;/a&gt;中有详细说明:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;keepalive_timeout&lt;/p&gt;
-&lt;p&gt;Syntax: keepalive_timeout timeout [ header_timeout ]&lt;/p&gt;
-&lt;p&gt;Default:    75s&lt;/p&gt;
-&lt;p&gt;Context:    http
-           server
-           location&lt;/p&gt;
-&lt;p&gt;Reference:  keepalive_timeout&lt;/p&gt;
-&lt;p&gt;The first parameter assigns the timeout for keep-alive connections with the client. The server will close connections after this time.&lt;/p&gt;
-&lt;p&gt;The optional second parameter assigns the time value in the header Keep-Alive: timeout=time of the response. This header can convince some browsers to close the connection, so that the server does not have to. Without this parameter, nginx does not send a Keep-Alive header (though this is not what makes a connection "keep-alive").&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;如果我们要关闭keep-alive功能，可在http, server或location中设置&lt;code&gt;keepalive_timeout  0;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;如：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="n"&gt;listen&lt;/span&gt;          &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="n"&gt;server_name&lt;/span&gt;     &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="n"&gt;access_log&lt;/span&gt;      &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;access&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="n"&gt;error_log&lt;/span&gt;       &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="n"&gt;keepalive_timeout&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="p"&gt;........&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;下图给出了keepalive_timeout设置前后，http请求的header中connection的变化：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="/static/images/nginx/keepalive/keepalive.png" /&gt;&lt;/p&gt;
-&lt;p&gt;设置&lt;code&gt;keepalive_timeout  0;&lt;/code&gt;之后：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="/static/images/nginx/keepalive/notalive.png" /&gt;&lt;/p&gt;
-&lt;p&gt;笔者并没有对keep-alive做相应性能方面的benchmark，所以不确定keep-alive对性能的影响，而且keep-alive对性能的影响也与应用场景有关。&lt;/p&gt;</summary></entry><entry><title>iptables</title><link href="/iptables.html" rel="alternate"></link><updated>2013-06-25T14:52:10+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-25:iptables.html</id><summary type="html">&lt;p&gt;/etc/sysconfig/iptables - The system scripts that activate the firewall by reading this file.&lt;/p&gt;
+&lt;p&gt;非常重要的一点，一定要有气质、魅力，善于和另人交流，杜绝屌丝。还有程序员要注意身体哦。&lt;/p&gt;</summary></entry><entry><title>iptables</title><link href="/iptables.html" rel="alternate"></link><updated>2013-06-25T14:52:10+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-25:iptables.html</id><summary type="html">&lt;p&gt;/etc/sysconfig/iptables - The system scripts that activate the firewall by reading this file.&lt;/p&gt;
 &lt;h2&gt;Ref:&lt;/h2&gt;
 &lt;p&gt;http://www.cyberciti.biz/faq/rhel-fedorta-linux-iptables-firewall-configuration-tutorial/&lt;/p&gt;</summary></entry><entry><title>datetime</title><link href="/datetime.html" rel="alternate"></link><updated>2013-06-25T10:38:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-25:datetime.html</id><summary type="html">&lt;h2&gt;insert current date&lt;/h2&gt;
 &lt;p&gt;"map F3 to insert current date
