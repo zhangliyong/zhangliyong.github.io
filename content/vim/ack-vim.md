@@ -1,39 +1,24 @@
+Title: ack.vim
+Slug: vim-ack
+Date: 2014-02-04 16:20
+Tags: vim, ack, grep
+Summary: An ack-vim plugin tutorial
 
--smart-case
---sort-files
---color
---type-set=rst:ext:rst,txt
---type-set=md:ext:mkd,md,markdown
+[ack](http://beyondgrep.com/) 是一个类似于grep的工具，专门针对程序员进行了优化，主要用于搜索源代码，默认忽略非代码文件，支持大部分编程语言。在各平台的安装参考其官方网站 http://beyondgrep.com/ 。
 
+[ack.vim](https://github.com/mileszs/ack.vim) 是ack的vim插件，可在vim下直接使用ack。
 
-ACKRC LOCATION SEMANTICS
-       Ack can load its configuration from many sources.  This list specifies the sources Ack looks for configuration; each one that is
-       found is loaded in the order specified here, and each one overrides options set in any of the sources preceding it.  (For example,
-       if I set --sort-files in my user ackrc, and --nosort-files on the command line, the command line takes precedence)
+ack可通过配置文件调整搜索行为，如增加新编程语言的技术等。
 
-       ·   Defaults are loaded from App::Ack::ConfigDefaults.  This can be omitted using "--ignore-ack-defaults".
+类似于大部分unix程序，ack有全局配置(/etc/ackrc)，用户配置(~/.ackrc)，工程配置(.ackrc)等，可参考其manpage。
 
-       ·   Global ackrc
+下面列出本人的用户配置(~/.ackrc):
 
-           Options are then loaded from the global ackrc.  This is located at "/etc/ackrc" on Unix-like systems, and "C:\Documents and
-           Settings\All Users\Application Data" on Windows.  This can be omitted using "--noenv".
+    --smart-case
+    --sort-files
+    --type-set=rst:ext:rst,txt
+    --type-set=md:ext:mkd,md,markdown
+    --type-set=dotfile:match:/^\..+/
+    --nodotfile
 
-       ·   User ackrc
-
-           Options are then loaded from the user's ackrc.  This is located at "$HOME/.ackrc" on Unix-like systems, and "C:\Documents and
-           Settings\$USER\Application Data".  If a different ackrc is desired, it may be overridden with the $ACKRC environment variable.
-           This can be omitted using "--noenv".
-
-       ·   Project ackrc
-
-           Options are then loaded from the project ackrc.  The project ackrc is the first ackrc file with the name ".ackrc" or "_ackrc",
-           first searching in the current directory, then the parent directory, then the grandparent directory, etc.  This can be omitted
-           using "--noenv".
-
-       ·   ACK_OPTIONS
-
-           Options are then loaded from the environment variable "ACK_OPTIONS".  This can be omitted using "--noenv".
-
-       ·   Command line
-
-           Options are then loaded from the command line.
+增加对Markdown和reStructuredText文件的支持，并忽略所有以"."开头的隐藏文件。

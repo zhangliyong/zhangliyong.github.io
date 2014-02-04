@@ -20,7 +20,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。
 
 例如为"ab", "abc"构造后缀树，找到两个字符"#", "$"，我们得到字符中abc#abcde$"，然后为其构造后缀树，如图:
 
-![](static/images/suffix_tree/ab_abc.png)
+![](images/suffix_tree/ab_abc.png)
 
 当有少量字符串的时候，这种方式比较实用，我们可以很轻易找到n个不同的字符，当字符串比较多时，
 我们很难找到这么多不同的字符。目前unicode的码点是从0到0x10ffff，也就是unicode最多能表示1114111个字符，仅仅是百万级。
@@ -44,24 +44,24 @@ s=s1u1s2u2.....snun，并为s构造后缀树。
 
 以字符串"ab"为例，其后缀树为：
 
-![](static/images/suffix_tree/ab.png)
+![](/images/suffix_tree/ab.png)
 
 设置"ab"的索引为0，将索引加到叶结点中为:
 
-![](static/images/suffix_tree/ab_index.png)
+![](/images/suffix_tree/ab_index.png)
 
 ##扩展一
 字符串末尾字符为重复字符，为"aba"为例，
 为其构造后缀树并将索引加到叶结点后：
 
-![](static/images/suffix_tree/aba_index_1.png)
+![](/images/suffix_tree/aba_index_1.png)
 
 此时active point为(root, 'a', 1), remainder为1，即我们还有一个后缀，隐含在后缀树中，
 而此时字符串中所有的字符都已加到后缀树中，我们需要为此后缀创建一个叶结点，并将索引0加到叶结点中。
 
 如图：
 
-![](static/images/suffix_tree/aba_index_2.png)
+![](/images/suffix_tree/aba_index_2.png)
 
 红色的结点即是我们创建的，这个结点即是叶结点也是中间结点，对于后缀'a'来说是叶结点，
 对于后缀'aba'来说是中间结点。
@@ -74,13 +74,13 @@ s=s1u1s2u2.....snun，并为s构造后缀树。
 
 如字符串"abcabdab"，将所以字符加到后缀树后：
 
-![](static/images/suffix_tree/abcabdab_index_1.png)
+![](/images/suffix_tree/abcabdab_index_1.png)
 
 此时active point为(blue node, \0, 0), remainder为2。
 
 后缀"ab", "a"为隐式，此时active length为0，将索引加到active node中后，如图：
 
-![](static/images/suffix_tree/abcabdab_index_2.png)
+![](/images/suffix_tree/abcabdab_index_2.png)
 
 
 ## 扩展二
@@ -92,7 +92,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。
 
 "ab"的后缀树：
 
-![](static/images/suffix_tree/ab_index_1.png)
+![](/images/suffix_tree/ab_index_1.png)
 
 我们需要向此后缀树中加入字符串"abc"，
 
@@ -100,13 +100,13 @@ s=s1u1s2u2.....snun，并为s构造后缀树。
 
 我们继续加入字符"c"，在active node下加入一条边，如图：
 
-![](static/images/suffix_tree/ab_abc_index_1.png)
+![](/images/suffix_tree/ab_abc_index_1.png)
 
 此时remainder变为2，active node指向红色结点，由于我们之前为叶结点创建了suffix link，更新active node的时间复杂度依然为O(1)。
 
 最终结果如图：
 
-![](static/images/suffix_tree/ab_abc_index_2.png)
+![](/images/suffix_tree/ab_abc_index_2.png)
 
 
 下面给出程序的伪代码：
@@ -152,7 +152,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。
 
 例如在后缀树
 
-![](static/images/suffix_tree/ab_abc_index_2.png)
+![](/images/suffix_tree/ab_abc_index_2.png)
 
 中查找'b'时，可找到索引0，1，再根据索引找到原来的字符串。
 
