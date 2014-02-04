@@ -13,10 +13,19 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;增加对Markdown和reStructuredText文件的支持，并忽略所有以"."开头的隐藏文件。&lt;/p&gt;</summary><category term="vim"></category><category term="ack"></category><category term="grep"></category></entry><entry><title>Linux Sysadmin Tools</title><link href="http://zhangliyong.github.io/linux-sysadmin-tools.html" rel="alternate"></link><updated>2014-02-04T00:00:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-04:linux-sysadmin-tools.html</id><summary type="html">&lt;p&gt;下面列出一些自己常用的系统管理的工具，总结一下，以防忘记。&lt;/p&gt;
-&lt;p&gt;htop&lt;/p&gt;
-&lt;p&gt;iftop&lt;/p&gt;
-&lt;p&gt;iotop&lt;/p&gt;</summary></entry><entry><title>iotop</title><link href="http://zhangliyong.github.io/iotop.html" rel="alternate"></link><updated>2014-02-03T19:53:14+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:iotop.html</id><summary type="html">&lt;p&gt;http://guichaz.free.fr/iotop/&lt;/p&gt;</summary></entry><entry><title>iftop</title><link href="http://zhangliyong.github.io/iftop.html" rel="alternate"></link><updated>2014-02-03T19:53:08+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:iftop.html</id><summary type="html">&lt;p&gt;http://www.ex-parrot.com/pdw/iftop/&lt;/p&gt;</summary></entry><entry><title>HTTP keep-alive</title><link href="http://zhangliyong.github.io/http-keep-alive.html" rel="alternate"></link><updated>2014-02-03T19:48:15+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
+&lt;p&gt;增加对Markdown和reStructuredText文件的支持，并忽略所有以"."开头的隐藏文件。&lt;/p&gt;</summary><category term="vim"></category><category term="ack"></category><category term="grep"></category></entry><entry><title>Linux Sysadmin Tools</title><link href="http://zhangliyong.github.io/linux-sysadmin-tools.html" rel="alternate"></link><updated>2014-02-04T00:00:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-04:linux-sysadmin-tools.html</id><summary type="html">&lt;p&gt;下面列出一些自己常用的系统管理的工具，总结一下。&lt;/p&gt;
+&lt;h1&gt;htop&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://hisham.hm/htop/index.php"&gt;htop&lt;/a&gt; 是一个替代top的工具，显示信息很详细，功能丰富，一但上手操作也很简单，
+&lt;a href="http://www.thegeekstuff.com/2011/09/linux-htop-examples/"&gt;thegeekstuff&lt;/a&gt;上有
+一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="htop" src="http://hisham.hm/htop/htop-1.0-screenshot.png" /&gt;&lt;/p&gt;
+&lt;h1&gt;iftop&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://www.ex-parrot.com/pdw/iftop/"&gt;iftop&lt;/a&gt; 实时显示网卡的带宽使用情况。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="iftop" src="http://www.ex-parrot.com/pdw/iftop/iftop_normal.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="iftop" src="http://www.ex-parrot.com/pdw/iftop/iftop_ports.png" /&gt;&lt;/p&gt;
+&lt;h1&gt;iotop&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://guichaz.free.fr/iotop/"&gt;iotop&lt;/a&gt; 是用python编写的显示磁盘IO使用的应用，vmstat可以显示磁盘的整体使用情况，iotop 可以显示各个应用的磁盘使用。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="iotop" src="http://guichaz.free.fr/iotop/iotop_big.png" /&gt;&lt;/p&gt;</summary><category term="Linux"></category><category term="sysadmin"></category><category term="bash"></category></entry><entry><title>HTTP keep-alive</title><link href="http://zhangliyong.github.io/http-keep-alive.html" rel="alternate"></link><updated>2014-02-03T19:48:15+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Turn off KeepAlive
 I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing that, right?&lt;/p&gt;
@@ -335,9 +344,7 @@ The value of resident is roughly equivalent to the amount of RAM, in megabytes (
 &lt;p&gt;Does MongoDB require a lot of RAM?
 Not necessarily. It’s certainly possible to run MongoDB on a machine with a small amount of free RAM.&lt;/p&gt;
 &lt;p&gt;MongoDB automatically uses all free memory on the machine as its cache. System resource monitors show that MongoDB uses a lot of memory, but its usage is dynamic. If another process suddenly needs half the server’s RAM, MongoDB will yield cached memory to the other process.&lt;/p&gt;
-&lt;p&gt;Technically, the operating system’s virtual memory subsystem manages MongoDB’s memory. This means that MongoDB will use as much free memory as it can, swapping to disk as needed. Deployments with enough memory to fit the application’s working data set in RAM will achieve the best performance.&lt;/p&gt;</summary></entry><entry><title>htop command</title><link href="http://zhangliyong.github.io/htop-command.html" rel="alternate"></link><updated>2013-07-28T11:11:13+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-28:htop-command.html</id><summary type="html">&lt;p&gt;推荐一个代替工具htop，显示信息很详细，功能丰富，一但上手操作也很简单，
-&lt;a href="http://www.thegeekstuff.com/2011/09/linux-htop-examples/"&gt;thegeekstuff&lt;/a&gt;上有
-一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。&lt;/p&gt;</summary></entry><entry><title>vmstat</title><link href="http://zhangliyong.github.io/vmstat.html" rel="alternate"></link><updated>2013-07-25T11:35:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-25:vmstat.html</id><summary type="html">&lt;p&gt;最近在分析mongo的性能问题，发现mongo所在机器的io比较频繁。&lt;/p&gt;
+&lt;p&gt;Technically, the operating system’s virtual memory subsystem manages MongoDB’s memory. This means that MongoDB will use as much free memory as it can, swapping to disk as needed. Deployments with enough memory to fit the application’s working data set in RAM will achieve the best performance.&lt;/p&gt;</summary></entry><entry><title>vmstat</title><link href="http://zhangliyong.github.io/vmstat.html" rel="alternate"></link><updated>2013-07-25T11:35:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-25:vmstat.html</id><summary type="html">&lt;p&gt;最近在分析mongo的性能问题，发现mongo所在机器的io比较频繁。&lt;/p&gt;
 &lt;p&gt;使用vmstat命令查看，发现b（The number of processes in uninterruptible sleep）这一列的数量比较大，持续在4左右。
 随后查询uninterruptible sleep状态的意义，引自：http://www.novell.com/support/kb/doc.php?id=7002725&lt;/p&gt;
 &lt;blockquote&gt;
