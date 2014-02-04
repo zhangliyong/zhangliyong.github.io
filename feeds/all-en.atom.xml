@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2014-02-03T19:54:21+01:00</updated><entry><title>ack-vim</title><link href="/ack-vim.html" rel="alternate"></link><updated>2014-02-03T19:54:21+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-02-03:ack-vim.html</id><summary type="html">&lt;p&gt;-smart-case
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-03T19:54:21+01:00</updated><entry><title>ack-vim</title><link href="http://zhangliyong.github.io/ack-vim.html" rel="alternate"></link><updated>2014-02-03T19:54:21+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:ack-vim.html</id><summary type="html">&lt;p&gt;-smart-case
 --sort-files
 --color
 --type-set=rst:ext:rst,txt
@@ -34,9 +34,9 @@
    &lt;span class="err"&gt;·&lt;/span&gt;   &lt;span class="n"&gt;Command&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;
 
        &lt;span class="n"&gt;Options&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;then&lt;/span&gt; &lt;span class="n"&gt;loaded&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Be Newbie Forever</title><link href="/be-newbie-forever.html" rel="alternate"></link><updated>2014-02-03T19:53:49+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-02-03:be-newbie-forever.html</id><summary type="html">&lt;p&gt;You will be newbie forever.
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Be Newbie Forever</title><link href="http://zhangliyong.github.io/be-newbie-forever.html" rel="alternate"></link><updated>2014-02-03T19:53:49+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:be-newbie-forever.html</id><summary type="html">&lt;p&gt;You will be newbie forever.
 Get good at the beginner mode, learning new programs, asking dumb questions, making stupid mistakes, soliciting help, and helping others with what you learn (the best way to learn yourself).&lt;/p&gt;
-&lt;p&gt;http://benoithamelin.tumblr.com/post/17949523929/you-will-be-newbie-forever-get-good-at-the&lt;/p&gt;</summary></entry><entry><title>iotop</title><link href="/iotop.html" rel="alternate"></link><updated>2014-02-03T19:53:14+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-02-03:iotop.html</id><summary type="html">&lt;p&gt;http://guichaz.free.fr/iotop/&lt;/p&gt;</summary></entry><entry><title>iftop</title><link href="/iftop.html" rel="alternate"></link><updated>2014-02-03T19:53:08+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-02-03:iftop.html</id><summary type="html">&lt;p&gt;http://www.ex-parrot.com/pdw/iftop/&lt;/p&gt;</summary></entry><entry><title>HTTP keep-alive</title><link href="/http-keep-alive.html" rel="alternate"></link><updated>2014-02-03T19:48:15+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-02-03:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
+&lt;p&gt;http://benoithamelin.tumblr.com/post/17949523929/you-will-be-newbie-forever-get-good-at-the&lt;/p&gt;</summary></entry><entry><title>iotop</title><link href="http://zhangliyong.github.io/iotop.html" rel="alternate"></link><updated>2014-02-03T19:53:14+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:iotop.html</id><summary type="html">&lt;p&gt;http://guichaz.free.fr/iotop/&lt;/p&gt;</summary></entry><entry><title>iftop</title><link href="http://zhangliyong.github.io/iftop.html" rel="alternate"></link><updated>2014-02-03T19:53:08+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:iftop.html</id><summary type="html">&lt;p&gt;http://www.ex-parrot.com/pdw/iftop/&lt;/p&gt;</summary></entry><entry><title>HTTP keep-alive</title><link href="http://zhangliyong.github.io/http-keep-alive.html" rel="alternate"></link><updated>2014-02-03T19:48:15+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Turn off KeepAlive
 I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing that, right?&lt;/p&gt;
@@ -83,7 +83,7 @@ I don’t totally understand how KeepAlive works, but turning it off on our Djan
 &lt;p&gt;&lt;img alt="" src="/images/nginx/keepalive/keepalive.png" /&gt;&lt;/p&gt;
 &lt;p&gt;设置&lt;code&gt;keepalive_timeout  0;&lt;/code&gt;之后：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="/images/nginx/keepalive/notalive.png" /&gt;&lt;/p&gt;
-&lt;p&gt;笔者并没有对keep-alive做相应性能方面的benchmark，所以不确定keep-alive对性能的影响，而且keep-alive对性能的影响也与应用场景有关。&lt;/p&gt;</summary></entry><entry><title>Generalized Suffix Tree</title><link href="/generalized-suffix-tree.html" rel="alternate"></link><updated>2014-02-03T19:47:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-02-03:generalized-suffix-tree.html</id><summary type="html">&lt;p&gt;本文提供了另一种构造generalized suffix tree的方法，不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
+&lt;p&gt;笔者并没有对keep-alive做相应性能方面的benchmark，所以不确定keep-alive对性能的影响，而且keep-alive对性能的影响也与应用场景有关。&lt;/p&gt;</summary></entry><entry><title>Generalized Suffix Tree</title><link href="http://zhangliyong.github.io/generalized-suffix-tree.html" rel="alternate"></link><updated>2014-02-03T19:47:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:generalized-suffix-tree.html</id><summary type="html">&lt;p&gt;本文提供了另一种构造generalized suffix tree的方法，不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
 构造原理依然采用Ukkonen提出的算法。下面我们由简入深分别介绍此种方式应对的问题。&lt;/p&gt;
 &lt;h2&gt;前言&lt;/h2&gt;
 &lt;p&gt;后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，&lt;/p&gt;
@@ -196,11 +196,11 @@ s=s1u1s2u2.....snun，并为s构造后缀树。&lt;/p&gt;
 &lt;p&gt;模式P的长度为|P|，则搜索的时间复杂度为O(|P|)&lt;/p&gt;
 &lt;h3&gt;空间&lt;/h3&gt;
 &lt;p&gt;TODO&lt;/p&gt;
-&lt;p&gt;笔者给出了一个python版本的实现。&lt;/p&gt;</summary></entry><entry><title>wsgi</title><link href="/wsgi.html" rel="alternate"></link><updated>2014-02-03T19:20:22+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-02-03:wsgi.html</id><summary type="html">&lt;p&gt;http://lucumr.pocoo.org/2007/5/21/getting-started-with-wsgi/&lt;/p&gt;
+&lt;p&gt;笔者给出了一个python版本的实现。&lt;/p&gt;</summary></entry><entry><title>wsgi</title><link href="http://zhangliyong.github.io/wsgi.html" rel="alternate"></link><updated>2014-02-03T19:20:22+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:wsgi.html</id><summary type="html">&lt;p&gt;http://lucumr.pocoo.org/2007/5/21/getting-started-with-wsgi/&lt;/p&gt;
 &lt;p&gt;http://webpython.codepoint.net/wsgi_request_parsing_post&lt;/p&gt;
-&lt;p&gt;http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html&lt;/p&gt;</summary></entry><entry><title>Read Later</title><link href="/read-later.html" rel="alternate"></link><updated>2014-01-24T13:46:17+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-01-24:read-later.html</id><summary type="html">&lt;h2&gt;Python&lt;/h2&gt;
+&lt;p&gt;http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html&lt;/p&gt;</summary></entry><entry><title>Read Later</title><link href="http://zhangliyong.github.io/read-later.html" rel="alternate"></link><updated>2014-01-24T13:46:17+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-01-24:read-later.html</id><summary type="html">&lt;h2&gt;Python&lt;/h2&gt;
 &lt;p&gt;Python Guide: http://docs.python-guide.org/en/latest/index.html&lt;/p&gt;
-&lt;p&gt;字符串匹配的KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html&lt;/p&gt;</summary></entry><entry><title>Git</title><link href="/git.html" rel="alternate"></link><updated>2014-01-09T14:52:21+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2014-01-09:git.html</id><summary type="html">&lt;h2&gt;Basic&lt;/h2&gt;
+&lt;p&gt;字符串匹配的KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html&lt;/p&gt;</summary></entry><entry><title>Git</title><link href="http://zhangliyong.github.io/git.html" rel="alternate"></link><updated>2014-01-09T14:52:21+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-01-09:git.html</id><summary type="html">&lt;h2&gt;Basic&lt;/h2&gt;
 &lt;p&gt;使用Git前，要先理解三个概念（与其它的VCS不同）：working directory, index, repository.&lt;/p&gt;
 &lt;h3&gt;working directory&lt;/h3&gt;
 &lt;p&gt;即是你当前的工作目录，你所编辑的文件都在此目录下。&lt;/p&gt;
@@ -210,7 +210,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。&lt;/p&gt;
 &lt;p&gt;http://danielkummer.github.com/git-flow-cheatsheet/&lt;/p&gt;
 &lt;h2&gt;Git submodules&lt;/h2&gt;
 &lt;p&gt;http://git-scm.com/docs/gitignore
-http://git-scm.com/docs/git-check-ignore.html&lt;/p&gt;</summary></entry><entry><title>gevent</title><link href="/gevent.html" rel="alternate"></link><updated>2013-12-04T15:56:56+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-12-04:gevent.html</id><summary type="html">&lt;h2&gt;Pool&lt;/h2&gt;
+http://git-scm.com/docs/git-check-ignore.html&lt;/p&gt;</summary></entry><entry><title>gevent</title><link href="http://zhangliyong.github.io/gevent.html" rel="alternate"></link><updated>2013-12-04T15:56:56+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-12-04:gevent.html</id><summary type="html">&lt;h2&gt;Pool&lt;/h2&gt;
 &lt;p&gt;什么时候执行Pool中的任务&lt;/p&gt;
 &lt;p&gt;用gevent spawn的greenlet何时执行，无论是用group, pool, gevent, 当spawn时，新spawn的greenlet已经处理准备执行状态，
 当主进程或其它greenlet sleep或有其它switch操作时，新spawn的greenlet会被执行。&lt;/p&gt;
@@ -220,7 +220,7 @@ http://git-scm.com/docs/git-check-ignore.html&lt;/p&gt;</summary></entry><entry>
 &lt;p&gt;Gevent and Greenlets: http://blog.pythonisito.com/2012/07/gevent-and-greenlets.html&lt;/p&gt;
 &lt;p&gt;Greening the Python Standard Library with Gevent: http://blog.pythonisito.com/2012/08/gevent-monkey-patch.html&lt;/p&gt;
 &lt;p&gt;Building TCP Servers with Gevent: http://blog.pythonisito.com/2012/08/building-tcp-servers-with-gevent.html&lt;/p&gt;
-&lt;p&gt;Building Web Applications with Gevent's WSGI Server: http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html&lt;/p&gt;</summary></entry><entry><title>TODO</title><link href="/todo.html" rel="alternate"></link><updated>2013-08-21T20:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-21:todo.html</id><summary type="html">&lt;h2&gt;2013-05-08&lt;/h2&gt;
+&lt;p&gt;Building Web Applications with Gevent's WSGI Server: http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html&lt;/p&gt;</summary></entry><entry><title>TODO</title><link href="http://zhangliyong.github.io/todo.html" rel="alternate"></link><updated>2013-08-21T20:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-21:todo.html</id><summary type="html">&lt;h2&gt;2013-05-08&lt;/h2&gt;
 &lt;h3&gt;TODO TODAY&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -230,7 +230,7 @@ http://git-scm.com/docs/git-check-ignore.html&lt;/p&gt;</summary></entry><entry>
 &lt;p&gt;总结peclian&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;mysql replication, mysql 索引树&lt;/p&gt;</summary></entry><entry><title>Problems I encouter with emacs</title><link href="/problems-i-encouter-with-emacs.html" rel="alternate"></link><updated>2013-08-20T18:06:34+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-20:problems-i-encouter-with-emacs.html</id><summary type="html">&lt;p&gt;emacs with zsh&lt;/p&gt;
+&lt;p&gt;mysql replication, mysql 索引树&lt;/p&gt;</summary></entry><entry><title>Problems I encouter with emacs</title><link href="http://zhangliyong.github.io/problems-i-encouter-with-emacs.html" rel="alternate"></link><updated>2013-08-20T18:06:34+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-20:problems-i-encouter-with-emacs.html</id><summary type="html">&lt;p&gt;emacs with zsh&lt;/p&gt;
 &lt;p&gt;when I first open zsh in emacs using:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;term&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -244,7 +244,7 @@ I solve this problem by running:&lt;/p&gt;
 
 
 &lt;p&gt;in terminal.&lt;/p&gt;
-&lt;p&gt;ref: http://stackoverflow.com/questions/8918910/weird-character-zsh-in-emacs-terminal&lt;/p&gt;</summary></entry><entry><title>The python packages I love</title><link href="/the-python-packages-i-love.html" rel="alternate"></link><updated>2013-08-12T13:26:18+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-12:the-python-packages-i-love.html</id><summary type="html">&lt;p&gt;gevent:&lt;/p&gt;
+&lt;p&gt;ref: http://stackoverflow.com/questions/8918910/weird-character-zsh-in-emacs-terminal&lt;/p&gt;</summary></entry><entry><title>The python packages I love</title><link href="http://zhangliyong.github.io/the-python-packages-i-love.html" rel="alternate"></link><updated>2013-08-12T13:26:18+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-12:the-python-packages-i-love.html</id><summary type="html">&lt;p&gt;gevent:&lt;/p&gt;
 &lt;p&gt;arrow: Better dates &amp;amp; times for Python https://github.com/crsmithdev/arrow http://crsmithdev.com/arrow&lt;/p&gt;
 &lt;p&gt;requests: &lt;/p&gt;
 &lt;p&gt;grequests:&lt;/p&gt;
@@ -253,13 +253,13 @@ I solve this problem by running:&lt;/p&gt;
 envoy
 tablib
 clint
-autoenv&lt;/p&gt;</summary></entry><entry><title>urwid</title><link href="/urwid.html" rel="alternate"></link><updated>2013-08-09T16:21:44+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-09:urwid.html</id><summary type="html">&lt;p&gt;最近要写一个mongo current op的管理工具，&lt;/p&gt;
+autoenv&lt;/p&gt;</summary></entry><entry><title>urwid</title><link href="http://zhangliyong.github.io/urwid.html" rel="alternate"></link><updated>2013-08-09T16:21:44+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-09:urwid.html</id><summary type="html">&lt;p&gt;最近要写一个mongo current op的管理工具，&lt;/p&gt;
 &lt;p&gt;http://www.nicosphere.net/urwid-for-python-a-ncurses-library-2541/&lt;/p&gt;
 &lt;p&gt;https://github.com/intnull/videotop/blob/master/videotop.py&lt;/p&gt;
 &lt;p&gt;Why can't I select text in an Urwid program?&lt;/p&gt;
 &lt;p&gt;By default Urwid's MainLoop tells the terminal that it will handle mouse input so it can react to things like selecting widgets with the mouse or activating check boxes.&lt;/p&gt;
 &lt;p&gt;If you wrote this program and you want to disable Urwid's mouse handling you can set handle_mouse=False when creating your MainLoop or screen object.&lt;/p&gt;
-&lt;p&gt;Or you can just hold the SHIFT key while clicking and dragging in to get the normal select text/copy behavior.&lt;/p&gt;</summary></entry><entry><title>Find out which process open a linux port</title><link href="/find-out-which-process-open-a-linux-port.html" rel="alternate"></link><updated>2013-08-09T15:48:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-09:find-out-which-process-open-a-linux-port.html</id><summary type="html">&lt;p&gt;最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。&lt;/p&gt;
+&lt;p&gt;Or you can just hold the SHIFT key while clicking and dragging in to get the normal select text/copy behavior.&lt;/p&gt;</summary></entry><entry><title>Find out which process open a linux port</title><link href="http://zhangliyong.github.io/find-out-which-process-open-a-linux-port.html" rel="alternate"></link><updated>2013-08-09T15:48:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-09:find-out-which-process-open-a-linux-port.html</id><summary type="html">&lt;p&gt;最近在调mongodb的性能，发现currentop中有很多长时间运行的查询，从currentop中可以看到查询来源ip:port。&lt;/p&gt;
 &lt;p&gt;那么可以到ip机器上查询port对应的进程号，进而找到发出此查询的应用。&lt;/p&gt;
 &lt;p&gt;根据port来查询进程号有多种方案：&lt;/p&gt;
 &lt;ol&gt;
@@ -283,7 +283,7 @@ autoenv&lt;/p&gt;</summary></entry><entry><title>urwid</title><link href="/urwid
 &lt;/ol&gt;
 &lt;p&gt;通过这几种方式找到进程号后，可以利用&lt;code&gt;ps -eaf | grep &amp;lt;pid&amp;gt;&lt;/code&gt;找到此进程的执行命令，
 并可以通过&lt;code&gt;/proc/&amp;lt;pid&amp;gt;/cwd&lt;/code&gt;找到此进程的执行目录。&lt;/p&gt;
-&lt;p&gt;参考：http://www.cyberciti.biz/faq/what-process-has-open-linux-port/&lt;/p&gt;</summary></entry><entry><title>locale</title><link href="/locale.html" rel="alternate"></link><updated>2013-08-08T13:45:42+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-08:locale.html</id><summary type="html">&lt;p&gt;当在终端下执行某些操作，提示编码问题时，基本是因为终端的locale环境的编码不支持。&lt;/p&gt;
+&lt;p&gt;参考：http://www.cyberciti.biz/faq/what-process-has-open-linux-port/&lt;/p&gt;</summary></entry><entry><title>locale</title><link href="http://zhangliyong.github.io/locale.html" rel="alternate"></link><updated>2013-08-08T13:45:42+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-08:locale.html</id><summary type="html">&lt;p&gt;当在终端下执行某些操作，提示编码问题时，基本是因为终端的locale环境的编码不支持。&lt;/p&gt;
 &lt;p&gt;有些终端下默认的LC_*设置为&lt;code&gt;C&lt;/code&gt;，可运行&lt;code&gt;locale&lt;/code&gt;查看，也可查看&lt;code&gt;/etc/default/locale&lt;/code&gt;，
 此时终端环境的默认编码是&lt;code&gt;ASCII&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;可将其改为&lt;code&gt;UTF8&lt;/code&gt;编码。&lt;/p&gt;
@@ -292,7 +292,7 @@ autoenv&lt;/p&gt;</summary></entry><entry><title>urwid</title><link href="/urwid
 &lt;li&gt;用&lt;code&gt;locale -a&lt;/code&gt;命令查看系统支持的category。&lt;/li&gt;
 &lt;li&gt;在终端下进行&lt;code&gt;export LANG=&amp;lt;category&amp;gt;&lt;/code&gt;，此时终端的&lt;code&gt;LC_*&lt;/code&gt;变量发生了变化。
     如果不想每次手动设置，可将&lt;code&gt;export LANG=&amp;lt;category&amp;gt;&lt;/code&gt;加到&lt;code&gt;.bashrc&lt;/code&gt;中。&lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>PuDB</title><link href="/pudb.html" rel="alternate"></link><updated>2013-08-06T10:31:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-06:pudb.html</id><summary type="html">&lt;p&gt;https://pypi.python.org/pypi/pudb&lt;/p&gt;</summary></entry><entry><title>transfer munin server</title><link href="/transfer-munin-server.html" rel="alternate"></link><updated>2013-08-05T13:27:23+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-05:transfer-munin-server.html</id><summary type="html">&lt;p&gt;当修改某一node的主机名时，修改后此node的所有历史记录都会消失，可以恢复这些历史数据，在munin中所有数据都保存在rrd文件中，此文件在/var/lib/munin中，如：social/services.social-uptime-uptime-g.rrd 是主机名为services.social的其中一个数据文件。当修改了node的主机名时，只需要同时对数据文件重命名即可。&lt;/p&gt;
+&lt;/ol&gt;</summary></entry><entry><title>PuDB</title><link href="http://zhangliyong.github.io/pudb.html" rel="alternate"></link><updated>2013-08-06T10:31:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-06:pudb.html</id><summary type="html">&lt;p&gt;https://pypi.python.org/pypi/pudb&lt;/p&gt;</summary></entry><entry><title>transfer munin server</title><link href="http://zhangliyong.github.io/transfer-munin-server.html" rel="alternate"></link><updated>2013-08-05T13:27:23+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-05:transfer-munin-server.html</id><summary type="html">&lt;p&gt;当修改某一node的主机名时，修改后此node的所有历史记录都会消失，可以恢复这些历史数据，在munin中所有数据都保存在rrd文件中，此文件在/var/lib/munin中，如：social/services.social-uptime-uptime-g.rrd 是主机名为services.social的其中一个数据文件。当修改了node的主机名时，只需要同时对数据文件重命名即可。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;取消munin crontab的执行， cd /etc/cron.d/; sudo mv munin munin.disable
     crontab不会执行/etc/cron.d/下文件名中带有“.”的文件&lt;/li&gt;
@@ -301,7 +301,7 @@ autoenv&lt;/p&gt;</summary></entry><entry><title>urwid</title><link href="/urwid
 &lt;li&gt;修改munin crontab执行，5分钟后将会看到更新的结果。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;： 改动数据文件前要先取消crontab的执行，否则可能会影响历史数据, 同时数据文件迁移之后，要保证用户munin有对这些rrd文件写的权限。因为用&lt;code&gt;sudo cp&lt;/code&gt;之后会改变这些文件的owner.&lt;/p&gt;
-&lt;p&gt;如果要将munin server转移到其它机器，只需要将rrd数据文件复制过去即可。&lt;/p&gt;</summary></entry><entry><title>munin</title><link href="/munin.html" rel="alternate"></link><updated>2013-08-05T13:17:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-08-05:munin.html</id><summary type="html">&lt;h2&gt;Writing plugins&lt;/h2&gt;
+&lt;p&gt;如果要将munin server转移到其它机器，只需要将rrd数据文件复制过去即可。&lt;/p&gt;</summary></entry><entry><title>munin</title><link href="http://zhangliyong.github.io/munin.html" rel="alternate"></link><updated>2013-08-05T13:17:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-05:munin.html</id><summary type="html">&lt;h2&gt;Writing plugins&lt;/h2&gt;
 &lt;p&gt;global attribute: http://munin-monitoring.org/wiki/protocol-config&lt;/p&gt;
 &lt;p&gt;redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch&lt;/p&gt;
 &lt;p&gt;mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph&lt;/p&gt;
@@ -316,7 +316,7 @@ http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565&lt;/p&gt;
 &lt;p&gt;有时我们在&lt;code&gt;/etc/munin/plugin-conf.d/&lt;/code&gt;中会看到&lt;code&gt;env.warning value&lt;/code&gt;，这是因为插件会读取&lt;code&gt;env.warning&lt;/code&gt;的值，并根据此值设置每个field的warning。如果插件不读取&lt;code&gt;env.warning&lt;/code&gt;的值，即使设置也不会启作用，munin不会自动设置。&lt;/p&gt;
 &lt;p&gt;关于warning, critical的设置可参考: &lt;a href="http://munin-monitoring.org/wiki/fieldname.warning"&gt;{fieldname}.warning&lt;/a&gt;, &lt;a href="http://munin-monitoring.org/wiki/fieldname.critical"&gt;{fieldname}.critical}&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;http://munin-monitoring.org/wiki/protocol-config&lt;/p&gt;
-&lt;p&gt;http://munin-monitoring.org/wiki/munin-man#munin-html&lt;/p&gt;</summary></entry><entry><title>fabric</title><link href="/fabric.html" rel="alternate"></link><updated>2013-07-31T11:19:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-31:fabric.html</id><summary type="html">&lt;p&gt;下面介绍python下的一个用于项目部署的工具&lt;a href="http://docs.fabfile.org/"&gt;fabric&lt;/a&gt;，要学习fabric推荐阅读其官方文档，&lt;/p&gt;
+&lt;p&gt;http://munin-monitoring.org/wiki/munin-man#munin-html&lt;/p&gt;</summary></entry><entry><title>fabric</title><link href="http://zhangliyong.github.io/fabric.html" rel="alternate"></link><updated>2013-07-31T11:19:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-31:fabric.html</id><summary type="html">&lt;p&gt;下面介绍python下的一个用于项目部署的工具&lt;a href="http://docs.fabfile.org/"&gt;fabric&lt;/a&gt;，要学习fabric推荐阅读其官方文档，&lt;/p&gt;
 &lt;p&gt;本文给只给出一个简单的介绍及一些基本的功能。&lt;/p&gt;
 &lt;p&gt;根据官方文档的介绍:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -344,7 +344,7 @@ A library of subroutines (built on top of a lower-level library) to make executi
 &lt;p&gt;fab可以用于项目部署，服务器管理。它可以通过ssh执行服务器上的shell命令，当然也可以执行本地的shell命令。&lt;/p&gt;
 &lt;p&gt;例如： local执行本地命令，run执行服务器端命令，sudo以root权限执行服务器端命令。&lt;/p&gt;
 &lt;p&gt;fab可以通过设置env.hosts变量来在所有host中执行某一task。&lt;/p&gt;
-&lt;p&gt;fab也提供了一些decorator，如hosts, roles来设置在某些host上执行task。&lt;/p&gt;</summary></entry><entry><title>How mongodb use memory</title><link href="/how-mongodb-use-memory.html" rel="alternate"></link><updated>2013-07-29T15:11:21+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-29:how-mongodb-use-memory.html</id><summary type="html">&lt;p&gt;网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。&lt;/p&gt;
+&lt;p&gt;fab也提供了一些decorator，如hosts, roles来设置在某些host上执行task。&lt;/p&gt;</summary></entry><entry><title>How mongodb use memory</title><link href="http://zhangliyong.github.io/how-mongodb-use-memory.html" rel="alternate"></link><updated>2013-07-29T15:11:21+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-29:how-mongodb-use-memory.html</id><summary type="html">&lt;p&gt;网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。&lt;/p&gt;
 &lt;p&gt;MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。&lt;/p&gt;
 &lt;p&gt;查看working set大小可用如下命令：&lt;code&gt;db.runCommand( { serverStatus: 1, workingSet: 1 } )&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;serverStatus.mem.resident
@@ -353,9 +353,9 @@ The value of resident is roughly equivalent to the amount of RAM, in megabytes (
 &lt;p&gt;Does MongoDB require a lot of RAM?
 Not necessarily. It’s certainly possible to run MongoDB on a machine with a small amount of free RAM.&lt;/p&gt;
 &lt;p&gt;MongoDB automatically uses all free memory on the machine as its cache. System resource monitors show that MongoDB uses a lot of memory, but its usage is dynamic. If another process suddenly needs half the server’s RAM, MongoDB will yield cached memory to the other process.&lt;/p&gt;
-&lt;p&gt;Technically, the operating system’s virtual memory subsystem manages MongoDB’s memory. This means that MongoDB will use as much free memory as it can, swapping to disk as needed. Deployments with enough memory to fit the application’s working data set in RAM will achieve the best performance.&lt;/p&gt;</summary></entry><entry><title>htop command</title><link href="/htop-command.html" rel="alternate"></link><updated>2013-07-28T11:11:13+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-28:htop-command.html</id><summary type="html">&lt;p&gt;推荐一个代替工具htop，显示信息很详细，功能丰富，一但上手操作也很简单，
+&lt;p&gt;Technically, the operating system’s virtual memory subsystem manages MongoDB’s memory. This means that MongoDB will use as much free memory as it can, swapping to disk as needed. Deployments with enough memory to fit the application’s working data set in RAM will achieve the best performance.&lt;/p&gt;</summary></entry><entry><title>htop command</title><link href="http://zhangliyong.github.io/htop-command.html" rel="alternate"></link><updated>2013-07-28T11:11:13+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-28:htop-command.html</id><summary type="html">&lt;p&gt;推荐一个代替工具htop，显示信息很详细，功能丰富，一但上手操作也很简单，
 &lt;a href="http://www.thegeekstuff.com/2011/09/linux-htop-examples/"&gt;thegeekstuff&lt;/a&gt;上有
-一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。&lt;/p&gt;</summary></entry><entry><title>vmstat</title><link href="/vmstat.html" rel="alternate"></link><updated>2013-07-25T11:35:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-25:vmstat.html</id><summary type="html">&lt;p&gt;最近在分析mongo的性能问题，发现mongo所在机器的io比较频繁。&lt;/p&gt;
+一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。&lt;/p&gt;</summary></entry><entry><title>vmstat</title><link href="http://zhangliyong.github.io/vmstat.html" rel="alternate"></link><updated>2013-07-25T11:35:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-25:vmstat.html</id><summary type="html">&lt;p&gt;最近在分析mongo的性能问题，发现mongo所在机器的io比较频繁。&lt;/p&gt;
 &lt;p&gt;使用vmstat命令查看，发现b（The number of processes in uninterruptible sleep）这一列的数量比较大，持续在4左右。
 随后查询uninterruptible sleep状态的意义，引自：http://www.novell.com/support/kb/doc.php?id=7002725&lt;/p&gt;
 &lt;blockquote&gt;
@@ -374,7 +374,7 @@ This command produces a report and a list of all processes in D state and a full
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;关于vmstat的使用参考：http://www.linuxintheshell.org/2013/05/22/episode-030-vmstat/&lt;/p&gt;</summary></entry><entry><title>Mongo Performance</title><link href="/mongo-performance.html" rel="alternate"></link><updated>2013-07-25T10:07:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-25:mongo-performance.html</id><summary type="html">&lt;p&gt;最近mongo的性能&lt;/p&gt;</summary></entry><entry><title>Mongo</title><link href="/mongo.html" rel="alternate"></link><updated>2013-07-24T17:36:09+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-24:mongo.html</id><summary type="html">&lt;h2&gt;query after update slow&lt;/h2&gt;
+&lt;p&gt;关于vmstat的使用参考：http://www.linuxintheshell.org/2013/05/22/episode-030-vmstat/&lt;/p&gt;</summary></entry><entry><title>Mongo Performance</title><link href="http://zhangliyong.github.io/mongo-performance.html" rel="alternate"></link><updated>2013-07-25T10:07:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-25:mongo-performance.html</id><summary type="html">&lt;p&gt;最近mongo的性能&lt;/p&gt;</summary></entry><entry><title>Mongo</title><link href="http://zhangliyong.github.io/mongo.html" rel="alternate"></link><updated>2013-07-24T17:36:09+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-24:mongo.html</id><summary type="html">&lt;h2&gt;query after update slow&lt;/h2&gt;
 &lt;p&gt;这两天有一个接口的速度非常慢，主要是执行一条查询语句非常慢，有时耗时达200秒，于是找到了这条查询语句单独在mongo shell中执行，在mongo shell中执行并不慢，慢慢调试后最终找到问题，原因是在查询语句执行之前执行了两次更新语句。&lt;/p&gt;
 &lt;p&gt;利用pymongo执行更新时，如果不设置safe=True，mongo会及时返回函数调用，但更新并没有真正执行完，mongo进程在后台继续执行，所以当接着执行查询时，此时更新没有结束，数据库会处于lock状态，查询等待数据库解锁，所以查询非常慢。&lt;/p&gt;
 &lt;p&gt;把更新语句去除后，查询恢复正常。&lt;/p&gt;
@@ -389,7 +389,7 @@ As you probably know, MongoDB has a global lock. The longer your writes take, th
 &lt;p&gt;More Reads Make For Faster Writes
 The trick to lowering your lock percentage and thus having faster updates is to query the document you are going to update, before you perform the update. Querying before doing an upsert might seem counter intuitive at first glance, but it makes sense when you think about it.&lt;/p&gt;
 &lt;p&gt;The read ensures that whatever document you are going to update is in RAM. This means the update, which will happen immediately after the read, always updates the document in RAM, which is super fast. I think of it as warming the database for the document you are about to update.&lt;/p&gt;
-&lt;p&gt;http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/&lt;/p&gt;</summary></entry><entry><title>Job</title><link href="/job.html" rel="alternate"></link><updated>2013-07-10T13:19:07+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-07-10:job.html</id><summary type="html">&lt;p&gt;今天读了A. Jesse Jiryu Davis的一篇&lt;a href="http://emptysqua.re/blog/so-youre-coming-to-a-career-fair/"&gt;文章&lt;/a&gt;，关于计算机专业的学生如何让自己突出，找到
+&lt;p&gt;http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/&lt;/p&gt;</summary></entry><entry><title>Job</title><link href="http://zhangliyong.github.io/job.html" rel="alternate"></link><updated>2013-07-10T13:19:07+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-10:job.html</id><summary type="html">&lt;p&gt;今天读了A. Jesse Jiryu Davis的一篇&lt;a href="http://emptysqua.re/blog/so-youre-coming-to-a-career-fair/"&gt;文章&lt;/a&gt;，关于计算机专业的学生如何让自己突出，找到
 自己喜欢的工作。&lt;/p&gt;
 &lt;p&gt;开篇作者就指出要想办法让自己突出，不要与其他学生都一样，如果你是一个黑客，那你就要表现出来。&lt;/p&gt;
 &lt;ol&gt;
@@ -411,23 +411,23 @@ The trick to lowering your lock percentage and thus having faster updates is to 
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;对于我们在职的程序员，这些建议仍然适用，我们一定要有自己可拿出的东西来，有一些自己的项目，能与开源。&lt;/p&gt;
-&lt;p&gt;非常重要的一点，一定要有气质、魅力，善于和另人交流，杜绝屌丝。还有程序员要注意身体哦。&lt;/p&gt;</summary></entry><entry><title>iptables</title><link href="/iptables.html" rel="alternate"></link><updated>2013-06-25T14:52:10+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-25:iptables.html</id><summary type="html">&lt;p&gt;/etc/sysconfig/iptables - The system scripts that activate the firewall by reading this file.&lt;/p&gt;
+&lt;p&gt;非常重要的一点，一定要有气质、魅力，善于和另人交流，杜绝屌丝。还有程序员要注意身体哦。&lt;/p&gt;</summary></entry><entry><title>iptables</title><link href="http://zhangliyong.github.io/iptables.html" rel="alternate"></link><updated>2013-06-25T14:52:10+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-25:iptables.html</id><summary type="html">&lt;p&gt;/etc/sysconfig/iptables - The system scripts that activate the firewall by reading this file.&lt;/p&gt;
 &lt;h2&gt;Ref:&lt;/h2&gt;
-&lt;p&gt;http://www.cyberciti.biz/faq/rhel-fedorta-linux-iptables-firewall-configuration-tutorial/&lt;/p&gt;</summary></entry><entry><title>datetime</title><link href="/datetime.html" rel="alternate"></link><updated>2013-06-25T10:38:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-25:datetime.html</id><summary type="html">&lt;h2&gt;insert current date&lt;/h2&gt;
+&lt;p&gt;http://www.cyberciti.biz/faq/rhel-fedorta-linux-iptables-firewall-configuration-tutorial/&lt;/p&gt;</summary></entry><entry><title>datetime</title><link href="http://zhangliyong.github.io/datetime.html" rel="alternate"></link><updated>2013-06-25T10:38:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-25:datetime.html</id><summary type="html">&lt;h2&gt;insert current date&lt;/h2&gt;
 &lt;p&gt;"map F3 to insert current date
 nnoremap &lt;F3&gt; "=strftime("%Y-%m-%d (%a)")&lt;CR&gt;P
 inoremap &lt;F3&gt; &lt;C-R&gt;=strftime("%Y-%m-%d (%a)")&lt;CR&gt;&lt;/p&gt;
 &lt;p&gt;http://vim.wikia.com/wiki/Insert_current_date_or_time&lt;/p&gt;
 &lt;p&gt;http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-&lt;em&gt;Tutorial&lt;/em&gt;(Part_1)&lt;/p&gt;
-&lt;p&gt;http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118&lt;/p&gt;</summary></entry><entry><title>vim</title><link href="/vim.html" rel="alternate"></link><updated>2013-06-25T10:36:37+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-25:vim.html</id><summary type="html">&lt;p&gt;TODO: wrap my plugins&lt;/p&gt;</summary></entry><entry><title>mem</title><link href="/mem.html" rel="alternate"></link><updated>2013-06-19T14:54:04+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-19:mem.html</id><summary type="html">&lt;p&gt;http://virtualthreads.blogspot.com/2006/02/understanding-memory-usage-on-linux.html&lt;/p&gt;
+&lt;p&gt;http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118&lt;/p&gt;</summary></entry><entry><title>vim</title><link href="http://zhangliyong.github.io/vim.html" rel="alternate"></link><updated>2013-06-25T10:36:37+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-25:vim.html</id><summary type="html">&lt;p&gt;TODO: wrap my plugins&lt;/p&gt;</summary></entry><entry><title>mem</title><link href="http://zhangliyong.github.io/mem.html" rel="alternate"></link><updated>2013-06-19T14:54:04+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-19:mem.html</id><summary type="html">&lt;p&gt;http://virtualthreads.blogspot.com/2006/02/understanding-memory-usage-on-linux.html&lt;/p&gt;
 &lt;p&gt;http://www.cyberciti.biz/tips/howto-find-memory-used-by-program.html&lt;/p&gt;
 &lt;p&gt;pmap&lt;/p&gt;
-&lt;p&gt;vmmap on mac&lt;/p&gt;</summary></entry><entry><title>concurrency</title><link href="/concurrency.html" rel="alternate"></link><updated>2013-06-19T14:50:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-19:concurrency.html</id><summary type="html">&lt;p&gt;http://www.jeffknupp.com/blog/2012/03/31/pythons-hardest-problem/&lt;/p&gt;
+&lt;p&gt;vmmap on mac&lt;/p&gt;</summary></entry><entry><title>concurrency</title><link href="http://zhangliyong.github.io/concurrency.html" rel="alternate"></link><updated>2013-06-19T14:50:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-19:concurrency.html</id><summary type="html">&lt;p&gt;http://www.jeffknupp.com/blog/2012/03/31/pythons-hardest-problem/&lt;/p&gt;
 &lt;p&gt;http://stackoverflow.com/questions/731993/multiprocessing-or-multithreading&lt;/p&gt;
 &lt;p&gt;http://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python&lt;/p&gt;
 &lt;p&gt;http://eli.thegreenplace.net/2012/01/16/python-parallelizing-cpu-bound-tasks-with-multiprocessing/&lt;/p&gt;
-&lt;p&gt;http://stackoverflow.com/questions/1226584/multiprocess-or-threading-in-python&lt;/p&gt;</summary></entry><entry><title>Redis vs Mongodb</title><link href="/redis-vs-mongodb.html" rel="alternate"></link><updated>2013-06-04T14:33:16+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-06-04:redis-vs-mongodb.html</id><summary type="html">&lt;p&gt;Redis and MongoDB insertion performance analysis: http://blog.axant.it/archives/236
-MongoDB and Redis: a different interpretation of what's wrong with Relational DBs: http://oldblog.antirez.com/post/MongoDB-and-Redis.html&lt;/p&gt;</summary></entry><entry><title>Memory</title><link href="/memory.html" rel="alternate"></link><updated>2013-05-19T21:42:19+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:memory.html</id><summary type="html"></summary></entry><entry><title>Sleeping</title><link href="/sleeping.html" rel="alternate"></link><updated>2013-05-19T21:17:11+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:sleeping.html</id><summary type="html">&lt;h2&gt;关于睡眠你应该知道的十件事&lt;/h2&gt;
+&lt;p&gt;http://stackoverflow.com/questions/1226584/multiprocess-or-threading-in-python&lt;/p&gt;</summary></entry><entry><title>Redis vs Mongodb</title><link href="http://zhangliyong.github.io/redis-vs-mongodb.html" rel="alternate"></link><updated>2013-06-04T14:33:16+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-04:redis-vs-mongodb.html</id><summary type="html">&lt;p&gt;Redis and MongoDB insertion performance analysis: http://blog.axant.it/archives/236
+MongoDB and Redis: a different interpretation of what's wrong with Relational DBs: http://oldblog.antirez.com/post/MongoDB-and-Redis.html&lt;/p&gt;</summary></entry><entry><title>Memory</title><link href="http://zhangliyong.github.io/memory.html" rel="alternate"></link><updated>2013-05-19T21:42:19+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:memory.html</id><summary type="html"></summary></entry><entry><title>Sleeping</title><link href="http://zhangliyong.github.io/sleeping.html" rel="alternate"></link><updated>2013-05-19T21:17:11+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:sleeping.html</id><summary type="html">&lt;h2&gt;关于睡眠你应该知道的十件事&lt;/h2&gt;
 &lt;p&gt;地址：http://v.163.com/movie/2013/5/V/Q/M8TDTH9BJ_M8TE2FFVQ.html&lt;/p&gt;
 &lt;p&gt;网易分开课上有一期bbc拍摄的关于睡眠的记录片，里面提到了很多关于提高睡眠的问题，
 对于一些自己感觉有帮助的记录如下：&lt;/p&gt;
@@ -450,7 +450,7 @@ MongoDB and Redis: a different interpretation of what's wrong with Relational DB
 &lt;li&gt;
 &lt;p&gt;睡觉前一小时泡个热水澡有利于睡眠。&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>Logbook</title><link href="/logbook.html" rel="alternate"></link><updated>2013-05-19T18:50:40+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:logbook.html</id><summary type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;/ol&gt;</summary></entry><entry><title>Logbook</title><link href="http://zhangliyong.github.io/logbook.html" rel="alternate"></link><updated>2013-05-19T18:50:40+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:logbook.html</id><summary type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
 logbook目前还处于开发阶段。可以参考官方&lt;a href="https://logbook.readthedocs.org/en/latest/features.html#core-features"&gt;core feature&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
@@ -545,7 +545,7 @@ handler的，这个handler有一个特殊的功能，它会将所有的log记录
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;： Processor只有当log被某一个handler处理的时候才会执行，否则processor永远不会招待。&lt;/p&gt;</summary></entry><entry><title>django-logbook</title><link href="/django-logbook.html" rel="alternate"></link><updated>2013-05-19T17:55:35+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-19:django-logbook.html</id><summary type="html"></summary></entry><entry><title>Linux</title><link href="/linux.html" rel="alternate"></link><updated>2013-05-16T12:18:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-16:linux.html</id><summary type="html">&lt;h2&gt;Linux TCP Performance Tuning&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;： Processor只有当log被某一个handler处理的时候才会执行，否则processor永远不会招待。&lt;/p&gt;</summary></entry><entry><title>django-logbook</title><link href="http://zhangliyong.github.io/django-logbook.html" rel="alternate"></link><updated>2013-05-19T17:55:35+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:django-logbook.html</id><summary type="html"></summary></entry><entry><title>Linux</title><link href="http://zhangliyong.github.io/linux.html" rel="alternate"></link><updated>2013-05-16T12:18:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-16:linux.html</id><summary type="html">&lt;h2&gt;Linux TCP Performance Tuning&lt;/h2&gt;
 &lt;p&gt;There are two ways to change tcp parameters.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -566,7 +566,7 @@ handler的，这个handler有一个特殊的功能，它会将所有的log记录
 &lt;li&gt;/proc/sys/net/core/somaxconn: Limit of socket listen() backlog, known in userspace as SOMAXCONN. Defaults to 128. The value should be raised substantially to support bursts of request. For example, to support a burst of 1024 requests, set somaxconn to 1024.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;change userlevel file-max
-need logout and login to work&lt;/p&gt;</summary></entry><entry><title>nginx tips</title><link href="/nginx-tips.html" rel="alternate"></link><updated>2013-05-13T16:11:31+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-13:nginx-tips.html</id><summary type="html">&lt;h2&gt;nginx backlog&lt;/h2&gt;
+need logout and login to work&lt;/p&gt;</summary></entry><entry><title>nginx tips</title><link href="http://zhangliyong.github.io/nginx-tips.html" rel="alternate"></link><updated>2013-05-13T16:11:31+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-13:nginx-tips.html</id><summary type="html">&lt;h2&gt;nginx backlog&lt;/h2&gt;
 &lt;h2&gt;Root Directory&lt;/h2&gt;
 &lt;p&gt;nginx 默认根目录，&lt;/p&gt;
 &lt;p&gt;如果在配置文件中指定了root，则根目录即为root指定的目录&lt;/p&gt;
@@ -576,8 +576,8 @@ need logout and login to work&lt;/p&gt;</summary></entry><entry><title>nginx tip
 &lt;h2&gt;Custome error page&lt;/h2&gt;
 &lt;p&gt;nginx 有个默认的错误显示页面&lt;/p&gt;
 &lt;h2&gt;Ref&lt;/h2&gt;
-&lt;p&gt;http://wiki.nginx.org/Pitfalls&lt;/p&gt;</summary></entry><entry><title>pelican</title><link href="/pelican.html" rel="alternate"></link><updated>2013-05-09T10:29:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-09:pelican.html</id><summary type="html">&lt;h2&gt;介绍&lt;/h2&gt;
-&lt;p&gt;peclian 是一个python版本的表态页面生成器，类似于jekyll&lt;/p&gt;</summary></entry><entry><title>Mongodb NUMA 导致的性能问题</title><link href="/mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="alternate"></link><updated>2013-05-08T13:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-08:mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html</id><summary type="html">&lt;p&gt;最近升级了mongodb，用mongo连接mongod后出现如下warning:&lt;/p&gt;
+&lt;p&gt;http://wiki.nginx.org/Pitfalls&lt;/p&gt;</summary></entry><entry><title>pelican</title><link href="http://zhangliyong.github.io/pelican.html" rel="alternate"></link><updated>2013-05-09T10:29:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-09:pelican.html</id><summary type="html">&lt;h2&gt;介绍&lt;/h2&gt;
+&lt;p&gt;peclian 是一个python版本的表态页面生成器，类似于jekyll&lt;/p&gt;</summary></entry><entry><title>Mongodb NUMA 导致的性能问题</title><link href="http://zhangliyong.github.io/mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="alternate"></link><updated>2013-05-08T13:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-08:mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html</id><summary type="html">&lt;p&gt;最近升级了mongodb，用mongo连接mongod后出现如下warning:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Server&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;startup&lt;/span&gt; &lt;span class="n"&gt;warnings&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
 &lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;WARNING&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;You&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;running&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;NUMA&lt;/span&gt; &lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
@@ -620,7 +620,7 @@ need logout and login to work&lt;/p&gt;</summary></entry><entry><title>nginx tip
 &lt;p&gt;http://docs.mongodb.org/manual/administration/production-notes/#production-numa&lt;/p&gt;
 &lt;p&gt;http://huoding.com/2011/08/09/104&lt;/p&gt;
 &lt;p&gt;http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/&lt;/p&gt;
-&lt;p&gt;http://blog.nosqlfan.com/html/2772.html&lt;/p&gt;</summary></entry><entry><title>python build Dynamic Link Library</title><link href="/python-build-dynamic-link-library.html" rel="alternate"></link><updated>2013-05-05T18:41:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-05:python-build-dynamic-link-library.html</id><summary type="html">&lt;p&gt;当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：&lt;/p&gt;
+&lt;p&gt;http://blog.nosqlfan.com/html/2772.html&lt;/p&gt;</summary></entry><entry><title>python build Dynamic Link Library</title><link href="http://zhangliyong.github.io/python-build-dynamic-link-library.html" rel="alternate"></link><updated>2013-05-05T18:41:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-05:python-build-dynamic-link-library.html</id><summary type="html">&lt;p&gt;当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
 .../lib/libpython2.7.a: could not read symbols: Bad value
@@ -684,11 +684,11 @@ collect2: ld returned 1 exit status&lt;/p&gt;
 &lt;h2&gt;参考&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html"&gt;http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://blog.csdn.net/huzhenwei/article/details/7339548"&gt;http://blog.csdn.net/huzhenwei/article/details/7339548&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://linux.101hacks.com/unix/ldconfig/"&gt;http://linux.101hacks.com/unix/ldconfig/&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Python</title><link href="/python.html" rel="alternate"></link><updated>2013-05-04T16:36:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-04:python.html</id><summary type="html">&lt;h2&gt;decorator&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://linux.101hacks.com/unix/ldconfig/"&gt;http://linux.101hacks.com/unix/ldconfig/&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Python</title><link href="http://zhangliyong.github.io/python.html" rel="alternate"></link><updated>2013-05-04T16:36:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-04:python.html</id><summary type="html">&lt;h2&gt;decorator&lt;/h2&gt;
 &lt;h2&gt;class method&lt;/h2&gt;
 &lt;h1&gt;Django&lt;/h1&gt;
 &lt;h2&gt;Django test&lt;/h2&gt;
-&lt;p&gt;ref: http://mikegrouchy.com/blog/great-django-test-talks.html&lt;/p&gt;</summary></entry><entry><title>Pythonbrew</title><link href="/pythonbrew.html" rel="alternate"></link><updated>2013-05-04T16:35:56+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-04:pythonbrew.html</id><summary type="html">&lt;p&gt;home page: https://github.com/utahta/pythonbrew&lt;/p&gt;
+&lt;p&gt;ref: http://mikegrouchy.com/blog/great-django-test-talks.html&lt;/p&gt;</summary></entry><entry><title>Pythonbrew</title><link href="http://zhangliyong.github.io/pythonbrew.html" rel="alternate"></link><updated>2013-05-04T16:35:56+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-04:pythonbrew.html</id><summary type="html">&lt;p&gt;home page: https://github.com/utahta/pythonbrew&lt;/p&gt;
 &lt;h2&gt;install packages over pythonbrew&lt;/h2&gt;
 &lt;p&gt;pythonbrew can install multiple python versions on the same machine,
 if you want to install packages over a specified python version, a
@@ -703,7 +703,7 @@ recommand way is to install pip first.&lt;/p&gt;
 
 
 &lt;p&gt;after that you can use pip to install whatever pacakges over the python version.&lt;/p&gt;
-&lt;p&gt;If you want to install package on a different python version, re-do "install pip" section.&lt;/p&gt;</summary></entry><entry><title>Mysql 性能调优</title><link href="/mysql-xing-neng-diao-you.html" rel="alternate"></link><updated>2013-05-04T16:35:42+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-05-04:mysql-xing-neng-diao-you.html</id><summary type="html">&lt;h2&gt;thread cache size&lt;/h2&gt;
+&lt;p&gt;If you want to install package on a different python version, re-do "install pip" section.&lt;/p&gt;</summary></entry><entry><title>Mysql 性能调优</title><link href="http://zhangliyong.github.io/mysql-xing-neng-diao-you.html" rel="alternate"></link><updated>2013-05-04T16:35:42+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-04:mysql-xing-neng-diao-you.html</id><summary type="html">&lt;h2&gt;thread cache size&lt;/h2&gt;
 &lt;p&gt;http://www.dbasquare.com/kb/mysql-and-thread-cache-size/&lt;/p&gt;
 &lt;p&gt;query_cache_type可以设置为0(OFF)，1(ON)或者2(DEMOND)，分别表示完全不使用query cache，除显式要求不使用query cache（使用sql_no_cache）之外的所有的select都使用query cache，只有显示要求才使用query cache（使用sql_cache)&lt;/p&gt;
 &lt;p&gt;show global status like '';
@@ -777,14 +777,14 @@ The accounts created by these statements have the following properties:&lt;/p&gt
 +-----------------------------------------------------+&lt;/p&gt;
 &lt;p&gt;16.1.1.5. Creating a Data Snapshot Using mysqldump  :  http://dev.mysql.com/doc/refman/5.1/en/replication-howto-mysqldump.html&lt;/p&gt;
 &lt;p&gt;Obtaining the Replication Master Binary Log Coordinates : http://dev.mysql.com/doc/refman/5.1/en/replication-howto-masterstatus.html&lt;/p&gt;
-&lt;p&gt;If a slave uses the default host-based relay log file names, changing a slave's host name after replication has been set up can cause replication to fail with the errors Failed to open the relay log and Could not find target log during relay log initialization. This is a known issue (see Bug #2122). If you anticipate that a slave's host name might change in the future (for example, if networking is set up on the slave such that its host name can be modified using DHCP), you can avoid this issue entirely by using the --relay-log and --relay-log-index options to specify relay log file names explicitly when you initially set up the slave. This will make the names independent of server host name changes.&lt;/p&gt;</summary></entry><entry><title>TIME_WAIT in netstat</title><link href="/time_wait-in-netstat.html" rel="alternate"></link><updated>2013-04-11T23:44:01+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-04-11:time_wait-in-netstat.html</id><summary type="html">&lt;p&gt;netstat -tanp | grep -o '(10.18.10.20\|211.151.139.230\|127.0.0.1):[0-9]*' | sort -nr | uniq -c | sort -nr -k 1 | wc -l&lt;/p&gt;</summary></entry><entry><title>misc</title><link href="/misc.html" rel="alternate"></link><updated>2013-03-31T20:31:38+02:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-31:misc.html</id><summary type="html">&lt;h1&gt;Mac sshfs&lt;/h1&gt;
+&lt;p&gt;If a slave uses the default host-based relay log file names, changing a slave's host name after replication has been set up can cause replication to fail with the errors Failed to open the relay log and Could not find target log during relay log initialization. This is a known issue (see Bug #2122). If you anticipate that a slave's host name might change in the future (for example, if networking is set up on the slave such that its host name can be modified using DHCP), you can avoid this issue entirely by using the --relay-log and --relay-log-index options to specify relay log file names explicitly when you initially set up the slave. This will make the names independent of server host name changes.&lt;/p&gt;</summary></entry><entry><title>TIME_WAIT in netstat</title><link href="http://zhangliyong.github.io/time_wait-in-netstat.html" rel="alternate"></link><updated>2013-04-11T23:44:01+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-04-11:time_wait-in-netstat.html</id><summary type="html">&lt;p&gt;netstat -tanp | grep -o '(10.18.10.20\|211.151.139.230\|127.0.0.1):[0-9]*' | sort -nr | uniq -c | sort -nr -k 1 | wc -l&lt;/p&gt;</summary></entry><entry><title>misc</title><link href="http://zhangliyong.github.io/misc.html" rel="alternate"></link><updated>2013-03-31T20:31:38+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-03-31:misc.html</id><summary type="html">&lt;h1&gt;Mac sshfs&lt;/h1&gt;
 &lt;p&gt;Mac 挂载远程目录&lt;/p&gt;
 &lt;p&gt;http://osxfuse.github.com/&lt;/p&gt;
 &lt;p&gt;install OXSFUSE and SSHFS&lt;/p&gt;
 &lt;h2&gt;TF-IDF&lt;/h2&gt;
 &lt;p&gt;http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
 http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
-http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</summary></entry><entry><title>Bash</title><link href="/bash.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:bash.html</id><summary type="html">&lt;h2&gt;alias&lt;/h2&gt;
+http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</summary></entry><entry><title>Bash</title><link href="http://zhangliyong.github.io/bash.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-03-27:bash.html</id><summary type="html">&lt;h2&gt;alias&lt;/h2&gt;
 &lt;p&gt;对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。&lt;/p&gt;
 &lt;p&gt;e.g. 在.bashrc中加入&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;servername&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ssh sns@hostname&amp;#39;&lt;/span&gt;
@@ -851,7 +851,7 @@ server
 
 &lt;p&gt;我们用将"local host"输出到标准输出，在hostname机器上&lt;code&gt;cat&lt;/code&gt;从标准输入获取"local host"并再次输出到标准输出(本地机器的标准输出)。&lt;/p&gt;
 &lt;p&gt;虽然&lt;code&gt;command&lt;/code&gt;中的标准输入输出是在本地机器，但&lt;code&gt;command&lt;/code&gt;中的命令和目录等都是相对于hostname的，与本地机器无法。&lt;/p&gt;
-&lt;p&gt;fuser&lt;/p&gt;</summary></entry><entry><title>config gevent on uwsgi</title><link href="/config-gevent-on-uwsgi.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:,2013-03-27:config-gevent-on-uwsgi.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;caution&lt;/strong&gt;: need gevent(&amp;gt;= 1.0), and uwsgi(&amp;gt;= 1.4)&lt;/p&gt;
+&lt;p&gt;fuser&lt;/p&gt;</summary></entry><entry><title>config gevent on uwsgi</title><link href="http://zhangliyong.github.io/config-gevent-on-uwsgi.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-03-27:config-gevent-on-uwsgi.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;caution&lt;/strong&gt;: need gevent(&amp;gt;= 1.0), and uwsgi(&amp;gt;= 1.4)&lt;/p&gt;
 &lt;p&gt;https://github.com/SiteSupport/gevent/downloads&lt;/p&gt;
 &lt;p&gt;uwsgi install
 https://uwsgi-docs.readthedocs.org/en/latest/Install.html&lt;/p&gt;
