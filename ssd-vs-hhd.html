@@ -62,72 +62,10 @@
             <p>随机MongoDB的数据量增大，我们服务器的磁盘利用率不数据增加，一度接近100%，而且
 Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先迁移到使用SSD的服务
 器，下面我利用 <code>mongoperf</code> 工具对HHD和SSD的 R/W 进行了一个测评。</p>
-<div class="gist">
-    <script src='https://gist.github.com/8931586.js'></script>
-    <noscript>
-        <pre><code>##Read
-
-    echo "{nThreads:32,fileSizeMB:2000,r:true}" | ./bin/mongoperf
-
-###HHD
-    new thread, total running : 32
-    2093 ops/sec 8 MB/sec
-    1963 ops/sec 7 MB/sec
-    2010 ops/sec 7 MB/sec
-    2044 ops/sec 7 MB/sec
-    2061 ops/sec 8 MB/sec
-    2011 ops/sec 7 MB/sec
+<div class="highlight"><pre><span class="p">[</span><span class="n">gist</span><span class="o">:</span><span class="n">id</span><span class="o">=</span><span class="mi">8931586</span><span class="p">]</span>
+</pre></div>
 
 
-###SSD
-    new thread, total running : 32
-    37804 ops/sec 147 MB/sec
-    33013 ops/sec 128 MB/sec
-    36563 ops/sec 142 MB/sec
-    38056 ops/sec 148 MB/sec
-    39058 ops/sec 152 MB/sec
-    39036 ops/sec 152 MB/sec
-    32946 ops/sec 128 MB/sec
-    42343 ops/sec 165 MB/sec
-    40949 ops/sec 159 MB/sec
-
-
-##Write
-
-    echo "{nThreads:32,fileSizeMB:2000,w:true}" | ./bin/mongoperf
-
-###HHD
-    new thread, total running : 32
-    3 ops/sec 0 MB/sec
-    485 ops/sec 1 MB/sec
-    1543 ops/sec 6 MB/sec
-    679 ops/sec 2 MB/sec
-    1059 ops/sec 4 MB/sec
-    1383 ops/sec 5 MB/sec
-    674 ops/sec 2 MB/sec
-    740 ops/sec 2 MB/sec
-    572 ops/sec 2 MB/sec
-    679 ops/sec 2 MB/sec
-    0 ops/sec 0 MB/sec
-    1134 ops/sec 4 MB/sec
-
-###SSD
-    new thread, total running : 32
-    read:0 write:1
-    993 ops/sec 3 MB/sec
-    2160 ops/sec 8 MB/sec
-    312 ops/sec 1 MB/sec
-    493 ops/sec 1 MB/sec
-    7570 ops/sec 29 MB/sec
-    10026 ops/sec 39 MB/sec
-    3120 ops/sec 12 MB/sec
-    514 ops/sec 2 MB/sec
-    903 ops/sec 3 MB/sec
-    1503 ops/sec 5 MB/sec
-    2413 ops/sec 9 MB/sec
-</code></pre>
-    </noscript>
-</div>
 <p>可以看到</p>
             <aside>
             <hr/>
@@ -143,7 +81,7 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
         <div class="span2" style="float:right;font-size:0.9em;">
  
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2014-02-15T17:33:15">Feb 15, 2014</time>
+            <time pubdate="pubdate" datetime="2014-02-15T17:33:54">Feb 15, 2014</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#mongo-ref">mongo</a> 
             <h4>Tags</h4>
