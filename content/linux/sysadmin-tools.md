@@ -22,6 +22,6 @@ iftop
 
 iotop
 =====
-[iotop](http://guichaz.free.fr/iotop/) 是用python编写的显示磁盘IO使用的应用，vmstat可以显示磁盘的整体使用情况，iotop 可以显示各个应用的磁盘使用。
+[iotop](http://guichaz.free.fr/iotop/) 是用python编写的显示磁盘IO使用的应用，vmstat和iostat可以显示磁盘的整体使用情况，iotop 可以显示各个应用的磁盘使用。
 
 ![iotop](http://guichaz.free.fr/iotop/iotop_big.png)
