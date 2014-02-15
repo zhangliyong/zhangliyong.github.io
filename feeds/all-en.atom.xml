@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-15T17:26:22+01:00</updated><entry><title>ssd-vs-hhd</title><link href="http://zhangliyong.github.io/ssd-vs-hhd.html" rel="alternate"></link><updated>2014-02-15T17:26:22+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-15:ssd-vs-hhd.html</id><summary type="html">&lt;div class="gist"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-15T17:32:04+01:00</updated><entry><title>ssd-vs-hhd</title><link href="http://zhangliyong.github.io/ssd-vs-hhd.html" rel="alternate"></link><updated>2014-02-15T17:32:04+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-15:ssd-vs-hhd.html</id><summary type="html">&lt;p&gt;随机MongoDB的数据量增大，我们服务器的磁盘利用率不数据增加，一度接近100%，而且
+Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先迁移到使用SSD的服务
+器，下面我利用 &lt;code&gt;mongoperf&lt;/code&gt; 工具对HHD和SSD的 R/W 进行了一个测评。&lt;/p&gt;
+&lt;div class="gist"&gt;
     &lt;script src='https://gist.github.com/8931586.js'&gt;&lt;/script&gt;
     &lt;noscript&gt;
         &lt;pre&gt;&lt;code&gt;##Read

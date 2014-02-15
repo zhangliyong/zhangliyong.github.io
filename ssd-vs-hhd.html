@@ -59,7 +59,10 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
-            <div class="gist">
+            <p>随机MongoDB的数据量增大，我们服务器的磁盘利用率不数据增加，一度接近100%，而且
+Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先迁移到使用SSD的服务
+器，下面我利用 <code>mongoperf</code> 工具对HHD和SSD的 R/W 进行了一个测评。</p>
+<div class="gist">
     <script src='https://gist.github.com/8931586.js'></script>
     <noscript>
         <pre><code>##Read
@@ -139,7 +142,7 @@
         <div class="span2" style="float:right;font-size:0.9em;">
  
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2014-02-15T17:26:22">Feb 15, 2014</time>
+            <time pubdate="pubdate" datetime="2014-02-15T17:32:04">Feb 15, 2014</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#mongo-ref">mongo</a> 
             <h4>Tags</h4>
