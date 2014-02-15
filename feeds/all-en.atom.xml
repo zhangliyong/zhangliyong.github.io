@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-04T16:20:00+01:00</updated><entry><title>ack.vim</title><link href="http://zhangliyong.github.io/vim-ack.html" rel="alternate"></link><updated>2014-02-04T16:20:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-04:vim-ack.html</id><summary type="html">&lt;p&gt;&lt;a href="http://beyondgrep.com/"&gt;ack&lt;/a&gt; 是一个类似于grep的工具，专门针对程序员进行了优化，主要用于搜索源代码，默认忽略非代码文件，支持大部分编程语言。在各平台的安装参考其官方网站 http://beyondgrep.com/ 。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-15T17:26:22+01:00</updated><entry><title>ssd-vs-hhd</title><link href="http://zhangliyong.github.io/ssd-vs-hhd.html" rel="alternate"></link><updated>2014-02-15T17:26:22+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-15:ssd-vs-hhd.html</id><summary type="html">&lt;div class="gist"&gt;
+    &lt;script src='https://gist.github.com/8931586.js'&gt;&lt;/script&gt;
+    &lt;noscript&gt;
+        &lt;pre&gt;&lt;code&gt;##Read
+
+    echo "{nThreads:32,fileSizeMB:2000,r:true}" | ./bin/mongoperf
+
+###HHD
+    new thread, total running : 32
+    2093 ops/sec 8 MB/sec
+    1963 ops/sec 7 MB/sec
+    2010 ops/sec 7 MB/sec
+    2044 ops/sec 7 MB/sec
+    2061 ops/sec 8 MB/sec
+    2011 ops/sec 7 MB/sec
+
+
+###SSD
+    new thread, total running : 32
+    37804 ops/sec 147 MB/sec
+    33013 ops/sec 128 MB/sec
+    36563 ops/sec 142 MB/sec
+    38056 ops/sec 148 MB/sec
+    39058 ops/sec 152 MB/sec
+    39036 ops/sec 152 MB/sec
+    32946 ops/sec 128 MB/sec
+    42343 ops/sec 165 MB/sec
+    40949 ops/sec 159 MB/sec
+
+
+##Write
+
+    echo "{nThreads:32,fileSizeMB:2000,w:true}" | ./bin/mongoperf
+
+###HHD
+    new thread, total running : 32
+    3 ops/sec 0 MB/sec
+    485 ops/sec 1 MB/sec
+    1543 ops/sec 6 MB/sec
+    679 ops/sec 2 MB/sec
+    1059 ops/sec 4 MB/sec
+    1383 ops/sec 5 MB/sec
+    674 ops/sec 2 MB/sec
+    740 ops/sec 2 MB/sec
+    572 ops/sec 2 MB/sec
+    679 ops/sec 2 MB/sec
+    0 ops/sec 0 MB/sec
+    1134 ops/sec 4 MB/sec
+
+###SSD
+    new thread, total running : 32
+    read:0 write:1
+    993 ops/sec 3 MB/sec
+    2160 ops/sec 8 MB/sec
+    312 ops/sec 1 MB/sec
+    493 ops/sec 1 MB/sec
+    7570 ops/sec 29 MB/sec
+    10026 ops/sec 39 MB/sec
+    3120 ops/sec 12 MB/sec
+    514 ops/sec 2 MB/sec
+    903 ops/sec 3 MB/sec
+    1503 ops/sec 5 MB/sec
+    2413 ops/sec 9 MB/sec
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/noscript&gt;
+&lt;/div&gt;</summary><category term="mongodb"></category><category term="ssd"></category><category term="hhd"></category><category term="disk"></category></entry><entry><title>ack.vim</title><link href="http://zhangliyong.github.io/vim-ack.html" rel="alternate"></link><updated>2014-02-04T16:20:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-04:vim-ack.html</id><summary type="html">&lt;p&gt;&lt;a href="http://beyondgrep.com/"&gt;ack&lt;/a&gt; 是一个类似于grep的工具，专门针对程序员进行了优化，主要用于搜索源代码，默认忽略非代码文件，支持大部分编程语言。在各平台的安装参考其官方网站 http://beyondgrep.com/ 。&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/mileszs/ack.vim"&gt;ack.vim&lt;/a&gt; 是ack的vim插件，可在vim下直接使用ack。&lt;/p&gt;
 &lt;p&gt;ack可通过配置文件调整搜索行为，如增加新编程语言的技术等。&lt;/p&gt;
 &lt;p&gt;类似于大部分unix程序，ack有全局配置(/etc/ackrc)，用户配置(~/.ackrc)，工程配置(.ackrc)等，可参考其manpage。&lt;/p&gt;
