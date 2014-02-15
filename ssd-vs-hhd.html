@@ -131,6 +131,8 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
 </div>
 <p>可以看到HHD的读取速度为6-7MB/s，SSD的为150MB/s左右，为HHD的20多倍。</p>
 <p>再看写的速度，HHD最高为6MB/s，SSD最高为39MB/s，为HHD的6倍多。</p>
+<p>使用SSD后，可以大大减小Disk IO的延时，提高MongoDB响应速度，
+但SSD的价格比较高，如果学着SSD性价比低，可以配置sharding。</p>
             <aside>
             <hr/>
             <nav>
@@ -145,7 +147,7 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
         <div class="span2" style="float:right;font-size:0.9em;">
  
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2014-02-15T19:14:42">Feb 15, 2014</time>
+            <time pubdate="pubdate" datetime="2014-02-15T19:17:04">Feb 15, 2014</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#mongo-ref">mongo</a> 
             <h4>Tags</h4>
