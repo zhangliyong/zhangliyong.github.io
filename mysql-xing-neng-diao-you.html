@@ -134,6 +134,37 @@ The accounts created by these statements have the following properties:</p>
 <p>16.1.1.5. Creating a Data Snapshot Using mysqldump  :  http://dev.mysql.com/doc/refman/5.1/en/replication-howto-mysqldump.html</p>
 <p>Obtaining the Replication Master Binary Log Coordinates : http://dev.mysql.com/doc/refman/5.1/en/replication-howto-masterstatus.html</p>
 <p>If a slave uses the default host-based relay log file names, changing a slave's host name after replication has been set up can cause replication to fail with the errors Failed to open the relay log and Could not find target log during relay log initialization. This is a known issue (see Bug #2122). If you anticipate that a slave's host name might change in the future (for example, if networking is set up on the slave such that its host name can be modified using DHCP), you can avoid this issue entirely by using the --relay-log and --relay-log-index options to specify relay log file names explicitly when you initially set up the slave. This will make the names independent of server host name changes.</p>
+<section>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="./mysql-xing-neng-diao-you.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'lyonsblog';
+        var disqus_identifier = './mysql-xing-neng-diao-you.html';
+    var disqus_url = './mysql-xing-neng-diao-you.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
             <aside>
             <hr/>
             <nav>
@@ -178,5 +209,31 @@ The accounts created by these statements have the following properties:</p>
             }
         </script>
 
+<script type="text/javascript">
+    var disqus_shortname = 'lyonsblog';
+
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+        <script  language="javascript" type="text/javascript">
+            function uncollapse() {
+                var hash_str = window.location.hash;
+                if (window.location.hash.match(/^#comment-\d+$/))
+                {
+                    var hash_str = '#disqus_thread';
+                }
+                $(hash_str).collapse({
+                    toggle: true
+                    })
+            }
+        </script>
+
+        <script type="text/javascript" language="JavaScript">
+            uncollapse(); 
+        </script>
     </body>
 </html>

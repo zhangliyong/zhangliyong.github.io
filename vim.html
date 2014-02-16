@@ -60,14 +60,54 @@
         <div class="span8 offset2 article-content">
 
             <p>TODO: wrap my plugins</p>
+<h2>auto reload .vimrc</h2>
+<div class="highlight"><pre><span class="n">augroup</span> <span class="n">reload_vimrc</span> <span class="s">&quot; {</span>
+    <span class="n">autocmd</span><span class="o">!</span>
+    <span class="n">autocmd</span> <span class="n">BufWritePost</span> <span class="err">$</span><span class="n">MYVIMRC</span> <span class="n">source</span> <span class="err">$</span><span class="n">MYVIMRC</span>
+<span class="n">augroup</span> <span class="n">END</span> <span class="s">&quot; }</span>
+</pre></div>
+
+
+<p>http://www.bestofvim.com/tip/auto-reload-your-vimrc/</p>
+<section>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="./vim.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'lyonsblog';
+        var disqus_identifier = './vim.html';
+    var disqus_url = './vim.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
             <aside>
             <hr/>
             <nav>
             <ul class="articles_timeline">
  
-                <li class="previous_article">« <a href="./mem.html" title="Previous: mem">mem</a></li>
+                <li class="previous_article">« <a href="./ssd-vs-hhd.html" title="Previous: ssd-vs-hhd">ssd-vs-hhd</a></li>
  
-                <li class="next_article"><a href="./datetime.html" title="Next: datetime">datetime</a> »</li>
+                <li class="next_article"><a href="./mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" title="Next: Mongodb NUMA 导致的性能问题">Mongodb NUMA 导致的性能问题</a> »</li>
             </ul>
             </nav>
             </aside>
@@ -76,7 +116,7 @@
         <div class="span2" style="float:right;font-size:0.9em;">
  
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2013-06-25T10:36:37">Jun 25, 2013</time>
+            <time pubdate="pubdate" datetime="2014-02-16T17:25:31">Feb 16, 2014</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#vim-ref">vim</a> 
 
@@ -104,5 +144,31 @@
             }
         </script>
 
+<script type="text/javascript">
+    var disqus_shortname = 'lyonsblog';
+
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+        <script  language="javascript" type="text/javascript">
+            function uncollapse() {
+                var hash_str = window.location.hash;
+                if (window.location.hash.match(/^#comment-\d+$/))
+                {
+                    var hash_str = '#disqus_thread';
+                }
+                $(hash_str).collapse({
+                    toggle: true
+                    })
+            }
+        </script>
+
+        <script type="text/javascript" language="JavaScript">
+            uncollapse(); 
+        </script>
     </body>
 </html>

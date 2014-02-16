@@ -75,6 +75,37 @@ As you probably know, MongoDB has a global lock. The longer your writes take, th
 The trick to lowering your lock percentage and thus having faster updates is to query the document you are going to update, before you perform the update. Querying before doing an upsert might seem counter intuitive at first glance, but it makes sense when you think about it.</p>
 <p>The read ensures that whatever document you are going to update is in RAM. This means the update, which will happen immediately after the read, always updates the document in RAM, which is super fast. I think of it as warming the database for the document you are about to update.</p>
 <p>http://www.mongotips.com/b/lower-lock-and-number-of-slow-queries/</p>
+<section>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="./mongo.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'lyonsblog';
+        var disqus_identifier = './mongo.html';
+    var disqus_url = './mongo.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
             <aside>
             <hr/>
             <nav>
@@ -119,5 +150,31 @@ The trick to lowering your lock percentage and thus having faster updates is to 
             }
         </script>
 
+<script type="text/javascript">
+    var disqus_shortname = 'lyonsblog';
+
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+        <script  language="javascript" type="text/javascript">
+            function uncollapse() {
+                var hash_str = window.location.hash;
+                if (window.location.hash.match(/^#comment-\d+$/))
+                {
+                    var hash_str = '#disqus_thread';
+                }
+                $(hash_str).collapse({
+                    toggle: true
+                    })
+            }
+        </script>
+
+        <script type="text/javascript" language="JavaScript">
+            uncollapse(); 
+        </script>
     </body>
 </html>

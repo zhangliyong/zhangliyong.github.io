@@ -133,12 +133,45 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
 <p>再看写的速度，HHD最高为6MB/s，SSD最高为39MB/s，为HHD的6倍多。</p>
 <p>使用SSD后，可以大大减小Disk IO的延时，提高MongoDB响应速度，
 但SSD的价格比较高，如果学着SSD性价比低，可以配置sharding。</p>
+<section>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="./ssd-vs-hhd.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'lyonsblog';
+        var disqus_identifier = './ssd-vs-hhd.html';
+    var disqus_url = './ssd-vs-hhd.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
             <aside>
             <hr/>
             <nav>
             <ul class="articles_timeline">
  
                 <li class="previous_article">« <a href="./vim-ack.html" title="Previous: ack.vim">ack.vim</a></li>
+ 
+                <li class="next_article"><a href="./vim.html" title="Next: vim">vim</a> »</li>
             </ul>
             </nav>
             </aside>
@@ -147,7 +180,7 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
         <div class="span2" style="float:right;font-size:0.9em;">
  
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2014-02-15T19:17:04">Feb 15, 2014</time>
+            <time pubdate="pubdate" datetime="2014-02-16T17:01:45">Feb 16, 2014</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#mongo-ref">mongo</a> 
             <h4>Tags</h4>
@@ -159,7 +192,7 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
                     <span>1</span>
 </a></li>
                 <li><a href="/tags.html#mongodb-ref">mongodb
-                    <span>1</span>
+                    <span>2</span>
 </a></li>
                 <li><a href="/tags.html#ssd-ref">ssd
                     <span>1</span>
@@ -190,5 +223,31 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
             }
         </script>
 
+<script type="text/javascript">
+    var disqus_shortname = 'lyonsblog';
+
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+        <script  language="javascript" type="text/javascript">
+            function uncollapse() {
+                var hash_str = window.location.hash;
+                if (window.location.hash.match(/^#comment-\d+$/))
+                {
+                    var hash_str = '#disqus_thread';
+                }
+                $(hash_str).collapse({
+                    toggle: true
+                    })
+            }
+        </script>
+
+        <script type="text/javascript" language="JavaScript">
+            uncollapse(); 
+        </script>
     </body>
 </html>

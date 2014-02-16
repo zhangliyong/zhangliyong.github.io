@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-15T19:17:04+01:00</updated><entry><title>ssd-vs-hhd</title><link href="http://zhangliyong.github.io/ssd-vs-hhd.html" rel="alternate"></link><updated>2014-02-15T19:17:04+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-15:ssd-vs-hhd.html</id><summary type="html">&lt;p&gt;随机MongoDB的数据量增大，我们服务器的磁盘利用率不数据增加，一度接近100%，而且
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-16T17:27:18+01:00</updated><entry><title>Mongodb NUMA 导致的性能问题</title><link href="http://zhangliyong.github.io/mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="alternate"></link><updated>2014-02-16T17:27:18+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-16:mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html</id><summary type="html">&lt;p&gt;最近升级了mongodb，用mongo连接mongod后出现如下warning:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Server&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;startup&lt;/span&gt; &lt;span class="n"&gt;warnings&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;WARNING&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;You&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;running&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;NUMA&lt;/span&gt; &lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;          &lt;span class="n"&gt;We&lt;/span&gt; &lt;span class="n"&gt;suggest&lt;/span&gt; &lt;span class="n"&gt;launching&lt;/span&gt; &lt;span class="n"&gt;mongod&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;avoid&lt;/span&gt; &lt;span class="n"&gt;performance&lt;/span&gt; &lt;span class="n"&gt;problems&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;              &lt;span class="n"&gt;numactl&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;interleave&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;mongod&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;other&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;随即查了下&lt;em&gt;NUMA&lt;/em&gt;是什么，有多篇文章均提到了NUMA会导致mongodb的性能问题，而且官方文档也有说明。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To disable NUMA for MongoDB, use the numactl command and start mongod in the following manner:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt; &lt;span class="n"&gt;numactl&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;interleave&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mongod&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;Adjust the proc settings using the following command:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;proc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;zone_reclaim_mode&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;To fully disable NUMA you must perform both operations. However, you can change zone_reclaim_mode without restarting mongod. For more information, see documentation on Proc/sys/vm.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在此做一个整理：&lt;/p&gt;
+&lt;p&gt;NUMA：NUMA是多核心CPU架构中的一种，其全称为Non-Uniform Memory Access，简单来说就是在多核心CPU中，机器的物理内存是分配给各个核的，架构简图如下所示：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="NUMA" src="http://jcole.us/blog/files/numa-architecture.png" /&gt;&lt;/p&gt;
+&lt;p&gt;每个核访问分配给自己的内存会比访问分配给其它核的内存要快，有下面几种访问控制策略：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;缺省(default)：总是在本地节点分配（分配在当前进程运行的节点上）；&lt;/li&gt;
+&lt;li&gt;绑定(bind)：强制分配到指定节点上；&lt;/li&gt;
+&lt;li&gt;交叉(interleave)：在所有节点或者指定的节点上交织分配；&lt;/li&gt;
+&lt;li&gt;优先(preferred)：在指定节点上分配，失败则在其他节点上分配。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;上面文章中最后使用numactl –interleave命令就是指定其为交叉共享模式。&lt;/p&gt;
+&lt;p&gt;我们知道虚拟内存机制是通过一个中断信号来通知虚拟内存系统进行内存swap的，所以这个irqbalance进程忙，是一个危险信号，在这里是由于在进行频繁的内存交换。这种频繁交换现象称为swap insanity，在MySQL中经常提到，也就是在NUMA框架中，采用不合适的策略，导致核心只能从指定内存块节点上分配内存，即使总内存还有富余，也会由于当前节点内存不足时产生大量的swap操作。&lt;/p&gt;
+&lt;h3&gt;Install&lt;/h3&gt;
+&lt;p&gt;在Ubuntu下以numactl的命令启动mongodb，要先安装numactl&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;numactl&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;参考：&lt;/h3&gt;
+&lt;p&gt;http://docs.mongodb.org/manual/administration/production-notes/#production-numa&lt;/p&gt;
+&lt;p&gt;http://huoding.com/2011/08/09/104&lt;/p&gt;
+&lt;p&gt;http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/&lt;/p&gt;
+&lt;p&gt;http://blog.nosqlfan.com/html/2772.html&lt;/p&gt;</summary><category term="MongoDB"></category><category term="DB"></category></entry><entry><title>vim</title><link href="http://zhangliyong.github.io/vim.html" rel="alternate"></link><updated>2014-02-16T17:25:31+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-16:vim.html</id><summary type="html">&lt;p&gt;TODO: wrap my plugins&lt;/p&gt;
+&lt;h2&gt;auto reload .vimrc&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;augroup&lt;/span&gt; &lt;span class="n"&gt;reload_vimrc&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; {&lt;/span&gt;
+    &lt;span class="n"&gt;autocmd&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+    &lt;span class="n"&gt;autocmd&lt;/span&gt; &lt;span class="n"&gt;BufWritePost&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;MYVIMRC&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;MYVIMRC&lt;/span&gt;
+&lt;span class="n"&gt;augroup&lt;/span&gt; &lt;span class="n"&gt;END&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; }&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;http://www.bestofvim.com/tip/auto-reload-your-vimrc/&lt;/p&gt;</summary></entry><entry><title>ssd-vs-hhd</title><link href="http://zhangliyong.github.io/ssd-vs-hhd.html" rel="alternate"></link><updated>2014-02-16T17:01:45+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-16:ssd-vs-hhd.html</id><summary type="html">&lt;p&gt;随机MongoDB的数据量增大，我们服务器的磁盘利用率不数据增加，一度接近100%，而且
 Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先迁移到使用SSD的服务
 器，下面我利用 &lt;code&gt;mongoperf&lt;/code&gt; 工具对HHD和SSD的 R/W 进行了一个测评。&lt;/p&gt;
 &lt;p&gt;结果如下：&lt;/p&gt;
@@ -486,7 +544,7 @@ nnoremap &lt;F3&gt; "=strftime("%Y-%m-%d (%a)")&lt;CR&gt;P
 inoremap &lt;F3&gt; &lt;C-R&gt;=strftime("%Y-%m-%d (%a)")&lt;CR&gt;&lt;/p&gt;
 &lt;p&gt;http://vim.wikia.com/wiki/Insert_current_date_or_time&lt;/p&gt;
 &lt;p&gt;http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-&lt;em&gt;Tutorial&lt;/em&gt;(Part_1)&lt;/p&gt;
-&lt;p&gt;http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118&lt;/p&gt;</summary></entry><entry><title>vim</title><link href="http://zhangliyong.github.io/vim.html" rel="alternate"></link><updated>2013-06-25T10:36:37+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-25:vim.html</id><summary type="html">&lt;p&gt;TODO: wrap my plugins&lt;/p&gt;</summary></entry><entry><title>mem</title><link href="http://zhangliyong.github.io/mem.html" rel="alternate"></link><updated>2013-06-19T14:54:04+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-19:mem.html</id><summary type="html">&lt;p&gt;http://virtualthreads.blogspot.com/2006/02/understanding-memory-usage-on-linux.html&lt;/p&gt;
+&lt;p&gt;http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118&lt;/p&gt;</summary></entry><entry><title>mem</title><link href="http://zhangliyong.github.io/mem.html" rel="alternate"></link><updated>2013-06-19T14:54:04+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-19:mem.html</id><summary type="html">&lt;p&gt;http://virtualthreads.blogspot.com/2006/02/understanding-memory-usage-on-linux.html&lt;/p&gt;
 &lt;p&gt;http://www.cyberciti.biz/tips/howto-find-memory-used-by-program.html&lt;/p&gt;
 &lt;p&gt;pmap&lt;/p&gt;
 &lt;p&gt;vmmap on mac&lt;/p&gt;</summary></entry><entry><title>concurrency</title><link href="http://zhangliyong.github.io/concurrency.html" rel="alternate"></link><updated>2013-06-19T14:50:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-19:concurrency.html</id><summary type="html">&lt;p&gt;http://www.jeffknupp.com/blog/2012/03/31/pythons-hardest-problem/&lt;/p&gt;
@@ -644,50 +702,7 @@ need logout and login to work&lt;/p&gt;</summary></entry><entry><title>nginx tip
 &lt;p&gt;nginx 有个默认的错误显示页面&lt;/p&gt;
 &lt;h2&gt;Ref&lt;/h2&gt;
 &lt;p&gt;http://wiki.nginx.org/Pitfalls&lt;/p&gt;</summary></entry><entry><title>pelican</title><link href="http://zhangliyong.github.io/pelican.html" rel="alternate"></link><updated>2013-05-09T10:29:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-09:pelican.html</id><summary type="html">&lt;h2&gt;介绍&lt;/h2&gt;
-&lt;p&gt;peclian 是一个python版本的表态页面生成器，类似于jekyll&lt;/p&gt;</summary></entry><entry><title>Mongodb NUMA 导致的性能问题</title><link href="http://zhangliyong.github.io/mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html" rel="alternate"></link><updated>2013-05-08T13:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-08:mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html</id><summary type="html">&lt;p&gt;最近升级了mongodb，用mongo连接mongod后出现如下warning:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Server&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;startup&lt;/span&gt; &lt;span class="n"&gt;warnings&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;WARNING&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;You&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;running&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;NUMA&lt;/span&gt; &lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;          &lt;span class="n"&gt;We&lt;/span&gt; &lt;span class="n"&gt;suggest&lt;/span&gt; &lt;span class="n"&gt;launching&lt;/span&gt; &lt;span class="n"&gt;mongod&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;avoid&lt;/span&gt; &lt;span class="n"&gt;performance&lt;/span&gt; &lt;span class="n"&gt;problems&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-&lt;span class="n"&gt;Mon&lt;/span&gt; &lt;span class="n"&gt;Oct&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initandlisten&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;              &lt;span class="n"&gt;numactl&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;interleave&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;mongod&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;other&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;随即查了下&lt;em&gt;NUMA&lt;/em&gt;是什么，有多篇文章均提到了NUMA会导致mongodb的性能问题，而且官方文档也有说明。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;To disable NUMA for MongoDB, use the numactl command and start mongod in the following manner:&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt; &lt;span class="n"&gt;numactl&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;interleave&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mongod&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;blockquote&gt;
-&lt;p&gt;Adjust the proc settings using the following command:&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;proc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;zone_reclaim_mode&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;blockquote&gt;
-&lt;p&gt;To fully disable NUMA you must perform both operations. However, you can change zone_reclaim_mode without restarting mongod. For more information, see documentation on Proc/sys/vm.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;在此做一个整理：&lt;/p&gt;
-&lt;p&gt;NUMA：NUMA是多核心CPU架构中的一种，其全称为Non-Uniform Memory Access，简单来说就是在多核心CPU中，机器的物理内存是分配给各个核的，架构简图如下所示：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="NUMA" src="http://jcole.us/blog/files/numa-architecture.png" /&gt;&lt;/p&gt;
-&lt;p&gt;每个核访问分配给自己的内存会比访问分配给其它核的内存要快，有下面几种访问控制策略：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;缺省(default)：总是在本地节点分配（分配在当前进程运行的节点上）；&lt;/li&gt;
-&lt;li&gt;绑定(bind)：强制分配到指定节点上；&lt;/li&gt;
-&lt;li&gt;交叉(interleave)：在所有节点或者指定的节点上交织分配；&lt;/li&gt;
-&lt;li&gt;优先(preferred)：在指定节点上分配，失败则在其他节点上分配。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;上面文章中最后使用numactl –interleave命令就是指定其为交叉共享模式。&lt;/p&gt;
-&lt;p&gt;我们知道虚拟内存机制是通过一个中断信号来通知虚拟内存系统进行内存swap的，所以这个irqbalance进程忙，是一个危险信号，在这里是由于在进行频繁的内存交换。这种频繁交换现象称为swap insanity，在MySQL中经常提到，也就是在NUMA框架中，采用不合适的策略，导致核心只能从指定内存块节点上分配内存，即使总内存还有富余，也会由于当前节点内存不足时产生大量的swap操作。&lt;/p&gt;
-&lt;h3&gt;参考：&lt;/h3&gt;
-&lt;p&gt;http://docs.mongodb.org/manual/administration/production-notes/#production-numa&lt;/p&gt;
-&lt;p&gt;http://huoding.com/2011/08/09/104&lt;/p&gt;
-&lt;p&gt;http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/&lt;/p&gt;
-&lt;p&gt;http://blog.nosqlfan.com/html/2772.html&lt;/p&gt;</summary></entry><entry><title>python build Dynamic Link Library</title><link href="http://zhangliyong.github.io/python-build-dynamic-link-library.html" rel="alternate"></link><updated>2013-05-05T18:41:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-05:python-build-dynamic-link-library.html</id><summary type="html">&lt;p&gt;当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：&lt;/p&gt;
+&lt;p&gt;peclian 是一个python版本的表态页面生成器，类似于jekyll&lt;/p&gt;</summary></entry><entry><title>python build Dynamic Link Library</title><link href="http://zhangliyong.github.io/python-build-dynamic-link-library.html" rel="alternate"></link><updated>2013-05-05T18:41:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-05:python-build-dynamic-link-library.html</id><summary type="html">&lt;p&gt;当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
 .../lib/libpython2.7.a: could not read symbols: Bad value

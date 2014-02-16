@@ -6,7 +6,7 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-<meta name="keywords" content=", mongo, " />
+<meta name="keywords" content="MongoDB, DB, mongo, " />
         <title>Mongodb NUMA 导致的性能问题  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
@@ -98,19 +98,54 @@
 </ol>
 <p>上面文章中最后使用numactl –interleave命令就是指定其为交叉共享模式。</p>
 <p>我们知道虚拟内存机制是通过一个中断信号来通知虚拟内存系统进行内存swap的，所以这个irqbalance进程忙，是一个危险信号，在这里是由于在进行频繁的内存交换。这种频繁交换现象称为swap insanity，在MySQL中经常提到，也就是在NUMA框架中，采用不合适的策略，导致核心只能从指定内存块节点上分配内存，即使总内存还有富余，也会由于当前节点内存不足时产生大量的swap操作。</p>
+<h3>Install</h3>
+<p>在Ubuntu下以numactl的命令启动mongodb，要先安装numactl</p>
+<div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">numactl</span>
+</pre></div>
+
+
 <h3>参考：</h3>
 <p>http://docs.mongodb.org/manual/administration/production-notes/#production-numa</p>
 <p>http://huoding.com/2011/08/09/104</p>
 <p>http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/</p>
 <p>http://blog.nosqlfan.com/html/2772.html</p>
+<section>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="./mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'lyonsblog';
+        var disqus_identifier = './mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html';
+    var disqus_url = './mongodb-numa-dao-zhi-de-xing-neng-wen-ti.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
             <aside>
             <hr/>
             <nav>
             <ul class="articles_timeline">
  
-                <li class="previous_article">« <a href="./python-build-dynamic-link-library.html" title="Previous: python build Dynamic Link Library">python build Dynamic Link Library</a></li>
- 
-                <li class="next_article"><a href="./pelican.html" title="Next: pelican">pelican</a> »</li>
+                <li class="previous_article">« <a href="./vim.html" title="Previous: vim">vim</a></li>
             </ul>
             </nav>
             </aside>
@@ -119,9 +154,18 @@
         <div class="span2" style="float:right;font-size:0.9em;">
  
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2013-05-08T13:45:46">May 8, 2013</time>
+            <time pubdate="pubdate" datetime="2014-02-16T17:27:18">Feb 16, 2014</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#mongo-ref">mongo</a> 
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article"> 
+                <li><a href="/tags.html#DB-ref">DB
+                    <span>1</span>
+</a></li>
+                <li><a href="/tags.html#MongoDB-ref">MongoDB
+                    <span>2</span>
+</a></li>
+            </ul>
 
         </div>
         </section>
@@ -147,5 +191,31 @@
             }
         </script>
 
+<script type="text/javascript">
+    var disqus_shortname = 'lyonsblog';
+
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+        <script  language="javascript" type="text/javascript">
+            function uncollapse() {
+                var hash_str = window.location.hash;
+                if (window.location.hash.match(/^#comment-\d+$/))
+                {
+                    var hash_str = '#disqus_thread';
+                }
+                $(hash_str).collapse({
+                    toggle: true
+                    })
+            }
+        </script>
+
+        <script type="text/javascript" language="JavaScript">
+            uncollapse(); 
+        </script>
     </body>
 </html>
