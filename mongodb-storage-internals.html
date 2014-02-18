@@ -59,7 +59,7 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
-            <p>我们都知道MongoDB通过 <code>mmap</code> 的方式将存储在磁盘上的数据文件映射到内存中进行操作，那MongoDB是如何组织数据文件的，最近在网上找了相关资源，在此做一个 <strong> 翻译和汇总 </strong> 非原创，原文在下面的参考链接部分。</p>
+            <p>我们都知道MongoDB通过 <code>mmap</code> 的方式将存储在磁盘上的数据文件映射到内存中进行操作，那MongoDB是如何组织数据文件的，最近在网上找了相关资源，在此做一个 <strong> 翻译和汇总 </strong> , 非原创，原文在下面的参考链接部分。</p>
 <p>我们按照从总体到内部的顺序进行分析，</p>
 <h2>Data Files</h2>
 <p>所有的 data files 存储在 <code>dbpath</code> 参考所指定的目录中，对应于每个数据库都有一个 、namespace file, 多个journal file 和 data file。</p>
