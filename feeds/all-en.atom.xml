@@ -77,14 +77,18 @@
 &lt;/ul&gt;
 &lt;h2&gt;参考&lt;/h2&gt;
 &lt;p&gt;http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen&lt;/p&gt;
-&lt;p&gt;http://blog.mongolab.com/2014/01/how-big-is-your-mongodb/&lt;/p&gt;</summary><category term="MongoDB"></category></entry><entry><title>sftp in ssh</title><link href="http://zhangliyong.github.io/sftp-in-ssh.html" rel="alternate"></link><updated>2014-02-17T09:11:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-17:sftp-in-ssh.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;sftp&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt; 
-    &lt;span class="n"&gt;Connecting&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt; 
-    &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
-    &lt;span class="n"&gt;subsystem&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;channel&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; 
-    &lt;span class="n"&gt;Connection&lt;/span&gt; &lt;span class="n"&gt;closed&lt;/span&gt;
+&lt;p&gt;http://blog.mongolab.com/2014/01/how-big-is-your-mongodb/&lt;/p&gt;</summary><category term="MongoDB"></category></entry><entry><title>sftp in ssh config</title><link href="http://zhangliyong.github.io/sftp-in-ssh-config.html" rel="alternate"></link><updated>2014-02-17T09:11:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-17:sftp-in-ssh-config.html</id><summary type="html">&lt;p&gt;今天在使用 fabric 中的 &lt;code&gt;put&lt;/code&gt; 函数上传文件到服务器时，抛出 &lt;code&gt;Connection closed&lt;/code&gt; 的异常，Google 之后发现 &lt;code&gt;put&lt;/code&gt; 使用 &lt;code&gt;sftp&lt;/code&gt; 进行上传，于是使用 &lt;code&gt;sftp&lt;/code&gt; 连接服务器：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;sftp&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt; 
+&lt;span class="n"&gt;Connecting&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt; 
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
+&lt;span class="n"&gt;subsystem&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;channel&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; 
+&lt;span class="n"&gt;Connection&lt;/span&gt; &lt;span class="n"&gt;closed&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;发现连接失败.&lt;/p&gt;
+&lt;p&gt;解决方案：&lt;/p&gt;
+&lt;p&gt;https://forums.gentoo.org/viewtopic-t-802682-start-0.html&lt;/p&gt;
 &lt;p&gt;In your /etc/ssh/sshd_config (not ssh_config) file, you probably have a line like this: &lt;/p&gt;
 &lt;p&gt;Code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Subsystem&lt;/span&gt; &lt;span class="n"&gt;sftp&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;misc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sftp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
