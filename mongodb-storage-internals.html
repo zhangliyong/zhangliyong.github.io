@@ -6,8 +6,8 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-<meta name="keywords" content="mongodb, ssd, hhd, disk, mongo, " />
-        <title>ssd-vs-hhd  · Lyon's Blog
+<meta name="keywords" content="MongoDB, mongo, " />
+        <title>MongoDB Storage Internals  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
@@ -52,93 +52,48 @@
 <article>
 <div class="row-fluid">
     <header class="page_header span10 offset2">
-    <h1><a href="./ssd-vs-hhd.html"> ssd-vs-hhd  </a></h1>
+    <h1><a href="./mongodb-storage-internals.html"> MongoDB Storage Internals  </a></h1>
     </header>
 </div>
 
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
-            <p>随机MongoDB的数据量增大，我们服务器的磁盘利用率不数据增加，一度接近100%，而且
-Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先迁移到使用SSD的服务
-器，下面我利用 <code>mongoperf</code> 工具对HHD和SSD的 R/W 进行了一个测评。</p>
-<p>结果如下：</p>
-<div class="gist">
-    <script src='https://gist.github.com/8931586.js'></script>
-    <noscript>
-        <pre><code>##Read
-
-    echo "{nThreads:32,fileSizeMB:2000,r:true}" | ./bin/mongoperf
-
-###HHD
-    new thread, total running : 32
-    2093 ops/sec 8 MB/sec
-    1963 ops/sec 7 MB/sec
-    2010 ops/sec 7 MB/sec
-    2044 ops/sec 7 MB/sec
-    2061 ops/sec 8 MB/sec
-    2011 ops/sec 7 MB/sec
+            <p>我们都知道MongoDB通过 <code>mmap</code> 的方式将存储在磁盘上的数据文件映射到内存中进行操作，那MongoDB是如何组织数据文件的，最近在网上找了相关资源，在此做一个汇总。</p>
+<p>我们按照从总体到内部的顺序进行分析，</p>
+<h2>Data files</h2>
+<p>所有的 data files 存储在 <code>dbpath</code> 参考所指定的目录中，对应于每个数据库都有一个 、namespace file, 多个journal file 和 data file。</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">ls</span> <span class="o">-</span><span class="n">lh</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">db</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">mongodb</span> <span class="n">nogroup</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Feb</span> <span class="mi">14</span> <span class="mi">13</span><span class="o">:</span><span class="mi">14</span> <span class="n">journal</span>
+<span class="o">-</span><span class="n">rwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">1</span> <span class="n">mongodb</span> <span class="n">nogroup</span>    <span class="mi">6</span> <span class="n">Feb</span> <span class="mi">13</span> <span class="mi">16</span><span class="o">:</span><span class="mi">49</span> <span class="n">mongod</span><span class="p">.</span><span class="n">lock</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-------</span> <span class="mi">1</span> <span class="n">mongodb</span> <span class="n">nogroup</span>  <span class="mi">64</span><span class="n">M</span> <span class="n">Feb</span> <span class="mi">14</span> <span class="mi">13</span><span class="o">:</span><span class="mi">15</span> <span class="n">test</span><span class="mf">.0</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-------</span> <span class="mi">1</span> <span class="n">mongodb</span> <span class="n">nogroup</span> <span class="mi">128</span><span class="n">M</span> <span class="n">Feb</span> <span class="mi">14</span> <span class="mi">13</span><span class="o">:</span><span class="mi">14</span> <span class="n">test</span><span class="mf">.1</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-------</span> <span class="mi">1</span> <span class="n">mongodb</span> <span class="n">nogroup</span>  <span class="mi">16</span><span class="n">M</span> <span class="n">Feb</span> <span class="mi">14</span> <span class="mi">13</span><span class="o">:</span><span class="mi">15</span> <span class="n">test</span><span class="p">.</span><span class="n">ns</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">mongodb</span> <span class="n">nogroup</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Feb</span> <span class="mi">14</span> <span class="mi">13</span><span class="o">:</span><span class="mi">15</span> <span class="n">_tmp</span>
+</pre></div>
 
 
-###SSD
-    new thread, total running : 32
-    37804 ops/sec 147 MB/sec
-    33013 ops/sec 128 MB/sec
-    36563 ops/sec 142 MB/sec
-    38056 ops/sec 148 MB/sec
-    39058 ops/sec 152 MB/sec
-    39036 ops/sec 152 MB/sec
-    32946 ops/sec 128 MB/sec
-    42343 ops/sec 165 MB/sec
-    40949 ops/sec 159 MB/sec
-
-
-##Write
-
-    echo "{nThreads:32,fileSizeMB:2000,w:true}" | ./bin/mongoperf
-
-###HHD
-    new thread, total running : 32
-    3 ops/sec 0 MB/sec
-    485 ops/sec 1 MB/sec
-    1543 ops/sec 6 MB/sec
-    679 ops/sec 2 MB/sec
-    1059 ops/sec 4 MB/sec
-    1383 ops/sec 5 MB/sec
-    674 ops/sec 2 MB/sec
-    740 ops/sec 2 MB/sec
-    572 ops/sec 2 MB/sec
-    679 ops/sec 2 MB/sec
-    0 ops/sec 0 MB/sec
-    1134 ops/sec 4 MB/sec
-
-###SSD
-    new thread, total running : 32
-    read:0 write:1
-    993 ops/sec 3 MB/sec
-    2160 ops/sec 8 MB/sec
-    312 ops/sec 1 MB/sec
-    493 ops/sec 1 MB/sec
-    7570 ops/sec 29 MB/sec
-    10026 ops/sec 39 MB/sec
-    3120 ops/sec 12 MB/sec
-    514 ops/sec 2 MB/sec
-    903 ops/sec 3 MB/sec
-    1503 ops/sec 5 MB/sec
-    2413 ops/sec 9 MB/sec
-</code></pre>
-    </noscript>
-</div>
-<p>可以看到HHD的读取速度为6-7MB/s，SSD的为150MB/s左右，为HHD的20多倍。</p>
-<p>再看写的速度，HHD最高为6MB/s，SSD最高为39MB/s，为HHD的6倍多。</p>
-<p>使用SSD后，可以大大减小Disk IO的延时，提高MongoDB响应速度，
-但SSD的价格比较高，如果学着SSD性价比低，可以配置sharding。</p>
+<p><code>mongod.lock</code> 是MongoDB的lock 文件，可用来判断上次MongoDB是否正常shutdown。</p>
+<p><code>_tmp</code> 是 MongoDB的临时目录，如建立索引时会用到。不会存储持久化数据。</p>
+<p>其余的所有文件为 test 数据库的文件。</p>
+<p>MongoDB 采用 aggressive pre-allocation的方式申请 data files，而且总会多申请一个备用的data file，如上面的test.1为备用的data file。数据文件会以指数级增长，最大为2GB。</p>
+<p>namespace file 内存储了所有的 collection以及index。</p>
+<p>data file 存储了所有的document及index。data file 以 extent为逻辑存储单元，每个data file包含多个extents.</p>
+<h2>extents</h2>
+<p>每个extent被用来存储doucments或者index。</p>
+<p>extents与data file之间的关系</p>
+<p><img alt="extents and data file" src="http://blog.mongolab.com/wp-content/uploads/2014/01/data_extents1.png" /></p>
+<p>extents与namespace file之间的关系</p>
+<p><img alt="extents and namespace file" src="https://www.evernote.com/shard/s30/sh/7fd6636c-36b9-40a9-b83e-593e248ad8df/d8138c78d9127af7b2edb153d68ed02c" /></p>
+<h2>参考</h2>
+<p>http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen</p>
+<p>http://blog.mongolab.com/2014/01/how-big-is-your-mongodb/</p>
 <section>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="./ssd-vs-hhd.html#disqus_thread">
+                href="./mongodb-storage-internals.html#disqus_thread">
                 Comments
             </a>
         </div>
@@ -148,8 +103,8 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'lyonsblog';
-        var disqus_identifier = './ssd-vs-hhd.html';
-    var disqus_url = './ssd-vs-hhd.html';
+        var disqus_identifier = './mongodb-storage-internals.html';
+    var disqus_url = './mongodb-storage-internals.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -169,9 +124,7 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
             <nav>
             <ul class="articles_timeline">
  
-                <li class="previous_article">« <a href="./vim-ack.html" title="Previous: ack.vim">ack.vim</a></li>
- 
-                <li class="next_article"><a href="./vim.html" title="Next: vim">vim</a> »</li>
+                <li class="previous_article">« <a href="./sftp-in-ssh.html" title="Previous: sftp in ssh">sftp in ssh</a></li>
             </ul>
             </nav>
             </aside>
@@ -180,22 +133,13 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
         <div class="span2" style="float:right;font-size:0.9em;">
  
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2014-02-16T17:01:45">Feb 16, 2014</time>
+            <time pubdate="pubdate" datetime="2014-02-18T09:12:00">Feb 18, 2014</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#mongo-ref">mongo</a> 
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article"> 
-                <li><a href="/tags.html#disk-ref">disk
-                    <span>1</span>
-</a></li>
-                <li><a href="/tags.html#hhd-ref">hhd
-                    <span>1</span>
-</a></li>
-                <li><a href="/tags.html#mongodb-ref">mongodb
+                <li><a href="/tags.html#MongoDB-ref">MongoDB
                     <span>3</span>
-</a></li>
-                <li><a href="/tags.html#ssd-ref">ssd
-                    <span>1</span>
 </a></li>
             </ul>
 
