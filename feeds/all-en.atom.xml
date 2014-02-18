@@ -53,6 +53,18 @@
 &lt;p&gt;当删除数据库时，fileSize会变化，因为此数据库相应的data file会被删除，但当删除collection，documents及index时fileSize不会变化。&lt;/p&gt;
 &lt;h3&gt;nsSize&lt;/h3&gt;
 &lt;p&gt;namespace(&lt;code&gt;test.ns&lt;/code&gt;)文件的大小。namespace file的大小是固定的，但可以通过修改nssize参数调整。&lt;/p&gt;
+&lt;h2&gt;Fragmentation&lt;/h2&gt;
+&lt;p&gt;当执行 &lt;code&gt;update&lt;/code&gt; 及 &lt;code&gt;remove&lt;/code&gt; 操作时会产生fragmentation.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="fragmentation" src="https://www.evernote.com/shard/s30/sh/7fe5f0f5-0453-422d-b10c-44d7858e8f3a/6c4a17b9b49476734e37440f829ee5f8/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /&gt;&lt;/p&gt;
+&lt;p&gt;如果文档的大小不固定，而且经常发生变化，则会产生大量的 fragmentation，这样会浪费内存及磁盘空间，增加Disk IO，会使写操作变慢。可以通过比较 &lt;code&gt;db.collection.stats()&lt;/code&gt; 输出中的 &lt;code&gt;size&lt;/code&gt; 和 &lt;code&gt;storageSize&lt;/code&gt; 来判断fragmentation的状况。&lt;/p&gt;
+&lt;h3&gt;How to Combat&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;定时执行 &lt;code&gt;compact&lt;/code&gt; ，会lock数据库，要在secondary上执行。&lt;/li&gt;
+&lt;li&gt;设定 collection schema, 使document不会增大&lt;/li&gt;
+&lt;li&gt;pre-pad documents, 使document不会增大。&lt;/li&gt;
+&lt;li&gt;使用不同的collection, 尽量使用 &lt;code&gt;db.collection.drop()&lt;/code&gt; 代替 &lt;code&gt;db.collection.remove()&lt;/code&gt; 删除数据&lt;/li&gt;
+&lt;li&gt;设置 &lt;code&gt;usePowerOf2sizes&lt;/code&gt; 提高空间的重用度。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2&gt;参考&lt;/h2&gt;
 &lt;p&gt;http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen&lt;/p&gt;
 &lt;p&gt;http://blog.mongolab.com/2014/01/how-big-is-your-mongodb/&lt;/p&gt;</summary><category term="MongoDB"></category></entry><entry><title>sftp in ssh</title><link href="http://zhangliyong.github.io/sftp-in-ssh.html" rel="alternate"></link><updated>2014-02-17T09:11:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-17:sftp-in-ssh.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;sftp&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt; 
