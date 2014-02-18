@@ -111,6 +111,8 @@
 <p>fileSize 包括所有的data extents, index extents以及data file中未使用的空间，是数据库存储在磁盘上的文件大小。会比storageSize要大，因为它还包括index extents，以及未使用的空间。</p>
 <p><strong>NOTE:</strong> dataSize 和 storageSize 都不包括index。</p>
 <p>当删除数据库时，fileSize会变化，因为此数据库相应的data file会被删除，但当删除collection，documents及index时fileSize不会变化。</p>
+<h3>nsSize</h3>
+<p>namespace(<code>test.ns</code>)文件的大小。namespace file的大小是固定的，但可以通过修改nssize参数调整。</p>
 <h2>参考</h2>
 <p>http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen</p>
 <p>http://blog.mongolab.com/2014/01/how-big-is-your-mongodb/</p>
