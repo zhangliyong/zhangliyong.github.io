@@ -97,11 +97,21 @@
 <h2>Records</h2>
 <p>每一个record会存储一些metadata及一个document。</p>
 <p><img alt="records" src="https://www.evernote.com/shard/s30/sh/14d51a20-e929-4e6a-95c6-df0929da3f87/0f543bfa0139eb4b503e32c98d0474e7/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /></p>
+<p><img alt="record allocation" src="https://www.evernote.com/shard/s30/sh/cc9c8241-32fb-4a88-b794-4bd9430c5887/181d7befe5ea6be0af90f11f235005ed/deep/0/Inside-MongoDB--the-Internals-of-an-Open-Source-Database.png" /></p>
+<h2>Indexes</h2>
+<p>MongoDB的索引是BTree结构，序列化到磁盘进行存储，存储在自己的extents中，而且每一个index有一个单独的namespace，并不属于其collection的namespace.</p>
+<div class="highlight"><pre><span class="o">&gt;</span> <span class="n">db</span><span class="p">.</span><span class="n">system</span><span class="p">.</span><span class="n">namespaces</span><span class="p">.</span><span class="n">find</span><span class="p">()</span>
+<span class="p">{</span> <span class="s">&quot;name&quot;</span> <span class="o">:</span> <span class="s">&quot;test.system.indexes&quot;</span> <span class="p">}</span>
+<span class="p">{</span> <span class="s">&quot;name&quot;</span> <span class="o">:</span> <span class="s">&quot;test.foo.$_id_&quot;</span> <span class="p">}</span>
+<span class="p">{</span> <span class="s">&quot;name&quot;</span> <span class="o">:</span> <span class="s">&quot;test.foo&quot;</span> <span class="p">}</span>
+</pre></div>
+
+
 <h2>Metrics from db.stats()</h2>
 <p>现在我们知道了MongoDB的数据组织方式，下面分析一下 <code>db.stats()</code> 的输出指标所代表的含义。</p>
 <h3>dataSize</h3>
 <p><img alt="data size" src="http://blog.mongolab.com/wp-content/uploads/2014/01/data_size.png" /></p>
-<p>dataSize 是所有 documents 的大小总和，包括这个document的padding, 当document被删除时dataSize会变小，但当减小document大小时，dataSize不会变化。</p>
+<p>dataSize 是所有 documents 的大小总和，包括这个document的padding，也是所有records的总和, 当document被删除时dataSize会变小，但当减小document大小时，dataSize不会变化。</p>
 <h3>storageSize</h3>
 <p><img alt="storageSize" src="http://blog.mongolab.com/wp-content/uploads/2014/01/storage_size.png" /></p>
 <p>storageSize是所有extents的大小总和，会比dataSize要大，因为它会包括extents中未被使用的空间，以及因document被删除及移动带来的空闲空间。</p>

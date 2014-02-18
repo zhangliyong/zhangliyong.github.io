@@ -37,11 +37,21 @@
 &lt;h2&gt;Records&lt;/h2&gt;
 &lt;p&gt;每一个record会存储一些metadata及一个document。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="records" src="https://www.evernote.com/shard/s30/sh/14d51a20-e929-4e6a-95c6-df0929da3f87/0f543bfa0139eb4b503e32c98d0474e7/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="record allocation" src="https://www.evernote.com/shard/s30/sh/cc9c8241-32fb-4a88-b794-4bd9430c5887/181d7befe5ea6be0af90f11f235005ed/deep/0/Inside-MongoDB--the-Internals-of-an-Open-Source-Database.png" /&gt;&lt;/p&gt;
+&lt;h2&gt;Indexes&lt;/h2&gt;
+&lt;p&gt;MongoDB的索引是BTree结构，序列化到磁盘进行存储，存储在自己的extents中，而且每一个index有一个单独的namespace，并不属于其collection的namespace.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;namespaces&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;test.system.indexes&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;test.foo.$_id_&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;test.foo&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;h2&gt;Metrics from db.stats()&lt;/h2&gt;
 &lt;p&gt;现在我们知道了MongoDB的数据组织方式，下面分析一下 &lt;code&gt;db.stats()&lt;/code&gt; 的输出指标所代表的含义。&lt;/p&gt;
 &lt;h3&gt;dataSize&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="data size" src="http://blog.mongolab.com/wp-content/uploads/2014/01/data_size.png" /&gt;&lt;/p&gt;
-&lt;p&gt;dataSize 是所有 documents 的大小总和，包括这个document的padding, 当document被删除时dataSize会变小，但当减小document大小时，dataSize不会变化。&lt;/p&gt;
+&lt;p&gt;dataSize 是所有 documents 的大小总和，包括这个document的padding，也是所有records的总和, 当document被删除时dataSize会变小，但当减小document大小时，dataSize不会变化。&lt;/p&gt;
 &lt;h3&gt;storageSize&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="storageSize" src="http://blog.mongolab.com/wp-content/uploads/2014/01/storage_size.png" /&gt;&lt;/p&gt;
 &lt;p&gt;storageSize是所有extents的大小总和，会比dataSize要大，因为它会包括extents中未被使用的空间，以及因document被删除及移动带来的空闲空间。&lt;/p&gt;
