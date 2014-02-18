@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-18T09:12:00+01:00</updated><entry><title>MongoDB Storage Internals</title><link href="http://zhangliyong.github.io/mongodb-storage-internals.html" rel="alternate"></link><updated>2014-02-18T09:12:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-18:mongodb-storage-internals.html</id><summary type="html">&lt;p&gt;我们都知道MongoDB通过 &lt;code&gt;mmap&lt;/code&gt; 的方式将存储在磁盘上的数据文件映射到内存中进行操作，那MongoDB是如何组织数据文件的，最近在网上找了相关资源，在此做一个汇总。&lt;/p&gt;
 &lt;p&gt;我们按照从总体到内部的顺序进行分析，&lt;/p&gt;
-&lt;h2&gt;Data files&lt;/h2&gt;
+&lt;h2&gt;Data Files&lt;/h2&gt;
 &lt;p&gt;所有的 data files 存储在 &lt;code&gt;dbpath&lt;/code&gt; 参考所指定的目录中，对应于每个数据库都有一个 、namespace file, 多个journal file 和 data file。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;lh&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;
 &lt;span class="n"&gt;drwxr&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;xr&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;mongodb&lt;/span&gt; &lt;span class="n"&gt;nogroup&lt;/span&gt; &lt;span class="mf"&gt;4.0&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="n"&gt;Feb&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt; &lt;span class="n"&gt;journal&lt;/span&gt;
@@ -19,7 +19,7 @@
 &lt;p&gt;MongoDB 采用 aggressive pre-allocation的方式申请 data files，而且总会多申请一个备用的data file，如上面的test.1为备用的data file。数据文件会以指数级增长，最大为2GB。&lt;/p&gt;
 &lt;p&gt;namespace file 内存储了所有的 collection以及index。&lt;/p&gt;
 &lt;p&gt;data file 存储了所有的document及index。data file 以 extent为逻辑存储单元，每个data file包含多个extents.&lt;/p&gt;
-&lt;h2&gt;extents&lt;/h2&gt;
+&lt;h2&gt;Extents&lt;/h2&gt;
 &lt;p&gt;每个extent被用来存储doucments或者index。&lt;/p&gt;
 &lt;p&gt;extents与data file之间的关系&lt;/p&gt;
 &lt;p&gt;&lt;img alt="extents and data file" src="http://blog.mongolab.com/wp-content/uploads/2014/01/data_extents1.png" /&gt;&lt;/p&gt;
@@ -31,6 +31,12 @@
 &lt;li&gt;一个collection通常会有多个extents。&lt;/li&gt;
 &lt;li&gt;当需要一个新的extent时会在当前data file中申请extent，如果当前data file空间不足，则申请新的data file.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;同一个collection的所有extents通过指针连接，namespace file中的collection只需要指向其第一个extent即可。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="extents" src="https://www.evernote.com/shard/s30/sh/948ed357-1c61-4d54-bfc3-29694ffaa6ff/0cfd37262cfe8f33dc49cfcf1e9ba242/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /&gt;&lt;/p&gt;
+&lt;p&gt;每个extent会存储一些metadata，其余空间存储records。&lt;/p&gt;
+&lt;h2&gt;Records&lt;/h2&gt;
+&lt;p&gt;每一个record会存储一些metadata及一个document。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="records" src="https://www.evernote.com/shard/s30/sh/14d51a20-e929-4e6a-95c6-df0929da3f87/0f543bfa0139eb4b503e32c98d0474e7/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /&gt;&lt;/p&gt;
 &lt;h2&gt;参考&lt;/h2&gt;
 &lt;p&gt;http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen&lt;/p&gt;
 &lt;p&gt;http://blog.mongolab.com/2014/01/how-big-is-your-mongodb/&lt;/p&gt;</summary><category term="MongoDB"></category></entry><entry><title>sftp in ssh</title><link href="http://zhangliyong.github.io/sftp-in-ssh.html" rel="alternate"></link><updated>2014-02-17T09:11:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-17:sftp-in-ssh.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;sftp&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt; 

@@ -61,7 +61,7 @@
 
             <p>我们都知道MongoDB通过 <code>mmap</code> 的方式将存储在磁盘上的数据文件映射到内存中进行操作，那MongoDB是如何组织数据文件的，最近在网上找了相关资源，在此做一个汇总。</p>
 <p>我们按照从总体到内部的顺序进行分析，</p>
-<h2>Data files</h2>
+<h2>Data Files</h2>
 <p>所有的 data files 存储在 <code>dbpath</code> 参考所指定的目录中，对应于每个数据库都有一个 、namespace file, 多个journal file 和 data file。</p>
 <div class="highlight"><pre><span class="err">$</span> <span class="n">ls</span> <span class="o">-</span><span class="n">lh</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">db</span>
 <span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">mongodb</span> <span class="n">nogroup</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Feb</span> <span class="mi">14</span> <span class="mi">13</span><span class="o">:</span><span class="mi">14</span> <span class="n">journal</span>
@@ -79,7 +79,7 @@
 <p>MongoDB 采用 aggressive pre-allocation的方式申请 data files，而且总会多申请一个备用的data file，如上面的test.1为备用的data file。数据文件会以指数级增长，最大为2GB。</p>
 <p>namespace file 内存储了所有的 collection以及index。</p>
 <p>data file 存储了所有的document及index。data file 以 extent为逻辑存储单元，每个data file包含多个extents.</p>
-<h2>extents</h2>
+<h2>Extents</h2>
 <p>每个extent被用来存储doucments或者index。</p>
 <p>extents与data file之间的关系</p>
 <p><img alt="extents and data file" src="http://blog.mongolab.com/wp-content/uploads/2014/01/data_extents1.png" /></p>
@@ -91,6 +91,12 @@
 <li>一个collection通常会有多个extents。</li>
 <li>当需要一个新的extent时会在当前data file中申请extent，如果当前data file空间不足，则申请新的data file.</li>
 </ul>
+<p>同一个collection的所有extents通过指针连接，namespace file中的collection只需要指向其第一个extent即可。</p>
+<p><img alt="extents" src="https://www.evernote.com/shard/s30/sh/948ed357-1c61-4d54-bfc3-29694ffaa6ff/0cfd37262cfe8f33dc49cfcf1e9ba242/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /></p>
+<p>每个extent会存储一些metadata，其余空间存储records。</p>
+<h2>Records</h2>
+<p>每一个record会存储一些metadata及一个document。</p>
+<p><img alt="records" src="https://www.evernote.com/shard/s30/sh/14d51a20-e929-4e6a-95c6-df0929da3f87/0f543bfa0139eb4b503e32c98d0474e7/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /></p>
 <h2>参考</h2>
 <p>http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen</p>
 <p>http://blog.mongolab.com/2014/01/how-big-is-your-mongodb/</p>
