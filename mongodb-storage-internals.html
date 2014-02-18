@@ -97,6 +97,20 @@
 <h2>Records</h2>
 <p>每一个record会存储一些metadata及一个document。</p>
 <p><img alt="records" src="https://www.evernote.com/shard/s30/sh/14d51a20-e929-4e6a-95c6-df0929da3f87/0f543bfa0139eb4b503e32c98d0474e7/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /></p>
+<h2>Metrics from db.stats()</h2>
+<p>现在我们知道了MongoDB的数据组织方式，下面分析一下 <code>db.stats()</code> 的输出指标所代表的含义。</p>
+<h3>dataSize</h3>
+<p><img alt="data size" src="http://blog.mongolab.com/wp-content/uploads/2014/01/data_size.png" /></p>
+<p>dataSize 是所有 documents 的大小总和，包括这个document的padding, 当document被删除时dataSize会变小，但当减小document大小时，dataSize不会变化。</p>
+<h3>storageSize</h3>
+<p><img alt="storageSize" src="http://blog.mongolab.com/wp-content/uploads/2014/01/storage_size.png" /></p>
+<p>storageSize是所有extents的大小总和，会比dataSize要大，因为它会包括extents中未被使用的空间，以及因document被删除及移动带来的空闲空间。</p>
+<p>当删除或减小document时，storageSize不会变化。</p>
+<h3>fileSize</h3>
+<p><img alt="fileSize" src="http://blog.mongolab.com/wp-content/uploads/2014/01/file_size.png" /></p>
+<p>fileSize 包括所有的data extents, index extents以及data file中未使用的空间，是数据库存储在磁盘上的文件大小。会比storageSize要大，因为它还包括index extents，以及未使用的空间。</p>
+<p><strong>NOTE:</strong> dataSize 和 storageSize 都不包括index。</p>
+<p>当删除数据库时，fileSize会变化，因为此数据库相应的data file会被删除，但当删除collection，documents及index时fileSize不会变化。</p>
 <h2>参考</h2>
 <p>http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen</p>
 <p>http://blog.mongolab.com/2014/01/how-big-is-your-mongodb/</p>
