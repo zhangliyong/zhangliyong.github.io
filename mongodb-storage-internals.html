@@ -85,10 +85,12 @@
 <p><img alt="extents and data file" src="http://blog.mongolab.com/wp-content/uploads/2014/01/data_extents1.png" /></p>
 <p>extents与namespace file之间的关系</p>
 <p><img alt="extents and namespace file" src="https://www.evernote.com/shard/s30/sh/7fd6636c-36b9-40a9-b83e-593e248ad8df/d8138c78d9127af7b2edb153d68ed02c/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /></p>
-<p><strong>NOTE</strong>:
-<em> 一个extent只能存储一个collection的documents或index，不能同时用来存储documents和index。
-</em> 一个collection通常会有多个extents。
-* 当需要一个新的extent时会在当前data file中申请extent，如果当前data file空间不足，则申请新的data file.</p>
+<p><strong>NOTE</strong>:</p>
+<ul>
+<li>一个extent只能存储一个collection的documents或index，不能同时用来存储documents和index。</li>
+<li>一个collection通常会有多个extents。</li>
+<li>当需要一个新的extent时会在当前data file中申请extent，如果当前data file空间不足，则申请新的data file.</li>
+</ul>
 <h2>参考</h2>
 <p>http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen</p>
 <p>http://blog.mongolab.com/2014/01/how-big-is-your-mongodb/</p>

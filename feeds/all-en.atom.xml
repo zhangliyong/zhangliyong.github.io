@@ -25,10 +25,12 @@
 &lt;p&gt;&lt;img alt="extents and data file" src="http://blog.mongolab.com/wp-content/uploads/2014/01/data_extents1.png" /&gt;&lt;/p&gt;
 &lt;p&gt;extents与namespace file之间的关系&lt;/p&gt;
 &lt;p&gt;&lt;img alt="extents and namespace file" src="https://www.evernote.com/shard/s30/sh/7fd6636c-36b9-40a9-b83e-593e248ad8df/d8138c78d9127af7b2edb153d68ed02c/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;:
-&lt;em&gt; 一个extent只能存储一个collection的documents或index，不能同时用来存储documents和index。
-&lt;/em&gt; 一个collection通常会有多个extents。
-* 当需要一个新的extent时会在当前data file中申请extent，如果当前data file空间不足，则申请新的data file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个extent只能存储一个collection的documents或index，不能同时用来存储documents和index。&lt;/li&gt;
+&lt;li&gt;一个collection通常会有多个extents。&lt;/li&gt;
+&lt;li&gt;当需要一个新的extent时会在当前data file中申请extent，如果当前data file空间不足，则申请新的data file.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2&gt;参考&lt;/h2&gt;
 &lt;p&gt;http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen&lt;/p&gt;
 &lt;p&gt;http://blog.mongolab.com/2014/01/how-big-is-your-mongodb/&lt;/p&gt;</summary><category term="MongoDB"></category></entry><entry><title>sftp in ssh</title><link href="http://zhangliyong.github.io/sftp-in-ssh.html" rel="alternate"></link><updated>2014-02-17T09:11:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-17:sftp-in-ssh.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;sftp&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt; 
