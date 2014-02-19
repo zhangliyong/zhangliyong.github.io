@@ -94,7 +94,7 @@
 </pre></div>
 
 
-<p>The doucment without <code>name</code> filed also show up. So when create an index on a field, if a document without the filed, it will also be indexed in the index with the filed value as <code>null</code>.</p>
+<p>The doucment without <code>name</code> filed also show up. So when create an index on a field without <code>sparse</code> option, if an document without the filed, it will also be indexed in the index with the filed value as <code>null</code>.</p>
 <p>Use <code>explain()</code> on the two query, the <code>indexBounds</code> of the output are the same. They both use index <code>{name: 1}</code>, and have the same time complexity, only the outputs are different.</p>
 <div class="highlight"><pre><span class="s2">&quot;nscannedObjects&quot;</span> <span class="o">:</span> <span class="nt">2</span><span class="o">,</span>
 <span class="s2">&quot;nscanned&quot;</span> <span class="o">:</span> <span class="nt">2</span><span class="o">,</span>

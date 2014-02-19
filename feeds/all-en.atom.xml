@@ -34,7 +34,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The doucment without &lt;code&gt;name&lt;/code&gt; filed also show up. So when create an index on a field, if a document without the filed, it will also be indexed in the index with the filed value as &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The doucment without &lt;code&gt;name&lt;/code&gt; filed also show up. So when create an index on a field without &lt;code&gt;sparse&lt;/code&gt; option, if an document without the filed, it will also be indexed in the index with the filed value as &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Use &lt;code&gt;explain()&lt;/code&gt; on the two query, the &lt;code&gt;indexBounds&lt;/code&gt; of the output are the same. They both use index &lt;code&gt;{name: 1}&lt;/code&gt;, and have the same time complexity, only the outputs are different.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="s2"&gt;&amp;quot;nscannedObjects&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;2&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
 &lt;span class="s2"&gt;&amp;quot;nscanned&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;2&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
