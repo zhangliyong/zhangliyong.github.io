@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-18T16:22:57+01:00</updated><entry><title>MongoDB Journal</title><link href="http://zhangliyong.github.io/mongodb-journal.html" rel="alternate"></link><updated>2014-02-18T16:22:57+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-18:mongodb-journal.html</id><summary type="html"></summary></entry><entry><title>MongoDB mmap</title><link href="http://zhangliyong.github.io/mongodb-mmap.html" rel="alternate"></link><updated>2014-02-18T15:12:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-18:mongodb-mmap.html</id><summary type="html">&lt;p&gt;MongoDB 使用系统调用 &lt;code&gt;mmap&lt;/code&gt; 将数据文件映射到内存，然后直接操作内存。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-18T16:30:00+01:00</updated><entry><title>MongoDB Journal</title><link href="http://zhangliyong.github.io/mongodb-journal.html" rel="alternate"></link><updated>2014-02-18T16:30:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-18:mongodb-journal.html</id><summary type="html">&lt;p&gt;启用journal后，MongoDB的操作先写到journal buffer中，每100ms MongoDB会flush journal buffer到磁盘journal中，此时数据不会丢失，&lt;/p&gt;
+&lt;p&gt;若MongoDB crash，则最多会丢失100ms的数据。&lt;/p&gt;
+&lt;p&gt;journal文件的格式为：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="journal" src="https://www.evernote.com/shard/s30/sh/1da95a5d-e676-4d26-9526-4c88a0f99c6d/55ab60012797fe9541233b5835db1f18/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /&gt;&lt;/p&gt;
+&lt;h2&gt;How Journal Works&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; 翻译自： http://www.kchodorow.com/blog/2012/10/04/how-mongodbs-journaling-works/&lt;/p&gt;
+&lt;p&gt;首先磁盘上存储了 journal files和data files，如下：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="journal files and data files" src="http://www.kchodorow.com/blog/wp-content/uploads/2012/10/mapfile.png" /&gt;&lt;/p&gt;
+&lt;p&gt;当启动mongod后，会将data files映射到shared view，并返回其在内存的虚拟地址。例如：数据文件大小为2,000 bytes，操作系统将其映射到内存地址1,000,000-1,002,000，如果你访问地址1,000,042，那你会得到数据文件中从第42个字节开始的数据。（当然操作系统不会把所有数据都load到内存中，只有当你访问到时，才会放到内存中.）&lt;/p&gt;
+&lt;p&gt;&lt;img alt="shared view" src="http://www.kchodorow.com/blog/wp-content/uploads/2012/10/to_shared.png" /&gt;&lt;/p&gt;
+&lt;h2&gt;Cost of a Journal&lt;/h2&gt;
+&lt;p&gt;使用journal后写操作的性能会降低5-30%。&lt;/p&gt;
+&lt;p&gt;对于写操作非常频繁的系统建议journal files和data files使用不同的物理磁盘，它们都会flush数据到磁盘，若使用同一个会使用Disk IO延时增大，降低性能。&lt;/p&gt;
+&lt;p&gt;对于以读为主的系统，不会有太多影响。&lt;/p&gt;
+&lt;h2&gt;参考&lt;/h2&gt;
+&lt;p&gt;http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen&lt;/p&gt;
+&lt;p&gt;http://www.kchodorow.com/blog/2012/10/04/how-mongodbs-journaling-works/&lt;/p&gt;</summary><category term="MongoDB"></category></entry><entry><title>MongoDB mmap</title><link href="http://zhangliyong.github.io/mongodb-mmap.html" rel="alternate"></link><updated>2014-02-18T15:12:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-18:mongodb-mmap.html</id><summary type="html">&lt;p&gt;MongoDB 使用系统调用 &lt;code&gt;mmap&lt;/code&gt; 将数据文件映射到内存，然后直接操作内存。&lt;/p&gt;
 &lt;p&gt;这样简化了MongoDB的开发，可以省去复杂的内存及磁盘操作相关的代码，完全不用关心文件系统的类型，OS会自动cache数据，并使用LRU的方式，而且MongoDB重启后可以继续使用cache中的数据。&lt;/p&gt;
 &lt;p&gt;当然也会有缺点，数据文件碎片(fragmentation)会影响内存的使用，而且操作系统的 &lt;code&gt;read-ahead&lt;/code&gt; 也会影响内存的使用，对于索引数据来说，cache的LRU方式并不合适，索引数据最好一直在内存中。&lt;/p&gt;
 &lt;p&gt;MongoDB 进程的虚拟内存 &lt;code&gt;virtual size = total files size + overhead(connections, heap)&lt;/code&gt;&lt;/p&gt;

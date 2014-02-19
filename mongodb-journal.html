@@ -6,7 +6,7 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-<meta name="keywords" content=", mongo, " />
+<meta name="keywords" content="MongoDB, mongo, " />
         <title>MongoDB Journal  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
@@ -59,7 +59,23 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
-            
+            <p>启用journal后，MongoDB的操作先写到journal buffer中，每100ms MongoDB会flush journal buffer到磁盘journal中，此时数据不会丢失，</p>
+<p>若MongoDB crash，则最多会丢失100ms的数据。</p>
+<p>journal文件的格式为：</p>
+<p><img alt="journal" src="https://www.evernote.com/shard/s30/sh/1da95a5d-e676-4d26-9526-4c88a0f99c6d/55ab60012797fe9541233b5835db1f18/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /></p>
+<h2>How Journal Works</h2>
+<p><strong>NOTE:</strong> 翻译自： http://www.kchodorow.com/blog/2012/10/04/how-mongodbs-journaling-works/</p>
+<p>首先磁盘上存储了 journal files和data files，如下：</p>
+<p><img alt="journal files and data files" src="http://www.kchodorow.com/blog/wp-content/uploads/2012/10/mapfile.png" /></p>
+<p>当启动mongod后，会将data files映射到shared view，并返回其在内存的虚拟地址。例如：数据文件大小为2,000 bytes，操作系统将其映射到内存地址1,000,000-1,002,000，如果你访问地址1,000,042，那你会得到数据文件中从第42个字节开始的数据。（当然操作系统不会把所有数据都load到内存中，只有当你访问到时，才会放到内存中.）</p>
+<p><img alt="shared view" src="http://www.kchodorow.com/blog/wp-content/uploads/2012/10/to_shared.png" /></p>
+<h2>Cost of a Journal</h2>
+<p>使用journal后写操作的性能会降低5-30%。</p>
+<p>对于写操作非常频繁的系统建议journal files和data files使用不同的物理磁盘，它们都会flush数据到磁盘，若使用同一个会使用Disk IO延时增大，降低性能。</p>
+<p>对于以读为主的系统，不会有太多影响。</p>
+<h2>参考</h2>
+<p>http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen</p>
+<p>http://www.kchodorow.com/blog/2012/10/04/how-mongodbs-journaling-works/</p>
 <section>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
@@ -105,9 +121,15 @@
         <div class="span2" style="float:right;font-size:0.9em;">
  
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2014-02-18T16:22:57">Feb 18, 2014</time>
+            <time pubdate="pubdate" datetime="2014-02-18T16:30:00">Feb 18, 2014</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#mongo-ref">mongo</a> 
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article"> 
+                <li><a href="/tags.html#MongoDB-ref">MongoDB
+                    <span>5</span>
+</a></li>
+            </ul>
 
         </div>
         </section>
