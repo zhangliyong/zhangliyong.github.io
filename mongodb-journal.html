@@ -66,7 +66,7 @@
 <p>journal文件的格式为：</p>
 <p><img alt="journal" src="https://www.evernote.com/shard/s30/sh/1da95a5d-e676-4d26-9526-4c88a0f99c6d/55ab60012797fe9541233b5835db1f18/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /></p>
 <h2>How Journal Works</h2>
-<p><strong>NOTE:</strong> 翻译自： http://www.kchodorow.com/blog/2012/10/04/how-mongodbs-journaling-works/</p>
+<p><strong>NOTE:</strong> 此部分翻译自： http://www.kchodorow.com/blog/2012/10/04/how-mongodbs-journaling-works/</p>
 <p>首先磁盘上存储了 journal files和data files，如下：</p>
 <p><img alt="journal files and data files" src="http://www.kchodorow.com/blog/wp-content/uploads/2012/10/mapfile.png" /></p>
 <p>当启动mongod后，会将data files映射到shared view，并返回其在内存的虚拟地址。例如：数据文件大小为2,000 bytes，操作系统将其映射到内存地址1,000,000-1,002,000，如果你访问地址1,000,042，那你会得到数据文件中从第42个字节开始的数据。（当然操作系统不会把所有数据都load到内存中，只有当你访问到时，才会放到内存中.）</p>
