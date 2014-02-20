@@ -6,8 +6,8 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-<meta name="keywords" content="mongodb, ssd, hhd, disk, mongo, " />
-        <title>ssd-vs-hhd  · Lyon's Blog
+<meta name="keywords" content="MongoDB, , mongo, " />
+        <title>MongoDB Replication Set  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
@@ -52,93 +52,20 @@
 <article>
 <div class="row-fluid">
     <header class="page_header span10 offset2">
-    <h1><a href="./ssd-vs-hhd.html"> ssd-vs-hhd  </a></h1>
+    <h1><a href="./mongodb-replication-set.html"> MongoDB Replication Set  </a></h1>
     </header>
 </div>
 
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
-            <p>随机MongoDB的数据量增大，我们服务器的磁盘利用率不数据增加，一度接近100%，而且
-Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先迁移到使用SSD的服务
-器，下面我利用 <code>mongoperf</code> 工具对HHD和SSD的 R/W 进行了一个测评。</p>
-<p>结果如下：</p>
-<div class="gist">
-    <script src='https://gist.github.com/8931586.js'></script>
-    <noscript>
-        <pre><code>##Read
-
-    echo "{nThreads:32,fileSizeMB:2000,r:true}" | ./bin/mongoperf
-
-###HHD
-    new thread, total running : 32
-    2093 ops/sec 8 MB/sec
-    1963 ops/sec 7 MB/sec
-    2010 ops/sec 7 MB/sec
-    2044 ops/sec 7 MB/sec
-    2061 ops/sec 8 MB/sec
-    2011 ops/sec 7 MB/sec
-
-
-###SSD
-    new thread, total running : 32
-    37804 ops/sec 147 MB/sec
-    33013 ops/sec 128 MB/sec
-    36563 ops/sec 142 MB/sec
-    38056 ops/sec 148 MB/sec
-    39058 ops/sec 152 MB/sec
-    39036 ops/sec 152 MB/sec
-    32946 ops/sec 128 MB/sec
-    42343 ops/sec 165 MB/sec
-    40949 ops/sec 159 MB/sec
-
-
-##Write
-
-    echo "{nThreads:32,fileSizeMB:2000,w:true}" | ./bin/mongoperf
-
-###HHD
-    new thread, total running : 32
-    3 ops/sec 0 MB/sec
-    485 ops/sec 1 MB/sec
-    1543 ops/sec 6 MB/sec
-    679 ops/sec 2 MB/sec
-    1059 ops/sec 4 MB/sec
-    1383 ops/sec 5 MB/sec
-    674 ops/sec 2 MB/sec
-    740 ops/sec 2 MB/sec
-    572 ops/sec 2 MB/sec
-    679 ops/sec 2 MB/sec
-    0 ops/sec 0 MB/sec
-    1134 ops/sec 4 MB/sec
-
-###SSD
-    new thread, total running : 32
-    read:0 write:1
-    993 ops/sec 3 MB/sec
-    2160 ops/sec 8 MB/sec
-    312 ops/sec 1 MB/sec
-    493 ops/sec 1 MB/sec
-    7570 ops/sec 29 MB/sec
-    10026 ops/sec 39 MB/sec
-    3120 ops/sec 12 MB/sec
-    514 ops/sec 2 MB/sec
-    903 ops/sec 3 MB/sec
-    1503 ops/sec 5 MB/sec
-    2413 ops/sec 9 MB/sec
-</code></pre>
-    </noscript>
-</div>
-<p>可以看到HHD的读取速度为6-7MB/s，SSD的为150MB/s左右，为HHD的20多倍。</p>
-<p>再看写的速度，HHD最高为6MB/s，SSD最高为39MB/s，为HHD的6倍多。</p>
-<p>使用SSD后，可以大大减小Disk IO的延时，提高MongoDB响应速度，
-但SSD的价格比较高，如果学着SSD性价比低，可以配置sharding。</p>
+            
 <section>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="./ssd-vs-hhd.html#disqus_thread">
+                href="./mongodb-replication-set.html#disqus_thread">
                 Comments
             </a>
         </div>
@@ -148,8 +75,8 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'lyonsblog';
-        var disqus_identifier = './ssd-vs-hhd.html';
-    var disqus_url = './ssd-vs-hhd.html';
+        var disqus_identifier = './mongodb-replication-set.html';
+    var disqus_url = './mongodb-replication-set.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -169,9 +96,9 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
             <nav>
             <ul class="articles_timeline">
  
-                <li class="previous_article">« <a href="./vim-ack.html" title="Previous: ack.vim">ack.vim</a></li>
+                <li class="previous_article">« <a href="./mongodb-index-internals.html" title="Previous: MongoDB Index Internals">MongoDB Index Internals</a></li>
  
-                <li class="next_article"><a href="./vim.html" title="Next: vim">vim</a> »</li>
+                <li class="next_article"><a href="./b-tree.html" title="Next: B-tree">B-tree</a> »</li>
             </ul>
             </nav>
             </aside>
@@ -180,22 +107,16 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
         <div class="span2" style="float:right;font-size:0.9em;">
  
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2014-02-16T17:01:45">Feb 16, 2014</time>
+            <time pubdate="pubdate" datetime="2014-02-19T17:28:25">Feb 19, 2014</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#mongo-ref">mongo</a> 
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article"> 
-                <li><a href="/tags.html#disk-ref">disk
-                    <span>2</span>
-</a></li>
-                <li><a href="/tags.html#hhd-ref">hhd
+                <li><a href="/tags.html#-ref">
                     <span>1</span>
 </a></li>
-                <li><a href="/tags.html#mongodb-ref">mongodb
+                <li><a href="/tags.html#MongoDB-ref">MongoDB
                     <span>9</span>
-</a></li>
-                <li><a href="/tags.html#ssd-ref">ssd
-                    <span>1</span>
 </a></li>
             </ul>
 
