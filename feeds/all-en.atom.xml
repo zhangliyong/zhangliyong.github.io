@@ -224,7 +224,6 @@ When create a sparse index, only when the document does not have all the fields 
 
 
 &lt;p&gt;&lt;code&gt;mongod.lock&lt;/code&gt; 是MongoDB的lock 文件，可用来判断上次MongoDB是否正常shutdown。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;_tmp&lt;/code&gt; 是 MongoDB的临时目录，如建立索引时会用到。不会存储持久化数据。&lt;/p&gt;
 &lt;p&gt;其余的所有文件为 test 数据库的文件。&lt;/p&gt;
 &lt;p&gt;MongoDB 采用 aggressive pre-allocation的方式申请 data files，而且总会多申请一个备用的data file，如上面的test.1为备用的data file。数据文件会以指数级增长，最大为2GB。&lt;/p&gt;
 &lt;p&gt;namespace file 内存储了所有的 collection以及index。&lt;/p&gt;

@@ -74,7 +74,6 @@
 
 
 <p><code>mongod.lock</code> 是MongoDB的lock 文件，可用来判断上次MongoDB是否正常shutdown。</p>
-<p><code>_tmp</code> 是 MongoDB的临时目录，如建立索引时会用到。不会存储持久化数据。</p>
 <p>其余的所有文件为 test 数据库的文件。</p>
 <p>MongoDB 采用 aggressive pre-allocation的方式申请 data files，而且总会多申请一个备用的data file，如上面的test.1为备用的data file。数据文件会以指数级增长，最大为2GB。</p>
 <p>namespace file 内存储了所有的 collection以及index。</p>
