@@ -29,7 +29,7 @@ All leaves appear in the same level, and internal vertices carry no information.
 &lt;/blockquote&gt;
 &lt;p&gt;This is what btree looks like:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="index btree" src="https://www.evernote.com/shard/s30/sh/58663d76-cf6f-4944-943b-fb850f3084b1/3bc5e37b28b267f8cd2e374e99d0d59c/deep/0/Btree.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header(see &lt;a href="mongodb-storage-internals.md"&gt;mongo storage&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See &lt;a href="{filename}../mongo/mongodb-storage-internals.md"&gt;mongo storage&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Bucket store keynode and keydata, this is what bucket looks like:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="index bucket" src="https://www.evernote.com/shard/s30/sh/3a7cb4c5-d387-4335-b1b4-920d7510091e/33b58b26c816e9621cd556325ceeb8d2/deep/0/From-Skitch.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;prevChildBucket&lt;/code&gt; is a pointer, point to the left child bucket of this key. &lt;code&gt;kdo&lt;/code&gt; points to the key data of this key. &lt;code&gt;recordLoc&lt;/code&gt; points to the location of the key's doucment.&lt;/p&gt;
@@ -51,7 +51,7 @@ All leaves appear in the same level, and internal vertices carry no information.
 
 &lt;p&gt;The size of keydata varies, with upper limit 1024 bytes.&lt;/p&gt;
 &lt;p&gt;When insert a new key to a bucket, keynode is inserted from left, and keydata is insert from right.&lt;/p&gt;
-&lt;p&gt;bucket format:&lt;/p&gt;
+&lt;p&gt;Bucket format:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;hhhh&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;kkkkkkk&lt;/span&gt;&lt;span class="err"&gt;————&lt;/span&gt;&lt;span class="n"&gt;bbbbbbbbbbbuuubbbuubbb&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
  &lt;span class="n"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;
  &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;KeyNode&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;
@@ -65,8 +65,8 @@ All leaves appear in the same level, and internal vertices carry no information.
 &lt;p&gt;keydata is a projection of a document into the schema of the index. For an index, the schema is fixed, so keydata does not need to contain fieldNames. If a document does not have a field, then the fileValue will be null in keydata.&lt;/p&gt;
 &lt;h3&gt;Sparse&lt;/h3&gt;
 &lt;p&gt;When create a sparse index, only when the document does not have all the fields of the index, it will be ignore, if one of the fields exists, it will be indexed.&lt;/p&gt;
-&lt;h2&gt;IndexStats&lt;/h2&gt;
-&lt;p&gt;MongoDB 2.4 ships with a &lt;code&gt;indexStats&lt;/code&gt; command, the command can be run only on a mongod instance that uses the --enableExperimentalIndexStatsCmd option.&lt;/p&gt;
+&lt;h3&gt;IndexStats&lt;/h3&gt;
+&lt;p&gt;MongoDB 2.4 ships with a &lt;code&gt;indexStats&lt;/code&gt; command, the command can be run only on a mongod instance that uses the &lt;code&gt;--enableExperimentalIndexStatsCmd&lt;/code&gt; option.&lt;/p&gt;
 &lt;p&gt;To aggregate statistics, issue the command like so:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;db.runCommand&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;indexStats&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;collection&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;index name&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -74,7 +74,8 @@ All leaves appear in the same level, and internal vertices carry no information.
 
 &lt;h2&gt;Reference&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/B-tree"&gt;http://en.wikipedia.org/wiki/B-tree&lt;/a&gt;
-&lt;a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/catalog/index_create.cpp"&gt;https://github.com/mongodb/mongo/blob/master/src/mongo/db/catalog/index_create.cpp&lt;/a&gt;&lt;/p&gt;</summary><category term="MongoDB"></category><category term="Index"></category><category term="B-Tree"></category></entry><entry><title>MongoDB Index</title><link href="http://zhangliyong.github.io/mongodb-index.html" rel="alternate"></link><updated>2014-02-19T13:47:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-19:mongodb-index.html</id><summary type="html">&lt;p&gt;本文我们讨论一下一些特殊查询对索引的使用情况。&lt;/p&gt;
+&lt;a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h"&gt;https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h&lt;/a&gt;
+&lt;a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.cpp"&gt;https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.cpp&lt;/a&gt;&lt;/p&gt;</summary><category term="MongoDB"></category><category term="Index"></category><category term="B-Tree"></category></entry><entry><title>MongoDB Index</title><link href="http://zhangliyong.github.io/mongodb-index.html" rel="alternate"></link><updated>2014-02-19T13:47:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-19:mongodb-index.html</id><summary type="html">&lt;p&gt;本文我们讨论一下一些特殊查询对索引的使用情况。&lt;/p&gt;
 &lt;p&gt;Test data:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;rs0&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;PRIMARY&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;foo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;find&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
 &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ObjectId&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;52fda635720bcc4ea4bb961c&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;test_name&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;

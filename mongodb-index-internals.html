@@ -86,7 +86,7 @@ All leaves appear in the same level, and internal vertices carry no information.
 </blockquote>
 <p>This is what btree looks like:</p>
 <p><img alt="index btree" src="https://www.evernote.com/shard/s30/sh/58663d76-cf6f-4944-943b-fb850f3084b1/3bc5e37b28b267f8cd2e374e99d0d59c/deep/0/Btree.jpg" /></p>
-<p>When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header(see <a href="mongodb-storage-internals.md">mongo storage</a>).</p>
+<p>When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See <a href="{filename}../mongo/mongodb-storage-internals.md">mongo storage</a>.</p>
 <p>Bucket store keynode and keydata, this is what bucket looks like:</p>
 <p><img alt="index bucket" src="https://www.evernote.com/shard/s30/sh/3a7cb4c5-d387-4335-b1b4-920d7510091e/33b58b26c816e9621cd556325ceeb8d2/deep/0/From-Skitch.jpg" /></p>
 <p><code>prevChildBucket</code> is a pointer, point to the left child bucket of this key. <code>kdo</code> points to the key data of this key. <code>recordLoc</code> points to the location of the key's doucment.</p>
@@ -108,7 +108,7 @@ All leaves appear in the same level, and internal vertices carry no information.
 
 <p>The size of keydata varies, with upper limit 1024 bytes.</p>
 <p>When insert a new key to a bucket, keynode is inserted from left, and keydata is insert from right.</p>
-<p>bucket format:</p>
+<p>Bucket format:</p>
 <div class="highlight"><pre> <span class="o">|</span><span class="n">hhhh</span><span class="o">|</span><span class="n">kkkkkkk</span><span class="err">————</span><span class="n">bbbbbbbbbbbuuubbbuubbb</span><span class="o">|</span>
  <span class="n">h</span> <span class="o">=</span> <span class="n">header</span> <span class="n">data</span>
  <span class="n">k</span> <span class="o">=</span> <span class="n">KeyNode</span> <span class="n">data</span>
@@ -122,8 +122,8 @@ All leaves appear in the same level, and internal vertices carry no information.
 <p>keydata is a projection of a document into the schema of the index. For an index, the schema is fixed, so keydata does not need to contain fieldNames. If a document does not have a field, then the fileValue will be null in keydata.</p>
 <h3>Sparse</h3>
 <p>When create a sparse index, only when the document does not have all the fields of the index, it will be ignore, if one of the fields exists, it will be indexed.</p>
-<h2>IndexStats</h2>
-<p>MongoDB 2.4 ships with a <code>indexStats</code> command, the command can be run only on a mongod instance that uses the --enableExperimentalIndexStatsCmd option.</p>
+<h3>IndexStats</h3>
+<p>MongoDB 2.4 ships with a <code>indexStats</code> command, the command can be run only on a mongod instance that uses the <code>--enableExperimentalIndexStatsCmd</code> option.</p>
 <p>To aggregate statistics, issue the command like so:</p>
 <div class="highlight"><pre><span class="nx">db.runCommand</span><span class="p">(</span> <span class="p">{</span> <span class="nx">indexStats</span><span class="p">:</span> <span class="s2">&quot;&lt;collection&gt;&quot;</span><span class="p">,</span> <span class="nb">index</span><span class="p">:</span> <span class="s2">&quot;&lt;index name&gt;&quot;</span> <span class="p">}</span> <span class="p">)</span>
 </pre></div>
@@ -131,7 +131,8 @@ All leaves appear in the same level, and internal vertices carry no information.
 
 <h2>Reference</h2>
 <p><a href="http://en.wikipedia.org/wiki/B-tree">http://en.wikipedia.org/wiki/B-tree</a>
-<a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/catalog/index_create.cpp">https://github.com/mongodb/mongo/blob/master/src/mongo/db/catalog/index_create.cpp</a></p>
+<a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h">https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h</a>
+<a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.cpp">https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.cpp</a></p>
 <section>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
