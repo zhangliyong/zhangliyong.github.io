@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-19T17:28:25+01:00</updated><entry><title>MongoDB Replication Set</title><link href="http://zhangliyong.github.io/posts/2014/02/19/mongodb-replication-set.html" rel="alternate"></link><updated>2014-02-19T17:28:25+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-19:posts/2014/02/19/mongodb-replication-set.html</id><summary type="html"></summary><category term="MongoDB"></category><category term=""></category></entry><entry><title>MongoDB Index Internals</title><link href="http://zhangliyong.github.io/posts/2014/02/19/mongodb-index-internals.html" rel="alternate"></link><updated>2014-02-19T16:58:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-19:posts/2014/02/19/mongodb-index-internals.html</id><summary type="html">&lt;p&gt;As we all know MongoDB use B-tree to create indexes, here I'll show the deep view of MongoDB indexes.&lt;/p&gt;
-&lt;h2&gt;B-tree&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-19T17:28:25+01:00</updated><entry><title>MongoDB Replication Set</title><link href="http://zhangliyong.github.io/posts/2014/02/19/mongodb-replication-set.html" rel="alternate"></link><updated>2014-02-19T17:28:25+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-19:posts/2014/02/19/mongodb-replication-set.html</id><summary type="html"></summary><category term="MongoDB"></category><category term=""></category></entry><entry><title>MongoDB Index Internals</title><link href="http://zhangliyong.github.io/posts/2014/02/19/mongodb-index-internals.html" rel="alternate"></link><updated>2014-02-19T16:58:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-19:posts/2014/02/19/mongodb-index-internals.html</id><summary type="html">
+&lt;p&gt;As we all know MongoDB use B-tree to create indexes, here I'll show the deep view of MongoDB indexes.&lt;/p&gt;
+&lt;h2 id="b-tree"&gt;B-tree&lt;/h2&gt;
 &lt;p&gt;First, an overview of B-tree.&lt;/p&gt;
 &lt;p&gt;From wikipedia:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;In computer science, a B-tree is a tree data structure that keeps data sorted and allows searches, sequential access, insertions, and deletions in logarithmic time. The B-tree is a generalization of a binary search tree in that a node can have more than two children (Comer 1979, p. 123). Unlike self-balancing binary search trees, the B-tree is optimized for systems that read and write large blocks of data. It is commonly used in databases and filesystems.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;A B-tree of order 2 or order 5:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="btree" src="http://upload.wikimedia.org/wikipedia/commons/thumb/6/65/B-tree.svg/500px-B-tree.svg.png" title="A B-tree of order 2 or order 5." /&gt;&lt;/p&gt;
-&lt;p&gt;Internal nodes can have vary number of keys, vary between &lt;img alt="d" src="http://upload.wikimedia.org/math/8/2/7/8277e0910d750195b448797616e091ad.png" /&gt; and &lt;img alt="2d" src="http://upload.wikimedia.org/math/c/3/0/c309f0daf5910cf7ac2038ce9520448a.png" /&gt;, the factor of 2 can guarantee that nodes can be split and combined, and still conform to the upper and lower limit.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="btree" src="http://upload.wikimedia.org/wikipedia/commons/thumb/6/65/B-tree.svg/500px-B-tree.svg.png" title="A B-tree of order 2 or order 5."/&gt;&lt;/p&gt;
+&lt;p&gt;Internal nodes can have vary number of keys, vary between &lt;img alt="d" src="http://upload.wikimedia.org/math/8/2/7/8277e0910d750195b448797616e091ad.png"/&gt; and &lt;img alt="2d" src="http://upload.wikimedia.org/math/c/3/0/c309f0daf5910cf7ac2038ce9520448a.png"/&gt;, the factor of 2 can guarantee that nodes can be split and combined, and still conform to the upper and lower limit.&lt;/p&gt;
 &lt;p&gt;All leaf nodes have the same depth.&lt;/p&gt;
 &lt;p&gt;Definition from wikipedia:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;According to Knuth's definition, a B-tree of order m is a tree which satisfies the following properties:&lt;/p&gt;
-&lt;p&gt;Every node has at most m children. &lt;br /&gt;
-Every non-leaf node (except root) has at least ⌈m⁄2⌉ children.  &lt;br /&gt;
-The root has at least two children if it is not a leaf node.  &lt;br /&gt;
-A non-leaf node with k children contains k−1 keys.  &lt;br /&gt;
+&lt;p&gt;Every node has at most m children. &lt;br/&gt;
+Every non-leaf node (except root) has at least ⌈m⁄2⌉ children.  &lt;br/&gt;
+The root has at least two children if it is not a leaf node.  &lt;br/&gt;
+A non-leaf node with k children contains k−1 keys.  &lt;br/&gt;
 All leaves appear in the same level, and internal vertices carry no information.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;MongoDB Index B-tree&lt;/h2&gt;
+&lt;h2 id="mongodb-index-b-tree"&gt;MongoDB Index B-tree&lt;/h2&gt;
 &lt;p&gt;In this section, I will show you mongo index btree.&lt;/p&gt;
 &lt;p&gt;From &lt;a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h"&gt;btree.h&lt;/a&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;The nodes of our btree are referred to as buckets below.  These buckets are of size BucketSize and their body is an ordered array of &lt;bson key, disk loc&gt; pairs, where disk loc is the disk location of a document and bson key is a projection of this document into the schema of the index for this btree.  Ordering is determined on the basis of bson key first and then disk loc in case of a tie.  All bson keys for a btree have identical schemas with empty string field names and may not have an objsize() exceeding KeyMax.  The btree's buckets are themselves organized into an ordered tree.&lt;/p&gt;
+&lt;p&gt;The nodes of our btree are referred to as buckets below.  These buckets are of size BucketSize and their body is an ordered array of &lt;bson disk key, loc&gt; pairs, where disk loc is the disk location of a document and bson key is a projection of this document into the schema of the index for this btree.  Ordering is determined on the basis of bson key first and then disk loc in case of a tie.  All bson keys for a btree have identical schemas with empty string field names and may not have an objsize() exceeding KeyMax.  The btree's buckets are themselves organized into an ordered tree.&lt;/bson&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;This is what btree looks like:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="index btree" src="https://www.evernote.com/shard/s30/sh/58663d76-cf6f-4944-943b-fb850f3084b1/3bc5e37b28b267f8cd2e374e99d0d59c/deep/0/Btree.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="index btree" src="https://www.evernote.com/shard/s30/sh/58663d76-cf6f-4944-943b-fb850f3084b1/3bc5e37b28b267f8cd2e374e99d0d59c/deep/0/Btree.jpg"/&gt;&lt;/p&gt;
 &lt;p&gt;When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See &lt;a href="http://zhangliyong.github.io/posts/2014/02/18/mongodb-storage-internals.html"&gt;mongo storage&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Bucket store keynode and keydata, this is what bucket looks like:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="index bucket" src="https://www.evernote.com/shard/s30/sh/3a7cb4c5-d387-4335-b1b4-920d7510091e/33b58b26c816e9621cd556325ceeb8d2/deep/0/From-Skitch.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="index bucket" src="https://www.evernote.com/shard/s30/sh/3a7cb4c5-d387-4335-b1b4-920d7510091e/33b58b26c816e9621cd556325ceeb8d2/deep/0/From-Skitch.jpg"/&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;prevChildBucket&lt;/code&gt; is a pointer, point to the left child bucket of this key. &lt;code&gt;kdo&lt;/code&gt; points to the key data of this key. &lt;code&gt;recordLoc&lt;/code&gt; points to the location of the key's doucment.&lt;/p&gt;
 &lt;p&gt;keynode is a struct, and has a fixed size.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;Loc&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
 &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;__KeyNode&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="cm"&gt;/**&lt;/span&gt;
-&lt;span class="cm"&gt;     * The &amp;#39;left&amp;#39; child bucket of this key.  If this is the i-th key, it&lt;/span&gt;
+&lt;span class="cm"&gt;     * The 'left' child bucket of this key.  If this is the i-th key, it&lt;/span&gt;
 &lt;span class="cm"&gt;     * points to the i index child bucket.&lt;/span&gt;
 &lt;span class="cm"&gt;     */&lt;/span&gt;
     &lt;span class="n"&gt;Loc&lt;/span&gt; &lt;span class="n"&gt;prevChildBucket&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -45,8 +46,6 @@ All leaves appear in the same level, and internal vertices carry no information.
     &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;short&lt;/span&gt; &lt;span class="n"&gt;_kdo&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;The size of keydata varies, with upper limit 1024 bytes.&lt;/p&gt;
 &lt;p&gt;When insert a new key to a bucket, keynode is inserted from left, and keydata is insert from right.&lt;/p&gt;
 &lt;p&gt;Bucket format:&lt;/p&gt;
@@ -57,8 +56,6 @@ All leaves appear in the same level, and internal vertices carry no information.
  &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bson&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;
  &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;unused&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;old&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;bson&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;may&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;garbage&lt;/span&gt; &lt;span class="n"&gt;collected&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;So how many keys can be stored in a bucket depends on keydata size. MongoDB allows to store 1024 keys at most. When the bucket is full, or has 1024 keys, it will be splited.&lt;/p&gt;
 &lt;p&gt;keydata is a projection of a document into the schema of the index. For an index, the schema is fixed, so keydata does not need to contain fieldNames. If a document does not have a field, then the fileValue will be null in keydata.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Sparse:&lt;/strong&gt;
@@ -67,25 +64,19 @@ When create a sparse index, only when the document does not have all the fields 
 &lt;p&gt;index:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;documents:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nl"&gt;d1:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;Tom&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;23&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;          &lt;span class="n"&gt;keydata&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Tom&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nl"&gt;d1:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;'&lt;/span&gt;&lt;span class="n"&gt;Tom&lt;/span&gt;&lt;span class="err"&gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;23&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;          &lt;span class="n"&gt;keydata&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Tom&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt;
 &lt;span class="nl"&gt;d2:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;          &lt;span class="n"&gt;keydata&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;
-&lt;span class="nl"&gt;d3:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;Jerry&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CA&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="n"&gt;keydata&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Jerry&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;null&lt;/span&gt;
+&lt;span class="nl"&gt;d3:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;'&lt;/span&gt;&lt;span class="n"&gt;Jerry&lt;/span&gt;&lt;span class="err"&gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CA&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="n"&gt;keydata&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Jerry&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;null&lt;/span&gt;
 &lt;span class="nl"&gt;d4:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;weight&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;70&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CA&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;      &lt;span class="n"&gt;keydata&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;null&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;If create the index with sparse as true, the document &lt;code&gt;d4&lt;/code&gt; will not be indexed.&lt;/p&gt;
-&lt;h3&gt;IndexStats&lt;/h3&gt;
+&lt;h3 id="indexstats"&gt;IndexStats&lt;/h3&gt;
 &lt;p&gt;MongoDB 2.4 ships with a &lt;code&gt;indexStats&lt;/code&gt; command, the command can be run only on a mongod instance that uses the &lt;code&gt;--enableExperimentalIndexStatsCmd&lt;/code&gt; option.&lt;/p&gt;
 &lt;p&gt;To aggregate statistics, issue the command like so:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;db.runCommand&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;indexStats&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;collection&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;index name&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;db.runCommand&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;indexStats&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;collection&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;index name&amp;gt;"&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h2&gt;Reference&lt;/h2&gt;
+&lt;h2 id="reference"&gt;Reference&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/B-tree"&gt;http://en.wikipedia.org/wiki/B-tree&lt;/a&gt;
 &lt;a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h"&gt;https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h&lt;/a&gt;
 &lt;a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.cpp"&gt;https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.cpp&lt;/a&gt;&lt;/p&gt;</summary><category term="MongoDB"></category><category term="Index"></category><category term="B-Tree"></category></entry><entry><title>MongoDB Index</title><link href="http://zhangliyong.github.io/posts/2014/02/19/mongodb-index.html" rel="alternate"></link><updated>2014-02-19T13:47:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-19:posts/2014/02/19/mongodb-index.html</id><summary type="html">&lt;p&gt;本文我们讨论一下一些特殊查询对索引的使用情况。&lt;/p&gt;
@@ -100,7 +91,7 @@ When create a sparse index, only when the document does not have all the fields 
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;$exists, null&lt;/h2&gt;
+&lt;h2 id="exists-null"&gt;$exists, null&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// not use index {name: 1}&lt;/span&gt;
 &lt;span class="nl"&gt;rs0:&lt;/span&gt;&lt;span class="no"&gt;PRIMARY&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;({&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="nl"&gt;exists:&lt;/span&gt; &lt;span class="n"&gt;true&lt;/span&gt;&lt;span class="p"&gt;}})&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ObjectId&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;52fda635720bcc4ea4bb961c&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;test_name&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
@@ -138,7 +129,7 @@ When create a sparse index, only when the document does not have all the fields 
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;$ne&lt;/h2&gt;
+&lt;h2 id="ne"&gt;$ne&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// use index {b: 1}&lt;/span&gt;
 &lt;span class="nl"&gt;rs0:&lt;/span&gt;&lt;span class="no"&gt;PRIMARY&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="nl"&gt;ne:&lt;/span&gt; &lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}})&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ObjectId&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;52fda635720bcc4ea4bb961c&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;test_name&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
@@ -168,11 +159,11 @@ When create a sparse index, only when the document does not have all the fields 
 
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;code&gt;_id&lt;/code&gt; is output by default for any query, so if you want an query to be indexOnly, you need to specify &lt;code&gt;_id: 0&lt;/code&gt; on return fields.&lt;/p&gt;</summary><category term="MongoDB"></category><category term="Index"></category><category term="B-Tree"></category></entry><entry><title>MongoDB Journal</title><link href="http://zhangliyong.github.io/posts/2014/02/18/mongodb-journal.html" rel="alternate"></link><updated>2014-02-18T16:30:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-18:posts/2014/02/18/mongodb-journal.html</id><summary type="html">&lt;p&gt;启用journal后，MongoDB的操作先写到journal buffer中，每100ms MongoDB会flush journal buffer到磁盘journal中，此时数据不会丢失，&lt;/p&gt;
 &lt;p&gt;若MongoDB crash，则最多会丢失100ms的数据。&lt;/p&gt;
-&lt;h2&gt;Journal Files&lt;/h2&gt;
+&lt;h2 id="journal-files"&gt;Journal Files&lt;/h2&gt;
 &lt;p&gt;mongod启动后，会在 &lt;code&gt;dbpath&lt;/code&gt; 下新建一个 &lt;code&gt;journal&lt;/code&gt; 目录，这个目录下存放所有的journal文件，journal 文件是append-only，而且文件名以 &lt;code&gt;j._&lt;/code&gt; 为前缀，每个journal文件的大小为1GB，当journal超过1GB后，会创建新的journal文件，当MongoDB将journal中的所写操作应用到数据文件后，这些journal文件才会被删除。&lt;/p&gt;
 &lt;p&gt;journal文件的格式为：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="journal" src="https://www.evernote.com/shard/s30/sh/1da95a5d-e676-4d26-9526-4c88a0f99c6d/55ab60012797fe9541233b5835db1f18/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /&gt;&lt;/p&gt;
-&lt;h2&gt;How Journal Works&lt;/h2&gt;
+&lt;h2 id="how-journal-works"&gt;How Journal Works&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; 此部分翻译自： http://www.kchodorow.com/blog/2012/10/04/how-mongodbs-journaling-works/&lt;/p&gt;
 &lt;p&gt;首先磁盘上存储了 journal files和data files，如下：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="journal files and data files" src="http://www.kchodorow.com/blog/wp-content/uploads/2012/10/mapfile.png" /&gt;&lt;/p&gt;
@@ -195,11 +186,11 @@ When create a sparse index, only when the document does not have all the fields 
 &lt;p&gt;最后，shared view中的改动flush后硬盘中。默认情况下mongod会要求OS每60s flush一次。每次flush完后，会将journal中flush过的改动删除。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="flushed" src="http://www.kchodorow.com/blog/wp-content/uploads/2012/10/flushed.png" /&gt;&lt;/p&gt;
 &lt;p&gt;这就是journal的工作原理。感谢Richard，他给的解释是我听过的最好的（今年秋季他还会&lt;a href="http://education.10gen.com/courses/10gen/M101/2012_Fall/about"&gt;在线教授 MongoDB&lt;/a&gt;）。&lt;/p&gt;
-&lt;h2&gt;Cost of a Journal&lt;/h2&gt;
+&lt;h2 id="cost-of-a-journal"&gt;Cost of a Journal&lt;/h2&gt;
 &lt;p&gt;使用journal后写操作的性能会降低5-30%。&lt;/p&gt;
 &lt;p&gt;对于写操作非常频繁的系统建议journal files和data files使用不同的物理磁盘，它们都会flush数据到磁盘，若使用同一个会使用Disk IO延时增大，降低性能。&lt;/p&gt;
 &lt;p&gt;对于以读为主的系统，不会有太多影响。&lt;/p&gt;
-&lt;h2&gt;参考&lt;/h2&gt;
+&lt;h2 id="_1"&gt;参考&lt;/h2&gt;
 &lt;p&gt;http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen&lt;/p&gt;
 &lt;p&gt;http://www.kchodorow.com/blog/2012/10/04/how-mongodbs-journaling-works/&lt;/p&gt;</summary><category term="MongoDB"></category></entry><entry><title>MongoDB mmap</title><link href="http://zhangliyong.github.io/posts/2014/02/18/mongodb-mmap.html" rel="alternate"></link><updated>2014-02-18T15:12:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-18:posts/2014/02/18/mongodb-mmap.html</id><summary type="html">&lt;p&gt;MongoDB 使用系统调用 &lt;code&gt;mmap&lt;/code&gt; 将数据文件映射到内存，然后直接操作内存。&lt;/p&gt;
 &lt;p&gt;这样简化了MongoDB的开发，可以省去复杂的内存及磁盘操作相关的代码，完全不用关心文件系统的类型，OS会自动cache数据，并使用LRU的方式，而且MongoDB重启后可以继续使用cache中的数据。&lt;/p&gt;
@@ -208,10 +199,10 @@ When create a sparse index, only when the document does not have all the fields 
 &lt;p&gt;如果MongoDB启动时启用了journal，则virtual size会翻倍。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="mongodb mmap" src="https://www.evernote.com/shard/s30/sh/e52f6016-74cb-44f4-b821-b09a4211e4db/6b0227c2023075510f625d5211add1c6/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /&gt;&lt;/p&gt;
 &lt;p&gt;TODO: add mmap fundermentals&lt;/p&gt;
-&lt;h2&gt;参考&lt;/h2&gt;
+&lt;h2 id="_1"&gt;参考&lt;/h2&gt;
 &lt;p&gt;http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen&lt;/p&gt;</summary><category term="MongoDB"></category><category term="mmap"></category><category term="Linux"></category></entry><entry><title>MongoDB Storage Internals</title><link href="http://zhangliyong.github.io/posts/2014/02/18/mongodb-storage-internals.html" rel="alternate"></link><updated>2014-02-18T09:12:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-18:posts/2014/02/18/mongodb-storage-internals.html</id><summary type="html">&lt;p&gt;我们都知道MongoDB通过 &lt;code&gt;mmap&lt;/code&gt; 的方式将存储在磁盘上的数据文件映射到内存中进行操作，那MongoDB是如何组织数据文件的，最近在网上找了相关资源，在此做一个 &lt;strong&gt; 翻译和汇总 &lt;/strong&gt; , 非原创，原文在下面的参考链接部分。&lt;/p&gt;
 &lt;p&gt;我们按照从总体到内部的顺序进行分析，&lt;/p&gt;
-&lt;h2&gt;Data Files&lt;/h2&gt;
+&lt;h2 id="data-files"&gt;Data Files&lt;/h2&gt;
 &lt;p&gt;所有的 data files 存储在 &lt;code&gt;dbpath&lt;/code&gt; 参考所指定的目录中，对应于每个数据库都有一个 、namespace file, 多个journal file 和 data file。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;lh&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;
 &lt;span class="n"&gt;drwxr&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;xr&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;mongodb&lt;/span&gt; &lt;span class="n"&gt;nogroup&lt;/span&gt; &lt;span class="mf"&gt;4.0&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="n"&gt;Feb&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt; &lt;span class="n"&gt;journal&lt;/span&gt;
@@ -228,7 +219,7 @@ When create a sparse index, only when the document does not have all the fields 
 &lt;p&gt;MongoDB 采用 aggressive pre-allocation的方式申请 data files，而且总会多申请一个备用的data file，如上面的test.1为备用的data file。数据文件会以指数级增长，最大为2GB。&lt;/p&gt;
 &lt;p&gt;namespace file 内存储了所有的 collection以及index。&lt;/p&gt;
 &lt;p&gt;data file 存储了所有的document及index。data file 以 extent为逻辑存储单元，每个data file包含多个extents.&lt;/p&gt;
-&lt;h2&gt;Extents&lt;/h2&gt;
+&lt;h2 id="extents"&gt;Extents&lt;/h2&gt;
 &lt;p&gt;每个extent被用来存储doucments或者index。&lt;/p&gt;
 &lt;p&gt;extents与data file之间的关系&lt;/p&gt;
 &lt;p&gt;&lt;img alt="extents and data file" src="http://blog.mongolab.com/wp-content/uploads/2014/01/data_extents1.png" /&gt;&lt;/p&gt;
@@ -243,11 +234,11 @@ When create a sparse index, only when the document does not have all the fields 
 &lt;p&gt;同一个collection的所有extents通过指针连接，namespace file中的collection只需要指向其第一个extent即可。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="extents" src="https://www.evernote.com/shard/s30/sh/948ed357-1c61-4d54-bfc3-29694ffaa6ff/0cfd37262cfe8f33dc49cfcf1e9ba242/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /&gt;&lt;/p&gt;
 &lt;p&gt;每个extent会存储一些metadata，其余空间存储records。&lt;/p&gt;
-&lt;h2&gt;Records&lt;/h2&gt;
+&lt;h2 id="records"&gt;Records&lt;/h2&gt;
 &lt;p&gt;每一个record会存储一些metadata及一个document。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="records" src="https://www.evernote.com/shard/s30/sh/14d51a20-e929-4e6a-95c6-df0929da3f87/0f543bfa0139eb4b503e32c98d0474e7/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="record allocation" src="https://www.evernote.com/shard/s30/sh/cc9c8241-32fb-4a88-b794-4bd9430c5887/181d7befe5ea6be0af90f11f235005ed/deep/0/Inside-MongoDB--the-Internals-of-an-Open-Source-Database.png" /&gt;&lt;/p&gt;
-&lt;h2&gt;Indexes&lt;/h2&gt;
+&lt;h2 id="indexes"&gt;Indexes&lt;/h2&gt;
 &lt;p&gt;MongoDB的索引是BTree结构，序列化到磁盘进行存储，存储在自己的extents中，而且每一个index有一个单独的namespace，并不属于其collection的namespace.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;namespaces&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;test.system.indexes&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
@@ -256,27 +247,27 @@ When create a sparse index, only when the document does not have all the fields 
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Metrics from db.stats()&lt;/h2&gt;
+&lt;h2 id="metrics-from-dbstats"&gt;Metrics from db.stats()&lt;/h2&gt;
 &lt;p&gt;现在我们知道了MongoDB的数据组织方式，下面分析一下 &lt;code&gt;db.stats()&lt;/code&gt; 的输出指标所代表的含义。&lt;/p&gt;
-&lt;h3&gt;dataSize&lt;/h3&gt;
+&lt;h3 id="datasize"&gt;dataSize&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="data size" src="http://blog.mongolab.com/wp-content/uploads/2014/01/data_size.png" /&gt;&lt;/p&gt;
 &lt;p&gt;dataSize 是所有 documents 的大小总和，包括这个document的padding，也是所有records的总和, 当document被删除时dataSize会变小，但当减小document大小时，dataSize不会变化。&lt;/p&gt;
-&lt;h3&gt;storageSize&lt;/h3&gt;
+&lt;h3 id="storagesize"&gt;storageSize&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="storageSize" src="http://blog.mongolab.com/wp-content/uploads/2014/01/storage_size.png" /&gt;&lt;/p&gt;
 &lt;p&gt;storageSize是所有extents的大小总和，会比dataSize要大，因为它会包括extents中未被使用的空间，以及因document被删除及移动带来的空闲空间。&lt;/p&gt;
 &lt;p&gt;当删除或减小document时，storageSize不会变化。&lt;/p&gt;
-&lt;h3&gt;fileSize&lt;/h3&gt;
+&lt;h3 id="filesize"&gt;fileSize&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="fileSize" src="http://blog.mongolab.com/wp-content/uploads/2014/01/file_size.png" /&gt;&lt;/p&gt;
 &lt;p&gt;fileSize 包括所有的data extents, index extents以及data file中未使用的空间，是数据库存储在磁盘上的文件大小。会比storageSize要大，因为它还包括index extents，以及未使用的空间。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; dataSize 和 storageSize 都不包括index。&lt;/p&gt;
 &lt;p&gt;当删除数据库时，fileSize会变化，因为此数据库相应的data file会被删除，但当删除collection，documents及index时fileSize不会变化。&lt;/p&gt;
-&lt;h3&gt;nsSize&lt;/h3&gt;
+&lt;h3 id="nssize"&gt;nsSize&lt;/h3&gt;
 &lt;p&gt;namespace(&lt;code&gt;test.ns&lt;/code&gt;)文件的大小。namespace file的大小是固定的，但可以通过修改nssize参数调整。&lt;/p&gt;
-&lt;h2&gt;Fragmentation&lt;/h2&gt;
+&lt;h2 id="fragmentation"&gt;Fragmentation&lt;/h2&gt;
 &lt;p&gt;当执行 &lt;code&gt;update&lt;/code&gt; 及 &lt;code&gt;remove&lt;/code&gt; 操作时会产生fragmentation.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="fragmentation" src="https://www.evernote.com/shard/s30/sh/7fe5f0f5-0453-422d-b10c-44d7858e8f3a/6c4a17b9b49476734e37440f829ee5f8/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /&gt;&lt;/p&gt;
 &lt;p&gt;如果文档的大小不固定，而且经常发生变化，则会产生大量的 fragmentation，这样会浪费内存及磁盘空间，增加Disk IO，而且由于update操作引起的文档移动还会导致索引的更新，使写操作变慢。可以通过比较 &lt;code&gt;db.collection.stats()&lt;/code&gt; 输出中的 &lt;code&gt;size&lt;/code&gt; 和 &lt;code&gt;storageSize&lt;/code&gt; 来判断fragmentation的状况。&lt;/p&gt;
-&lt;h3&gt;How to Combat&lt;/h3&gt;
+&lt;h3 id="how-to-combat"&gt;How to Combat&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;定时执行 &lt;code&gt;compact&lt;/code&gt; ，会lock数据库，要在secondary上执行。&lt;/li&gt;
 &lt;li&gt;设定 collection schema, 使document不会增大&lt;/li&gt;
@@ -285,7 +276,7 @@ When create a sparse index, only when the document does not have all the fields 
 &lt;li&gt;设置 &lt;code&gt;usePowerOf2sizes&lt;/code&gt; 提高空间的重用度。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href="http://linux.sys-con.com/node/2756958/mobile"&gt;MongoDB Exorcises File Fragmentation Demons&lt;/a&gt; 介绍了 &lt;code&gt;usePowerOf2sizes&lt;/code&gt; 所带来的空间利用率及性能的提升。不同的应用场景其效果也不一样。&lt;/p&gt;
-&lt;h2&gt;参考&lt;/h2&gt;
+&lt;h2 id="_1"&gt;参考&lt;/h2&gt;
 &lt;p&gt;http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen&lt;/p&gt;
 &lt;p&gt;http://blog.mongolab.com/2014/01/how-big-is-your-mongodb/&lt;/p&gt;
 &lt;p&gt;http://linux.sys-con.com/node/2756958/mobile&lt;/p&gt;</summary><category term="MongoDB"></category><category term="Fragmentation"></category><category term="Disk"></category><category term="Storage"></category></entry><entry><title>sftp in ssh config</title><link href="http://zhangliyong.github.io/posts/2014/02/17/sftp-in-ssh-config.html" rel="alternate"></link><updated>2014-02-17T09:11:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-17:posts/2014/02/17/sftp-in-ssh-config.html</id><summary type="html">&lt;p&gt;今天在使用 fabric 中的 &lt;code&gt;put&lt;/code&gt; 函数上传文件到服务器时，抛出 &lt;code&gt;Connection closed&lt;/code&gt; 的异常，Google 之后发现 &lt;code&gt;put&lt;/code&gt; 使用 &lt;code&gt;sftp&lt;/code&gt; 进行上传，于是使用 &lt;code&gt;sftp&lt;/code&gt; 连接服务器：&lt;/p&gt;
@@ -349,18 +340,18 @@ When create a sparse index, only when the document does not have all the fields 
 &lt;/ol&gt;
 &lt;p&gt;上面文章中最后使用numactl –interleave命令就是指定其为交叉共享模式。&lt;/p&gt;
 &lt;p&gt;我们知道虚拟内存机制是通过一个中断信号来通知虚拟内存系统进行内存swap的，所以这个irqbalance进程忙，是一个危险信号，在这里是由于在进行频繁的内存交换。这种频繁交换现象称为swap insanity，在MySQL中经常提到，也就是在NUMA框架中，采用不合适的策略，导致核心只能从指定内存块节点上分配内存，即使总内存还有富余，也会由于当前节点内存不足时产生大量的swap操作。&lt;/p&gt;
-&lt;h3&gt;Install&lt;/h3&gt;
+&lt;h3 id="install"&gt;Install&lt;/h3&gt;
 &lt;p&gt;在Ubuntu下以numactl的命令启动mongodb，要先安装numactl&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;numactl&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;参考：&lt;/h3&gt;
+&lt;h3 id="_1"&gt;参考：&lt;/h3&gt;
 &lt;p&gt;http://docs.mongodb.org/manual/administration/production-notes/#production-numa&lt;/p&gt;
 &lt;p&gt;http://huoding.com/2011/08/09/104&lt;/p&gt;
 &lt;p&gt;http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/&lt;/p&gt;
 &lt;p&gt;http://blog.nosqlfan.com/html/2772.html&lt;/p&gt;</summary><category term="MongoDB"></category><category term="DB"></category></entry><entry><title>vim</title><link href="http://zhangliyong.github.io/posts/2014/02/16/vim.html" rel="alternate"></link><updated>2014-02-16T17:25:31+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-16:posts/2014/02/16/vim.html</id><summary type="html">&lt;p&gt;TODO: wrap my plugins&lt;/p&gt;
-&lt;h2&gt;auto reload .vimrc&lt;/h2&gt;
+&lt;h2 id="auto-reload-vimrc"&gt;auto reload .vimrc&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;augroup&lt;/span&gt; &lt;span class="n"&gt;reload_vimrc&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; {&lt;/span&gt;
     &lt;span class="n"&gt;autocmd&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
     &lt;span class="n"&gt;autocmd&lt;/span&gt; &lt;span class="n"&gt;BufWritePost&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;MYVIMRC&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;MYVIMRC&lt;/span&gt;
@@ -456,16 +447,16 @@ Disk IO成为MongoDB的性能瓶颈，在进行sharding之前，我们决定先�
 
 
 &lt;p&gt;增加对Markdown和reStructuredText文件的支持，并忽略所有以"."开头的隐藏文件。&lt;/p&gt;</summary><category term="vim"></category><category term="ack"></category><category term="grep"></category></entry><entry><title>Linux Sysadmin Tools</title><link href="http://zhangliyong.github.io/posts/2014/02/04/linux-sysadmin-tools.html" rel="alternate"></link><updated>2014-02-04T00:00:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-04:posts/2014/02/04/linux-sysadmin-tools.html</id><summary type="html">&lt;p&gt;下面列出一些自己常用的系统管理的工具，总结一下。&lt;/p&gt;
-&lt;h1&gt;htop&lt;/h1&gt;
+&lt;h1 id="htop"&gt;htop&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://hisham.hm/htop/index.php"&gt;htop&lt;/a&gt; 是一个替代top的工具，显示信息很详细，功能丰富，一但上手操作也很简单，
 &lt;a href="http://www.thegeekstuff.com/2011/09/linux-htop-examples/"&gt;thegeekstuff&lt;/a&gt;上有
 一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="htop" src="http://hisham.hm/htop/htop-1.0-screenshot.png" /&gt;&lt;/p&gt;
-&lt;h1&gt;iftop&lt;/h1&gt;
+&lt;h1 id="iftop"&gt;iftop&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://www.ex-parrot.com/pdw/iftop/"&gt;iftop&lt;/a&gt; 实时显示网卡的带宽使用情况。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="iftop" src="http://www.ex-parrot.com/pdw/iftop/iftop_normal.png" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="iftop" src="http://www.ex-parrot.com/pdw/iftop/iftop_ports.png" /&gt;&lt;/p&gt;
-&lt;h1&gt;iotop&lt;/h1&gt;
+&lt;h1 id="iotop"&gt;iotop&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://guichaz.free.fr/iotop/"&gt;iotop&lt;/a&gt; 是用python编写的显示磁盘IO使用的应用，vmstat和iostat可以显示磁盘的整体使用情况，iotop 可以显示各个应用的磁盘使用。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="iotop" src="http://guichaz.free.fr/iotop/iotop_big.png" /&gt;&lt;/p&gt;</summary><category term="Linux"></category><category term="sysadmin"></category><category term="bash"></category></entry><entry><title>HTTP keep-alive</title><link href="http://zhangliyong.github.io/posts/2014/02/03/http-keep-alive.html" rel="alternate"></link><updated>2014-02-03T19:48:15+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:posts/2014/02/03/http-keep-alive.html</id><summary type="html">&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -516,7 +507,7 @@ I don’t totally understand how KeepAlive works, but turning it off on our Djan
 &lt;p&gt;&lt;img alt="" src="/images/nginx/keepalive/notalive.png" /&gt;&lt;/p&gt;
 &lt;p&gt;笔者并没有对keep-alive做相应性能方面的benchmark，所以不确定keep-alive对性能的影响，而且keep-alive对性能的影响也与应用场景有关。&lt;/p&gt;</summary></entry><entry><title>Generalized Suffix Tree</title><link href="http://zhangliyong.github.io/posts/2014/02/03/generalized-suffix-tree.html" rel="alternate"></link><updated>2014-02-03T19:47:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:posts/2014/02/03/generalized-suffix-tree.html</id><summary type="html">&lt;p&gt;本文提供了另一种构造generalized suffix tree的方法，不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
 构造原理依然采用Ukkonen提出的算法。下面我们由简入深分别介绍此种方式应对的问题。&lt;/p&gt;
-&lt;h2&gt;前言&lt;/h2&gt;
+&lt;h2 id="_1"&gt;前言&lt;/h2&gt;
 &lt;p&gt;后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，&lt;/p&gt;
 &lt;p&gt;后缀树的搜索非常快，但是构造后缀树比较复杂， Ukkonen提出的构造后缀树的算法时间复杂度为O(nlogn), 构造原理阅读
 http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english，本文也是在此链接
@@ -532,7 +523,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。&lt;/p&gt;
 我们很难找到这么多不同的字符。目前unicode的码点是从0到0x10ffff，也就是unicode最多能表示1114111个字符，仅仅是百万级。
 所以假如我们有千万级的字符串时，我们就找不到如此多的字符了。&lt;/p&gt;
 &lt;p&gt;我们提供了另一种解决方案。&lt;/p&gt;
-&lt;h2&gt;准备&lt;/h2&gt;
+&lt;h2 id="_2"&gt;准备&lt;/h2&gt;
 &lt;p&gt;我们在原有的基础上进行了改进。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;为每个字符串设置一个惟一的索引(index)，用于标识此字符串，根据索引可找到原来的字符串。&lt;/li&gt;
@@ -542,12 +533,12 @@ s=s1u1s2u2.....snun，并为s构造后缀树。&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;第3条很容易理解，第1条是为第3、4条准备的，是为降低空间复杂度。下面我们对2、3进行说明。&lt;/p&gt;
 &lt;p&gt;从根结点到每个叶结点的路径代表一个字符或多个字符串的后缀，叶结点上的索引即是这些字符串的索引。&lt;/p&gt;
-&lt;h2&gt;基本&lt;/h2&gt;
+&lt;h2 id="_3"&gt;基本&lt;/h2&gt;
 &lt;p&gt;以字符串"ab"为例，其后缀树为：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="/images/suffix_tree/ab.png" /&gt;&lt;/p&gt;
 &lt;p&gt;设置"ab"的索引为0，将索引加到叶结点中为:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="/images/suffix_tree/ab_index.png" /&gt;&lt;/p&gt;
-&lt;h2&gt;扩展一&lt;/h2&gt;
+&lt;h2 id="_4"&gt;扩展一&lt;/h2&gt;
 &lt;p&gt;字符串末尾字符为重复字符，为"aba"为例，
 为其构造后缀树并将索引加到叶结点后：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="/images/suffix_tree/aba_index_1.png" /&gt;&lt;/p&gt;
@@ -565,7 +556,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。&lt;/p&gt;
 &lt;p&gt;此时active point为(blue node, \0, 0), remainder为2。&lt;/p&gt;
 &lt;p&gt;后缀"ab", "a"为隐式，此时active length为0，将索引加到active node中后，如图：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="/images/suffix_tree/abcabdab_index_2.png" /&gt;&lt;/p&gt;
-&lt;h2&gt;扩展二&lt;/h2&gt;
+&lt;h2 id="_5"&gt;扩展二&lt;/h2&gt;
 &lt;p&gt;在后缀树中加入一个新的字符串。&lt;/p&gt;
 &lt;p&gt;在加入新的字符串之前，需要重置active point为(root, '\0', 0)。&lt;/p&gt;
 &lt;p&gt;以字符串"ab", "abc"为例, "ab"的索引为0, "abc"的索引为1，&lt;/p&gt;
@@ -613,35 +604,35 @@ s=s1u1s2u2.....snun，并为s构造后缀树。&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;搜索&lt;/h2&gt;
+&lt;h2 id="_6"&gt;搜索&lt;/h2&gt;
 &lt;p&gt;搜索与普通的后缀树搜索类似，根据要搜索的字符串在树中依次匹配即可。&lt;/p&gt;
 &lt;p&gt;当模式最终匹配到某一条边后，后到这条边的目标结点，则以这个结点为根结点的子树中的所有索引就是此次的搜索结果。
 再根据索引可得到原来的字符串。&lt;/p&gt;
 &lt;p&gt;例如在后缀树&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="/images/suffix_tree/ab_abc_index_2.png" /&gt;&lt;/p&gt;
 &lt;p&gt;中查找'b'时，可找到索引0，1，再根据索引找到原来的字符串。&lt;/p&gt;
-&lt;h2&gt;复杂度&lt;/h2&gt;
-&lt;h3&gt;时间&lt;/h3&gt;
+&lt;h2 id="_7"&gt;复杂度&lt;/h2&gt;
+&lt;h3 id="_8"&gt;时间&lt;/h3&gt;
 &lt;p&gt;由于构造后缀树和搜索的原理与之前的一样，&lt;/p&gt;
 &lt;p&gt;假定所有字符串的长度之和为n，则构造后缀树的时间复杂度为O(nlogn)。&lt;/p&gt;
 &lt;p&gt;模式P的长度为|P|，则搜索的时间复杂度为O(|P|)&lt;/p&gt;
-&lt;h3&gt;空间&lt;/h3&gt;
+&lt;h3 id="_9"&gt;空间&lt;/h3&gt;
 &lt;p&gt;TODO&lt;/p&gt;
 &lt;p&gt;笔者给出了一个python版本的实现。&lt;/p&gt;</summary></entry><entry><title>wsgi</title><link href="http://zhangliyong.github.io/posts/2014/02/03/wsgi.html" rel="alternate"></link><updated>2014-02-03T19:20:22+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:posts/2014/02/03/wsgi.html</id><summary type="html">&lt;p&gt;http://lucumr.pocoo.org/2007/5/21/getting-started-with-wsgi/&lt;/p&gt;
 &lt;p&gt;http://webpython.codepoint.net/wsgi_request_parsing_post&lt;/p&gt;
 &lt;p&gt;http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html&lt;/p&gt;</summary></entry><entry><title>Be Newbie Forever</title><link href="http://zhangliyong.github.io/posts/2014/02/03/be-newbie-forever.html" rel="alternate"></link><updated>2014-02-03T00:00:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:posts/2014/02/03/be-newbie-forever.html</id><summary type="html">&lt;p&gt;You will be newbie forever.&lt;/p&gt;
 &lt;p&gt;Get good at the beginner mode, learning new programs, asking dumb questions, making stupid mistakes, soliciting help, and helping others with what you learn (the best way to learn yourself).&lt;/p&gt;
-&lt;p&gt;From: http://benoithamelin.tumblr.com/post/17949523929/you-will-be-newbie-forever-get-good-at-the&lt;/p&gt;</summary></entry><entry><title>Read Later</title><link href="http://zhangliyong.github.io/posts/2014/01/24/read-later.html" rel="alternate"></link><updated>2014-01-24T13:46:17+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-01-24:posts/2014/01/24/read-later.html</id><summary type="html">&lt;h2&gt;Python&lt;/h2&gt;
+&lt;p&gt;From: http://benoithamelin.tumblr.com/post/17949523929/you-will-be-newbie-forever-get-good-at-the&lt;/p&gt;</summary></entry><entry><title>Read Later</title><link href="http://zhangliyong.github.io/posts/2014/01/24/read-later.html" rel="alternate"></link><updated>2014-01-24T13:46:17+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-01-24:posts/2014/01/24/read-later.html</id><summary type="html">&lt;h2 id="python"&gt;Python&lt;/h2&gt;
 &lt;p&gt;Python Guide: http://docs.python-guide.org/en/latest/index.html&lt;/p&gt;
-&lt;p&gt;字符串匹配的KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html&lt;/p&gt;</summary></entry><entry><title>Git</title><link href="http://zhangliyong.github.io/posts/2014/01/09/git.html" rel="alternate"></link><updated>2014-01-09T14:52:21+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-01-09:posts/2014/01/09/git.html</id><summary type="html">&lt;h2&gt;Basic&lt;/h2&gt;
+&lt;p&gt;字符串匹配的KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html&lt;/p&gt;</summary></entry><entry><title>Git</title><link href="http://zhangliyong.github.io/posts/2014/01/09/git.html" rel="alternate"></link><updated>2014-01-09T14:52:21+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-01-09:posts/2014/01/09/git.html</id><summary type="html">&lt;h2 id="basic"&gt;Basic&lt;/h2&gt;
 &lt;p&gt;使用Git前，要先理解三个概念（与其它的VCS不同）：working directory, index, repository.&lt;/p&gt;
-&lt;h3&gt;working directory&lt;/h3&gt;
+&lt;h3 id="working-directory"&gt;working directory&lt;/h3&gt;
 &lt;p&gt;即是你当前的工作目录，你所编辑的文件都在此目录下。&lt;/p&gt;
-&lt;h3&gt;index&lt;/h3&gt;
-&lt;h2&gt;git add&lt;/h2&gt;
-&lt;h2&gt;Git Flow&lt;/h2&gt;
+&lt;h3 id="index"&gt;index&lt;/h3&gt;
+&lt;h2 id="git-add"&gt;git add&lt;/h2&gt;
+&lt;h2 id="git-flow"&gt;Git Flow&lt;/h2&gt;
 &lt;p&gt;http://danielkummer.github.com/git-flow-cheatsheet/&lt;/p&gt;
-&lt;h2&gt;Git submodules&lt;/h2&gt;
+&lt;h2 id="git-submodules"&gt;Git submodules&lt;/h2&gt;
 &lt;p&gt;http://git-scm.com/docs/gitignore
 http://git-scm.com/docs/git-check-ignore.html&lt;/p&gt;</summary></entry><entry><title>iptables</title><link href="http://zhangliyong.github.io/posts/2014/01/01/iptables.html" rel="alternate"></link><updated>2014-01-01T00:00:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-01-01:posts/2014/01/01/iptables.html</id><summary type="html">&lt;p&gt;/etc/sysconfig/iptables - The system scripts that activate the firewall by reading this file.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;vi&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;iptables&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;up&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rule&lt;/span&gt;
@@ -649,19 +640,19 @@ http://git-scm.com/docs/git-check-ignore.html&lt;/p&gt;</summary></entry><entry>
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Ref:&lt;/h2&gt;
-&lt;p&gt;http://www.cyberciti.biz/faq/rhel-fedorta-linux-iptables-firewall-configuration-tutorial/&lt;/p&gt;</summary><category term="iptables"></category><category term="Linux"></category></entry><entry><title>gevent</title><link href="http://zhangliyong.github.io/posts/2013/12/04/gevent.html" rel="alternate"></link><updated>2013-12-04T15:56:56+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-12-04:posts/2013/12/04/gevent.html</id><summary type="html">&lt;h2&gt;Pool&lt;/h2&gt;
+&lt;h2 id="ref"&gt;Ref:&lt;/h2&gt;
+&lt;p&gt;http://www.cyberciti.biz/faq/rhel-fedorta-linux-iptables-firewall-configuration-tutorial/&lt;/p&gt;</summary><category term="iptables"></category><category term="Linux"></category></entry><entry><title>gevent</title><link href="http://zhangliyong.github.io/posts/2013/12/04/gevent.html" rel="alternate"></link><updated>2013-12-04T15:56:56+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-12-04:posts/2013/12/04/gevent.html</id><summary type="html">&lt;h2 id="pool"&gt;Pool&lt;/h2&gt;
 &lt;p&gt;什么时候执行Pool中的任务&lt;/p&gt;
 &lt;p&gt;用gevent spawn的greenlet何时执行，无论是用group, pool, gevent, 当spawn时，新spawn的greenlet已经处理准备执行状态，
 当主进程或其它greenlet sleep或有其它switch操作时，新spawn的greenlet会被执行。&lt;/p&gt;
-&lt;h2&gt;ref:&lt;/h2&gt;
+&lt;h2 id="ref"&gt;ref:&lt;/h2&gt;
 &lt;p&gt;Introduction to Gevent: http://blog.pythonisito.com/2012/07/introduction-to-gevent.html&lt;/p&gt;
 &lt;p&gt;Gevent, Threads, and Benchmarks: http://blog.pythonisito.com/2012/07/gevent-threads-and-benchmarks.html&lt;/p&gt;
 &lt;p&gt;Gevent and Greenlets: http://blog.pythonisito.com/2012/07/gevent-and-greenlets.html&lt;/p&gt;
 &lt;p&gt;Greening the Python Standard Library with Gevent: http://blog.pythonisito.com/2012/08/gevent-monkey-patch.html&lt;/p&gt;
 &lt;p&gt;Building TCP Servers with Gevent: http://blog.pythonisito.com/2012/08/building-tcp-servers-with-gevent.html&lt;/p&gt;
-&lt;p&gt;Building Web Applications with Gevent's WSGI Server: http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html&lt;/p&gt;</summary></entry><entry><title>TODO</title><link href="http://zhangliyong.github.io/posts/2013/08/21/todo.html" rel="alternate"></link><updated>2013-08-21T20:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-21:posts/2013/08/21/todo.html</id><summary type="html">&lt;h2&gt;2013-05-08&lt;/h2&gt;
-&lt;h3&gt;TODO TODAY&lt;/h3&gt;
+&lt;p&gt;Building Web Applications with Gevent's WSGI Server: http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html&lt;/p&gt;</summary></entry><entry><title>TODO</title><link href="http://zhangliyong.github.io/posts/2013/08/21/todo.html" rel="alternate"></link><updated>2013-08-21T20:45:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-21:posts/2013/08/21/todo.html</id><summary type="html">&lt;h2 id="2013-05-08"&gt;2013-05-08&lt;/h2&gt;
+&lt;h3 id="todo-today"&gt;TODO TODAY&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;蕃茄工作法做笔记（思维导图）&lt;/p&gt;
@@ -741,16 +732,16 @@ autoenv&lt;/p&gt;</summary></entry><entry><title>urwid</title><link href="http:/
 &lt;li&gt;修改munin crontab执行，5分钟后将会看到更新的结果。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;： 改动数据文件前要先取消crontab的执行，否则可能会影响历史数据, 同时数据文件迁移之后，要保证用户munin有对这些rrd文件写的权限。因为用&lt;code&gt;sudo cp&lt;/code&gt;之后会改变这些文件的owner.&lt;/p&gt;
-&lt;p&gt;如果要将munin server转移到其它机器，只需要将rrd数据文件复制过去即可。&lt;/p&gt;</summary></entry><entry><title>munin</title><link href="http://zhangliyong.github.io/posts/2013/08/05/munin.html" rel="alternate"></link><updated>2013-08-05T13:17:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-05:posts/2013/08/05/munin.html</id><summary type="html">&lt;h2&gt;Writing plugins&lt;/h2&gt;
+&lt;p&gt;如果要将munin server转移到其它机器，只需要将rrd数据文件复制过去即可。&lt;/p&gt;</summary></entry><entry><title>munin</title><link href="http://zhangliyong.github.io/posts/2013/08/05/munin.html" rel="alternate"></link><updated>2013-08-05T13:17:46+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-05:posts/2013/08/05/munin.html</id><summary type="html">&lt;h2 id="writing-plugins"&gt;Writing plugins&lt;/h2&gt;
 &lt;p&gt;global attribute: http://munin-monitoring.org/wiki/protocol-config&lt;/p&gt;
 &lt;p&gt;redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch&lt;/p&gt;
 &lt;p&gt;mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph&lt;/p&gt;
-&lt;h2&gt;fw_conntract fw_forwarded_local timeout&lt;/h2&gt;
+&lt;h2 id="fw_conntract-fw_forwarded_local-timeout"&gt;fw_conntract fw_forwarded_local timeout&lt;/h2&gt;
 &lt;p&gt;配置好munin之后，fw_conntrack总是报警，读不到数据，主要原因是执行fw_conntrack超时，munin plugin的默认超时时间是10s，超时主要是因为&lt;code&gt;cat /proc/net/ip_conntrack&lt;/code&gt;，对于网络请求少的服务器，此语句会很快执行完，但对于网络请求比较多的服务器，此语句耗时可能要超过30s。&lt;/p&gt;
 &lt;p&gt;Google的相应问题，此问题早已被人解决，解决方案见如下链接：
 http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565&lt;/p&gt;
 &lt;p&gt;主要就是用&lt;code&gt;conntrack -L&lt;/code&gt; 代替&lt;code&gt;cat /proc/net/ip_conntrack&lt;/code&gt;，要先安装&lt;code&gt;sudo apt-get install conntrack&lt;/code&gt;&lt;/p&gt;
-&lt;h2&gt;limits&lt;/h2&gt;
+&lt;h2 id="limits"&gt;limits&lt;/h2&gt;
 &lt;p&gt;limit 用于检查每个plugin的field的值是否超出设定的warning和critical，并做出相应的警报。&lt;/p&gt;
 &lt;p&gt;warning和critical是运行插件config输出的每个filed的warning和critical来设置的。&lt;/p&gt;
 &lt;p&gt;有时我们在&lt;code&gt;/etc/munin/plugin-conf.d/&lt;/code&gt;中会看到&lt;code&gt;env.warning value&lt;/code&gt;，这是因为插件会读取&lt;code&gt;env.warning&lt;/code&gt;的值，并根据此值设置每个field的warning。如果插件不读取&lt;code&gt;env.warning&lt;/code&gt;的值，即使设置也不会启作用，munin不会自动设置。&lt;/p&gt;
@@ -812,14 +803,14 @@ This command produces a report and a list of all processes in D state and a full
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;关于vmstat的使用参考：http://www.linuxintheshell.org/2013/05/22/episode-030-vmstat/&lt;/p&gt;</summary></entry><entry><title>Mongo Performance</title><link href="http://zhangliyong.github.io/posts/2013/07/25/mongo-performance.html" rel="alternate"></link><updated>2013-07-25T10:07:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-25:posts/2013/07/25/mongo-performance.html</id><summary type="html">&lt;p&gt;最近mongo的性能&lt;/p&gt;</summary></entry><entry><title>Mongo</title><link href="http://zhangliyong.github.io/posts/2013/07/24/mongo.html" rel="alternate"></link><updated>2013-07-24T17:36:09+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-24:posts/2013/07/24/mongo.html</id><summary type="html">&lt;h2&gt;query after update slow&lt;/h2&gt;
+&lt;p&gt;关于vmstat的使用参考：http://www.linuxintheshell.org/2013/05/22/episode-030-vmstat/&lt;/p&gt;</summary></entry><entry><title>Mongo Performance</title><link href="http://zhangliyong.github.io/posts/2013/07/25/mongo-performance.html" rel="alternate"></link><updated>2013-07-25T10:07:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-25:posts/2013/07/25/mongo-performance.html</id><summary type="html">&lt;p&gt;最近mongo的性能&lt;/p&gt;</summary></entry><entry><title>Mongo</title><link href="http://zhangliyong.github.io/posts/2013/07/24/mongo.html" rel="alternate"></link><updated>2013-07-24T17:36:09+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-07-24:posts/2013/07/24/mongo.html</id><summary type="html">&lt;h2 id="query-after-update-slow"&gt;query after update slow&lt;/h2&gt;
 &lt;p&gt;这两天有一个接口的速度非常慢，主要是执行一条查询语句非常慢，有时耗时达200秒，于是找到了这条查询语句单独在mongo shell中执行，在mongo shell中执行并不慢，慢慢调试后最终找到问题，原因是在查询语句执行之前执行了两次更新语句。&lt;/p&gt;
 &lt;p&gt;利用pymongo执行更新时，如果不设置safe=True，mongo会及时返回函数调用，但更新并没有真正执行完，mongo进程在后台继续执行，所以当接着执行查询时，此时更新没有结束，数据库会处于lock状态，查询等待数据库解锁，所以查询非常慢。&lt;/p&gt;
 &lt;p&gt;把更新语句去除后，查询恢复正常。&lt;/p&gt;
-&lt;h2&gt;Concurrency&lt;/h2&gt;
+&lt;h2 id="concurrency"&gt;Concurrency&lt;/h2&gt;
 &lt;p&gt;MongoDB global lock to ga&lt;/p&gt;
-&lt;h2&gt;Tips&lt;/h2&gt;
-&lt;h3&gt;If Write Heavy&lt;/h3&gt;
+&lt;h2 id="tips"&gt;Tips&lt;/h2&gt;
+&lt;h3 id="if-write-heavy"&gt;If Write Heavy&lt;/h3&gt;
 &lt;p&gt;Global Lock is Global
 As you probably know, MongoDB has a global lock. The longer your writes take, the higher your lock percentage is. Updating documents that are in RAM is super fast.&lt;/p&gt;
 &lt;p&gt;Updating documents that have been pushed to disk, first have to be read from disk, stored in memory, updated, then written back to disk. This operation is slow and happens while inside the lock.&lt;/p&gt;
@@ -849,7 +840,7 @@ The trick to lowering your lock percentage and thus having faster updates is to 
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;对于我们在职的程序员，这些建议仍然适用，我们一定要有自己可拿出的东西来，有一些自己的项目，能与开源。&lt;/p&gt;
-&lt;p&gt;非常重要的一点，一定要有气质、魅力，善于和另人交流，杜绝屌丝。还有程序员要注意身体哦。&lt;/p&gt;</summary></entry><entry><title>datetime</title><link href="http://zhangliyong.github.io/posts/2013/06/25/datetime.html" rel="alternate"></link><updated>2013-06-25T10:38:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-25:posts/2013/06/25/datetime.html</id><summary type="html">&lt;h2&gt;insert current date&lt;/h2&gt;
+&lt;p&gt;非常重要的一点，一定要有气质、魅力，善于和另人交流，杜绝屌丝。还有程序员要注意身体哦。&lt;/p&gt;</summary></entry><entry><title>datetime</title><link href="http://zhangliyong.github.io/posts/2013/06/25/datetime.html" rel="alternate"></link><updated>2013-06-25T10:38:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-25:posts/2013/06/25/datetime.html</id><summary type="html">&lt;h2 id="insert-current-date"&gt;insert current date&lt;/h2&gt;
 &lt;p&gt;"map F3 to insert current date
 nnoremap &lt;F3&gt; "=strftime("%Y-%m-%d (%a)")&lt;CR&gt;P
 inoremap &lt;F3&gt; &lt;C-R&gt;=strftime("%Y-%m-%d (%a)")&lt;CR&gt;&lt;/p&gt;
@@ -863,7 +854,7 @@ inoremap &lt;F3&gt; &lt;C-R&gt;=strftime("%Y-%m-%d (%a)")&lt;CR&gt;&lt;/p&gt;
 &lt;p&gt;http://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python&lt;/p&gt;
 &lt;p&gt;http://eli.thegreenplace.net/2012/01/16/python-parallelizing-cpu-bound-tasks-with-multiprocessing/&lt;/p&gt;
 &lt;p&gt;http://stackoverflow.com/questions/1226584/multiprocess-or-threading-in-python&lt;/p&gt;</summary></entry><entry><title>Redis vs Mongodb</title><link href="http://zhangliyong.github.io/posts/2013/06/04/redis-vs-mongodb.html" rel="alternate"></link><updated>2013-06-04T14:33:16+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-06-04:posts/2013/06/04/redis-vs-mongodb.html</id><summary type="html">&lt;p&gt;Redis and MongoDB insertion performance analysis: http://blog.axant.it/archives/236
-MongoDB and Redis: a different interpretation of what's wrong with Relational DBs: http://oldblog.antirez.com/post/MongoDB-and-Redis.html&lt;/p&gt;</summary></entry><entry><title>Memory</title><link href="http://zhangliyong.github.io/posts/2013/05/19/memory.html" rel="alternate"></link><updated>2013-05-19T21:42:19+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:posts/2013/05/19/memory.html</id><summary type="html"></summary></entry><entry><title>Sleeping</title><link href="http://zhangliyong.github.io/posts/2013/05/19/sleeping.html" rel="alternate"></link><updated>2013-05-19T21:17:11+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:posts/2013/05/19/sleeping.html</id><summary type="html">&lt;h2&gt;关于睡眠你应该知道的十件事&lt;/h2&gt;
+MongoDB and Redis: a different interpretation of what's wrong with Relational DBs: http://oldblog.antirez.com/post/MongoDB-and-Redis.html&lt;/p&gt;</summary></entry><entry><title>Memory</title><link href="http://zhangliyong.github.io/posts/2013/05/19/memory.html" rel="alternate"></link><updated>2013-05-19T21:42:19+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:posts/2013/05/19/memory.html</id><summary type="html"></summary></entry><entry><title>Sleeping</title><link href="http://zhangliyong.github.io/posts/2013/05/19/sleeping.html" rel="alternate"></link><updated>2013-05-19T21:17:11+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:posts/2013/05/19/sleeping.html</id><summary type="html">&lt;h2 id="_1"&gt;关于睡眠你应该知道的十件事&lt;/h2&gt;
 &lt;p&gt;地址：http://v.163.com/movie/2013/5/V/Q/M8TDTH9BJ_M8TE2FFVQ.html&lt;/p&gt;
 &lt;p&gt;网易分开课上有一期bbc拍摄的关于睡眠的记录片，里面提到了很多关于提高睡眠的问题，
 对于一些自己感觉有帮助的记录如下：&lt;/p&gt;
@@ -886,13 +877,13 @@ MongoDB and Redis: a different interpretation of what's wrong with Relational DB
 &lt;li&gt;
 &lt;p&gt;睡觉前一小时泡个热水澡有利于睡眠。&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>Logbook</title><link href="http://zhangliyong.github.io/posts/2013/05/19/logbook.html" rel="alternate"></link><updated>2013-05-19T18:50:40+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:posts/2013/05/19/logbook.html</id><summary type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;/ol&gt;</summary></entry><entry><title>Logbook</title><link href="http://zhangliyong.github.io/posts/2013/05/19/logbook.html" rel="alternate"></link><updated>2013-05-19T18:50:40+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:posts/2013/05/19/logbook.html</id><summary type="html">&lt;h2 id="introduction"&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
 logbook目前还处于开发阶段。可以参考官方&lt;a href="https://logbook.readthedocs.org/en/latest/features.html#core-features"&gt;core feature&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
 filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供
 了更多的组件，如：processor。&lt;/p&gt;
-&lt;h2&gt;New Feature&lt;/h2&gt;
+&lt;h2 id="new-feature"&gt;New Feature&lt;/h2&gt;
 &lt;p&gt;在logbook中一个非常大的变化是大量使用&lt;a href="https://logbook.readthedocs.org/en/latest/stacks.html"&gt;stack&lt;/a&gt;,
 一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性，
 可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。&lt;/p&gt;
@@ -911,7 +902,7 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 &lt;p&gt;logbook中也提供了&lt;code&gt;with&lt;/code&gt;来完成对stack的push和pop。&lt;/p&gt;
 &lt;p&gt;logbook增加了很多的handler，甚至都有将log发到twitter上的handler。&lt;/p&gt;
 &lt;p&gt;logbook有非常多的特性，相信以后也会增加更多有趣的特性，建议阅读其官方文档：https://logbook.readthedocs.org/en/latest/&lt;/p&gt;
-&lt;h2&gt;Examples&lt;/h2&gt;
+&lt;h2 id="examples"&gt;Examples&lt;/h2&gt;
 &lt;p&gt;下面给出一些简单的使用示例，有些是官方文档上给出的。&lt;/p&gt;
 &lt;p&gt;开始使用logbook可以不用做任何配置：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;logbook&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;warn&lt;/span&gt;
@@ -931,16 +922,16 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;TestHandler&lt;/h3&gt;
+&lt;h3 id="testhandler"&gt;TestHandler&lt;/h3&gt;
 &lt;p&gt;logbook提供了TestHandler，可以用来测试log，使用非常方便，参考文档：
 https://logbook.readthedocs.org/en/latest/api/handlers.html#logbook.TestHandler&lt;/p&gt;
-&lt;h3&gt;MailHandler&lt;/h3&gt;
+&lt;h3 id="mailhandler"&gt;MailHandler&lt;/h3&gt;
 &lt;p&gt;https://logbook.readthedocs.org/en/latest/api/handlers.html#logbook.MailHandler
 TODO&lt;/p&gt;
-&lt;h3&gt;ThreadedWrapperHandler&lt;/h3&gt;
+&lt;h3 id="threadedwrapperhandler"&gt;ThreadedWrapperHandler&lt;/h3&gt;
 &lt;p&gt;https://logbook.readthedocs.org/en/latest/api/queues.html#logbook.queues.ThreadedWrapperHandler
 TODO&lt;/p&gt;
-&lt;h3&gt;FingersCrossedHandler&lt;/h3&gt;
+&lt;h3 id="fingerscrossedhandler"&gt;FingersCrossedHandler&lt;/h3&gt;
 &lt;p&gt;logbook提供了一个特殊的"fingers crossed" handler，这个handler作为一个wrapper，是用来封装其它
 handler的，这个handler有一个特殊的功能，它会将所有的log记录到内存中，当某一些log的级别
 (debug, info, warning, error)超过FingersCrossedHandler设置的级别时，所有在内存中的log以及后面的log
@@ -981,7 +972,7 @@ handler的，这个handler有一个特殊的功能，它会将所有的log记录
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;： Processor只有当log被某一个handler处理的时候才会执行，否则processor永远不会招待。&lt;/p&gt;</summary></entry><entry><title>django-logbook</title><link href="http://zhangliyong.github.io/posts/2013/05/19/django-logbook.html" rel="alternate"></link><updated>2013-05-19T17:55:35+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:posts/2013/05/19/django-logbook.html</id><summary type="html"></summary></entry><entry><title>Linux</title><link href="http://zhangliyong.github.io/posts/2013/05/16/linux.html" rel="alternate"></link><updated>2013-05-16T12:18:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-16:posts/2013/05/16/linux.html</id><summary type="html">&lt;h2&gt;Linux TCP Performance Tuning&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;： Processor只有当log被某一个handler处理的时候才会执行，否则processor永远不会招待。&lt;/p&gt;</summary></entry><entry><title>django-logbook</title><link href="http://zhangliyong.github.io/posts/2013/05/19/django-logbook.html" rel="alternate"></link><updated>2013-05-19T17:55:35+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-19:posts/2013/05/19/django-logbook.html</id><summary type="html"></summary></entry><entry><title>Linux</title><link href="http://zhangliyong.github.io/posts/2013/05/16/linux.html" rel="alternate"></link><updated>2013-05-16T12:18:32+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-16:posts/2013/05/16/linux.html</id><summary type="html">&lt;h2 id="linux-tcp-performance-tuning"&gt;Linux TCP Performance Tuning&lt;/h2&gt;
 &lt;p&gt;There are two ways to change tcp parameters.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -995,24 +986,24 @@ handler的，这个handler有一个特殊的功能，它会将所有的log记录
    this can change the value permanently.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3&gt;Parameters&lt;/h3&gt;
+&lt;h3 id="parameters"&gt;Parameters&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;/proc/sys/fs/file-max: The maximum number of concurrently open files.&lt;/li&gt;
 &lt;li&gt;/proc/sys/net/ipv4/tcp_max_syn_backlog: Maximum number of remembered connection requests, which are still did not receive an acknowledgment from connecting client. The default value is 1024 for systems with more than 128Mb of memory, and 128 for low memory machines. If server suffers of overload, try to increase this number.&lt;/li&gt;
 &lt;li&gt;/proc/sys/net/core/somaxconn: Limit of socket listen() backlog, known in userspace as SOMAXCONN. Defaults to 128. The value should be raised substantially to support bursts of request. For example, to support a burst of 1024 requests, set somaxconn to 1024.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;change userlevel file-max
-need logout and login to work&lt;/p&gt;</summary></entry><entry><title>nginx tips</title><link href="http://zhangliyong.github.io/posts/2013/05/13/nginx-tips.html" rel="alternate"></link><updated>2013-05-13T16:11:31+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-13:posts/2013/05/13/nginx-tips.html</id><summary type="html">&lt;h2&gt;nginx backlog&lt;/h2&gt;
-&lt;h2&gt;Root Directory&lt;/h2&gt;
+need logout and login to work&lt;/p&gt;</summary></entry><entry><title>nginx tips</title><link href="http://zhangliyong.github.io/posts/2013/05/13/nginx-tips.html" rel="alternate"></link><updated>2013-05-13T16:11:31+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-13:posts/2013/05/13/nginx-tips.html</id><summary type="html">&lt;h2 id="nginx-backlog"&gt;nginx backlog&lt;/h2&gt;
+&lt;h2 id="root-directory"&gt;Root Directory&lt;/h2&gt;
 &lt;p&gt;nginx 默认根目录，&lt;/p&gt;
 &lt;p&gt;如果在配置文件中指定了root，则根目录即为root指定的目录&lt;/p&gt;
 &lt;p&gt;如果通过编译安装的nginx，则根目录为编译时指定的prefix目录&lt;/p&gt;
 &lt;p&gt;如果通过包管理器安装，则根目录与发行版相关。例如ubuntu版本的根目录为：
 /usr/share/nginx/www&lt;/p&gt;
-&lt;h2&gt;Custome error page&lt;/h2&gt;
+&lt;h2 id="custome-error-page"&gt;Custome error page&lt;/h2&gt;
 &lt;p&gt;nginx 有个默认的错误显示页面&lt;/p&gt;
-&lt;h2&gt;Ref&lt;/h2&gt;
-&lt;p&gt;http://wiki.nginx.org/Pitfalls&lt;/p&gt;</summary></entry><entry><title>pelican</title><link href="http://zhangliyong.github.io/posts/2013/05/09/pelican.html" rel="alternate"></link><updated>2013-05-09T10:29:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-09:posts/2013/05/09/pelican.html</id><summary type="html">&lt;h2&gt;介绍&lt;/h2&gt;
+&lt;h2 id="ref"&gt;Ref&lt;/h2&gt;
+&lt;p&gt;http://wiki.nginx.org/Pitfalls&lt;/p&gt;</summary></entry><entry><title>pelican</title><link href="http://zhangliyong.github.io/posts/2013/05/09/pelican.html" rel="alternate"></link><updated>2013-05-09T10:29:55+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-09:posts/2013/05/09/pelican.html</id><summary type="html">&lt;h2 id="_1"&gt;介绍&lt;/h2&gt;
 &lt;p&gt;peclian 是一个python版本的表态页面生成器，类似于jekyll&lt;/p&gt;</summary></entry><entry><title>python build Dynamic Link Library</title><link href="http://zhangliyong.github.io/posts/2013/05/05/python-build-dynamic-link-library.html" rel="alternate"></link><updated>2013-05-05T18:41:50+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-05:posts/2013/05/05/python-build-dynamic-link-library.html</id><summary type="html">&lt;p&gt;当我们安装某些软件，需要链接python的动态库时，如果系统的python版本是静态库的，会提示如下错误：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;/usr/bin/ld: .../lib/libpython2.7.a(abstract.o): relocation R_X86_64_32 against 'a local symbol' can not be used when making a shared object; recompile with -fPIC
@@ -1021,7 +1012,7 @@ collect2: ld returned 1 exit status&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;这种情况需要安装动态库版本。&lt;/p&gt;
 &lt;p&gt;下面介绍自己编译安装动态库的python版本。&lt;/p&gt;
-&lt;h2&gt;安装&lt;/h2&gt;
+&lt;h2 id="_1"&gt;安装&lt;/h2&gt;
 &lt;p&gt;通过ubuntu软件库安装的python版本带有动态链接库，位置为&lt;code&gt;/usr/lib/libpython&amp;lt;version&amp;gt;.so&lt;/code&gt;,&lt;/p&gt;
 &lt;p&gt;如果系统中默认的python版本太低，软件库中又没有高版本时，需要手动编译安装。&lt;/p&gt;
 &lt;p&gt;下面以python2.7.4为例，其它版本类似&lt;/p&gt;
@@ -1047,7 +1038,7 @@ configure with --enable-shared.&lt;/p&gt;
 
 
 &lt;p&gt;通过这种方式会生成动态链接库，并安装到系统库目录下,地址：&lt;code&gt;/usr/local/lib/libpython2.7.so&lt;/code&gt;&lt;/p&gt;
-&lt;h2&gt;问题&lt;/h2&gt;
+&lt;h2 id="_2"&gt;问题&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;在make的过程可能会失败，提示如下错误：&lt;/p&gt;
@@ -1074,19 +1065,19 @@ collect2: ld returned 1 exit status&lt;/p&gt;
 &lt;p&gt;此时需要运行 &lt;code&gt;sudo ldconfig&lt;/code&gt;更新cache。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;参考&lt;/h2&gt;
+&lt;h2 id="_3"&gt;参考&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html"&gt;http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://blog.csdn.net/huzhenwei/article/details/7339548"&gt;http://blog.csdn.net/huzhenwei/article/details/7339548&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://linux.101hacks.com/unix/ldconfig/"&gt;http://linux.101hacks.com/unix/ldconfig/&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Python</title><link href="http://zhangliyong.github.io/posts/2013/05/04/python.html" rel="alternate"></link><updated>2013-05-04T16:36:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-04:posts/2013/05/04/python.html</id><summary type="html">&lt;h2&gt;decorator&lt;/h2&gt;
-&lt;h2&gt;class method&lt;/h2&gt;
-&lt;h1&gt;Django&lt;/h1&gt;
-&lt;h2&gt;Django test&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://linux.101hacks.com/unix/ldconfig/"&gt;http://linux.101hacks.com/unix/ldconfig/&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Python</title><link href="http://zhangliyong.github.io/posts/2013/05/04/python.html" rel="alternate"></link><updated>2013-05-04T16:36:02+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-04:posts/2013/05/04/python.html</id><summary type="html">&lt;h2 id="decorator"&gt;decorator&lt;/h2&gt;
+&lt;h2 id="class-method"&gt;class method&lt;/h2&gt;
+&lt;h1 id="django"&gt;Django&lt;/h1&gt;
+&lt;h2 id="django-test"&gt;Django test&lt;/h2&gt;
 &lt;p&gt;ref: http://mikegrouchy.com/blog/great-django-test-talks.html&lt;/p&gt;</summary></entry><entry><title>Pythonbrew</title><link href="http://zhangliyong.github.io/posts/2013/05/04/pythonbrew.html" rel="alternate"></link><updated>2013-05-04T16:35:56+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-04:posts/2013/05/04/pythonbrew.html</id><summary type="html">&lt;p&gt;home page: https://github.com/utahta/pythonbrew&lt;/p&gt;
-&lt;h2&gt;install packages over pythonbrew&lt;/h2&gt;
+&lt;h2 id="install-packages-over-pythonbrew"&gt;install packages over pythonbrew&lt;/h2&gt;
 &lt;p&gt;pythonbrew can install multiple python versions on the same machine,
 if you want to install packages over a specified python version, a
 recommand way is to install pip first.&lt;/p&gt;
-&lt;h3&gt;install pip&lt;/h3&gt;
+&lt;h3 id="install-pip"&gt;install pip&lt;/h3&gt;
 &lt;p&gt;home page: http://www.pip-installer.org/en/latest/&lt;/p&gt;
 &lt;p&gt;pip is just a python pacakge&lt;/p&gt;
 &lt;p&gt;first use pythonbrew switch to the desired python version, then&lt;/p&gt;
@@ -1096,14 +1087,14 @@ recommand way is to install pip first.&lt;/p&gt;
 
 
 &lt;p&gt;after that you can use pip to install whatever pacakges over the python version.&lt;/p&gt;
-&lt;p&gt;If you want to install package on a different python version, re-do "install pip" section.&lt;/p&gt;</summary></entry><entry><title>Mysql 性能调优</title><link href="http://zhangliyong.github.io/posts/2013/05/04/mysql-xing-neng-diao-you.html" rel="alternate"></link><updated>2013-05-04T16:35:42+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-04:posts/2013/05/04/mysql-xing-neng-diao-you.html</id><summary type="html">&lt;h2&gt;thread cache size&lt;/h2&gt;
+&lt;p&gt;If you want to install package on a different python version, re-do "install pip" section.&lt;/p&gt;</summary></entry><entry><title>Mysql 性能调优</title><link href="http://zhangliyong.github.io/posts/2013/05/04/mysql-xing-neng-diao-you.html" rel="alternate"></link><updated>2013-05-04T16:35:42+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-05-04:posts/2013/05/04/mysql-xing-neng-diao-you.html</id><summary type="html">&lt;h2 id="thread-cache-size"&gt;thread cache size&lt;/h2&gt;
 &lt;p&gt;http://www.dbasquare.com/kb/mysql-and-thread-cache-size/&lt;/p&gt;
 &lt;p&gt;query_cache_type可以设置为0(OFF)，1(ON)或者2(DEMOND)，分别表示完全不使用query cache，除显式要求不使用query cache（使用sql_no_cache）之外的所有的select都使用query cache，只有显示要求才使用query cache（使用sql_cache)&lt;/p&gt;
 &lt;p&gt;show global status like '';
 show global variables like '';&lt;/p&gt;
 &lt;p&gt;innodb_file_per_table&lt;/p&gt;
 &lt;p&gt;mysql io 延时计算&lt;/p&gt;
-&lt;h2&gt;mysql backup&lt;/h2&gt;
+&lt;h2 id="mysql-backup"&gt;mysql backup&lt;/h2&gt;
 &lt;p&gt;相较前几种方法，备份数据文件最为直接、快速、方便，缺点是基本上不能实现增量备份。为了保证数据的一致性，需要在靠背文件前，执行以下 SQL 语句：&lt;/p&gt;
 &lt;p&gt;FLUSH TABLES WITH READ LOCK;
 也就是把内存中的数据都刷新到磁盘中，同时锁定数据表，以保证拷贝过程中不会有新的数据写入。这种方法备份出来的数据恢复也很简单，直接拷贝回原来的数据库目录下即可。&lt;/p&gt;
@@ -1112,8 +1103,8 @@ show global variables like '';&lt;/p&gt;
 &lt;p&gt;ALTER TABLE tbl_name ENGINE = Innodb;
 这其实是一个 NULL 操作，表面上看什么也不做，实际上重新整理碎片了。&lt;/p&gt;
 &lt;p&gt;为了不影响线上业务，实现在线备份，并且能增量备份，最好的办法就是采用主从复制机制(replication)，在 slave 机器上做备份。&lt;/p&gt;
-&lt;h2&gt;mysql replication&lt;/h2&gt;
-&lt;h3&gt;switch master and slave&lt;/h3&gt;
+&lt;h2 id="mysql-replication"&gt;mysql replication&lt;/h2&gt;
+&lt;h3 id="switch-master-and-slave"&gt;switch master and slave&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;one slave and one master&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1170,14 +1161,14 @@ The accounts created by these statements have the following properties:&lt;/p&gt
 +-----------------------------------------------------+&lt;/p&gt;
 &lt;p&gt;16.1.1.5. Creating a Data Snapshot Using mysqldump  :  http://dev.mysql.com/doc/refman/5.1/en/replication-howto-mysqldump.html&lt;/p&gt;
 &lt;p&gt;Obtaining the Replication Master Binary Log Coordinates : http://dev.mysql.com/doc/refman/5.1/en/replication-howto-masterstatus.html&lt;/p&gt;
-&lt;p&gt;If a slave uses the default host-based relay log file names, changing a slave's host name after replication has been set up can cause replication to fail with the errors Failed to open the relay log and Could not find target log during relay log initialization. This is a known issue (see Bug #2122). If you anticipate that a slave's host name might change in the future (for example, if networking is set up on the slave such that its host name can be modified using DHCP), you can avoid this issue entirely by using the --relay-log and --relay-log-index options to specify relay log file names explicitly when you initially set up the slave. This will make the names independent of server host name changes.&lt;/p&gt;</summary></entry><entry><title>TIME_WAIT in netstat</title><link href="http://zhangliyong.github.io/posts/2013/04/11/time_wait-in-netstat.html" rel="alternate"></link><updated>2013-04-11T23:44:01+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-04-11:posts/2013/04/11/time_wait-in-netstat.html</id><summary type="html">&lt;p&gt;netstat -tanp | grep -o '(10.18.10.20\|211.151.139.230\|127.0.0.1):[0-9]*' | sort -nr | uniq -c | sort -nr -k 1 | wc -l&lt;/p&gt;</summary></entry><entry><title>misc</title><link href="http://zhangliyong.github.io/posts/2013/03/31/misc.html" rel="alternate"></link><updated>2013-03-31T20:31:38+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-03-31:posts/2013/03/31/misc.html</id><summary type="html">&lt;h1&gt;Mac sshfs&lt;/h1&gt;
+&lt;p&gt;If a slave uses the default host-based relay log file names, changing a slave's host name after replication has been set up can cause replication to fail with the errors Failed to open the relay log and Could not find target log during relay log initialization. This is a known issue (see Bug #2122). If you anticipate that a slave's host name might change in the future (for example, if networking is set up on the slave such that its host name can be modified using DHCP), you can avoid this issue entirely by using the --relay-log and --relay-log-index options to specify relay log file names explicitly when you initially set up the slave. This will make the names independent of server host name changes.&lt;/p&gt;</summary></entry><entry><title>TIME_WAIT in netstat</title><link href="http://zhangliyong.github.io/posts/2013/04/11/time_wait-in-netstat.html" rel="alternate"></link><updated>2013-04-11T23:44:01+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-04-11:posts/2013/04/11/time_wait-in-netstat.html</id><summary type="html">&lt;p&gt;netstat -tanp | grep -o '(10.18.10.20\|211.151.139.230\|127.0.0.1):[0-9]*' | sort -nr | uniq -c | sort -nr -k 1 | wc -l&lt;/p&gt;</summary></entry><entry><title>misc</title><link href="http://zhangliyong.github.io/posts/2013/03/31/misc.html" rel="alternate"></link><updated>2013-03-31T20:31:38+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-03-31:posts/2013/03/31/misc.html</id><summary type="html">&lt;h1 id="mac-sshfs"&gt;Mac sshfs&lt;/h1&gt;
 &lt;p&gt;Mac 挂载远程目录&lt;/p&gt;
 &lt;p&gt;http://osxfuse.github.com/&lt;/p&gt;
 &lt;p&gt;install OXSFUSE and SSHFS&lt;/p&gt;
-&lt;h2&gt;TF-IDF&lt;/h2&gt;
+&lt;h2 id="tf-idf"&gt;TF-IDF&lt;/h2&gt;
 &lt;p&gt;http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
 http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
-http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</summary></entry><entry><title>Bash</title><link href="http://zhangliyong.github.io/posts/2013/03/27/bash.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-03-27:posts/2013/03/27/bash.html</id><summary type="html">&lt;h2&gt;alias&lt;/h2&gt;
+http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</summary></entry><entry><title>Bash</title><link href="http://zhangliyong.github.io/posts/2013/03/27/bash.html" rel="alternate"></link><updated>2013-03-27T19:21:50+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-03-27:posts/2013/03/27/bash.html</id><summary type="html">&lt;h2 id="alias"&gt;alias&lt;/h2&gt;
 &lt;p&gt;对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。&lt;/p&gt;
 &lt;p&gt;e.g. 在.bashrc中加入&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;servername&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ssh sns@hostname&amp;#39;&lt;/span&gt;
@@ -1190,7 +1181,7 @@ http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</s
 
 
 &lt;p&gt;即可登陆到hostname机器。&lt;/p&gt;
-&lt;h2&gt;rsync&lt;/h2&gt;
+&lt;h2 id="rsync"&gt;rsync&lt;/h2&gt;
 &lt;p&gt;大家常用rsync同步数据，有些数据是不需要同步的，可以用 --exclude 选项。&lt;/p&gt;
 &lt;p&gt;e.g.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;rsync -avz --exclude &lt;span class="s2"&gt;&amp;quot;.*&amp;quot;&lt;/span&gt; --exclude &lt;span class="s2"&gt;&amp;quot;dbconfig.py&amp;quot;&lt;/span&gt; src user@hostname:/dest
@@ -1199,9 +1190,9 @@ http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</s
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;mail&lt;/h2&gt;
+&lt;h2 id="mail"&gt;mail&lt;/h2&gt;
 &lt;p&gt;所有crontab任务的运行结果都会输出到mail中，可以随时查看每个任务的运行情况。&lt;/p&gt;
-&lt;h2&gt;tmux&lt;/h2&gt;
+&lt;h2 id="tmux"&gt;tmux&lt;/h2&gt;
 &lt;p&gt;工作中经常ssh到远程服务器，有时需要在远程服务器中开启多个终端，&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;一种办法是在本地开启多个终端，分别远程到服务器。&lt;/li&gt;
@@ -1223,7 +1214,7 @@ http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</s
 
 &lt;p&gt;tmux 的功能非常强，但命令较多，学习成本较高，可以先使用上面几个命令。&lt;/p&gt;
 &lt;p&gt;推荐介绍视频: http://happycasts.net/episodes/41?autoplay=true&lt;/p&gt;
-&lt;h2&gt;ssh&lt;/h2&gt;
+&lt;h2 id="ssh"&gt;ssh&lt;/h2&gt;
 &lt;p&gt;今天搞清楚了ssh的标准输入输出，下面是ssh命令的使用方式&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1246&lt;/span&gt;&lt;span class="n"&gt;AaCfgKkMNnqsTtVvXxYy&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;cipher_spec&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
     &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="n"&gt;escape_char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;F&lt;/span&gt; &lt;span class="n"&gt;configfile&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="n"&gt;pkcs11&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;identity_file&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;

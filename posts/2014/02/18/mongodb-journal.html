@@ -6,7 +6,7 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-<meta name="keywords" content="MongoDB, mongo, " />
+<meta name="keywords" content="MongoDB, misc, " />
         <title>MongoDB Journal  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
@@ -61,11 +61,11 @@
 
             <p>启用journal后，MongoDB的操作先写到journal buffer中，每100ms MongoDB会flush journal buffer到磁盘journal中，此时数据不会丢失，</p>
 <p>若MongoDB crash，则最多会丢失100ms的数据。</p>
-<h2>Journal Files</h2>
+<h2 id="journal-files">Journal Files</h2>
 <p>mongod启动后，会在 <code>dbpath</code> 下新建一个 <code>journal</code> 目录，这个目录下存放所有的journal文件，journal 文件是append-only，而且文件名以 <code>j._</code> 为前缀，每个journal文件的大小为1GB，当journal超过1GB后，会创建新的journal文件，当MongoDB将journal中的所写操作应用到数据文件后，这些journal文件才会被删除。</p>
 <p>journal文件的格式为：</p>
 <p><img alt="journal" src="https://www.evernote.com/shard/s30/sh/1da95a5d-e676-4d26-9526-4c88a0f99c6d/55ab60012797fe9541233b5835db1f18/deep/0/MongoDB-London-2013-Understanding-MongoDB-Storage-for-Performance-a....png" /></p>
-<h2>How Journal Works</h2>
+<h2 id="how-journal-works">How Journal Works</h2>
 <p><strong>NOTE:</strong> 此部分翻译自： http://www.kchodorow.com/blog/2012/10/04/how-mongodbs-journaling-works/</p>
 <p>首先磁盘上存储了 journal files和data files，如下：</p>
 <p><img alt="journal files and data files" src="http://www.kchodorow.com/blog/wp-content/uploads/2012/10/mapfile.png" /></p>
@@ -88,11 +88,11 @@
 <p>最后，shared view中的改动flush后硬盘中。默认情况下mongod会要求OS每60s flush一次。每次flush完后，会将journal中flush过的改动删除。</p>
 <p><img alt="flushed" src="http://www.kchodorow.com/blog/wp-content/uploads/2012/10/flushed.png" /></p>
 <p>这就是journal的工作原理。感谢Richard，他给的解释是我听过的最好的（今年秋季他还会<a href="http://education.10gen.com/courses/10gen/M101/2012_Fall/about">在线教授 MongoDB</a>）。</p>
-<h2>Cost of a Journal</h2>
+<h2 id="cost-of-a-journal">Cost of a Journal</h2>
 <p>使用journal后写操作的性能会降低5-30%。</p>
 <p>对于写操作非常频繁的系统建议journal files和data files使用不同的物理磁盘，它们都会flush数据到磁盘，若使用同一个会使用Disk IO延时增大，降低性能。</p>
 <p>对于以读为主的系统，不会有太多影响。</p>
-<h2>参考</h2>
+<h2 id="_1">参考</h2>
 <p>http://www.slideshare.net/mongodb/mongodb-london-2013understanding-mongodb-storage-for-performance-and-data-safety-by-christian-kvalheim-10gen</p>
 <p>http://www.kchodorow.com/blog/2012/10/04/how-mongodbs-journaling-works/</p>
 <section>
@@ -109,7 +109,7 @@
                 <div class="comments">
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
         var disqus_identifier = '../../../../posts/2014/02/18/mongodb-journal.html';
     var disqus_url = '../../../../posts/2014/02/18/mongodb-journal.html';
 
@@ -144,7 +144,7 @@
             <h4>Published</h4>
             <time pubdate="pubdate" datetime="2014-02-18T16:30:00">Feb 18, 2014</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#mongo-ref">mongo</a> 
+            <a class="category-link" href="/categories.html#misc-ref">misc</a> 
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article"> 
                 <li><a href="/tags.html#MongoDB-ref">MongoDB
@@ -177,7 +177,7 @@
         </script>
 
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
 
     (function () {
         var s = document.createElement('script'); s.async = true;

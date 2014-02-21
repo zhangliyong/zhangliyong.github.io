@@ -6,7 +6,7 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-<meta name="keywords" content=", algorithm, " />
+<meta name="keywords" content=", misc, " />
         <title>Generalized Suffix Tree  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
@@ -61,7 +61,7 @@
 
             <p>本文提供了另一种构造generalized suffix tree的方法，不需要为每个字符串添加惟一的字符，所以可以为任意数量的字符串构造后缀树。
 构造原理依然采用Ukkonen提出的算法。下面我们由简入深分别介绍此种方式应对的问题。</p>
-<h2>前言</h2>
+<h2 id="_1">前言</h2>
 <p>后缀树可以用来快速的对字符串进行搜索，详细信息推荐阅读：http://en.wikipedia.org/wiki/Suffix_tree，</p>
 <p>后缀树的搜索非常快，但是构造后缀树比较复杂， Ukkonen提出的构造后缀树的算法时间复杂度为O(nlogn), 构造原理阅读
 http://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english，本文也是在此链接
@@ -77,7 +77,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。</p>
 我们很难找到这么多不同的字符。目前unicode的码点是从0到0x10ffff，也就是unicode最多能表示1114111个字符，仅仅是百万级。
 所以假如我们有千万级的字符串时，我们就找不到如此多的字符了。</p>
 <p>我们提供了另一种解决方案。</p>
-<h2>准备</h2>
+<h2 id="_2">准备</h2>
 <p>我们在原有的基础上进行了改进。</p>
 <ol>
 <li>为每个字符串设置一个惟一的索引(index)，用于标识此字符串，根据索引可找到原来的字符串。</li>
@@ -87,12 +87,12 @@ s=s1u1s2u2.....snun，并为s构造后缀树。</p>
 </ol>
 <p>第3条很容易理解，第1条是为第3、4条准备的，是为降低空间复杂度。下面我们对2、3进行说明。</p>
 <p>从根结点到每个叶结点的路径代表一个字符或多个字符串的后缀，叶结点上的索引即是这些字符串的索引。</p>
-<h2>基本</h2>
+<h2 id="_3">基本</h2>
 <p>以字符串"ab"为例，其后缀树为：</p>
 <p><img alt="" src="/images/suffix_tree/ab.png" /></p>
 <p>设置"ab"的索引为0，将索引加到叶结点中为:</p>
 <p><img alt="" src="/images/suffix_tree/ab_index.png" /></p>
-<h2>扩展一</h2>
+<h2 id="_4">扩展一</h2>
 <p>字符串末尾字符为重复字符，为"aba"为例，
 为其构造后缀树并将索引加到叶结点后：</p>
 <p><img alt="" src="/images/suffix_tree/aba_index_1.png" /></p>
@@ -110,7 +110,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。</p>
 <p>此时active point为(blue node, \0, 0), remainder为2。</p>
 <p>后缀"ab", "a"为隐式，此时active length为0，将索引加到active node中后，如图：</p>
 <p><img alt="" src="/images/suffix_tree/abcabdab_index_2.png" /></p>
-<h2>扩展二</h2>
+<h2 id="_5">扩展二</h2>
 <p>在后缀树中加入一个新的字符串。</p>
 <p>在加入新的字符串之前，需要重置active point为(root, '\0', 0)。</p>
 <p>以字符串"ab", "abc"为例, "ab"的索引为0, "abc"的索引为1，</p>
@@ -158,19 +158,19 @@ s=s1u1s2u2.....snun，并为s构造后缀树。</p>
 </pre></div>
 
 
-<h2>搜索</h2>
+<h2 id="_6">搜索</h2>
 <p>搜索与普通的后缀树搜索类似，根据要搜索的字符串在树中依次匹配即可。</p>
 <p>当模式最终匹配到某一条边后，后到这条边的目标结点，则以这个结点为根结点的子树中的所有索引就是此次的搜索结果。
 再根据索引可得到原来的字符串。</p>
 <p>例如在后缀树</p>
 <p><img alt="" src="/images/suffix_tree/ab_abc_index_2.png" /></p>
 <p>中查找'b'时，可找到索引0，1，再根据索引找到原来的字符串。</p>
-<h2>复杂度</h2>
-<h3>时间</h3>
+<h2 id="_7">复杂度</h2>
+<h3 id="_8">时间</h3>
 <p>由于构造后缀树和搜索的原理与之前的一样，</p>
 <p>假定所有字符串的长度之和为n，则构造后缀树的时间复杂度为O(nlogn)。</p>
 <p>模式P的长度为|P|，则搜索的时间复杂度为O(|P|)</p>
-<h3>空间</h3>
+<h3 id="_9">空间</h3>
 <p>TODO</p>
 <p>笔者给出了一个python版本的实现。</p>
 <section>
@@ -187,7 +187,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。</p>
                 <div class="comments">
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
         var disqus_identifier = '../../../../posts/2014/02/03/generalized-suffix-tree.html';
     var disqus_url = '../../../../posts/2014/02/03/generalized-suffix-tree.html';
 
@@ -222,7 +222,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。</p>
             <h4>Published</h4>
             <time pubdate="pubdate" datetime="2014-02-03T19:47:50">Feb 3, 2014</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#algorithm-ref">algorithm</a> 
+            <a class="category-link" href="/categories.html#misc-ref">misc</a> 
 
         </div>
         </section>
@@ -249,7 +249,7 @@ s=s1u1s2u2.....snun，并为s构造后缀树。</p>
         </script>
 
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
 
     (function () {
         var s = document.createElement('script'); s.async = true;

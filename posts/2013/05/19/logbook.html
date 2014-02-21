@@ -6,7 +6,7 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-<meta name="keywords" content=", python, " />
+<meta name="keywords" content=", misc, " />
         <title>Logbook  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
@@ -59,13 +59,13 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
-            <h2>Introduction</h2>
+            <h2 id="introduction">Introduction</h2>
 <p>Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
 logbook目前还处于开发阶段。可以参考官方<a href="https://logbook.readthedocs.org/en/latest/features.html#core-features">core feature</a></p>
 <p>logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
 filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供
 了更多的组件，如：processor。</p>
-<h2>New Feature</h2>
+<h2 id="new-feature">New Feature</h2>
 <p>在logbook中一个非常大的变化是大量使用<a href="https://logbook.readthedocs.org/en/latest/stacks.html">stack</a>,
 一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性，
 可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。</p>
@@ -84,7 +84,7 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 <p>logbook中也提供了<code>with</code>来完成对stack的push和pop。</p>
 <p>logbook增加了很多的handler，甚至都有将log发到twitter上的handler。</p>
 <p>logbook有非常多的特性，相信以后也会增加更多有趣的特性，建议阅读其官方文档：https://logbook.readthedocs.org/en/latest/</p>
-<h2>Examples</h2>
+<h2 id="examples">Examples</h2>
 <p>下面给出一些简单的使用示例，有些是官方文档上给出的。</p>
 <p>开始使用logbook可以不用做任何配置：</p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">warn</span>
@@ -104,16 +104,16 @@ filter等组件组成，但是在logbook中这些组件之间的关系发生的�
 </pre></div>
 
 
-<h3>TestHandler</h3>
+<h3 id="testhandler">TestHandler</h3>
 <p>logbook提供了TestHandler，可以用来测试log，使用非常方便，参考文档：
 https://logbook.readthedocs.org/en/latest/api/handlers.html#logbook.TestHandler</p>
-<h3>MailHandler</h3>
+<h3 id="mailhandler">MailHandler</h3>
 <p>https://logbook.readthedocs.org/en/latest/api/handlers.html#logbook.MailHandler
 TODO</p>
-<h3>ThreadedWrapperHandler</h3>
+<h3 id="threadedwrapperhandler">ThreadedWrapperHandler</h3>
 <p>https://logbook.readthedocs.org/en/latest/api/queues.html#logbook.queues.ThreadedWrapperHandler
 TODO</p>
-<h3>FingersCrossedHandler</h3>
+<h3 id="fingerscrossedhandler">FingersCrossedHandler</h3>
 <p>logbook提供了一个特殊的"fingers crossed" handler，这个handler作为一个wrapper，是用来封装其它
 handler的，这个handler有一个特殊的功能，它会将所有的log记录到内存中，当某一些log的级别
 (debug, info, warning, error)超过FingersCrossedHandler设置的级别时，所有在内存中的log以及后面的log
@@ -169,7 +169,7 @@ handler的，这个handler有一个特殊的功能，它会将所有的log记录
                 <div class="comments">
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
         var disqus_identifier = '../../../../posts/2013/05/19/logbook.html';
     var disqus_url = '../../../../posts/2013/05/19/logbook.html';
 
@@ -204,7 +204,7 @@ handler的，这个handler有一个特殊的功能，它会将所有的log记录
             <h4>Published</h4>
             <time pubdate="pubdate" datetime="2013-05-19T18:50:40">May 19, 2013</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#python-ref">python</a> 
+            <a class="category-link" href="/categories.html#misc-ref">misc</a> 
 
         </div>
         </section>
@@ -231,7 +231,7 @@ handler的，这个handler有一个特殊的功能，它会将所有的log记录
         </script>
 
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
 
     (function () {
         var s = document.createElement('script'); s.async = true;

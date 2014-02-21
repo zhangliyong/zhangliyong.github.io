@@ -6,7 +6,7 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-<meta name="keywords" content=", python, " />
+<meta name="keywords" content=", misc, " />
         <title>python build Dynamic Link Library  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
@@ -67,7 +67,7 @@ collect2: ld returned 1 exit status</p>
 </blockquote>
 <p>这种情况需要安装动态库版本。</p>
 <p>下面介绍自己编译安装动态库的python版本。</p>
-<h2>安装</h2>
+<h2 id="_1">安装</h2>
 <p>通过ubuntu软件库安装的python版本带有动态链接库，位置为<code>/usr/lib/libpython&lt;version&gt;.so</code>,</p>
 <p>如果系统中默认的python版本太低，软件库中又没有高版本时，需要手动编译安装。</p>
 <p>下面以python2.7.4为例，其它版本类似</p>
@@ -93,7 +93,7 @@ configure with --enable-shared.</p>
 
 
 <p>通过这种方式会生成动态链接库，并安装到系统库目录下,地址：<code>/usr/local/lib/libpython2.7.so</code></p>
-<h2>问题</h2>
+<h2 id="_2">问题</h2>
 <ul>
 <li>
 <p>在make的过程可能会失败，提示如下错误：</p>
@@ -120,7 +120,7 @@ collect2: ld returned 1 exit status</p>
 <p>此时需要运行 <code>sudo ldconfig</code>更新cache。</p>
 </li>
 </ul>
-<h2>参考</h2>
+<h2 id="_3">参考</h2>
 <p><a href="http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html">http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html</a></p>
 <p><a href="http://blog.csdn.net/huzhenwei/article/details/7339548">http://blog.csdn.net/huzhenwei/article/details/7339548</a></p>
 <p><a href="http://linux.101hacks.com/unix/ldconfig/">http://linux.101hacks.com/unix/ldconfig/</a></p>
@@ -138,7 +138,7 @@ collect2: ld returned 1 exit status</p>
                 <div class="comments">
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
         var disqus_identifier = '../../../../posts/2013/05/05/python-build-dynamic-link-library.html';
     var disqus_url = '../../../../posts/2013/05/05/python-build-dynamic-link-library.html';
 
@@ -173,7 +173,7 @@ collect2: ld returned 1 exit status</p>
             <h4>Published</h4>
             <time pubdate="pubdate" datetime="2013-05-05T18:41:50">May 5, 2013</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#python-ref">python</a> 
+            <a class="category-link" href="/categories.html#misc-ref">misc</a> 
 
         </div>
         </section>
@@ -200,7 +200,7 @@ collect2: ld returned 1 exit status</p>
         </script>
 
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
 
     (function () {
         var s = document.createElement('script'); s.async = true;

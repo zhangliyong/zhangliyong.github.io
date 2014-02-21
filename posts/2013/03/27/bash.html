@@ -6,7 +6,7 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-<meta name="keywords" content=", bash, " />
+<meta name="keywords" content=", misc, " />
         <title>Bash  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
@@ -59,7 +59,7 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
-            <h2>alias</h2>
+            <h2 id="alias">alias</h2>
 <p>对于一些比较常用的长命令可以用alias做一个别名，以后可以直接用别名操作。</p>
 <p>e.g. 在.bashrc中加入</p>
 <div class="highlight"><pre><span class="nb">alias </span><span class="nv">servername</span><span class="o">=</span><span class="s1">&#39;ssh sns@hostname&#39;</span>
@@ -72,7 +72,7 @@
 
 
 <p>即可登陆到hostname机器。</p>
-<h2>rsync</h2>
+<h2 id="rsync">rsync</h2>
 <p>大家常用rsync同步数据，有些数据是不需要同步的，可以用 --exclude 选项。</p>
 <p>e.g.</p>
 <div class="highlight"><pre>rsync -avz --exclude <span class="s2">&quot;.*&quot;</span> --exclude <span class="s2">&quot;dbconfig.py&quot;</span> src user@hostname:/dest
@@ -81,9 +81,9 @@
 </pre></div>
 
 
-<h2>mail</h2>
+<h2 id="mail">mail</h2>
 <p>所有crontab任务的运行结果都会输出到mail中，可以随时查看每个任务的运行情况。</p>
-<h2>tmux</h2>
+<h2 id="tmux">tmux</h2>
 <p>工作中经常ssh到远程服务器，有时需要在远程服务器中开启多个终端，</p>
 <ul>
 <li>一种办法是在本地开启多个终端，分别远程到服务器。</li>
@@ -105,7 +105,7 @@
 
 <p>tmux 的功能非常强，但命令较多，学习成本较高，可以先使用上面几个命令。</p>
 <p>推荐介绍视频: http://happycasts.net/episodes/41?autoplay=true</p>
-<h2>ssh</h2>
+<h2 id="ssh">ssh</h2>
 <p>今天搞清楚了ssh的标准输入输出，下面是ssh命令的使用方式</p>
 <div class="highlight"><pre><span class="n">ssh</span> <span class="p">[</span><span class="o">-</span><span class="mi">1246</span><span class="n">AaCfgKkMNnqsTtVvXxYy</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">bind_address</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">cipher_spec</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">D</span> <span class="p">[</span><span class="n">bind_address</span><span class="o">:</span><span class="p">]</span><span class="n">port</span><span class="p">]</span>
     <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="n">escape_char</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">F</span> <span class="n">configfile</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">I</span> <span class="n">pkcs11</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="n">identity_file</span><span class="p">]</span>
@@ -141,7 +141,7 @@ server
                 <div class="comments">
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
         var disqus_identifier = '../../../../posts/2013/03/27/bash.html';
     var disqus_url = '../../../../posts/2013/03/27/bash.html';
 
@@ -176,7 +176,7 @@ server
             <h4>Published</h4>
             <time pubdate="pubdate" datetime="2013-03-27T19:21:50">Mar 27, 2013</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#bash-ref">bash</a> 
+            <a class="category-link" href="/categories.html#misc-ref">misc</a> 
 
         </div>
         </section>
@@ -203,7 +203,7 @@ server
         </script>
 
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
 
     (function () {
         var s = document.createElement('script'); s.async = true;

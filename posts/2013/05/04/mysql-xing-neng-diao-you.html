@@ -6,7 +6,7 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-<meta name="keywords" content=", mysql, " />
+<meta name="keywords" content=", misc, " />
         <title>Mysql 性能调优  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
@@ -59,14 +59,14 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
-            <h2>thread cache size</h2>
+            <h2 id="thread-cache-size">thread cache size</h2>
 <p>http://www.dbasquare.com/kb/mysql-and-thread-cache-size/</p>
 <p>query_cache_type可以设置为0(OFF)，1(ON)或者2(DEMOND)，分别表示完全不使用query cache，除显式要求不使用query cache（使用sql_no_cache）之外的所有的select都使用query cache，只有显示要求才使用query cache（使用sql_cache)</p>
 <p>show global status like '';
 show global variables like '';</p>
 <p>innodb_file_per_table</p>
 <p>mysql io 延时计算</p>
-<h2>mysql backup</h2>
+<h2 id="mysql-backup">mysql backup</h2>
 <p>相较前几种方法，备份数据文件最为直接、快速、方便，缺点是基本上不能实现增量备份。为了保证数据的一致性，需要在靠背文件前，执行以下 SQL 语句：</p>
 <p>FLUSH TABLES WITH READ LOCK;
 也就是把内存中的数据都刷新到磁盘中，同时锁定数据表，以保证拷贝过程中不会有新的数据写入。这种方法备份出来的数据恢复也很简单，直接拷贝回原来的数据库目录下即可。</p>
@@ -75,8 +75,8 @@ show global variables like '';</p>
 <p>ALTER TABLE tbl_name ENGINE = Innodb;
 这其实是一个 NULL 操作，表面上看什么也不做，实际上重新整理碎片了。</p>
 <p>为了不影响线上业务，实现在线备份，并且能增量备份，最好的办法就是采用主从复制机制(replication)，在 slave 机器上做备份。</p>
-<h2>mysql replication</h2>
-<h3>switch master and slave</h3>
+<h2 id="mysql-replication">mysql replication</h2>
+<h3 id="switch-master-and-slave">switch master and slave</h3>
 <p><strong>one slave and one master</strong></p>
 <ul>
 <li>
@@ -148,7 +148,7 @@ The accounts created by these statements have the following properties:</p>
                 <div class="comments">
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
         var disqus_identifier = '../../../../posts/2013/05/04/mysql-xing-neng-diao-you.html';
     var disqus_url = '../../../../posts/2013/05/04/mysql-xing-neng-diao-you.html';
 
@@ -183,7 +183,7 @@ The accounts created by these statements have the following properties:</p>
             <h4>Published</h4>
             <time pubdate="pubdate" datetime="2013-05-04T16:35:42">May 4, 2013</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#mysql-ref">mysql</a> 
+            <a class="category-link" href="/categories.html#misc-ref">misc</a> 
 
         </div>
         </section>
@@ -210,7 +210,7 @@ The accounts created by these statements have the following properties:</p>
         </script>
 
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
 
     (function () {
         var s = document.createElement('script'); s.async = true;

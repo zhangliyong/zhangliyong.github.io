@@ -6,7 +6,7 @@
         <meta name="author" content="zhang liyong" />
         <meta name="copyright" content="zhang liyong" />
 
-<meta name="keywords" content=", munin, " />
+<meta name="keywords" content=", misc, " />
         <title>munin  · Lyon's Blog
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
@@ -59,16 +59,16 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
-            <h2>Writing plugins</h2>
+            <h2 id="writing-plugins">Writing plugins</h2>
 <p>global attribute: http://munin-monitoring.org/wiki/protocol-config</p>
 <p>redis munin 有改动，总是说Redis找不到，一会儿一下问题，做一个patch</p>
 <p>mulitgraph: http://munin-monitoring.org/wiki/protocol-multigraph</p>
-<h2>fw_conntract fw_forwarded_local timeout</h2>
+<h2 id="fw_conntract-fw_forwarded_local-timeout">fw_conntract fw_forwarded_local timeout</h2>
 <p>配置好munin之后，fw_conntrack总是报警，读不到数据，主要原因是执行fw_conntrack超时，munin plugin的默认超时时间是10s，超时主要是因为<code>cat /proc/net/ip_conntrack</code>，对于网络请求少的服务器，此语句会很快执行完，但对于网络请求比较多的服务器，此语句耗时可能要超过30s。</p>
 <p>Google的相应问题，此问题早已被人解决，解决方案见如下链接：
 http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565</p>
 <p>主要就是用<code>conntrack -L</code> 代替<code>cat /proc/net/ip_conntrack</code>，要先安装<code>sudo apt-get install conntrack</code></p>
-<h2>limits</h2>
+<h2 id="limits">limits</h2>
 <p>limit 用于检查每个plugin的field的值是否超出设定的warning和critical，并做出相应的警报。</p>
 <p>warning和critical是运行插件config输出的每个filed的warning和critical来设置的。</p>
 <p>有时我们在<code>/etc/munin/plugin-conf.d/</code>中会看到<code>env.warning value</code>，这是因为插件会读取<code>env.warning</code>的值，并根据此值设置每个field的warning。如果插件不读取<code>env.warning</code>的值，即使设置也不会启作用，munin不会自动设置。</p>
@@ -89,7 +89,7 @@ http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565</p>
                 <div class="comments">
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
         var disqus_identifier = '../../../../posts/2013/08/05/munin.html';
     var disqus_url = '../../../../posts/2013/08/05/munin.html';
 
@@ -124,7 +124,7 @@ http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565</p>
             <h4>Published</h4>
             <time pubdate="pubdate" datetime="2013-08-05T13:17:46">Aug 5, 2013</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#munin-ref">munin</a> 
+            <a class="category-link" href="/categories.html#misc-ref">misc</a> 
 
         </div>
         </section>
@@ -151,7 +151,7 @@ http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565565</p>
         </script>
 
 <script type="text/javascript">
-    var disqus_shortname = 'lyonsblog';
+    var disqus_shortname = 'lyonhappyblog';
 
     (function () {
         var s = document.createElement('script'); s.async = true;
