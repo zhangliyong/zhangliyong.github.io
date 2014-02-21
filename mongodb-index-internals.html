@@ -52,7 +52,7 @@
 <article>
 <div class="row-fluid">
     <header class="page_header span10 offset2">
-    <h1><a href="./mongodb-index-internals.html"> MongoDB Index Internals  </a></h1>
+    <h1><a href="./posts/2014/Feb/19/mongodb-index-internals.html"> MongoDB Index Internals  </a></h1>
     </header>
 </div>
 
@@ -87,7 +87,7 @@ All leaves appear in the same level, and internal vertices carry no information.
 </blockquote>
 <p>This is what btree looks like:</p>
 <p><img alt="index btree" src="https://www.evernote.com/shard/s30/sh/58663d76-cf6f-4944-943b-fb850f3084b1/3bc5e37b28b267f8cd2e374e99d0d59c/deep/0/Btree.jpg" /></p>
-<p>When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See <a href="./mongodb-storage-internals.html">mongo storage</a>.</p>
+<p>When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See <a href="./posts/2014/Feb/18/mongodb-storage-internals.html">mongo storage</a>.</p>
 <p>Bucket store keynode and keydata, this is what bucket looks like:</p>
 <p><img alt="index bucket" src="https://www.evernote.com/shard/s30/sh/3a7cb4c5-d387-4335-b1b4-920d7510091e/33b58b26c816e9621cd556325ceeb8d2/deep/0/From-Skitch.jpg" /></p>
 <p><code>prevChildBucket</code> is a pointer, point to the left child bucket of this key. <code>kdo</code> points to the key data of this key. <code>recordLoc</code> points to the location of the key's doucment.</p>
@@ -154,7 +154,7 @@ When create a sparse index, only when the document does not have all the fields 
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="./mongodb-index-internals.html#disqus_thread">
+                href="./posts/2014/Feb/19/mongodb-index-internals.html#disqus_thread">
                 Comments
             </a>
         </div>
@@ -164,8 +164,8 @@ When create a sparse index, only when the document does not have all the fields 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'lyonsblog';
-        var disqus_identifier = './mongodb-index-internals.html';
-    var disqus_url = './mongodb-index-internals.html';
+        var disqus_identifier = './posts/2014/Feb/19/mongodb-index-internals.html';
+    var disqus_url = './posts/2014/Feb/19/mongodb-index-internals.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -185,9 +185,9 @@ When create a sparse index, only when the document does not have all the fields 
             <nav>
             <ul class="articles_timeline">
  
-                <li class="previous_article">« <a href="./mongodb-index.html" title="Previous: MongoDB Index">MongoDB Index</a></li>
+                <li class="previous_article">« <a href="./posts/2014/Feb/19/mongodb-index.html" title="Previous: MongoDB Index">MongoDB Index</a></li>
  
-                <li class="next_article"><a href="./mongodb-replication-set.html" title="Next: MongoDB Replication Set">MongoDB Replication Set</a> »</li>
+                <li class="next_article"><a href="./posts/2014/Feb/19/mongodb-replication-set.html" title="Next: MongoDB Replication Set">MongoDB Replication Set</a> »</li>
             </ul>
             </nav>
             </aside>
