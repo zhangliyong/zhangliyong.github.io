@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-20T09:01:00+01:00</updated><entry><title>B-tree</title><link href="http://zhangliyong.github.io/b-tree.html" rel="alternate"></link><updated>2014-02-20T09:01:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-20:b-tree.html</id><summary type="html">&lt;p&gt;From wikipedia:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;In computer science, a B-tree is a tree data structure that keeps data sorted and allows searches, sequential access, insertions, and deletions in logarithmic time. The B-tree is a generalization of a binary search tree in that a node can have more than two children (Comer 1979, p. 123). Unlike self-balancing binary search trees, the B-tree is optimized for systems that read and write large blocks of data. It is commonly used in databases and filesystems.&lt;/p&gt;
-&lt;/blockquote&gt;</summary><category term="B-tree"></category><category term="Index"></category><category term="MongoDB"></category></entry><entry><title>MongoDB Replication Set</title><link href="http://zhangliyong.github.io/mongodb-replication-set.html" rel="alternate"></link><updated>2014-02-19T17:28:25+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-19:mongodb-replication-set.html</id><summary type="html"></summary><category term="MongoDB"></category><category term=""></category></entry><entry><title>MongoDB Index Internals</title><link href="http://zhangliyong.github.io/mongodb-index-internals.html" rel="alternate"></link><updated>2014-02-19T16:58:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-19:mongodb-index-internals.html</id><summary type="html">&lt;p&gt;As we all know MongoDB use B-tree to create indexes, here I'll show the deep view of MongoDB indexes.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-02-19T17:28:25+01:00</updated><entry><title>MongoDB Replication Set</title><link href="http://zhangliyong.github.io/mongodb-replication-set.html" rel="alternate"></link><updated>2014-02-19T17:28:25+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-19:mongodb-replication-set.html</id><summary type="html"></summary><category term="MongoDB"></category><category term=""></category></entry><entry><title>MongoDB Index Internals</title><link href="http://zhangliyong.github.io/mongodb-index-internals.html" rel="alternate"></link><updated>2014-02-19T16:58:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-19:mongodb-index-internals.html</id><summary type="html">&lt;p&gt;As we all know MongoDB use B-tree to create indexes, here I'll show the deep view of MongoDB indexes.&lt;/p&gt;
 &lt;h2&gt;B-tree&lt;/h2&gt;
 &lt;p&gt;First, an overview of B-tree.&lt;/p&gt;
 &lt;p&gt;From wikipedia:&lt;/p&gt;
@@ -23,13 +20,14 @@ A non-leaf node with k children contains k−1 keys.  &lt;br /&gt;
 All leaves appear in the same level, and internal vertices carry no information.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;MongoDB Index B-tree&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h"&gt;btree.h&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;In this section, I will show you mongo index btree.&lt;/p&gt;
+&lt;p&gt;From &lt;a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h"&gt;btree.h&lt;/a&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The nodes of our btree are referred to as buckets below.  These buckets are of size BucketSize and their body is an ordered array of &lt;bson key, disk loc&gt; pairs, where disk loc is the disk location of a document and bson key is a projection of this document into the schema of the index for this btree.  Ordering is determined on the basis of bson key first and then disk loc in case of a tie.  All bson keys for a btree have identical schemas with empty string field names and may not have an objsize() exceeding KeyMax.  The btree's buckets are themselves organized into an ordered tree.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;This is what btree looks like:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="index btree" src="https://www.evernote.com/shard/s30/sh/58663d76-cf6f-4944-943b-fb850f3084b1/3bc5e37b28b267f8cd2e374e99d0d59c/deep/0/Btree.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See &lt;a href="{filename}../mongo/mongodb-storage-internals.md"&gt;mongo storage&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See &lt;a href="http://zhangliyong.github.io/mongodb-storage-internals.html"&gt;mongo storage&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Bucket store keynode and keydata, this is what bucket looks like:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="index bucket" src="https://www.evernote.com/shard/s30/sh/3a7cb4c5-d387-4335-b1b4-920d7510091e/33b58b26c816e9621cd556325ceeb8d2/deep/0/From-Skitch.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;prevChildBucket&lt;/code&gt; is a pointer, point to the left child bucket of this key. &lt;code&gt;kdo&lt;/code&gt; points to the key data of this key. &lt;code&gt;recordLoc&lt;/code&gt; points to the location of the key's doucment.&lt;/p&gt;
@@ -61,10 +59,25 @@ All leaves appear in the same level, and internal vertices carry no information.
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;So how many keys can be stored in a bucket depends on keydata size. But MongoDB allows to store 1024 keys at most. When the bucket is full, or has 1024 keys, the bucket will be splited.&lt;/p&gt;
+&lt;p&gt;So how many keys can be stored in a bucket depends on keydata size. MongoDB allows to store 1024 keys at most. When the bucket is full, or has 1024 keys, it will be splited.&lt;/p&gt;
 &lt;p&gt;keydata is a projection of a document into the schema of the index. For an index, the schema is fixed, so keydata does not need to contain fieldNames. If a document does not have a field, then the fileValue will be null in keydata.&lt;/p&gt;
-&lt;h3&gt;Sparse&lt;/h3&gt;
-&lt;p&gt;When create a sparse index, only when the document does not have all the fields of the index, it will be ignore, if one of the fields exists, it will be indexed.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sparse:&lt;/strong&gt;
+When create a sparse index, only when the document does not have all the fields of the index, it will be ignore, if one of the fields exists, it will be indexed.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;index:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;documents:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nl"&gt;d1:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;Tom&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;23&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;          &lt;span class="n"&gt;keydata&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Tom&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt;
+&lt;span class="nl"&gt;d2:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;          &lt;span class="n"&gt;keydata&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;
+&lt;span class="nl"&gt;d3:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;Jerry&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CA&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="n"&gt;keydata&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Jerry&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;null&lt;/span&gt;
+&lt;span class="nl"&gt;d4:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;weight&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;70&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CA&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;      &lt;span class="n"&gt;keydata&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;null&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If create the index with sparse as true, the document &lt;code&gt;d4&lt;/code&gt; will not be indexed.&lt;/p&gt;
 &lt;h3&gt;IndexStats&lt;/h3&gt;
 &lt;p&gt;MongoDB 2.4 ships with a &lt;code&gt;indexStats&lt;/code&gt; command, the command can be run only on a mongod instance that uses the &lt;code&gt;--enableExperimentalIndexStatsCmd&lt;/code&gt; option.&lt;/p&gt;
 &lt;p&gt;To aggregate statistics, issue the command like so:&lt;/p&gt;

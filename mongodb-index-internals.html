@@ -80,13 +80,14 @@ A non-leaf node with k children contains k−1 keys.  <br />
 All leaves appear in the same level, and internal vertices carry no information.</p>
 </blockquote>
 <h2>MongoDB Index B-tree</h2>
-<p><a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h">btree.h</a>:</p>
+<p>In this section, I will show you mongo index btree.</p>
+<p>From <a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h">btree.h</a>:</p>
 <blockquote>
 <p>The nodes of our btree are referred to as buckets below.  These buckets are of size BucketSize and their body is an ordered array of <bson key, disk loc> pairs, where disk loc is the disk location of a document and bson key is a projection of this document into the schema of the index for this btree.  Ordering is determined on the basis of bson key first and then disk loc in case of a tie.  All bson keys for a btree have identical schemas with empty string field names and may not have an objsize() exceeding KeyMax.  The btree's buckets are themselves organized into an ordered tree.</p>
 </blockquote>
 <p>This is what btree looks like:</p>
 <p><img alt="index btree" src="https://www.evernote.com/shard/s30/sh/58663d76-cf6f-4944-943b-fb850f3084b1/3bc5e37b28b267f8cd2e374e99d0d59c/deep/0/Btree.jpg" /></p>
-<p>When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See <a href="{filename}../mongo/mongodb-storage-internals.md">mongo storage</a>.</p>
+<p>When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See <a href="./mongodb-storage-internals.html">mongo storage</a>.</p>
 <p>Bucket store keynode and keydata, this is what bucket looks like:</p>
 <p><img alt="index bucket" src="https://www.evernote.com/shard/s30/sh/3a7cb4c5-d387-4335-b1b4-920d7510091e/33b58b26c816e9621cd556325ceeb8d2/deep/0/From-Skitch.jpg" /></p>
 <p><code>prevChildBucket</code> is a pointer, point to the left child bucket of this key. <code>kdo</code> points to the key data of this key. <code>recordLoc</code> points to the location of the key's doucment.</p>
@@ -118,10 +119,25 @@ All leaves appear in the same level, and internal vertices carry no information.
 </pre></div>
 
 
-<p>So how many keys can be stored in a bucket depends on keydata size. But MongoDB allows to store 1024 keys at most. When the bucket is full, or has 1024 keys, the bucket will be splited.</p>
+<p>So how many keys can be stored in a bucket depends on keydata size. MongoDB allows to store 1024 keys at most. When the bucket is full, or has 1024 keys, it will be splited.</p>
 <p>keydata is a projection of a document into the schema of the index. For an index, the schema is fixed, so keydata does not need to contain fieldNames. If a document does not have a field, then the fileValue will be null in keydata.</p>
-<h3>Sparse</h3>
-<p>When create a sparse index, only when the document does not have all the fields of the index, it will be ignore, if one of the fields exists, it will be indexed.</p>
+<p><strong>Sparse:</strong>
+When create a sparse index, only when the document does not have all the fields of the index, it will be ignore, if one of the fields exists, it will be indexed.</p>
+<p><strong>Example:</strong></p>
+<p>index:</p>
+<div class="highlight"><pre><span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">age</span><span class="o">:</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+
+
+<p>documents:</p>
+<div class="highlight"><pre><span class="nl">d1:</span> <span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="err">&#39;</span><span class="n">Tom</span><span class="err">&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">:</span> <span class="mi">23</span><span class="p">}</span>          <span class="n">keydata</span><span class="o">:</span> <span class="n">Tom</span><span class="p">,</span><span class="mi">23</span>
+<span class="nl">d2:</span> <span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="n">null</span><span class="p">,</span>  <span class="n">age</span><span class="o">:</span> <span class="mi">40</span><span class="p">}</span>          <span class="n">keydata</span><span class="o">:</span> <span class="n">null</span><span class="p">,</span><span class="mi">40</span>
+<span class="nl">d3:</span> <span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="err">&#39;</span><span class="n">Jerry</span><span class="err">&#39;</span><span class="p">,</span> <span class="n">address</span><span class="o">:</span> <span class="n">CA</span><span class="p">}</span>    <span class="n">keydata</span><span class="o">:</span> <span class="n">Jerry</span><span class="p">,</span><span class="n">null</span>
+<span class="nl">d4:</span> <span class="p">{</span><span class="n">weight</span><span class="o">:</span> <span class="mi">70</span><span class="p">,</span>  <span class="n">address</span><span class="o">:</span> <span class="n">CA</span><span class="p">}</span>      <span class="n">keydata</span><span class="o">:</span> <span class="n">null</span><span class="p">,</span><span class="n">null</span>
+</pre></div>
+
+
+<p>If create the index with sparse as true, the document <code>d4</code> will not be indexed.</p>
 <h3>IndexStats</h3>
 <p>MongoDB 2.4 ships with a <code>indexStats</code> command, the command can be run only on a mongod instance that uses the <code>--enableExperimentalIndexStatsCmd</code> option.</p>
 <p>To aggregate statistics, issue the command like so:</p>
@@ -186,13 +202,13 @@ All leaves appear in the same level, and internal vertices carry no information.
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article"> 
                 <li><a href="/tags.html#B-Tree-ref">B-Tree
-                    <span>3</span>
+                    <span>2</span>
 </a></li>
                 <li><a href="/tags.html#Index-ref">Index
-                    <span>3</span>
+                    <span>2</span>
 </a></li>
                 <li><a href="/tags.html#MongoDB-ref">MongoDB
-                    <span>9</span>
+                    <span>8</span>
 </a></li>
             </ul>
 
