@@ -11,15 +11,15 @@
 </title>
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="../../../../theme/css/solarizedlight.css" media="screen">
-        <link rel="shortcut icon" href="../../../../theme/images/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="../../../../theme/images/apple-touch-icon.png" />
-        <link rel="apple-touch-icon" sizes="57x57" href="../../../../theme/images/apple-touch-icon-57x57.png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="../../../../theme/images/apple-touch-icon-72x72.png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="../../../../theme/images/apple-touch-icon-114x114.png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="../../../../theme/images/apple-touch-icon-144x144.png" />
-        <link rel="icon" href="../../../../theme/images/apple-touch-icon-144x144.png" />
+        <link rel="stylesheet" type="text/css" href="http://zhangliyong.github.io/theme/css/style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://zhangliyong.github.io/theme/css/solarizedlight.css" media="screen">
+        <link rel="shortcut icon" href="http://zhangliyong.github.io/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="http://zhangliyong.github.io/theme/images/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://zhangliyong.github.io/theme/images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://zhangliyong.github.io/theme/images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://zhangliyong.github.io/theme/images/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://zhangliyong.github.io/theme/images/apple-touch-icon-144x144.png" />
+        <link rel="icon" href="http://zhangliyong.github.io/theme/images/apple-touch-icon-144x144.png" />
     </head>
     <body>
         <div id="content-sans-footer">
@@ -31,15 +31,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="../../../../"><span class=site-name>Lyon's Blog</span></a>
+                    <a class="brand" href="http://zhangliyong.github.io/"><span class=site-name>Lyon's Blog</span></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right top-menu">
-                            <li ><a href="../../../..">Home</a></li>
-                            <li ><a href="../../../../pages/about.html">About</a></li>
-                            <li ><a href="../../../../categories.html">Categories</a></li>
-                            <li ><a href="../../../../tags.html">Tags</a></li>
-                            <li ><a href="../../../../archives.html">Archives</a></li>
-                            <li><form class="navbar-search" action="../../../../search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            <li ><a href="http://zhangliyong.github.io">Home</a></li>
+                            <li ><a href="http://zhangliyong.github.io/pages/about.html">About</a></li>
+                            <li ><a href="http://zhangliyong.github.io/categories.html">Categories</a></li>
+                            <li ><a href="http://zhangliyong.github.io/tags.html">Tags</a></li>
+                            <li ><a href="http://zhangliyong.github.io/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://zhangliyong.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
                         </ul>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
 <article>
 <div class="row-fluid">
     <header class="page_header span10 offset2">
-    <h1><a href="../../../../posts/2014/02/19/mongodb-index-internals.html"> MongoDB Index Internals  </a></h1>
+    <h1><a href="http://zhangliyong.github.io/posts/2014/02/19/mongodb-index-internals.html"> MongoDB Index Internals  </a></h1>
     </header>
 </div>
 
@@ -103,7 +103,7 @@ All leaves appear in the same level, and internal vertices carry no information.
 </blockquote>
 <p>This is what btree looks like:</p>
 <p><img alt="index btree" src="https://www.evernote.com/shard/s30/sh/58663d76-cf6f-4944-943b-fb850f3084b1/3bc5e37b28b267f8cd2e374e99d0d59c/deep/0/Btree.jpg"/></p>
-<p>When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See <a href="../../../../posts/2014/02/18/mongodb-storage-internals.html">mongo storage</a>.</p>
+<p>When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See <a href="http://zhangliyong.github.io/posts/2014/02/18/mongodb-storage-internals.html">mongo storage</a>.</p>
 <p>Bucket store keynode and keydata, this is what bucket looks like:</p>
 <p><img alt="index bucket" src="https://www.evernote.com/shard/s30/sh/3a7cb4c5-d387-4335-b1b4-920d7510091e/33b58b26c816e9621cd556325ceeb8d2/deep/0/From-Skitch.jpg"/></p>
 <p><code>prevChildBucket</code> is a pointer, point to the left child bucket of this key. <code>kdo</code> points to the key data of this key. <code>recordLoc</code> points to the location of the key's doucment.</p>
@@ -160,7 +160,7 @@ When create a sparse index, only when the document does not have all the fields 
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="../../../../posts/2014/02/19/mongodb-index-internals.html#disqus_thread">
+                href="http://zhangliyong.github.io/posts/2014/02/19/mongodb-index-internals.html#disqus_thread">
                 Comments
             </a>
         </div>
@@ -170,8 +170,8 @@ When create a sparse index, only when the document does not have all the fields 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'lyonhappyblog';
-        var disqus_identifier = '../../../../posts/2014/02/19/mongodb-index-internals.html';
-    var disqus_url = '../../../../posts/2014/02/19/mongodb-index-internals.html';
+        var disqus_identifier = 'http://zhangliyong.github.io/posts/2014/02/19/mongodb-index-internals.html';
+    var disqus_url = 'http://zhangliyong.github.io/posts/2014/02/19/mongodb-index-internals.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -191,9 +191,9 @@ When create a sparse index, only when the document does not have all the fields 
             <nav>
             <ul class="articles_timeline">
  
-                <li class="previous_article">« <a href="../../../../posts/2014/02/19/mongodb-index.html" title="Previous: MongoDB Index">MongoDB Index</a></li>
+                <li class="previous_article">« <a href="http://zhangliyong.github.io/posts/2014/02/19/mongodb-index.html" title="Previous: MongoDB Index">MongoDB Index</a></li>
  
-                <li class="next_article"><a href="../../../../posts/2014/02/19/mongodb-replication-set.html" title="Next: MongoDB Replication Set">MongoDB Replication Set</a> »</li>
+                <li class="next_article"><a href="http://zhangliyong.github.io/posts/2014/02/19/mongodb-replication-set.html" title="Next: MongoDB Replication Set">MongoDB Replication Set</a> »</li>
             </ul>
             </nav>
             </aside>
