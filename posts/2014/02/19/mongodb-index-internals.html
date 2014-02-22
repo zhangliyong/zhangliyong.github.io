@@ -83,7 +83,16 @@
     </div>
     <div class="span8 article-content">
 
-            
+            <div class="toc">
+<ul>
+<li><a href="#b-tree">B-tree</a></li>
+<li><a href="#mongodb-index-b-tree">MongoDB Index B-tree</a><ul>
+<li><a href="#indexstats">IndexStats</a></li>
+</ul>
+</li>
+<li><a href="#reference">Reference</a></li>
+</ul>
+</div>
 <p>As we all know MongoDB use B-tree to create indexes, here I'll show the deep view of MongoDB indexes.</p>
 <h2 id="b-tree">B-tree</h2>
 <p>First, an overview of B-tree.</p>
@@ -92,35 +101,35 @@
 <p>In computer science, a B-tree is a tree data structure that keeps data sorted and allows searches, sequential access, insertions, and deletions in logarithmic time. The B-tree is a generalization of a binary search tree in that a node can have more than two children (Comer 1979, p. 123). Unlike self-balancing binary search trees, the B-tree is optimized for systems that read and write large blocks of data. It is commonly used in databases and filesystems.</p>
 </blockquote>
 <p>A B-tree of order 2 or order 5:</p>
-<p><img alt="btree" src="http://upload.wikimedia.org/wikipedia/commons/thumb/6/65/B-tree.svg/500px-B-tree.svg.png" title="A B-tree of order 2 or order 5."/></p>
-<p>Internal nodes can have vary number of keys, vary between <img alt="d" src="http://upload.wikimedia.org/math/8/2/7/8277e0910d750195b448797616e091ad.png"/> and <img alt="2d" src="http://upload.wikimedia.org/math/c/3/0/c309f0daf5910cf7ac2038ce9520448a.png"/>, the factor of 2 can guarantee that nodes can be split and combined, and still conform to the upper and lower limit.</p>
+<p><img alt="btree" src="http://upload.wikimedia.org/wikipedia/commons/thumb/6/65/B-tree.svg/500px-B-tree.svg.png" title="A B-tree of order 2 or order 5." /></p>
+<p>Internal nodes can have vary number of keys, vary between $d$ and $2d$, the factor of $2$ can guarantee that nodes can be split and combined, and still conform to the upper and lower limit.</p>
 <p>All leaf nodes have the same depth.</p>
 <p>Definition from wikipedia:</p>
 <blockquote>
 <p>According to Knuth's definition, a B-tree of order m is a tree which satisfies the following properties:</p>
-<p>Every node has at most m children. <br/>
-Every non-leaf node (except root) has at least ⌈m⁄2⌉ children.  <br/>
-The root has at least two children if it is not a leaf node.  <br/>
-A non-leaf node with k children contains k−1 keys.  <br/>
+<p>Every node has at most m children. <br />
+Every non-leaf node (except root) has at least ⌈m⁄2⌉ children.  <br />
+The root has at least two children if it is not a leaf node.  <br />
+A non-leaf node with k children contains k−1 keys.  <br />
 All leaves appear in the same level, and internal vertices carry no information.</p>
 </blockquote>
 <h2 id="mongodb-index-b-tree">MongoDB Index B-tree</h2>
 <p>In this section, I will show you mongo index btree.</p>
 <p>From <a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h">btree.h</a>:</p>
 <blockquote>
-<p>The nodes of our btree are referred to as buckets below.  These buckets are of size BucketSize and their body is an ordered array of <bson disk key, loc> pairs, where disk loc is the disk location of a document and bson key is a projection of this document into the schema of the index for this btree.  Ordering is determined on the basis of bson key first and then disk loc in case of a tie.  All bson keys for a btree have identical schemas with empty string field names and may not have an objsize() exceeding KeyMax.  The btree's buckets are themselves organized into an ordered tree.</bson></p>
+<p>The nodes of our btree are referred to as buckets below.  These buckets are of size BucketSize and their body is an ordered array of <bson key, disk loc> pairs, where disk loc is the disk location of a document and bson key is a projection of this document into the schema of the index for this btree.  Ordering is determined on the basis of bson key first and then disk loc in case of a tie.  All bson keys for a btree have identical schemas with empty string field names and may not have an objsize() exceeding KeyMax.  The btree's buckets are themselves organized into an ordered tree.</p>
 </blockquote>
 <p>This is what btree looks like:</p>
-<p><img alt="index btree" src="https://www.evernote.com/shard/s30/sh/58663d76-cf6f-4944-943b-fb850f3084b1/3bc5e37b28b267f8cd2e374e99d0d59c/deep/0/Btree.jpg"/></p>
-<p>When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See <a href="http://zhangliyong.github.io/posts/2014/02/18/mongodb-storage-internals.html">mongo storage</a>.</p>
+<p><img alt="index btree" src="https://www.evernote.com/shard/s30/sh/58663d76-cf6f-4944-943b-fb850f3084b1/3bc5e37b28b267f8cd2e374e99d0d59c/deep/0/Btree.jpg" /></p>
+<p>When the btree is serialized on the disk, every bucket is stored as a record, like a document in a collection. Each bucket has a fixed size 8192, but with 16 byte to store record header. See <a href="{filename}mongodb-storage.md">mongo storage</a>.</p>
 <p>Bucket store keynode and keydata, this is what bucket looks like:</p>
-<p><img alt="index bucket" src="https://www.evernote.com/shard/s30/sh/3a7cb4c5-d387-4335-b1b4-920d7510091e/33b58b26c816e9621cd556325ceeb8d2/deep/0/From-Skitch.jpg"/></p>
+<p><img alt="index bucket" src="https://www.evernote.com/shard/s30/sh/3a7cb4c5-d387-4335-b1b4-920d7510091e/33b58b26c816e9621cd556325ceeb8d2/deep/0/From-Skitch.jpg" /></p>
 <p><code>prevChildBucket</code> is a pointer, point to the left child bucket of this key. <code>kdo</code> points to the key data of this key. <code>recordLoc</code> points to the location of the key's doucment.</p>
 <p>keynode is a struct, and has a fixed size.</p>
 <div class="highlight"><pre><span class="n">template</span><span class="o">&lt;</span> <span class="n">class</span> <span class="n">Loc</span> <span class="o">&gt;</span>
 <span class="k">struct</span> <span class="n">__KeyNode</span> <span class="p">{</span>
     <span class="cm">/**</span>
-<span class="cm">     * The 'left' child bucket of this key.  If this is the i-th key, it</span>
+<span class="cm">     * The &#39;left&#39; child bucket of this key.  If this is the i-th key, it</span>
 <span class="cm">     * points to the i index child bucket.</span>
 <span class="cm">     */</span>
     <span class="n">Loc</span> <span class="n">prevChildBucket</span><span class="p">;</span>
@@ -130,6 +139,8 @@ All leaves appear in the same level, and internal vertices carry no information.
     <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">_kdo</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
+
+
 <p>The size of keydata varies, with upper limit 1024 bytes.</p>
 <p>When insert a new key to a bucket, keynode is inserted from left, and keydata is insert from right.</p>
 <p>Bucket format:</p>
@@ -140,6 +151,8 @@ All leaves appear in the same level, and internal vertices carry no information.
  <span class="n">b</span> <span class="o">=</span> <span class="n">bson</span> <span class="n">key</span> <span class="n">data</span>
  <span class="n">u</span> <span class="o">=</span> <span class="n">unused</span> <span class="p">(</span><span class="n">old</span><span class="p">)</span> <span class="n">bson</span> <span class="n">key</span> <span class="n">data</span><span class="p">,</span> <span class="n">that</span> <span class="n">may</span> <span class="n">be</span> <span class="n">garbage</span> <span class="n">collected</span>
 </pre></div>
+
+
 <p>So how many keys can be stored in a bucket depends on keydata size. MongoDB allows to store 1024 keys at most. When the bucket is full, or has 1024 keys, it will be splited.</p>
 <p>keydata is a projection of a document into the schema of the index. For an index, the schema is fixed, so keydata does not need to contain fieldNames. If a document does not have a field, then the fileValue will be null in keydata.</p>
 <p><strong>Sparse:</strong>
@@ -148,22 +161,56 @@ When create a sparse index, only when the document does not have all the fields 
 <p>index:</p>
 <div class="highlight"><pre><span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">age</span><span class="o">:</span> <span class="mi">1</span><span class="p">}</span>
 </pre></div>
+
+
 <p>documents:</p>
-<div class="highlight"><pre><span class="nl">d1:</span> <span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="err">'</span><span class="n">Tom</span><span class="err">'</span><span class="p">,</span> <span class="n">age</span><span class="o">:</span> <span class="mi">23</span><span class="p">}</span>          <span class="n">keydata</span><span class="o">:</span> <span class="n">Tom</span><span class="p">,</span><span class="mi">23</span>
+<div class="highlight"><pre><span class="nl">d1:</span> <span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="err">&#39;</span><span class="n">Tom</span><span class="err">&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">:</span> <span class="mi">23</span><span class="p">}</span>          <span class="n">keydata</span><span class="o">:</span> <span class="n">Tom</span><span class="p">,</span><span class="mi">23</span>
 <span class="nl">d2:</span> <span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="n">null</span><span class="p">,</span>  <span class="n">age</span><span class="o">:</span> <span class="mi">40</span><span class="p">}</span>          <span class="n">keydata</span><span class="o">:</span> <span class="n">null</span><span class="p">,</span><span class="mi">40</span>
-<span class="nl">d3:</span> <span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="err">'</span><span class="n">Jerry</span><span class="err">'</span><span class="p">,</span> <span class="n">address</span><span class="o">:</span> <span class="n">CA</span><span class="p">}</span>    <span class="n">keydata</span><span class="o">:</span> <span class="n">Jerry</span><span class="p">,</span><span class="n">null</span>
+<span class="nl">d3:</span> <span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="err">&#39;</span><span class="n">Jerry</span><span class="err">&#39;</span><span class="p">,</span> <span class="n">address</span><span class="o">:</span> <span class="n">CA</span><span class="p">}</span>    <span class="n">keydata</span><span class="o">:</span> <span class="n">Jerry</span><span class="p">,</span><span class="n">null</span>
 <span class="nl">d4:</span> <span class="p">{</span><span class="n">weight</span><span class="o">:</span> <span class="mi">70</span><span class="p">,</span>  <span class="n">address</span><span class="o">:</span> <span class="n">CA</span><span class="p">}</span>      <span class="n">keydata</span><span class="o">:</span> <span class="n">null</span><span class="p">,</span><span class="n">null</span>
 </pre></div>
+
+
 <p>If create the index with sparse as true, the document <code>d4</code> will not be indexed.</p>
 <h3 id="indexstats">IndexStats</h3>
 <p>MongoDB 2.4 ships with a <code>indexStats</code> command, the command can be run only on a mongod instance that uses the <code>--enableExperimentalIndexStatsCmd</code> option.</p>
 <p>To aggregate statistics, issue the command like so:</p>
-<div class="highlight"><pre><span class="nx">db.runCommand</span><span class="p">(</span> <span class="p">{</span> <span class="nx">indexStats</span><span class="p">:</span> <span class="s2">"&lt;collection&gt;"</span><span class="p">,</span> <span class="nb">index</span><span class="p">:</span> <span class="s2">"&lt;index name&gt;"</span> <span class="p">}</span> <span class="p">)</span>
+<div class="highlight"><pre><span class="nx">db.runCommand</span><span class="p">(</span> <span class="p">{</span> <span class="nx">indexStats</span><span class="p">:</span> <span class="s2">&quot;&lt;collection&gt;&quot;</span><span class="p">,</span> <span class="nb">index</span><span class="p">:</span> <span class="s2">&quot;&lt;index name&gt;&quot;</span> <span class="p">}</span> <span class="p">)</span>
 </pre></div>
+
+
 <h2 id="reference">Reference</h2>
 <p><a href="http://en.wikipedia.org/wiki/B-tree">http://en.wikipedia.org/wiki/B-tree</a>
 <a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h">https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.h</a>
 <a href="https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.cpp">https://github.com/mongodb/mongo/blob/master/src/mongo/db/structure/btree/btree.cpp</a></p>
+<script type= "text/javascript">
+    if (!document.getElementById('mathjaxscript_pelican')) {
+        var s = document.createElement('script');
+        s.id = 'mathjaxscript_pelican';
+        s.type = 'text/javascript'; s.src = 'https:' == document.location.protocol ? 'https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js' : 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+        s[(window.opera ? "innerHTML" : "text")] =
+            "MathJax.Hub.Config({" +
+            "    config: ['MMLorHTML.js']," +
+            "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+            "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+            "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+            "    displayAlign: 'center'," +
+            "    displayIndent: '0em'," +
+            "    showMathMenu: true," +
+            "    tex2jax: { " +
+            "        inlineMath: [ ['$','$'] ], " +
+            "        displayMath: [ ['$$','$$'] ]," +
+            "        processEscapes: true," +
+            "        preview: 'TeX'," +
+            "    }, " +
+            "    'HTML-CSS': { " +
+            "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+            "    } " +
+            "}); ";
+        (document.body || document.getElementsByTagName('head')[0]).appendChild(s);
+    }
+</script>
+
 <section>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
