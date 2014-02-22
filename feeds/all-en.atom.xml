@@ -641,7 +641,23 @@ http://git-scm.com/docs/git-check-ignore.html&lt;/p&gt;</summary></entry><entry>
 
 
 &lt;h2 id="ref"&gt;Ref:&lt;/h2&gt;
-&lt;p&gt;http://www.cyberciti.biz/faq/rhel-fedorta-linux-iptables-firewall-configuration-tutorial/&lt;/p&gt;</summary><category term="iptables"></category><category term="Linux"></category></entry><entry><title>gevent</title><link href="http://zhangliyong.github.io/posts/2013/12/04/gevent.html" rel="alternate"></link><updated>2013-12-04T15:56:56+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-12-04:posts/2013/12/04/gevent.html</id><summary type="html">&lt;h2 id="pool"&gt;Pool&lt;/h2&gt;
+&lt;p&gt;http://www.cyberciti.biz/faq/rhel-fedorta-linux-iptables-firewall-configuration-tutorial/&lt;/p&gt;</summary><category term="iptables"></category><category term="Linux"></category></entry><entry><title>locale</title><link href="http://zhangliyong.github.io/posts/2013/12/22/locale.html" rel="alternate"></link><updated>2013-12-22T11:09:00+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-12-22:posts/2013/12/22/locale.html</id><summary type="html">&lt;p&gt;当在终端下执行某些操作，提示编码问题时，基本是因为终端的locale环境的编码不支持。&lt;/p&gt;
+&lt;p&gt;有些终端下默认的LC_*设置为&lt;code&gt;C&lt;/code&gt;，可运行&lt;code&gt;locale&lt;/code&gt;查看，也可查看&lt;code&gt;/etc/default/locale&lt;/code&gt;，
+此时终端环境的默认编码是&lt;code&gt;ASCII&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;可将其改为&lt;code&gt;UTF8&lt;/code&gt;编码。&lt;/p&gt;
+&lt;p&gt;修改方式如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用&lt;code&gt;locale -a&lt;/code&gt;命令查看系统支持的category。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在终端下进行&lt;code&gt;export LANG=&amp;lt;category&amp;gt;&lt;/code&gt;，此时终端的&lt;code&gt;LC_*&lt;/code&gt;变量发生了变化。
+    如果不想每次手动设置，可将&lt;code&gt;export LANG=&amp;lt;category&amp;gt;&lt;/code&gt;加到&lt;code&gt;.bashrc&lt;/code&gt;中。&lt;/p&gt;
+&lt;p&gt;如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;export LANG=en_US.UTF-8&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bashrc&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;</summary><category term="Linux"></category><category term="Bash"></category></entry><entry><title>gevent</title><link href="http://zhangliyong.github.io/posts/2013/12/04/gevent.html" rel="alternate"></link><updated>2013-12-04T15:56:56+01:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-12-04:posts/2013/12/04/gevent.html</id><summary type="html">&lt;h2 id="pool"&gt;Pool&lt;/h2&gt;
 &lt;p&gt;什么时候执行Pool中的任务&lt;/p&gt;
 &lt;p&gt;用gevent spawn的greenlet何时执行，无论是用group, pool, gevent, 当spawn时，新spawn的greenlet已经处理准备执行状态，
 当主进程或其它greenlet sleep或有其它switch操作时，新spawn的greenlet会被执行。&lt;/p&gt;
@@ -714,16 +730,7 @@ autoenv&lt;/p&gt;</summary></entry><entry><title>urwid</title><link href="http:/
 &lt;/ol&gt;
 &lt;p&gt;通过这几种方式找到进程号后，可以利用&lt;code&gt;ps -eaf | grep &amp;lt;pid&amp;gt;&lt;/code&gt;找到此进程的执行命令，
 并可以通过&lt;code&gt;/proc/&amp;lt;pid&amp;gt;/cwd&lt;/code&gt;找到此进程的执行目录。&lt;/p&gt;
-&lt;p&gt;参考：http://www.cyberciti.biz/faq/what-process-has-open-linux-port/&lt;/p&gt;</summary></entry><entry><title>locale</title><link href="http://zhangliyong.github.io/posts/2013/08/08/locale.html" rel="alternate"></link><updated>2013-08-08T13:45:42+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-08:posts/2013/08/08/locale.html</id><summary type="html">&lt;p&gt;当在终端下执行某些操作，提示编码问题时，基本是因为终端的locale环境的编码不支持。&lt;/p&gt;
-&lt;p&gt;有些终端下默认的LC_*设置为&lt;code&gt;C&lt;/code&gt;，可运行&lt;code&gt;locale&lt;/code&gt;查看，也可查看&lt;code&gt;/etc/default/locale&lt;/code&gt;，
-此时终端环境的默认编码是&lt;code&gt;ASCII&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;可将其改为&lt;code&gt;UTF8&lt;/code&gt;编码。&lt;/p&gt;
-&lt;p&gt;修改方式如下：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;用&lt;code&gt;locale -a&lt;/code&gt;命令查看系统支持的category。&lt;/li&gt;
-&lt;li&gt;在终端下进行&lt;code&gt;export LANG=&amp;lt;category&amp;gt;&lt;/code&gt;，此时终端的&lt;code&gt;LC_*&lt;/code&gt;变量发生了变化。
-    如果不想每次手动设置，可将&lt;code&gt;export LANG=&amp;lt;category&amp;gt;&lt;/code&gt;加到&lt;code&gt;.bashrc&lt;/code&gt;中。&lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>PuDB</title><link href="http://zhangliyong.github.io/posts/2013/08/06/pudb.html" rel="alternate"></link><updated>2013-08-06T10:31:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-06:posts/2013/08/06/pudb.html</id><summary type="html">&lt;p&gt;https://pypi.python.org/pypi/pudb&lt;/p&gt;</summary></entry><entry><title>transfer munin server</title><link href="http://zhangliyong.github.io/posts/2013/08/05/transfer-munin-server.html" rel="alternate"></link><updated>2013-08-05T13:27:23+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-05:posts/2013/08/05/transfer-munin-server.html</id><summary type="html">&lt;p&gt;当修改某一node的主机名时，修改后此node的所有历史记录都会消失，可以恢复这些历史数据，在munin中所有数据都保存在rrd文件中，此文件在/var/lib/munin中，如：social/services.social-uptime-uptime-g.rrd 是主机名为services.social的其中一个数据文件。当修改了node的主机名时，只需要同时对数据文件重命名即可。&lt;/p&gt;
+&lt;p&gt;参考：http://www.cyberciti.biz/faq/what-process-has-open-linux-port/&lt;/p&gt;</summary></entry><entry><title>PuDB</title><link href="http://zhangliyong.github.io/posts/2013/08/06/pudb.html" rel="alternate"></link><updated>2013-08-06T10:31:12+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-06:posts/2013/08/06/pudb.html</id><summary type="html">&lt;p&gt;https://pypi.python.org/pypi/pudb&lt;/p&gt;</summary></entry><entry><title>transfer munin server</title><link href="http://zhangliyong.github.io/posts/2013/08/05/transfer-munin-server.html" rel="alternate"></link><updated>2013-08-05T13:27:23+02:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2013-08-05:posts/2013/08/05/transfer-munin-server.html</id><summary type="html">&lt;p&gt;当修改某一node的主机名时，修改后此node的所有历史记录都会消失，可以恢复这些历史数据，在munin中所有数据都保存在rrd文件中，此文件在/var/lib/munin中，如：social/services.social-uptime-uptime-g.rrd 是主机名为services.social的其中一个数据文件。当修改了node的主机名时，只需要同时对数据文件重命名即可。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;取消munin crontab的执行， cd /etc/cron.d/; sudo mv munin munin.disable
     crontab不会执行/etc/cron.d/下文件名中带有“.”的文件&lt;/li&gt;
