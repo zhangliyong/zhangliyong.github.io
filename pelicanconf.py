@@ -70,16 +70,11 @@ DEFAULT_PAGINATION = 10
 
 
 LANDING_PAGE_ABOUT = {
-    "title": "I'm a software engineer, mainly focus on web backend",
+    "title": "A software engineer",
     "details": u'''
-软件攻城师一位，主要从事 Web 后端开发，常用语言为 Python，也有一定 JAVA, C的基础，主要涉及到Linux系统知识，Nginx, MongoDB, redis等，个人对函数编程及Linux系统知识感兴趣。热爱生活。平时喜欢读书，种类比较杂。
-
-<br />
-<br />
-Contact:
 <pre>
 {
-    Name: Zhang Liyong, 
+    Name: Lyon Zhang, 
     Github: <a href="https://github.com/zhangliyong">zhangliyong</a>,
     Twitter: <a href="https://twitter.com/zhangliyong">@zhangliyong</a>,
     E-mail: lyzhang87 at gmail,
@@ -88,6 +83,16 @@ Contact:
 }
 
 PROJECTS = [
+    {
+        'name': 'rq-gevent-worker',
+        'url': 'https://github.com/zhangliyong/rq-gevent-worker',
+        'description': 'A worker using gevent for rq'
+    },
+    {
+        'name': 'pyfuncrun',
+        'url': 'https://github.com/zhangliyong/pyfuncrun',
+        'description': 'Run a function in a module'
+    },
     {
         'name': 'dash-docsets',
         'url': 'https://github.com/zhangliyong/dash-docsets',
