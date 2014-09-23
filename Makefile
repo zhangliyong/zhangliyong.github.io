@@ -70,8 +70,7 @@ ftp_upload: publish
 	lftp ftp://$(FTP_USER)@$(FTP_HOST) -e "mirror -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
 github: publish
-	ghp-import $(OUTPUTDIR)
-	git push origin gh-pages:master
+	ghp-import -b master -p $(OUTPUTDIR)
 
 gitstatus:
 	cd $(OUTPUTDIR) && git status
