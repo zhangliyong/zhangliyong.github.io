@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="zhang liyong" />
+        <meta name="copyright" content="zhang liyong" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", misc, " />
+
+<meta property="og:title" content="Logbook "/>
+<meta property="og:url" content="http://zhangliyong.github.io/posts/2014/04/09/logbook.html" />
+<meta property="og:description" content="Introduction Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣， logbook目前还处于开发阶段。可以参考官方core feature logbook与logging差别比较大，logbook和logging基本都是由：logger, handler, filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供 了更多的组件，如：processor。 New Feature 在logbook中一个非常大的变化是大量使用stack, 一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性， 可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。 目前logbook中存在三种stack，分别用来存储Handler, Processor, Flag。 每一句log都会经过这三个stack中的每一个对象处理。假如目前存储handler的stack中目前 有两个handler h1, h2: | h1 | |____| | h2 | |____| 那每一句log都会被h1处理完后被h2再处理。 Handler, Processor, Flag必须加到stack中才能启到作用，可以使用 push_application() 及 pop_application()。 logbook中也提供了 ..." />
+<meta property="og:site_name" content="Lyon&#39;s Blog" />
+<meta property="og:article:author" content="zhang liyong" />
+<meta property="og:article:published_time" content="2014-04-09T10:10:53" />
+<meta name="twitter:title" content="Logbook ">
+<meta name="twitter:description" content="Introduction Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣， logbook目前还处于开发阶段。可以参考官方core feature logbook与logging差别比较大，logbook和logging基本都是由：logger, handler, filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供 了更多的组件，如：processor。 New Feature 在logbook中一个非常大的变化是大量使用stack, 一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性， 可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。 目前logbook中存在三种stack，分别用来存储Handler, Processor, Flag。 每一句log都会经过这三个stack中的每一个对象处理。假如目前存储handler的stack中目前 有两个handler h1, h2: | h1 | |____| | h2 | |____| 那每一句log都会被h1处理完后被h2再处理。 Handler, Processor, Flag必须加到stack中才能启到作用，可以使用 push_application() 及 pop_application()。 logbook中也提供了 ...">
+
+        <title>Logbook  · Lyon&#39;s Blog
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://zhangliyong.github.io/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://zhangliyong.github.io/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://zhangliyong.github.io/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://zhangliyong.github.io/theme/css/custom.css" media="screen">
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-48307158-1', 'auto');
+    ga('send', 'pageview');
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://zhangliyong.github.io/"><span class=site-name>Lyon's Blog</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://zhangliyong.github.io">Home</a></li>
+                            <!--<li ><a href="http://zhangliyong.github.io/categories.html">Categories</a></li>-->
+                            <li ><a href="http://zhangliyong.github.io/tags.html">Tags</a></li>
+                            <li ><a href="http://zhangliyong.github.io/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://zhangliyong.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://zhangliyong.github.io/posts/2014/04/09/logbook.html"> Logbook  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <h2 id="introduction">Introduction</h2>
+<p>Logbook是用来取代标准库logging的一个log系统，根据官方的介绍它让记log变的有趣，
+logbook目前还处于开发阶段。可以参考官方<a href="https://logbook.readthedocs.org/en/latest/features.html#core-features">core feature</a></p>
+<p>logbook与logging差别比较大，logbook和logging基本都是由：logger, handler,
+filter等组件组成，但是在logbook中这些组件之间的关系发生的根本的变化。并且logbook提供
+了更多的组件，如：processor。</p>
+<h2 id="new-feature">New Feature</h2>
+<p>在logbook中一个非常大的变化是大量使用<a href="https://logbook.readthedocs.org/en/latest/stacks.html">stack</a>,
+一开始采用logging的方式去理解logbook，发现很不适应，真正去了解之后，发现这种方式有非常强的灵活性，
+可以非常灵活的组织handler，而不用去处理handler与logger的有关系，将logger与handler解耦合。</p>
+<p>目前logbook中存在三种stack，分别用来存储Handler, Processor, Flag。
+每一句log都会经过这三个stack中的每一个对象处理。假如目前存储handler的stack中目前
+有两个handler h1, h2:</p>
+<div class="highlight"><pre><span class="o">|</span> <span class="n">h1</span> <span class="o">|</span>
+<span class="o">|</span><span class="n">____</span><span class="o">|</span>
+<span class="o">|</span> <span class="n">h2</span> <span class="o">|</span>
+<span class="o">|</span><span class="n">____</span><span class="o">|</span>
+</pre></div>
+
+
+<p>那每一句log都会被h1处理完后被h2再处理。</p>
+<p>Handler, Processor, Flag必须加到stack中才能启到作用，可以使用 <code>push_application()</code> 及 <code>pop_application()</code>。</p>
+<p>logbook中也提供了<code>with</code>来完成对stack的push和pop。</p>
+<p>logbook增加了很多的handler，甚至都有将log发到twitter上的handler。</p>
+<p>logbook有非常多的特性，相信以后也会增加更多有趣的特性，建议阅读其官方文档：https://logbook.readthedocs.org/en/latest/</p>
+<h2 id="examples">Examples</h2>
+<p>下面给出一些简单的使用示例，有些是官方文档上给出的。</p>
+<p>开始使用logbook可以不用做任何配置：</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">warn</span>
+<span class="n">warn</span><span class="p">(</span><span class="s">&#39;This is too cool for stdlib&#39;</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">2013</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">18</span> <span class="mi">14</span><span class="p">:</span><span class="mi">29</span><span class="p">]</span> <span class="n">WARNING</span><span class="p">:</span> <span class="n">Generic</span><span class="p">:</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">too</span> <span class="n">cool</span> <span class="k">for</span> <span class="n">stdlib</span>
+</pre></div>
+
+
+<p>上面的代码会将log记录到stderr中。是不是非常简单，都不需要设置handler，logbook有非常好的默认配置，
+在很多情况下你不需要改动即可直接使用。</p>
+<p>使用handler：</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">FileHandler</span><span class="p">,</span> <span class="n">info</span>
+
+<span class="n">file_handler</span> <span class="o">=</span> <span class="n">FileHandler</span><span class="p">(</span><span class="s">&#39;logbook.log&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s">&#39;INFO&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">file_handler</span><span class="p">:</span>
+    <span class="n">info</span><span class="p">(</span><span class="s">&#39;This is logged in a file&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="testhandler">TestHandler</h3>
+<p>logbook提供了TestHandler，可以用来测试log，使用非常方便，参考文档：
+https://logbook.readthedocs.org/en/latest/api/handlers.html#logbook.TestHandler</p>
+<h3 id="mailhandler">MailHandler</h3>
+<p>https://logbook.readthedocs.org/en/latest/api/handlers.html#logbook.MailHandler
+TODO</p>
+<h3 id="threadedwrapperhandler">ThreadedWrapperHandler</h3>
+<p>https://logbook.readthedocs.org/en/latest/api/queues.html#logbook.queues.ThreadedWrapperHandler
+TODO</p>
+<h3 id="fingerscrossedhandler">FingersCrossedHandler</h3>
+<p>logbook提供了一个特殊的"fingers crossed" handler，这个handler作为一个wrapper，是用来封装其它
+handler的，这个handler有一个特殊的功能，它会将所有的log记录到内存中，当某一些log的级别
+(debug, info, warning, error)超过FingersCrossedHandler设置的级别时，所有在内存中的log以及后面的log
+都将被记录到这个handler中。当log级别没有到达时，所有的log都不会被FingersCrossedHandler处理。</p>
+<p>这一handler很适合用在web application中，当某一错误产生时记录相关的request。</p>
+<p>FingersCrossedHandler默认设置的级别为ERROR</p>
+<p>下面给出两个示例代码：</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">info</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">FingersCrossedHandler</span><span class="p">,</span> <span class="n">FileHandler</span>
+<span class="n">file_handler</span> <span class="o">=</span> <span class="n">FileHandler</span><span class="p">(</span><span class="s">&#39;bar.log&#39;</span><span class="p">)</span>
+<span class="n">handler</span> <span class="o">=</span> <span class="n">FingersCrossedHandler</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">handler</span><span class="p">:</span>
+    <span class="n">info</span><span class="p">(</span><span class="s">&#39;hello info&#39;</span><span class="p">)</span>
+    <span class="n">error</span><span class="p">(</span><span class="s">&#39;hello error&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>会在bar.log文件中输出两句log</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">logbook</span> <span class="kn">import</span> <span class="n">info</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">FingersCrossedHandler</span><span class="p">,</span> <span class="n">FileHandler</span>
+<span class="n">file_handler</span> <span class="o">=</span> <span class="n">FileHandler</span><span class="p">(</span><span class="s">&#39;bar.log&#39;</span><span class="p">)</span>
+<span class="n">handler</span> <span class="o">=</span> <span class="n">FingersCrossedHandler</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">handler</span><span class="p">:</span>
+    <span class="n">info</span><span class="p">(</span><span class="s">&#39;hello info&#39;</span><span class="p">)</span>
+    <span class="n">info</span><span class="p">(</span><span class="s">&#39;hello info2&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>不会有任何log输出</p>
+<p>使用Processors</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">inject_cwd</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
+    <span class="n">record</span><span class="o">.</span><span class="n">extra</span><span class="p">[</span><span class="s">&#39;cwd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">Processor</span><span class="p">(</span><span class="n">inject_cwd</span><span class="p">):</span>
+    <span class="c"># all logging calls inside this block in this thread will now</span>
+    <span class="c"># have the current working directory information attached.</span>
+    <span class="o">...</span>
+</pre></div>
+
+
+<p><strong>注意</strong>： Processor只有当log被某一个handler处理的时候才会执行，否则processor永远不会招待。</p>
+            
+            <section>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://zhangliyong.github.io/posts/2014/04/09/logbook.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'lyonhappyblog';
+        var disqus_identifier = 'http://zhangliyong.github.io/posts/2014/04/09/logbook.html';
+    var disqus_url = 'http://zhangliyong.github.io/posts/2014/04/09/logbook.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://zhangliyong.github.io/posts/2014/04/09/misc.html" title="Previous: misc">misc</a></li>
+                <li class="next-article"><a href="http://zhangliyong.github.io/posts/2014/04/09/job.html" title="Next: Job">Job</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2014-04-09T10:10:53">Apr 9, 2014</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://zhangliyong.github.io/categories.html#misc-ref">misc</a>
+<h4>Contact</h4>
+    <a href="https://twitter.com/zhangliyong" title="My Twitter Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-twitter sidebar-social-links"></i></a>
+    <a href="https://github.com/zhangliyong" title="My Github Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="mailto:lyzhang87@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'lyonhappyblog';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

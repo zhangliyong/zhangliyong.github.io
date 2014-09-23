@@ -1,0 +1,12 @@
+digraph btree {
+
+    node [shape=record];
+
+    b1[label="<k0> kn0|<k1> kn1|<k2> kn2|.......|<k3>"]
+
+    b1:k0 -> b1:k3
+    b1:k0 -> b2
+    b1:k1 -> b3
+    b1:k2 -> b4
+
+}
