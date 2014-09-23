@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lyon's Blog</title><link>http://zhangliyong.github.io/</link><description></description><atom:link href="http://zhangliyong.github.io/feeds/zhang-liyong.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 23 Sep 2014 13:09:56 +0800</lastBuildDate><item><title>HTTP keep-alive</title><link>http://zhangliyong.github.io/posts/2014/09/23/http-keep-alive.html</link><description>&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lyon's Blog</title><link>http://zhangliyong.github.io/</link><description></description><atom:link href="http://zhangliyong.github.io/feeds/zhang-liyong.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 23 Sep 2014 14:00:00 +0800</lastBuildDate><item><title>Gevent Internals</title><link>http://zhangliyong.github.io/posts/2014/09/23/gevent-internals.html</link><description>&lt;h2 id="pool"&gt;Pool&lt;/h2&gt;
+&lt;p&gt;什么时候执行Pool中的任务&lt;/p&gt;
+&lt;p&gt;用gevent spawn的greenlet何时执行，无论是用group, pool, gevent, 当spawn时，新spawn的greenlet已经处理准备执行状态，
+当主进程或其它greenlet sleep或有其它switch操作时，新spawn的greenlet会被执行。&lt;/p&gt;
+&lt;h2 id="ref"&gt;ref:&lt;/h2&gt;
+&lt;p&gt;Introduction to Gevent: http://blog.pythonisito.com/2012/07/introduction-to-gevent.html&lt;/p&gt;
+&lt;p&gt;Gevent, Threads, and Benchmarks: http://blog.pythonisito.com/2012/07/gevent-threads-and-benchmarks.html&lt;/p&gt;
+&lt;p&gt;Gevent and Greenlets: http://blog.pythonisito.com/2012/07/gevent-and-greenlets.html&lt;/p&gt;
+&lt;p&gt;Greening the Python Standard Library with Gevent: http://blog.pythonisito.com/2012/08/gevent-monkey-patch.html&lt;/p&gt;
+&lt;p&gt;Building TCP Servers with Gevent: http://blog.pythonisito.com/2012/08/building-tcp-servers-with-gevent.html&lt;/p&gt;
+&lt;p&gt;Building Web Applications with Gevent's WSGI Server: http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">zhang liyong</dc:creator><pubDate>Tue, 23 Sep 2014 14:00:00 +0800</pubDate><guid>tag:zhangliyong.github.io,2014-09-23:posts/2014/09/23/gevent-internals.html</guid></item><item><title>HTTP keep-alive</title><link>http://zhangliyong.github.io/posts/2014/09/23/http-keep-alive.html</link><description>&lt;p&gt;今天在阅读&lt;a href="http://jacobian.org/writing/django-performance-tips/"&gt;Django performance tips&lt;/a&gt;时发现关闭keepalive可以提高效率，原文如下：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Turn off KeepAlive
 I don’t totally understand how KeepAlive works, but turning it off on our Django servers increased performance by something like 50%. Of course, don’t do this if the same server is also serving media… but you’re not doing that, right?&lt;/p&gt;
@@ -120,17 +130,7 @@ A library of subroutines (built on top of a lower-level library) to make executi
 &lt;/ol&gt;
 &lt;p&gt;通过这几种方式找到进程号后，可以利用&lt;code&gt;ps -eaf | grep &amp;lt;pid&amp;gt;&lt;/code&gt;找到此进程的执行命令，
 并可以通过&lt;code&gt;/proc/&amp;lt;pid&amp;gt;/cwd&lt;/code&gt;找到此进程的执行目录。&lt;/p&gt;
-&lt;p&gt;参考：http://www.cyberciti.biz/faq/what-process-has-open-linux-port/&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">zhang liyong</dc:creator><pubDate>Wed, 09 Apr 2014 10:10:53 +0800</pubDate><guid>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/find-out-which-process-open-a-linux-port.html</guid></item><item><title>gevent</title><link>http://zhangliyong.github.io/posts/2014/04/09/gevent.html</link><description>&lt;h2 id="pool"&gt;Pool&lt;/h2&gt;
-&lt;p&gt;什么时候执行Pool中的任务&lt;/p&gt;
-&lt;p&gt;用gevent spawn的greenlet何时执行，无论是用group, pool, gevent, 当spawn时，新spawn的greenlet已经处理准备执行状态，
-当主进程或其它greenlet sleep或有其它switch操作时，新spawn的greenlet会被执行。&lt;/p&gt;
-&lt;h2 id="ref"&gt;ref:&lt;/h2&gt;
-&lt;p&gt;Introduction to Gevent: http://blog.pythonisito.com/2012/07/introduction-to-gevent.html&lt;/p&gt;
-&lt;p&gt;Gevent, Threads, and Benchmarks: http://blog.pythonisito.com/2012/07/gevent-threads-and-benchmarks.html&lt;/p&gt;
-&lt;p&gt;Gevent and Greenlets: http://blog.pythonisito.com/2012/07/gevent-and-greenlets.html&lt;/p&gt;
-&lt;p&gt;Greening the Python Standard Library with Gevent: http://blog.pythonisito.com/2012/08/gevent-monkey-patch.html&lt;/p&gt;
-&lt;p&gt;Building TCP Servers with Gevent: http://blog.pythonisito.com/2012/08/building-tcp-servers-with-gevent.html&lt;/p&gt;
-&lt;p&gt;Building Web Applications with Gevent's WSGI Server: http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">zhang liyong</dc:creator><pubDate>Wed, 09 Apr 2014 10:10:53 +0800</pubDate><guid>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/gevent.html</guid></item><item><title>How mongodb use memory</title><link>http://zhangliyong.github.io/posts/2014/04/09/how-mongodb-use-memory.html</link><description>&lt;p&gt;网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。&lt;/p&gt;
+&lt;p&gt;参考：http://www.cyberciti.biz/faq/what-process-has-open-linux-port/&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">zhang liyong</dc:creator><pubDate>Wed, 09 Apr 2014 10:10:53 +0800</pubDate><guid>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/find-out-which-process-open-a-linux-port.html</guid></item><item><title>How mongodb use memory</title><link>http://zhangliyong.github.io/posts/2014/04/09/how-mongodb-use-memory.html</link><description>&lt;p&gt;网络上经常有文章说mongo会需要大量内存，那么mongo到低需要多少内存。&lt;/p&gt;
 &lt;p&gt;MongoDB实际需要的内存大小取决于working set的大小，working set是mongo完成操作所需要的所有文档及索引。对于一个collection而言，如果不需要访问每一条记录，不需要所有的记录都在内存中。working set最好都在内存中，以保证好的性能，如果不都在内存中会出现比较多的page fault。&lt;/p&gt;
 &lt;p&gt;查看working set大小可用如下命令：&lt;code&gt;db.runCommand( { serverStatus: 1, workingSet: 1 } )&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;serverStatus.mem.resident
