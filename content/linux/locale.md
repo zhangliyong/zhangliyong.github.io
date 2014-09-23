@@ -1,4 +1,7 @@
 Title: locale
+Tags: Linux, Bash
+Date: 2013-12-22 11:09
+Modified: 2014-02-22 11:10
 
 当在终端下执行某些操作，提示编码问题时，基本是因为终端的locale环境的编码不支持。
 
@@ -12,3 +15,7 @@ Title: locale
 1. 用`locale -a`命令查看系统支持的category。
 2. 在终端下进行`export LANG=<category>`，此时终端的`LC_*`变量发生了变化。
     如果不想每次手动设置，可将`export LANG=<category>`加到`.bashrc`中。
+
+    如：
+
+        echo "export LANG=en_US.UTF-8" >> .bashrc

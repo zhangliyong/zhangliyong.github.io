@@ -11,7 +11,7 @@ HTTP keep-alive即是HTTP persistent connection，维基百科有详细说明：
 
 下图显示了是否使用keep-alive功能的tcp连接对比图：
 
-![](http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/HTTP_persistent_connection.svg/500px-HTTP_persistent_connection.svg.png)
+![persistent connection](http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/HTTP_persistent_connection.svg/500px-HTTP_persistent_connection.svg.png)
 
 http 1.0默认不开启，可进行指定，http 1.1默认开启。
 
@@ -59,11 +59,11 @@ http 1.0默认不开启，可进行指定，http 1.1默认开启。
 
 下图给出了keepalive_timeout设置前后，http请求的header中connection的变化：
 
-![](/images/nginx/keepalive/keepalive.png)
+![keepalive](/images/nginx/keepalive/keepalive.png)
 
 设置`keepalive_timeout  0;`之后：
 
-![](/images/nginx/keepalive/notalive.png)
+![notalive](/images/nginx/keepalive/notalive.png)
 
 
 笔者并没有对keep-alive做相应性能方面的benchmark，所以不确定keep-alive对性能的影响，而且keep-alive对性能的影响也与应用场景有关。

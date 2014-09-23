@@ -1,4 +1,5 @@
 Title: Mongodb NUMA 导致的性能问题
+Tags: MongoDB, DB
 
 最近升级了mongodb，用mongo连接mongod后出现如下warning:
 
@@ -37,6 +38,11 @@ NUMA：NUMA是多核心CPU架构中的一种，其全称为Non-Uniform Memory Ac
 我们知道虚拟内存机制是通过一个中断信号来通知虚拟内存系统进行内存swap的，所以这个irqbalance进程忙，是一个危险信号，在这里是由于在进行频繁的内存交换。这种频繁交换现象称为swap insanity，在MySQL中经常提到，也就是在NUMA框架中，采用不合适的策略，导致核心只能从指定内存块节点上分配内存，即使总内存还有富余，也会由于当前节点内存不足时产生大量的swap操作。
 
 
+### Install
+
+在Ubuntu下以numactl的命令启动mongodb，要先安装numactl
+
+    sudo apt-get install numactl
 
 ###参考：
 
