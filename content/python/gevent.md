@@ -1,22 +1,58 @@
-Title: gevent
+Title: Gevent Internals
+Date: 2014-09-23 14:00
+Summary: How gevent works
 
-##Pool
-什么时候执行Pool中的任务
+#Introduction
+
+[Gevent][gevent] is an efficient coroutine-based asynchronous concurrency framework, it is based on [libev][libev] and [greenlet][greenlet].
+If you don't know how [greenlet][greenlet] works, recommend to read [this](http://www.slideshare.net/saghul/understanding-greenlet). If you only want to know how to use gevent, recommend you read <http://sdiehl.github.io/gevent-tutorial/>.
+
+#Greenlet diagram
+
+First an example from official website. 
+
+    >>> import gevent
+    >>> from gevent import socket
+    >>> urls = ['www.google.com', 'www.example.com', 'www.python.org']
+    >>> jobs = [gevent.spawn(socket.gethostbyname, url) for url in urls]
+    >>> gevent.joinall(jobs, timeout=2)
+    >>> [job.value for job in jobs]
+    ['74.125.79.106', '208.77.188.166', '82.94.164.162']
+
+In this example gevent retrieve three ips from web concurrently.
+`jobs = [gevent.spawn(socket.gethostbyname, url) for url in urls]` create three task greenlets, and
+`gevent.joinall(jobs, timeout=2)` wait all the three task greenlets finished.
+
+This is the greenlet diagram of the program.
+
+                                 +-----+
+                          +----> | task|
+                          |      +-----+
+                          |            
+    +-------+      +-----++      +-----+
+    | main  +----> | hub |-----> | task|
+    +-------+      +-----++      +-----+
+                          |            
+                          |      +-----+
+                          +----> | task|
+                                 +-----+
 
 
-用gevent spawn的greenlet何时执行，无论是用group, pool, gevent, 当spawn时，新spawn的greenlet已经处理准备执行状态，
-当主进程或其它greenlet sleep或有其它switch操作时，新spawn的greenlet会被执行。
+# How it works
 
-## ref:
+`main` is the default greenlet, `task` is the greenlet that do the real job, `hub` greenlet is the core of gevent, it cooperates all other greenlets, including `main`.
+So what is `hub`? `hub` is where gevent use [libev][libev]. When [gevent][gevent] initializes, it create `hub` first, and `hub` is singleton, only one `hub` exists in the process, and when use do `gevent.spawn`, gevent will create a task greenlet using `hub` as parent.
 
-Introduction to Gevent: http://blog.pythonisito.com/2012/07/introduction-to-gevent.html
+So how `hub` cooperate these greenlets, when `main` do some block operations, it will switch to `hub`, so `hub` can choose one greenlet to run, when the greenlet is also block or finished, `hub` will choose another one to run, `hub` use [libev][libev] to choose which greenlet to run.
 
-Gevent, Threads, and Benchmarks: http://blog.pythonisito.com/2012/07/gevent-threads-and-benchmarks.html
+Next explain monkeypatch
 
-Gevent and Greenlets: http://blog.pythonisito.com/2012/07/gevent-and-greenlets.html
+# Ref
 
-Greening the Python Standard Library with Gevent: http://blog.pythonisito.com/2012/08/gevent-monkey-patch.html
+<http://blog.segmentfault.com/fantix/1190000000613814>
 
-Building TCP Servers with Gevent: http://blog.pythonisito.com/2012/08/building-tcp-servers-with-gevent.html
+<https://github.com/surfly/gevent>
 
-Building Web Applications with Gevent's WSGI Server: http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html
+[gevent]: http://www.gevent.org/
+[greenlet]: http://greenlet.readthedocs.org/en/latest/
+[libev]: http://software.schmorp.de/pkg/libev.html
