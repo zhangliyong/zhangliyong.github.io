@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="Gevent Internals "/>
 <meta property="og:url" content="http://zhangliyong.github.io/posts/2014/09/23/gevent-internals.html" />
-<meta property="og:description" content="Pool 什么时候执行Pool中的任务 用gevent spawn的greenlet何时执行，无论是用group, pool, gevent, 当spawn时，新spawn的greenlet已经处理准备执行状态， 当主进程或其它greenlet sleep或有其它switch操作时，新spawn的greenlet会被执行。 ref: Introduction to Gevent: http://blog.pythonisito.com/2012/07/introduction-to-gevent.html Gevent, Threads, and Benchmarks: http://blog.pythonisito.com/2012/07/gevent-threads-and-benchmarks.html Gevent and Greenlets: http://blog.pythonisito.com/2012/07/gevent-and-greenlets.html Greening the Python ..." />
+<meta property="og:description" content="How gevent works" />
 <meta property="og:site_name" content="Lyon&#39;s Blog" />
 <meta property="og:article:author" content="zhang liyong" />
 <meta property="og:article:published_time" content="2014-09-23T14:00:00" />
 <meta name="twitter:title" content="Gevent Internals ">
-<meta name="twitter:description" content="Pool 什么时候执行Pool中的任务 用gevent spawn的greenlet何时执行，无论是用group, pool, gevent, 当spawn时，新spawn的greenlet已经处理准备执行状态， 当主进程或其它greenlet sleep或有其它switch操作时，新spawn的greenlet会被执行。 ref: Introduction to Gevent: http://blog.pythonisito.com/2012/07/introduction-to-gevent.html Gevent, Threads, and Benchmarks: http://blog.pythonisito.com/2012/07/gevent-threads-and-benchmarks.html Gevent and Greenlets: http://blog.pythonisito.com/2012/07/gevent-and-greenlets.html Greening the Python ...">
+<meta name="twitter:description" content="How gevent works">
 
         <title>Gevent Internals  · Lyon&#39;s Blog
 </title>
@@ -77,17 +77,47 @@
         <div class="span8 offset2 article-content">
 
             
-            <h2 id="pool">Pool</h2>
-<p>什么时候执行Pool中的任务</p>
-<p>用gevent spawn的greenlet何时执行，无论是用group, pool, gevent, 当spawn时，新spawn的greenlet已经处理准备执行状态，
-当主进程或其它greenlet sleep或有其它switch操作时，新spawn的greenlet会被执行。</p>
-<h2 id="ref">ref:</h2>
-<p>Introduction to Gevent: http://blog.pythonisito.com/2012/07/introduction-to-gevent.html</p>
-<p>Gevent, Threads, and Benchmarks: http://blog.pythonisito.com/2012/07/gevent-threads-and-benchmarks.html</p>
-<p>Gevent and Greenlets: http://blog.pythonisito.com/2012/07/gevent-and-greenlets.html</p>
-<p>Greening the Python Standard Library with Gevent: http://blog.pythonisito.com/2012/08/gevent-monkey-patch.html</p>
-<p>Building TCP Servers with Gevent: http://blog.pythonisito.com/2012/08/building-tcp-servers-with-gevent.html</p>
-<p>Building Web Applications with Gevent's WSGI Server: http://blog.pythonisito.com/2012/08/building-web-applications-with-gevents.html</p>
+            <h1 id="introduction">Introduction</h1>
+<p><a href="http://www.gevent.org/">Gevent</a> is an efficient coroutine-based asynchronous concurrency framework, it is based on <a href="http://software.schmorp.de/pkg/libev.html">libev</a> and <a href="http://greenlet.readthedocs.org/en/latest/">greenlet</a>.
+If you don't know how <a href="http://greenlet.readthedocs.org/en/latest/">greenlet</a> works, recommend to read <a href="http://www.slideshare.net/saghul/understanding-greenlet">this</a>. If you only want to know how to use gevent, recommend you read <a href="http://sdiehl.github.io/gevent-tutorial/">http://sdiehl.github.io/gevent-tutorial/</a>.</p>
+<h1 id="greenlet-diagram">Greenlet diagram</h1>
+<p>First an example from official website. </p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">import</span> <span class="n">gevent</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">from</span> <span class="n">gevent</span> <span class="n">import</span> <span class="n">socket</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">www</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">www</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">www</span><span class="p">.</span><span class="n">python</span><span class="p">.</span><span class="n">org</span><span class="err">&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">gevent</span><span class="p">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">gethostbyname</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="n">in</span> <span class="n">urls</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">gevent</span><span class="p">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">job</span><span class="p">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">job</span> <span class="n">in</span> <span class="n">jobs</span><span class="p">]</span>
+<span class="p">[</span><span class="err">&#39;</span><span class="mf">74.125.79.106</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="mf">208.77.188.166</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="mf">82.94.164.162</span><span class="err">&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>In this example gevent retrieve three ips from web concurrently.
+<code>jobs = [gevent.spawn(socket.gethostbyname, url) for url in urls]</code> create three task greenlets, and
+<code>gevent.joinall(jobs, timeout=2)</code> wait all the three task greenlets finished.</p>
+<p>This is the greenlet diagram of the program.</p>
+<div class="highlight"><pre>                             <span class="o">+-----+</span>
+                      <span class="o">+----&gt;</span> <span class="o">|</span> <span class="n">task</span><span class="o">|</span>
+                      <span class="o">|</span>      <span class="o">+-----+</span>
+                      <span class="o">|</span>            
+<span class="o">+-------+</span>      <span class="o">+-----++</span>      <span class="o">+-----+</span>
+<span class="o">|</span> <span class="n">main</span>  <span class="o">+----&gt;</span> <span class="o">|</span> <span class="n">hub</span> <span class="o">|-----&gt;</span> <span class="o">|</span> <span class="n">task</span><span class="o">|</span>
+<span class="o">+-------+</span>      <span class="o">+-----++</span>      <span class="o">+-----+</span>
+                      <span class="o">|</span>            
+                      <span class="o">|</span>      <span class="o">+-----+</span>
+                      <span class="o">+----&gt;</span> <span class="o">|</span> <span class="n">task</span><span class="o">|</span>
+                             <span class="o">+-----+</span>
+</pre></div>
+
+
+<h1 id="how-it-works">How it works</h1>
+<p><code>main</code> is the default greenlet, <code>task</code> is the greenlet that do the real job, <code>hub</code> greenlet is the core of gevent, it cooperates all other greenlets, including <code>main</code>.
+So what is <code>hub</code>? <code>hub</code> is where gevent use <a href="http://software.schmorp.de/pkg/libev.html">libev</a>. When <a href="http://www.gevent.org/">gevent</a> initializes, it create <code>hub</code> first, and <code>hub</code> is singleton, only one <code>hub</code> exists in the process, and when use do <code>gevent.spawn</code>, gevent will create a task greenlet using <code>hub</code> as parent.</p>
+<p>So how <code>hub</code> cooperate these greenlets, when <code>main</code> do some block operations, it will switch to <code>hub</code>, so <code>hub</code> can choose one greenlet to run, when the greenlet is also block or finished, <code>hub</code> will choose another one to run, <code>hub</code> use <a href="http://software.schmorp.de/pkg/libev.html">libev</a> to choose which greenlet to run.</p>
+<p>Next explain monkeypatch</p>
+<h1 id="ref">Ref</h1>
+<p><a href="http://blog.segmentfault.com/fantix/1190000000613814">http://blog.segmentfault.com/fantix/1190000000613814</a></p>
+<p><a href="https://github.com/surfly/gevent">https://github.com/surfly/gevent</a></p>
             
             <section>
 <div class="accordion" id="accordion2">
