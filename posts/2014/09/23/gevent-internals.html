@@ -129,7 +129,9 @@ So what is <code>hub</code>? <code>hub</code> is where gevent use <a href="http:
 
 
 <p>When use do <code>gevent.spawn</code>, gevent will create a task greenlet using <code>hub</code> as parent.</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Greenlet</span><span class="p">(</span><span class="n">greenlet</span><span class="p">):</span>
+<div class="highlight"><pre><span class="n">spawn</span> <span class="o">=</span> <span class="n">Greenlet</span><span class="o">.</span><span class="n">spawn</span>
+
+<span class="k">class</span> <span class="nc">Greenlet</span><span class="p">(</span><span class="n">greenlet</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A light-weight cooperatively-scheduled execution unit.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
