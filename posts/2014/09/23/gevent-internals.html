@@ -112,8 +112,62 @@ If you don't know how <a href="http://greenlet.readthedocs.org/en/latest/">green
 
 <h1 id="how-it-works">How it works</h1>
 <p><code>main</code> is the default greenlet, <code>task</code> is the greenlet that do the real job, <code>hub</code> greenlet is the core of gevent, it cooperates all other greenlets, including <code>main</code>.
-So what is <code>hub</code>? <code>hub</code> is where gevent use <a href="http://software.schmorp.de/pkg/libev.html">libev</a>. When <a href="http://www.gevent.org/">gevent</a> initializes, it create <code>hub</code> first, and <code>hub</code> is singleton, only one <code>hub</code> exists in the process, and when use do <code>gevent.spawn</code>, gevent will create a task greenlet using <code>hub</code> as parent.</p>
-<p>So how <code>hub</code> cooperate these greenlets, when <code>main</code> do some block operations, it will switch to <code>hub</code>, so <code>hub</code> can choose one greenlet to run, when the greenlet is also block or finished, <code>hub</code> will choose another one to run, <code>hub</code> use <a href="http://software.schmorp.de/pkg/libev.html">libev</a> to choose which greenlet to run.</p>
+So what is <code>hub</code>? <code>hub</code> is where gevent use <a href="http://software.schmorp.de/pkg/libev.html">libev</a>. When <a href="http://www.gevent.org/">gevent</a> initializes, it create <code>hub</code> first, and <code>hub</code> is singleton, only one <code>hub</code> exists in the thread.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">get_hub</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the hub for the current thread.</span>
+
+<span class="sd">    If hub does not exists in the current thread, the new one is created with call to :meth:`get_hub_class`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_threadlocal</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_threadlocal</span><span class="o">.</span><span class="n">hub</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">hubtype</span> <span class="o">=</span> <span class="n">get_hub_class</span><span class="p">()</span>
+        <span class="n">hub</span> <span class="o">=</span> <span class="n">_threadlocal</span><span class="o">.</span><span class="n">hub</span> <span class="o">=</span> <span class="n">hubtype</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hub</span>
+</pre></div>
+
+
+<p>When use do <code>gevent.spawn</code>, gevent will create a task greenlet using <code>hub</code> as parent.</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Greenlet</span><span class="p">(</span><span class="n">greenlet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A light-weight cooperatively-scheduled execution unit.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">hub</span> <span class="o">=</span> <span class="n">get_hub</span><span class="p">()</span>
+        <span class="n">greenlet</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">hub</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Schedule the greenlet to run in this loop iteration&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_start_event</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">loop</span><span class="o">.</span><span class="n">run_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">switch</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">spawn</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a new :class:`Greenlet` object, scheduled to start.</span>
+
+<span class="sd">        The arguments are passed to :meth:`Greenlet.__init__`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">cls</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">g</span>
+</pre></div>
+
+
+<p>At the begining, we said <a href="http://www.gevent.org/">gevent</a> use <a href="http://software.schmorp.de/pkg/libev.html">libev</a>, here <code>self.parent.loop.run_callback(self.switch)</code>, <code>loop</code> is from <a href="http://software.schmorp.de/pkg/libev.html">libev</a>, we register the new created task greenlet to <code>loop</code>. when the <code>loop</code> runs, it will execute the task greenlet.</p>
+<p>So when <code>loop</code> runs, when <code>main</code> do some block operations, it will switch to <code>hub</code>,</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">getcurrent</span><span class="p">(),</span> <span class="s">&#39;Do not call Hub.run() directly&#39;</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">loop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop</span>
+        <span class="n">loop</span><span class="o">.</span><span class="n">error_handler</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">loop</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">loop</span><span class="o">.</span><span class="n">error_handler</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c"># break the refcount cycle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">throw</span><span class="p">(</span><span class="n">LoopExit</span><span class="p">(</span><span class="s">&#39;This operation would block forever&#39;</span><span class="p">))</span>
+</pre></div>
+
+
+<p><code>loop.run()</code> will be executed, so <code>loop</code> can choose one greenlet to run, when the greenlet is also block or finished, it will choose another one to run.</p>
 <p>Next explain monkeypatch</p>
 <h1 id="ref">Ref</h1>
 <p><a href="http://blog.segmentfault.com/fantix/1190000000613814">http://blog.segmentfault.com/fantix/1190000000613814</a></p>
