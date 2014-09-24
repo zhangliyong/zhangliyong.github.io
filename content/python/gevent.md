@@ -41,9 +41,64 @@ This is the greenlet diagram of the program.
 # How it works
 
 `main` is the default greenlet, `task` is the greenlet that do the real job, `hub` greenlet is the core of gevent, it cooperates all other greenlets, including `main`.
-So what is `hub`? `hub` is where gevent use [libev][libev]. When [gevent][gevent] initializes, it create `hub` first, and `hub` is singleton, only one `hub` exists in the process, and when use do `gevent.spawn`, gevent will create a task greenlet using `hub` as parent.
+So what is `hub`? `hub` is where gevent use [libev][libev]. When [gevent][gevent] initializes, it create `hub` first, and `hub` is singleton, only one `hub` exists in the thread.
 
-So how `hub` cooperate these greenlets, when `main` do some block operations, it will switch to `hub`, so `hub` can choose one greenlet to run, when the greenlet is also block or finished, `hub` will choose another one to run, `hub` use [libev][libev] to choose which greenlet to run.
+    :::python
+    def get_hub(*args, **kwargs):
+        """Return the hub for the current thread.
+
+        If hub does not exists in the current thread, the new one is created with call to :meth:`get_hub_class`.
+        """
+        global _threadlocal
+        try:
+            return _threadlocal.hub
+        except AttributeError:
+            hubtype = get_hub_class()
+            hub = _threadlocal.hub = hubtype(*args, **kwargs)
+            return hub
+
+When use do `gevent.spawn`, gevent will create a task greenlet using `hub` as parent.
+
+    :::python
+    class Greenlet(greenlet):
+        """A light-weight cooperatively-scheduled execution unit."""
+
+        def __init__(self, run=None, *args, **kwargs):
+            hub = get_hub()
+            greenlet.__init__(self, parent=hub)
+
+        def start(self):
+            """Schedule the greenlet to run in this loop iteration"""
+            self._start_event = self.parent.loop.run_callback(self.switch)
+
+        @classmethod
+        def spawn(cls, *args, **kwargs):
+            """Return a new :class:`Greenlet` object, scheduled to start.
+
+            The arguments are passed to :meth:`Greenlet.__init__`.
+            """
+            g = cls(*args, **kwargs)
+            g.start()
+            return g
+
+
+At the begining, we said [gevent][gevent] use [libev][libev], here `self.parent.loop.run_callback(self.switch)`, `loop` is from [libev][libev], we register the new created task greenlet to `loop`. when the `loop` runs, it will execute the task greenlet.
+
+So when `loop` runs, when `main` do some block operations, it will switch to `hub`,
+
+    :::python
+    def run(self):
+        assert self is getcurrent(), 'Do not call Hub.run() directly'
+        while True:
+            loop = self.loop
+            loop.error_handler = self
+            try:
+                loop.run()
+            finally:
+                loop.error_handler = None  # break the refcount cycle
+            self.parent.throw(LoopExit('This operation would block forever'))
+
+`loop.run()` will be executed, so `loop` can choose one greenlet to run, when the greenlet is also block or finished, it will choose another one to run.
 
 Next explain monkeypatch
 
