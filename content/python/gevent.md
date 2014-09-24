@@ -60,6 +60,8 @@ So what is `hub`? `hub` is where gevent use [libev][libev]. When [gevent][gevent
 When use do `gevent.spawn`, gevent will create a task greenlet using `hub` as parent.
 
     :::python
+    spawn = Greenlet.spawn
+
     class Greenlet(greenlet):
         """A light-weight cooperatively-scheduled execution unit."""
 
