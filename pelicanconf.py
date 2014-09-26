@@ -89,6 +89,11 @@ PROJECTS = [
         'description': 'A worker using gevent for rq'
     },
     {
+        'name': 'mongodb-backup',
+        'url': 'https://github.com/zhangliyong/mongodb-backup',
+        'description': 'Backup mongodb data by copying dbpath'
+    },
+    {
         'name': 'pyfuncrun',
         'url': 'https://github.com/zhangliyong/pyfuncrun',
         'description': 'Run a function in a module'
