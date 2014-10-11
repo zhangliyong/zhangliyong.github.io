@@ -417,14 +417,7 @@ handler的，这个handler有一个特殊的功能，它会将所有的log记录
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;： Processor只有当log被某一个handler处理的时候才会执行，否则processor永远不会招待。&lt;/p&gt;</summary></entry><entry><title>misc</title><link href="http://zhangliyong.github.io/posts/2014/04/09/misc.html" rel="alternate"></link><updated>2014-04-09T10:10:53+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/misc.html</id><summary type="html">&lt;h1 id="mac-sshfs"&gt;Mac sshfs&lt;/h1&gt;
-&lt;p&gt;Mac 挂载远程目录&lt;/p&gt;
-&lt;p&gt;http://osxfuse.github.com/&lt;/p&gt;
-&lt;p&gt;install OXSFUSE and SSHFS&lt;/p&gt;
-&lt;h2 id="tf-idf"&gt;TF-IDF&lt;/h2&gt;
-&lt;p&gt;http://www.ruanyifeng.com/blog/2013/03/tf-idf.html
-http://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html
-http://www.ruanyifeng.com/blog/2013/03/automatic_summarization.html&lt;/p&gt;</summary></entry><entry><title>Mongo</title><link href="http://zhangliyong.github.io/posts/2014/04/09/mongo.html" rel="alternate"></link><updated>2014-04-09T10:10:53+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/mongo.html</id><summary type="html">&lt;h2 id="query-after-update-slow"&gt;query after update slow&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;： Processor只有当log被某一个handler处理的时候才会执行，否则processor永远不会招待。&lt;/p&gt;</summary></entry><entry><title>Mongo</title><link href="http://zhangliyong.github.io/posts/2014/04/09/mongo.html" rel="alternate"></link><updated>2014-04-09T10:10:53+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/mongo.html</id><summary type="html">&lt;h2 id="query-after-update-slow"&gt;query after update slow&lt;/h2&gt;
 &lt;p&gt;这两天有一个接口的速度非常慢，主要是执行一条查询语句非常慢，有时耗时达200秒，于是找到了这条查询语句单独在mongo shell中执行，在mongo shell中执行并不慢，慢慢调试后最终找到问题，原因是在查询语句执行之前执行了两次更新语句。&lt;/p&gt;
 &lt;p&gt;利用pymongo执行更新时，如果不设置safe=True，mongo会及时返回函数调用，但更新并没有真正执行完，mongo进程在后台继续执行，所以当接着执行查询时，此时更新没有结束，数据库会处于lock状态，查询等待数据库解锁，所以查询非常慢。&lt;/p&gt;
 &lt;p&gt;把更新语句去除后，查询恢复正常。&lt;/p&gt;
@@ -588,7 +581,7 @@ The accounts created by these statements have the following properties:&lt;/p&gt
 &lt;p&gt;nginx 有个默认的错误显示页面&lt;/p&gt;
 &lt;h2 id="ref"&gt;Ref&lt;/h2&gt;
 &lt;p&gt;http://wiki.nginx.org/Pitfalls&lt;/p&gt;</summary></entry><entry><title>pelican</title><link href="http://zhangliyong.github.io/posts/2014/04/09/pelican.html" rel="alternate"></link><updated>2014-04-09T10:10:53+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/pelican.html</id><summary type="html">&lt;h2 id="_1"&gt;介绍&lt;/h2&gt;
-&lt;p&gt;peclian 是一个python版本的表态页面生成器，类似于jekyll&lt;/p&gt;</summary></entry><entry><title>PuDB</title><link href="http://zhangliyong.github.io/posts/2014/04/09/pudb.html" rel="alternate"></link><updated>2014-04-09T10:10:53+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/pudb.html</id><summary type="html">&lt;p&gt;https://pypi.python.org/pypi/pudb&lt;/p&gt;</summary></entry><entry><title>Python</title><link href="http://zhangliyong.github.io/posts/2014/04/09/python.html" rel="alternate"></link><updated>2014-04-09T10:10:53+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/python.html</id><summary type="html">&lt;h2 id="decorator"&gt;decorator&lt;/h2&gt;
+&lt;p&gt;peclian 是一个python版本的表态页面生成器，类似于jekyll&lt;/p&gt;</summary></entry><entry><title>Python</title><link href="http://zhangliyong.github.io/posts/2014/04/09/python.html" rel="alternate"></link><updated>2014-04-09T10:10:53+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/python.html</id><summary type="html">&lt;h2 id="decorator"&gt;decorator&lt;/h2&gt;
 &lt;h2 id="class-method"&gt;class method&lt;/h2&gt;
 &lt;h1 id="django"&gt;Django&lt;/h1&gt;
 &lt;h2 id="django-test"&gt;Django test&lt;/h2&gt;
@@ -656,24 +649,7 @@ collect2: ld returned 1 exit status&lt;/p&gt;
 &lt;h2 id="_3"&gt;参考&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html"&gt;http://www.cbug.org/2011/11/21/multiple-python-versions-cause-shared-library-mess.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://blog.csdn.net/huzhenwei/article/details/7339548"&gt;http://blog.csdn.net/huzhenwei/article/details/7339548&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://linux.101hacks.com/unix/ldconfig/"&gt;http://linux.101hacks.com/unix/ldconfig/&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Pythonbrew</title><link href="http://zhangliyong.github.io/posts/2014/04/09/pythonbrew.html" rel="alternate"></link><updated>2014-04-09T10:10:53+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/pythonbrew.html</id><summary type="html">&lt;p&gt;home page: https://github.com/utahta/pythonbrew&lt;/p&gt;
-&lt;h2 id="install-packages-over-pythonbrew"&gt;install packages over pythonbrew&lt;/h2&gt;
-&lt;p&gt;pythonbrew can install multiple python versions on the same machine,
-if you want to install packages over a specified python version, a
-recommand way is to install pip first.&lt;/p&gt;
-&lt;h3 id="install-pip"&gt;install pip&lt;/h3&gt;
-&lt;p&gt;home page: http://www.pip-installer.org/en/latest/&lt;/p&gt;
-&lt;p&gt;pip is just a python pacakge&lt;/p&gt;
-&lt;p&gt;first use pythonbrew switch to the desired python version, then&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;O&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//raw.github.com/pypa/pip/master/contrib/get-pip.py&lt;/span&gt;
-&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;after that you can use pip to install whatever pacakges over the python version.&lt;/p&gt;
-&lt;p&gt;If you want to install package on a different python version, re-do "install pip" section.&lt;/p&gt;</summary></entry><entry><title>Read Later</title><link href="http://zhangliyong.github.io/posts/2014/04/09/read-later.html" rel="alternate"></link><updated>2014-04-09T10:10:53+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/read-later.html</id><summary type="html">&lt;h2 id="python"&gt;Python&lt;/h2&gt;
-&lt;p&gt;Python Guide: http://docs.python-guide.org/en/latest/index.html&lt;/p&gt;
-&lt;p&gt;字符串匹配的KMP算法: http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html&lt;/p&gt;</summary></entry><entry><title>Sleeping</title><link href="http://zhangliyong.github.io/posts/2014/04/09/sleeping.html" rel="alternate"></link><updated>2014-04-09T10:10:53+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/sleeping.html</id><summary type="html">&lt;h2 id="_1"&gt;关于睡眠你应该知道的十件事&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://linux.101hacks.com/unix/ldconfig/"&gt;http://linux.101hacks.com/unix/ldconfig/&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Sleeping</title><link href="http://zhangliyong.github.io/posts/2014/04/09/sleeping.html" rel="alternate"></link><updated>2014-04-09T10:10:53+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/sleeping.html</id><summary type="html">&lt;h2 id="_1"&gt;关于睡眠你应该知道的十件事&lt;/h2&gt;
 &lt;p&gt;地址：http://v.163.com/movie/2013/5/V/Q/M8TDTH9BJ_M8TE2FFVQ.html&lt;/p&gt;
 &lt;p&gt;网易分开课上有一期bbc拍摄的关于睡眠的记录片，里面提到了很多关于提高睡眠的问题，
 对于一些自己感觉有帮助的记录如下：&lt;/p&gt;
