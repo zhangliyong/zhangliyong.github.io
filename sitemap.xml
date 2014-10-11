@@ -5,27 +5,27 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://zhangliyong.github.io/index.html</loc>
-<lastmod>2014-10-11T15:39:26-00:00</lastmod>
+<lastmod>2014-10-11T15:40:23-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://zhangliyong.github.io/archives.html</loc>
-<lastmod>2014-10-11T15:39:26-00:00</lastmod>
+<lastmod>2014-10-11T15:40:23-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://zhangliyong.github.io/tags.html</loc>
-<lastmod>2014-10-11T15:39:26-00:00</lastmod>
+<lastmod>2014-10-11T15:40:23-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://zhangliyong.github.io/posts/2014/10/11/hight-throughput-web-server-tunning.html</loc>
+<loc>http://zhangliyong.github.io/posts/2014/10/11/hight-throughput-web-server-analysis-and-tunning.html</loc>
 <lastmod>2014-10-11T00:00:00-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
