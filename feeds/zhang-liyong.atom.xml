@@ -50,7 +50,6 @@ For more information refer &lt;a href="http://www.thegeekstuff.com/2011/07/iosta
 &lt;p&gt;iftop&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.ex-parrot.com/pdw/iftop/"&gt;iftop&lt;/a&gt; show the network usage with other hosts.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="iftop" src="http://www.ex-parrot.com/pdw/iftop/iftop_normal.png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="iftop" src="http://www.ex-parrot.com/pdw/iftop/iftop_ports.png" /&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id="nginx-tunning"&gt;Nginx tunning&lt;/h2&gt;
