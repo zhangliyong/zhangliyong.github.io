@@ -1,4 +1,4 @@
-Title: Hight Throughput Web Server Tunning
+Title: Hight Throughput Web Server Analysis and Tunning
 Date: 2014-10-11
 Tags: Linux, sysadmin, nginx, server
 
