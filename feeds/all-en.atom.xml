@@ -53,8 +53,28 @@ For more information refer &lt;a href="http://www.thegeekstuff.com/2011/07/iosta
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id="nginx-tunning"&gt;Nginx tunning&lt;/h2&gt;
-&lt;p&gt;somaxconn&lt;/p&gt;
-&lt;p&gt;fs-max&lt;/p&gt;</summary><category term="Linux"></category><category term="sysadmin"></category><category term="nginx"></category><category term="server"></category></entry><entry><title>Gevent Internals</title><link href="http://zhangliyong.github.io/posts/2014/09/23/gevent-internals.html" rel="alternate"></link><updated>2014-09-23T14:00:00+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-09-23:posts/2014/09/23/gevent-internals.html</id><summary type="html">&lt;h1 id="introduction"&gt;Introduction&lt;/h1&gt;
+&lt;h3 id="nginxconf"&gt;nginx.conf&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;keepalive_timeout&lt;/code&gt;: assigns the timeout for keep-alive connections with the client. Simply put, Nginx will close connections with the client after this period of time.&lt;/p&gt;
+&lt;p&gt;keep this small value, like &lt;code&gt;keepalive_timeout 15;&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="linux-tcp-performance-tuningsysctlconf"&gt;Linux TCP Performance Tuning(sysctl.conf)&lt;/h3&gt;
+&lt;p&gt;There are two ways to change tcp parameters.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;change the value of parameter files in /proc/sys/net/
+   e.g. increase the value of somaxconn
+        &lt;code&gt;echo 1024 &amp;gt; /proc/sys/net/core/somaxconn&lt;/code&gt;
+   when the server restart, the parameter will restore.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;change the vlaue in /etc/sysctl.con, and run &lt;code&gt;sudo sysctl -p&lt;/code&gt; to apply the changes immediately,
+   this can change the value permanently.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;/proc/sys/fs/file-max: The maximum number of concurrently open files.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;/proc/sys/net/ipv4/tcp_max_syn_backlog: Maximum number of remembered connection requests, which are still did not receive an acknowledgment from connecting client. The default value is 1024 for systems with more than 128Mb of memory, and 128 for low memory machines. If server suffers of overload, try to increase this number.&lt;/li&gt;
+&lt;li&gt;/proc/sys/net/core/somaxconn: Limit of socket listen() backlog, known in userspace as SOMAXCONN. Defaults to 128. The value should be raised substantially to support bursts of request. For example, to support a burst of 1024 requests, set somaxconn to 1024.&lt;/li&gt;
+&lt;/ol&gt;</summary><category term="Linux"></category><category term="sysadmin"></category><category term="nginx"></category><category term="server"></category></entry><entry><title>Gevent Internals</title><link href="http://zhangliyong.github.io/posts/2014/09/23/gevent-internals.html" rel="alternate"></link><updated>2014-09-23T14:00:00+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-09-23:posts/2014/09/23/gevent-internals.html</id><summary type="html">&lt;h1 id="introduction"&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://www.gevent.org/"&gt;Gevent&lt;/a&gt; is an efficient coroutine-based asynchronous concurrency framework, it is based on &lt;a href="http://software.schmorp.de/pkg/libev.html"&gt;libev&lt;/a&gt; and &lt;a href="http://greenlet.readthedocs.org/en/latest/"&gt;greenlet&lt;/a&gt;.
 If you don't know how &lt;a href="http://greenlet.readthedocs.org/en/latest/"&gt;greenlet&lt;/a&gt; works, recommend to read &lt;a href="http://www.slideshare.net/saghul/understanding-greenlet"&gt;this&lt;/a&gt;. If you only want to know how to use gevent, recommend you read &lt;a href="http://sdiehl.github.io/gevent-tutorial/"&gt;http://sdiehl.github.io/gevent-tutorial/&lt;/a&gt;.&lt;/p&gt;
 &lt;h1 id="greenlet-diagram"&gt;Greenlet diagram&lt;/h1&gt;
@@ -890,28 +910,7 @@ server
 &lt;p&gt;http://danielkummer.github.com/git-flow-cheatsheet/&lt;/p&gt;
 &lt;h2 id="git-submodules"&gt;Git submodules&lt;/h2&gt;
 &lt;p&gt;http://git-scm.com/docs/gitignore
-http://git-scm.com/docs/git-check-ignore.html&lt;/p&gt;</summary></entry><entry><title>Linux</title><link href="http://zhangliyong.github.io/posts/2014/04/09/linux.html" rel="alternate"></link><updated>2014-04-09T10:10:52+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/linux.html</id><summary type="html">&lt;h2 id="linux-tcp-performance-tuning"&gt;Linux TCP Performance Tuning&lt;/h2&gt;
-&lt;p&gt;There are two ways to change tcp parameters.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;change the value of parameter files in /proc/sys/net/
-   e.g. increase the value of somaxconn
-        &lt;code&gt;echo 1024 &amp;gt; /proc/sys/net/core/somaxconn&lt;/code&gt;
-   when the server restart, the parameter will restore.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;change the vlaue in /etc/sysctl.con, and run &lt;code&gt;sudo sysctl -p&lt;/code&gt; to apply the changes immediately,
-   this can change the value permanently.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="parameters"&gt;Parameters&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;/proc/sys/fs/file-max: The maximum number of concurrently open files.&lt;/li&gt;
-&lt;li&gt;/proc/sys/net/ipv4/tcp_max_syn_backlog: Maximum number of remembered connection requests, which are still did not receive an acknowledgment from connecting client. The default value is 1024 for systems with more than 128Mb of memory, and 128 for low memory machines. If server suffers of overload, try to increase this number.&lt;/li&gt;
-&lt;li&gt;/proc/sys/net/core/somaxconn: Limit of socket listen() backlog, known in userspace as SOMAXCONN. Defaults to 128. The value should be raised substantially to support bursts of request. For example, to support a burst of 1024 requests, set somaxconn to 1024.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;change userlevel file-max
-need logout and login to work&lt;/p&gt;</summary></entry><entry><title>Problems I encouter with emacs</title><link href="http://zhangliyong.github.io/posts/2014/04/09/problems-i-encouter-with-emacs.html" rel="alternate"></link><updated>2014-04-09T10:10:52+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/problems-i-encouter-with-emacs.html</id><summary type="html">&lt;p&gt;emacs with zsh&lt;/p&gt;
+http://git-scm.com/docs/git-check-ignore.html&lt;/p&gt;</summary></entry><entry><title>Problems I encouter with emacs</title><link href="http://zhangliyong.github.io/posts/2014/04/09/problems-i-encouter-with-emacs.html" rel="alternate"></link><updated>2014-04-09T10:10:52+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-04-09:posts/2014/04/09/problems-i-encouter-with-emacs.html</id><summary type="html">&lt;p&gt;emacs with zsh&lt;/p&gt;
 &lt;p&gt;when I first open zsh in emacs using:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;term&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
