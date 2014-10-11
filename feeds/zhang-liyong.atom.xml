@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/zhang-liyong.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-09-23T14:00:00+08:00</updated><entry><title>Gevent Internals</title><link href="http://zhangliyong.github.io/posts/2014/09/23/gevent-internals.html" rel="alternate"></link><updated>2014-09-23T14:00:00+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-09-23:posts/2014/09/23/gevent-internals.html</id><summary type="html">&lt;h1 id="introduction"&gt;Introduction&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lyon's Blog</title><link href="http://zhangliyong.github.io/" rel="alternate"></link><link href="http://zhangliyong.github.io/feeds/zhang-liyong.atom.xml" rel="self"></link><id>http://zhangliyong.github.io/</id><updated>2014-10-11T00:00:00+08:00</updated><entry><title>Hight Throughput Web Server Tunning</title><link href="http://zhangliyong.github.io/posts/2014/10/11/hight-throughput-web-server-tunning.html" rel="alternate"></link><updated>2014-10-11T00:00:00+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-10-11:posts/2014/10/11/hight-throughput-web-server-tunning.html</id><summary type="html">&lt;h2 id="performace-analysis"&gt;Performace analysis&lt;/h2&gt;
+&lt;p&gt;how to find the bottleneck of the server performace.&lt;/p&gt;
+&lt;p&gt;Check out this fabulous pic from &lt;a href="http://www.brendangregg.com/linuxperf.html"&gt;http://www.brendangregg.com/linuxperf.html&lt;/a&gt;
+&lt;img alt="linux_observability_tools" src="http://www.brendangregg.com/Perf/linux_observability_tools.png" /&gt;&lt;/p&gt;
+&lt;p&gt;and this great slices: &lt;a href="http://www.slideshare.net/brendangregg/linux-performance-tools"&gt;http://www.slideshare.net/brendangregg/linux-performance-tools&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;First you need to monitor you server and services, you can use munin, there are a lot of options.&lt;/p&gt;
+&lt;p&gt;When the service slow down, I would login to the service, using the following tools:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;htop&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://hisham.hm/htop/index.php"&gt;htop&lt;/a&gt; is great, it's like &lt;code&gt;top&lt;/code&gt;, but better, I highly recommend this tool.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="htop" src="http://hisham.hm/htop/htop-1.0-screenshot.png" /&gt;&lt;/p&gt;
+&lt;p&gt;watch the &lt;code&gt;load&lt;/code&gt;, if &lt;code&gt;load&lt;/code&gt; &amp;gt; number of CPUs, may mean CPU saturation&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;vmstat&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;vmstat&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;procs&lt;/span&gt; &lt;span class="o"&gt;-----------&lt;/span&gt;&lt;span class="n"&gt;memory&lt;/span&gt;&lt;span class="o"&gt;----------&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;&lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="n"&gt;r&lt;/span&gt;  &lt;span class="n"&gt;b&lt;/span&gt;   &lt;span class="n"&gt;swpd&lt;/span&gt;   &lt;span class="n"&gt;free&lt;/span&gt;   &lt;span class="n"&gt;buff&lt;/span&gt;  &lt;span class="n"&gt;cache&lt;/span&gt;   &lt;span class="n"&gt;si&lt;/span&gt;   &lt;span class="n"&gt;so&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="mi"&gt;9&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt;      &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;29549320&lt;/span&gt;  &lt;span class="mi"&gt;29252&lt;/span&gt; &lt;span class="mi"&gt;9299060&lt;/span&gt;   &lt;span class="mi"&gt;0&lt;/span&gt;    &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt;      &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;29547876&lt;/span&gt;  &lt;span class="mi"&gt;29252&lt;/span&gt; &lt;span class="mi"&gt;9299332&lt;/span&gt;   &lt;span class="mi"&gt;0&lt;/span&gt;    &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="mi"&gt;4&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt;      &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;29548124&lt;/span&gt;  &lt;span class="mi"&gt;29252&lt;/span&gt; &lt;span class="mi"&gt;9299460&lt;/span&gt;   &lt;span class="mi"&gt;0&lt;/span&gt;    &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="mi"&gt;5&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt;      &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;29548840&lt;/span&gt;  &lt;span class="mi"&gt;29252&lt;/span&gt; &lt;span class="mi"&gt;9299592&lt;/span&gt;   &lt;span class="mi"&gt;0&lt;/span&gt;    &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The procs data reports the number of processing jobs waiting to run and allows you to determine if there are processes “blocking” your system from running smoothly.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;r&lt;/code&gt; column displays the total number of processes waiting for access to the processor. The &lt;code&gt;b&lt;/code&gt; column displays the total number of processes in a “sleep” state.&lt;/p&gt;
+&lt;p&gt;I usually see &lt;code&gt;r&lt;/code&gt; value, if it's big, it means the server is in a high load.&lt;/p&gt;
+&lt;p&gt;For other data meaning, ref: &lt;a href="https://www.linode.com/docs/uptime/monitoring/use-vmstat-to-monitor-system-performance"&gt;https://www.linode.com/docs/uptime/monitoring/use-vmstat-to-monitor-system-performance&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;iostat iotop&lt;/p&gt;
+&lt;p&gt;Block I/O status&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;iostat&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;xmdz&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;1st output is since boot.
+For more information refer &lt;a href="http://www.thegeekstuff.com/2011/07/iostat-vmstat-mpstat-examples/"&gt;24 iostat, vmstat and mpstat Examples for Linux Performance Monitoring&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://guichaz.free.fr/iotop/"&gt;iotop&lt;/a&gt; can show which process use most I/O.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="iotop" src="http://guichaz.free.fr/iotop/iotop_big.png" /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;pidstat&lt;/p&gt;
+&lt;p&gt;Very useful process stats. eg, by-thread, disk I/O:&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;iftop&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.ex-parrot.com/pdw/iftop/"&gt;iftop&lt;/a&gt; show the network usage with other hosts.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="iftop" src="http://www.ex-parrot.com/pdw/iftop/iftop_normal.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="iftop" src="http://www.ex-parrot.com/pdw/iftop/iftop_ports.png" /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="nginx-tunning"&gt;Nginx tunning&lt;/h2&gt;
+&lt;p&gt;somaxconn&lt;/p&gt;
+&lt;p&gt;fs-max&lt;/p&gt;</summary><category term="Linux"></category><category term="sysadmin"></category><category term="nginx"></category><category term="server"></category></entry><entry><title>Gevent Internals</title><link href="http://zhangliyong.github.io/posts/2014/09/23/gevent-internals.html" rel="alternate"></link><updated>2014-09-23T14:00:00+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-09-23:posts/2014/09/23/gevent-internals.html</id><summary type="html">&lt;h1 id="introduction"&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://www.gevent.org/"&gt;Gevent&lt;/a&gt; is an efficient coroutine-based asynchronous concurrency framework, it is based on &lt;a href="http://software.schmorp.de/pkg/libev.html"&gt;libev&lt;/a&gt; and &lt;a href="http://greenlet.readthedocs.org/en/latest/"&gt;greenlet&lt;/a&gt;.
 If you don't know how &lt;a href="http://greenlet.readthedocs.org/en/latest/"&gt;greenlet&lt;/a&gt; works, recommend to read &lt;a href="http://www.slideshare.net/saghul/understanding-greenlet"&gt;this&lt;/a&gt;. If you only want to know how to use gevent, recommend you read &lt;a href="http://sdiehl.github.io/gevent-tutorial/"&gt;http://sdiehl.github.io/gevent-tutorial/&lt;/a&gt;.&lt;/p&gt;
 &lt;h1 id="greenlet-diagram"&gt;Greenlet diagram&lt;/h1&gt;
@@ -1385,19 +1441,7 @@ When create a sparse index, only when the document does not have all the fields 
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;增加对Markdown和reStructuredText文件的支持，并忽略所有以"."开头的隐藏文件。&lt;/p&gt;</summary><category term="vim"></category><category term="ack"></category><category term="grep"></category></entry><entry><title>Linux Sysadmin Tools</title><link href="http://zhangliyong.github.io/posts/2014/02/04/linux-sysadmin-tools.html" rel="alternate"></link><updated>2014-02-04T00:00:00+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-04:posts/2014/02/04/linux-sysadmin-tools.html</id><summary type="html">&lt;p&gt;下面列出一些自己常用的系统管理的工具，总结一下。&lt;/p&gt;
-&lt;h1 id="htop"&gt;htop&lt;/h1&gt;
-&lt;p&gt;&lt;a href="http://hisham.hm/htop/index.php"&gt;htop&lt;/a&gt; 是一个替代top的工具，显示信息很详细，功能丰富，一但上手操作也很简单，
-&lt;a href="http://www.thegeekstuff.com/2011/09/linux-htop-examples/"&gt;thegeekstuff&lt;/a&gt;上有
-一篇文章专门介绍了这一工具，正如这篇文章上说的：你一但开始即用htop，就不再回到top了。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="htop" src="http://hisham.hm/htop/htop-1.0-screenshot.png" /&gt;&lt;/p&gt;
-&lt;h1 id="iftop"&gt;iftop&lt;/h1&gt;
-&lt;p&gt;&lt;a href="http://www.ex-parrot.com/pdw/iftop/"&gt;iftop&lt;/a&gt; 实时显示网卡的带宽使用情况。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="iftop" src="http://www.ex-parrot.com/pdw/iftop/iftop_normal.png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="iftop" src="http://www.ex-parrot.com/pdw/iftop/iftop_ports.png" /&gt;&lt;/p&gt;
-&lt;h1 id="iotop"&gt;iotop&lt;/h1&gt;
-&lt;p&gt;&lt;a href="http://guichaz.free.fr/iotop/"&gt;iotop&lt;/a&gt; 是用python编写的显示磁盘IO使用的应用，vmstat和iostat可以显示磁盘的整体使用情况，iotop 可以显示各个应用的磁盘使用。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="iotop" src="http://guichaz.free.fr/iotop/iotop_big.png" /&gt;&lt;/p&gt;</summary><category term="Linux"></category><category term="sysadmin"></category><category term="bash"></category></entry><entry><title>Be Newbie Forever</title><link href="http://zhangliyong.github.io/posts/2014/02/03/be-newbie-forever.html" rel="alternate"></link><updated>2014-02-03T00:00:00+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:posts/2014/02/03/be-newbie-forever.html</id><summary type="html">&lt;p&gt;You will be newbie forever.&lt;/p&gt;
+&lt;p&gt;增加对Markdown和reStructuredText文件的支持，并忽略所有以"."开头的隐藏文件。&lt;/p&gt;</summary><category term="vim"></category><category term="ack"></category><category term="grep"></category></entry><entry><title>Be Newbie Forever</title><link href="http://zhangliyong.github.io/posts/2014/02/03/be-newbie-forever.html" rel="alternate"></link><updated>2014-02-03T00:00:00+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-02-03:posts/2014/02/03/be-newbie-forever.html</id><summary type="html">&lt;p&gt;You will be newbie forever.&lt;/p&gt;
 &lt;p&gt;Get good at the beginner mode, learning new programs, asking dumb questions, making stupid mistakes, soliciting help, and helping others with what you learn (the best way to learn yourself).&lt;/p&gt;
 &lt;p&gt;From: http://benoithamelin.tumblr.com/post/17949523929/you-will-be-newbie-forever-get-good-at-the&lt;/p&gt;</summary></entry><entry><title>mem</title><link href="http://zhangliyong.github.io/posts/2014/01/01/mem.html" rel="alternate"></link><updated>2014-01-01T10:29:00+08:00</updated><author><name>zhang liyong</name></author><id>tag:zhangliyong.github.io,2014-01-01:posts/2014/01/01/mem.html</id><summary type="html">&lt;p&gt;&lt;a href="http://virtualthreads.blogspot.com/2006/02/understanding-memory-usage-on-linux.html"&gt;http://virtualthreads.blogspot.com/2006/02/understanding-memory-usage-on-linux.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.cyberciti.biz/tips/howto-find-memory-used-by-program.html"&gt;http://www.cyberciti.biz/tips/howto-find-memory-used-by-program.html&lt;/a&gt;&lt;/p&gt;
