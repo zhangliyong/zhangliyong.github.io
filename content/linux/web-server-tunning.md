@@ -64,9 +64,6 @@ When the service slow down, I would login to the service, using the following to
 
     ![iftop](http://www.ex-parrot.com/pdw/iftop/iftop_normal.png)
 
-    ![iftop](http://www.ex-parrot.com/pdw/iftop/iftop_ports.png)
-
-
 ## Nginx tunning
 
 somaxconn
